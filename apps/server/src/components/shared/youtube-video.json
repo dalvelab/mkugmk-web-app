@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_youtube_videos",
+  "info": {
+    "displayName": "YoutubeVideo"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

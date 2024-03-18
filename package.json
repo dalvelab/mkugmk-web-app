@@ -4,13 +4,13 @@
   "description": "Repo for mkugmk website",
   "author": "Vlad Bragin",
   "scripts": {
-    "start:web": "npm start --prefix ./web",
-    "start:server": "npm start --prefix ./server",
-    "dev": "concurrently --kill-others \"npm run dev --prefix ./web\" \"npm run develop --prefix ./server\"",
-    "dev:web": "npm run dev --prefix ./web",
-    "dev:server": "npm run develop --prefix ./server",
-    "build:web": "npm run build --prefix ./web",
-    "build:server": "npm run build --prefix ./server"
+    "start:web": "npm start --prefix ./apps/web",
+    "start:server": "npm start --prefix ./apps/server",
+    "dev": "concurrently --kill-others \"npm run dev --prefix ./apps/web\" \"npm run develop --prefix ./apps/server\"",
+    "dev:web": "npm run dev --prefix ./apps/web",
+    "dev:server": "npm run develop --prefix ./apps/server",
+    "build:web": "npm run build --prefix ./apps/web",
+    "build:server": "npm run build --prefix ./apps/server"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

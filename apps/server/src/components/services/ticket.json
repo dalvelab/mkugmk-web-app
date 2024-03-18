@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_services_tickets",
+  "info": {
+    "displayName": "Ticket",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "additional_text": {
+      "type": "string"
+    },
+    "categories": {
+      "displayName": "TicketCategory",
+      "type": "component",
+      "repeatable": true,
+      "component": "services.ticket-category"
+    },
+    "available_on_website": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

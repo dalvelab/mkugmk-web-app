@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_socials",
+  "info": {
+    "displayName": "Social"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "vk",
+        "telegram",
+        "youtube"
+      ]
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

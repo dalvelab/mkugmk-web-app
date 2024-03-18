@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_pages",
+  "info": {
+    "displayName": "Page"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
