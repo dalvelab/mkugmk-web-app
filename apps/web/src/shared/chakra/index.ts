@@ -1,0 +1,1 @@
+export { chakraMKUGMKConfig } from './config';
