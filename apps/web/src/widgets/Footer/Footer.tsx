@@ -14,36 +14,36 @@ export const Footer = () => {
     >
       <Container maxW="container.xl" pt={8} pb={2} display="flex" flexDir="column">
         <Flex flexDir="column" gap={8}>
-          <Flex justifyContent="space-between">
-            <Flex 
-              gap={4} 
-              alignItems={["flex-start", "flex-start", "center", "center", "center"]} 
-              flexDir={["column", "column", "row", "row", "row"]}
-            >
+          <Grid 
+            gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]}
+            gap={4}
+          >
+            <Flex flexDir="column">
               <Text fontSize="3xl">Верхняя Пышма</Text>
               <Link 
                 target="_blank" 
                 rel="noreferer" 
-                href="https://yandex.ru/maps/-/CCUk5JdIsD" 
+                href="https://yandex.ru/maps/-/CDFtm2P2" 
                 pos="relative" 
                 _hover={{ textDecoration: 'none', color: 'brand.200' }}
                 >
-                  <Text fontSize="lg" _after={
-                    { 'content': '""',
-                    'width': '100%',
-                    'height': '1px',
-                    'bgColor': 'gray.900',
-                    'pos': 'absolute',
-                    'left': 0,
-                    'bottom': '-1px',
-                    }}>
-                      ул.Александра Козицына, д. 2
-                    </Text>
+                  <Text fontSize="lg">ул.Александра Козицына, д. 2</Text>
               </Link>
             </Flex>
-            <Button size="lg" colorScheme="green">Купить билет</Button>
-          </Flex>
-          <Flex justifyContent="space-between">
+            <Button 
+              alignSelf="center" 
+              justifySelf={["flex-start", "flex-start", "flex-start", "flex-end", "flex-end"]} 
+              size="lg" 
+              colorScheme="green"
+            >
+              Купить билет
+            </Button>
+          </Grid>
+          <Grid 
+            gridTemplateColumns={["auto", "1fr 1fr", "1fr 1fr", "auto auto auto auto", "auto auto auto auto"]} 
+            justifyContent="space-between"
+            gap={5}
+            >
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium">Контакты</Text>
               <Flex gap={1} flexDir="column">
@@ -70,7 +70,7 @@ export const Footer = () => {
             </Flex>
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium" color="brand.black">Социальные сети</Text>
-              <Flex gap={1} flexDir="column">
+              <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 <Link href="/">
                   <Text>Вконтакте</Text>
                 </Link>
@@ -84,7 +84,7 @@ export const Footer = () => {
             </Flex>
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium">Посетителям</Text>
-              <Flex gap={1} flexDir="column">
+              <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 <Link href="/">
                   <Text>FAQ</Text>
                 </Link>
@@ -96,14 +96,11 @@ export const Footer = () => {
                 </Link>
               </Flex>
             </Flex>
-          </Flex>
+          </Grid>
         </Flex>
-        <Flex mt={8} justifyContent="space-between" flexDirection={["column-reverse", "column-reverse", "column-reverse", "row", "row"]} gap={[4, 4, 4, null, null]}>
-          <Text fontSize="sm" color="brand.300">Частное учреждение культуры «Музейный комплекс», 2024</Text>
-          <Link href="/" referrerPolicy="no-referrer" target="_blank">
-            <Text fontSize="sm" color="brand.300" textDecoration="underline">Политика конфиденциальности</Text>
-          </Link>
-        </Flex>
+        <chakra.div mt={8}>
+          <Text fontSize="xs" color="brand.gray">Частное учреждение культуры «Музейный комплекс», 2024</Text>
+        </chakra.div>
       </Container>
     </chakra.footer> 
   )
