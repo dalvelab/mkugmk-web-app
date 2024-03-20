@@ -1,7 +1,8 @@
 {
   "collectionName": "components_shared_youtube_videos",
   "info": {
-    "displayName": "YoutubeVideo"
+    "displayName": "YoutubeVideo",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -9,9 +10,9 @@
       "type": "string",
       "required": true
     },
-    "link": {
-      "type": "string",
-      "required": true
+    "youtube_video": {
+      "type": "customField",
+      "customField": "plugin::oembed.oembed"
     }
   }
 }

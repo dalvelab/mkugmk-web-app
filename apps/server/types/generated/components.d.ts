@@ -97,10 +97,12 @@ export interface SharedYoutubeVideo extends Schema.Component {
   collectionName: 'components_shared_youtube_videos';
   info: {
     displayName: 'YoutubeVideo';
+    description: '';
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    link: Attribute.String & Attribute.Required;
+    youtube_video: Attribute.Text &
+      Attribute.CustomField<'plugin::oembed.oembed'>;
   };
 }
 
