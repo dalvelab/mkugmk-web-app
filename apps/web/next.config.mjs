@@ -6,10 +6,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'admin-mkugmk.memflash.ru'
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.ytimg.com'
       }
     ]
   }

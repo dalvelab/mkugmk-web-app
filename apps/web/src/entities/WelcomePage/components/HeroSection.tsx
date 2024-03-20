@@ -12,14 +12,14 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media}) =
 
   if (type === 'image') {
     return (
-      <chakra.div w="full" bg="red" h="100vh" pos="absolute" zIndex={-1}>
+      <chakra.div w="full" h="100vh" pos="absolute" zIndex={-1}>
         <Image style={{objectFit: 'cover'}} src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${media.url}`} fill alt="заглавное изображение" />
       </chakra.div>
     )
   } 
 
   return (
-    <chakra.div w="full" bg="red" h="100vh" pos="absolute" zIndex={-1} overflow="hidden">
+    <chakra.div w="full" h="100vh" pos="absolute" zIndex={-1} overflow="hidden">
       <video autoPlay muted loop style={{minHeight: "100vh", maxWidth: "100%", objectFit: 'cover'}}>
         <source src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${media.url}`} type={media.mime} />
         Your browser does not support the video tag.
