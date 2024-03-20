@@ -10,9 +10,8 @@
       "type": "string",
       "required": true
     },
-    "youtube_video": {
-      "type": "customField",
-      "customField": "plugin::oembed.oembed"
+    "video_id": {
+      "type": "string"
     }
   }
 }
