@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { useTranslation } from 'next-i18next'
 import { Button, chakra, Container, Flex, IconButton, Show, Text } from "@chakra-ui/react"
 import { ChevronDownIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 
+import { LanguageSelect } from '@/features';
+
 export const Navbar = () => {
   const [opened, setOpened] = useState(false);
+
+  const { t } = useTranslation('navigation');
+
   return (
     <chakra.nav 
       transition="0.1s ease-in"
@@ -22,30 +28,29 @@ export const Navbar = () => {
         <Flex w="full" h="full" justifyContent="space-between" alignItems="center">
           <Link href="/">
             <Flex color="brand.black" flexDir="column">
-              <Text fontSize="xl" textTransform="uppercase" fontWeight="bold">Музейный комплекс</Text>
-              <Text lineHeight="14px" fontWeight="medium" fontSize="sm">г. Верхняя Пышма</Text>
+              <Text fontSize="xl" textTransform="uppercase" fontWeight="bold">{t('title')}</Text>
+              <Text lineHeight="14px" fontWeight="medium" fontSize="sm">{t('city')}</Text>
             </Flex>
           </Link>
           <Flex gap={[6, 6, 6, 6, 8]} display={['none', 'none', 'none', 'flex', 'flex']} fontSize="lg" fontWeight="medium" color="brand.black">
             <Flex cursor="pointer" alignItems="center" gap={1}>
-              <Text>О комплексе</Text>
+              <Text>{t('link_about')}</Text>
               <ChevronDownIcon />
             </Flex>
             <Flex cursor="pointer" alignItems="center" gap={1}>
-              <Text>Посетителям</Text>
+              <Text>{t('link_visitors')}</Text>
               <ChevronDownIcon />
             </Flex>
-            <Link href="/">События и новости</Link>
-            <Link href="/">Контакты</Link>
+            <Link href="/">{t('link_news')}</Link>
+            <Link href="/">{t('link_contacts')}</Link>
           </Flex>
           <Flex gap={7} display={["none", "none", "none", "flex", "flex"]}>
-            <Button display={["none", "none", "none", "none", "block"]} size="md" colorScheme="green">Купить билет</Button>
-            <Flex gap={4}>
+            <Link href="/buy-ticket">
+              <Button display={["none", "none", "none", "none", "block"]} size="md" colorScheme="green">{t('buy_ticket')}</Button>
+            </Link>
+            <Flex gap={2}>
               <IconButton icon={<SearchIcon />} aria-label='Открыть поиск' bg="transparent" _hover={{bg: "brand.border"}} />
-              <Flex cursor="pointer" alignItems="center" gap={1}>
-                <Text>RU</Text>
-                <ChevronDownIcon />
-              </Flex>
+              <LanguageSelect />
             </Flex>
           </Flex>
           <Flex
@@ -53,7 +58,9 @@ export const Navbar = () => {
             alignItems="center"
             gap={6}
             >
-              <Button display={["none", "none", "block", "none", "none"]} size="md" colorScheme="green">Купить билет</Button>
+              <Link href="/buy-ticket">
+                <Button display={["none", "none", "block", "none", "none"]} size="md" colorScheme="green">{t('buy_ticket')}</Button>
+              </Link>
             <IconButton boxSize={10} icon={<HamburgerIcon boxSize={8} />} bg="transparent" _hover={{bg: "brand.border"}} aria-label='Открыть меню' />
           </Flex>
         </Flex>

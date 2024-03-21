@@ -32,5 +32,5 @@ export type StrapiImageFormat = {
 }
 
 export type DefaultRequestParams = {
-  locale: string;
+  locale?: string;
 }

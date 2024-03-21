@@ -1,19 +1,22 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-
+import { useTranslation } from 'next-i18next'
 import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui/react";
 
 import { getWelcomePage, WelcomeHeroSection, WelcomeGallery } from '@/entities';
 import { isVoid ,EmptyPage, isEmpty, Slider } from '@/shared';
 import type { WelcomePageResponse } from '@/entities';
 import type { ApiResponse } from '@/shared';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Home({ pageContent }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
 
+  const { t } = useTranslation('common');
+
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyPage />
   }
-
+  
   const { title, description, banner, youtube_gallery, gallery } = data;
 
   return (
@@ -47,7 +50,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
               textTransform="uppercase" 
               color="white"
             >
-              Музейный комплекс военной и гражданской техники
+              {t('museum_name')}
             </Heading>
             <Button mt={10} size="lg" colorScheme="green">Купить билет</Button>
           </Flex>
@@ -61,8 +64,8 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
           pos="relative"
           >
           <Flex flexDir="column" justifyContent="center" alignItems="center" gap={5}>
-            <Heading as="h2" fontSize="4xl">{title}</Heading>
-            <Text textAlign="center" fontSize="2xl">{description}
+            <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
+            <Text textAlign="center" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>{description}
             </Text>
           </Flex>
         </Container>
@@ -122,10 +125,14 @@ interface HomeProps {
   pageContent: ApiResponse<WelcomePageResponse, null>
 }
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const pageContent = await getWelcomePage({locale: 'ru'});
+export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
+  const pageContent = await getWelcomePage({locale});
 
   return {
-    props: { pageContent }
+    props: {
+      // @ts-ignore
+      ...(await serverSideTranslations(locale, ['common', 'navigation'])),
+      pageContent
+     }
   }
 };
