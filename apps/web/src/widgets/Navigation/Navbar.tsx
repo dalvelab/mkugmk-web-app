@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next'
 import { Button, chakra, Container, Flex, IconButton, Show, Text } from "@chakra-ui/react"
 import { ChevronDownIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
@@ -7,13 +7,33 @@ import { ChevronDownIcon, HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import { LanguageSelect } from '@/features';
 
 export const Navbar = () => {
-  const [opened, setOpened] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [scrollY, setScrollY] = useState(0); 
 
   const { t } = useTranslation('navigation');
+
+	const handleScroll = useCallback((e: Event) => {
+    if (scrollY > window.scrollY) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+
+    setScrollY(window.scrollY);
+  }, [scrollY]);
+
+	useEffect(() => {
+			window.addEventListener("scroll", handleScroll);
+			return () => {
+					window.removeEventListener("scroll", handleScroll);
+			};
+	}, [handleScroll]);
 
   return (
     <chakra.nav 
       transition="0.1s ease-in"
+      opacity={visible ? 1 : 0}
+      visibility={visible ? 'visible' : 'hidden'}
       w="full" 
       h={[16, 16, 16, 20, 20]}
       pos="fixed" 
@@ -21,8 +41,8 @@ export const Navbar = () => {
       borderColor="brand.border" 
       bgColor="white"
       top={0} 
-      left={0} 
-      zIndex={opened ? "toast" :"docked"}
+      left={0}
+      zIndex={2}
       >
       <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="space-between" alignItems="center">

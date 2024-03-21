@@ -20,7 +20,7 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media}) =
 
   return (
     <chakra.div w="full" h="100vh" pos="absolute" zIndex={-1} overflow="hidden">
-      <video autoPlay muted loop style={{minHeight: "100vh", maxWidth: "100%", objectFit: 'cover'}}>
+      <video autoPlay muted loop style={{minHeight: "100vh", minWidth: "100%", objectFit: 'cover'}}>
         <source src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${media.url}`} type={media.mime} />
         Your browser does not support the video tag.
       </video>

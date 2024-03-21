@@ -19,6 +19,8 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
   
   const { title, description, banner, youtube_gallery, gallery } = data;
 
+  console.log(banner);
+
   return (
     <>
       <chakra.section 

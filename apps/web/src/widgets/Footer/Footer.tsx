@@ -1,7 +1,65 @@
 import { Link } from '@chakra-ui/next-js';
-import { Button, chakra, Container, Flex, Grid, Text } from "@chakra-ui/react"
+import { Button, chakra, Container, Flex, Grid, Spinner, Text } from "@chakra-ui/react"
+
+import { isVoid, type ApiResponse } from '@/shared';
+import { useEffect, useState } from 'react';
+import { FooterResponse, getFooter } from '@/entities';
+import { useRouter } from 'next/router';
 
 export const Footer = () => {
+  const router = useRouter();
+
+  const [footerData, setFooterData] = useState<ApiResponse<FooterResponse, null> | null>(null);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getFooter({locale: router.locale}).then((data) => {
+      setFooterData(data);
+      setLoading(false);
+    })
+  }, [router.locale]);
+
+  if (isLoading) {
+    return (
+      <chakra.footer 
+        w="full" 
+        h="auto" 
+        minH={40} 
+        bgColor="white" 
+        borderTop="1px solid" 
+        borderColor="brand.border" 
+        pos="relative"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Spinner />
+      </chakra.footer>
+    )
+  }
+
+  if (isVoid(footerData) || isVoid(footerData.data)) {
+    return (
+      <chakra.footer 
+        w="full" 
+        h="auto" 
+        minH={40} 
+        bgColor="white" 
+        borderTop="1px solid" 
+        borderColor="brand.border" 
+        pos="relative"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Text fontSize="xl" fontWeight="medium">Нет данных для отображения футера</Text>
+      </chakra.footer>
+    )
+  }
+
+  const { city, address, contacts, working_time, pages, socials } = footerData.data;
+  
   return (
     <chakra.footer 
       w="full" 
@@ -18,8 +76,8 @@ export const Footer = () => {
             gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]}
             gap={4}
           >
-            <Flex flexDir="column">
-              <Text fontSize="3xl">Верхняя Пышма</Text>
+            <Flex flexDir="column" alignItems="flex-start">
+              <Text fontSize="3xl">{city}</Text>
               <Link 
                 target="_blank" 
                 rel="noreferer" 
@@ -27,7 +85,7 @@ export const Footer = () => {
                 pos="relative" 
                 _hover={{ textDecoration: 'none', color: 'brand.200' }}
                 >
-                  <Text fontSize="lg">ул.Александра Козицына, д. 2</Text>
+                  <Text fontSize="lg">{address}</Text>
               </Link>
             </Flex>
             <Button 
@@ -42,58 +100,47 @@ export const Footer = () => {
           <Grid 
             gridTemplateColumns={["auto", "1fr 1fr", "1fr 1fr", "auto auto auto auto", "auto auto auto auto"]} 
             justifyContent="space-between"
-            gap={5}
+            gap={[8, 5, 5, 5, 5]}
             >
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium">Контакты</Text>
               <Flex gap={1} flexDir="column">
-                <Link href="/">
-                  <Text>+7 (343 68) 4-67-84</Text>
-                </Link>
-                <Link href="/">
-                  <Text>mk@mkugmk.ru</Text>
-                </Link>
+                {contacts.map((contact) => (
+                  <Link key={contact.id} href="/">
+                    <Text>{contact.text}</Text>
+                  </Link>
+                ))}
               </Flex>
             </Flex>
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium">Режим работы кассы:</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
-                <Grid gridTemplateColumns="1fr 1fr" gap={4}>
-                  <Text>понедельник</Text>
-                  <Text>выходной</Text>
-                </Grid>
-                <Grid gridTemplateColumns="1fr 1fr" gap={4}>
-                  <Text>вторник-воскресенье</Text>
-                  <Text>10:00 - 19:00</Text>
-                </Grid>
+                {working_time.map((time) => (
+                  <Grid key={time.id} gridTemplateColumns="1fr 1fr" gap={4}>
+                    <Text>{time.day}</Text>
+                    <Text>{time.value}</Text>
+                  </Grid>
+                ))}
               </Flex>
             </Flex>
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium" color="brand.black">Социальные сети</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
-                <Link href="/">
-                  <Text>Вконтакте</Text>
-                </Link>
-                <Link href="/">
-                  <Text>Телеграм</Text>
-                </Link>
-                <Link href="/">
-                  <Text>YouTube</Text>
-                </Link>
+                {socials.map((social) => (
+                  <Link key={social.id} href="/">
+                    <Text>{social.name}</Text>
+                  </Link>
+                ))}
               </Flex>
             </Flex>
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium">Посетителям</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
-                <Link href="/">
-                  <Text>FAQ</Text>
-                </Link>
-                <Link href="/">
-                  <Text>Оставить отзыв</Text>
-                </Link>
-                <Link href="/">
-                  <Text>Заказать звонок</Text>
-                </Link>
+                {pages.map((page) => (
+                  <Link key={page.id} href="/">
+                    <Text>{page.name}</Text>
+                  </Link>
+                ))}
               </Flex>
             </Flex>
           </Grid>
