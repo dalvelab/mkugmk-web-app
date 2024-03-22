@@ -1238,6 +1238,12 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
           localized: true;
         };
       }>;
+    video_preview: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
