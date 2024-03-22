@@ -1,15 +1,12 @@
-import { StrapiMedia } from "@/shared";
+import { StrapiMedia, StrapiYoutubeVideo } from "@/shared";
 
-export type WelcomePageResponse = {
+export type WelcomePage = {
   id: number;
   title: string;
   description: string;
   locale: string;
   gallery: StrapiMedia[];
   banner: StrapiMedia;
-  youtube_gallery: {
-    id: number;
-    name: string;
-    video_id: string;
-  }[];
+  video_preview: StrapiMedia;
+  youtube_gallery: StrapiYoutubeVideo[];
 }

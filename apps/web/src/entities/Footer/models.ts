@@ -1,8 +1,11 @@
-export type FooterResponse = {
+import { StrapiWorkingTime } from "@/shared";
+
+export type Footer = {
   id: number;
   city: string;
   address: string;
   locale: string;
+  yandex_map_link: string;
   contacts: {
     id: number;
     type: 'phone' | 'email' | 'address';
@@ -20,10 +23,5 @@ export type FooterResponse = {
     link: string;
     name: string;
   }[]
-  working_time: {
-    id: number;
-    day: string;
-    value: string;
-    opened: boolean;
-  }[]
+  working_time: StrapiWorkingTime[]
 }

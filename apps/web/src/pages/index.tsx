@@ -4,7 +4,7 @@ import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui
 
 import { getWelcomePage, WelcomeHeroSection, WelcomeGallery } from '@/entities';
 import { isVoid ,EmptyPage, isEmpty, Slider } from '@/shared';
-import type { WelcomePageResponse } from '@/entities';
+import type { WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -17,32 +17,30 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
     return <EmptyPage />
   }
   
-  const { title, description, banner, youtube_gallery, gallery } = data;
-
-  console.log(banner);
+  const { title, description, banner, youtube_gallery, gallery, video_preview } = data;
 
   return (
     <>
       <chakra.section 
-        pb={10} 
         pos="relative" 
-        minH="100vh" 
+        minH="100vh"
         display="flex" 
         flexDir="column"
+        justifyContent="center"
       >
         <chakra.div pos="absolute" left={0} top={0} w="full" h="100vh" bg="black" opacity={0.6} zIndex={0} />
-        <WelcomeHeroSection media={banner} />
+        <WelcomeHeroSection media={banner} preview={video_preview} />
         <Container
-          maxWidth="container.xl" 
-          h={["calc(100vh - 64px)", "calc(100vh - 64px)", "calc(100vh - 80px)", "calc(100vh - 80px)", "calc(100vh - 80px)"]}
-          mt={16}
+          maxWidth="container.xl"
+          mt={[16, 16, 16, 20, 20]}
           display="flex"
           flexDir="column"
+          justifyContent="center"
           pos="relative"
           >
           <Flex 
             w={["full", "full", "full", "900px", "900px"]} 
-            h="full" 
+            h="full"
             flexDir="column"
             justifyContent="center"
             alignItems="flex-start">
@@ -58,7 +56,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
           </Flex>
         </Container>
       </chakra.section>
-      <chakra.section pt={[0, 10, 10, 10, 10]} pb={10} pos="relative">
+      <chakra.section pt={[0, 20, 20, 20, 20]} pb={10} pos="relative">
         <Container 
           maxWidth="container.xl" 
           display="flex"
@@ -124,7 +122,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
 }
 
 interface HomeProps {
-  pageContent: ApiResponse<WelcomePageResponse, null>
+  pageContent: ApiResponse<WelcomePage, null>
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {

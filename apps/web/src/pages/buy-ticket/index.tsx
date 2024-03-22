@@ -2,9 +2,9 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslation } from 'next-i18next'
 import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui/react";
 
-import { getWelcomePage, WelcomeHeroSection, WelcomeGallery } from '@/entities';
+import { getWelcomePage } from '@/entities';
 import { isVoid ,EmptyPage, isEmpty, Slider } from '@/shared';
-import type { WelcomePageResponse } from '@/entities';
+import type { WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -16,8 +16,6 @@ export default function BuyTicket({ pageContent }: InferGetServerSidePropsType<t
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyPage />
   }
-  
-  const { title, description, banner, youtube_gallery, gallery } = data;
 
   return (
     <>
@@ -35,7 +33,7 @@ export default function BuyTicket({ pageContent }: InferGetServerSidePropsType<t
 }
 
 interface HomeProps {
-  pageContent: ApiResponse<WelcomePageResponse, null>
+  pageContent: ApiResponse<WelcomePage, null>
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {

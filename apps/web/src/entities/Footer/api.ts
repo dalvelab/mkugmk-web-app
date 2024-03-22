@@ -1,9 +1,9 @@
 import { ApiResponse, DefaultRequestParams } from "@/shared";
-import { FooterResponse } from "./models";
+import { Footer } from "./models";
 
 interface getFooterProps extends DefaultRequestParams {};
 
-export async function getFooter(params: getFooterProps): Promise<ApiResponse<FooterResponse, null>> {
+export async function getFooter(params: getFooterProps): Promise<ApiResponse<Footer, null>> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/footer?locale=${params.locale}`);
 
   return res.json()

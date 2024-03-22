@@ -3,13 +3,14 @@ import { Button, chakra, Container, Flex, Grid, Spinner, Text } from "@chakra-ui
 
 import { isVoid, type ApiResponse } from '@/shared';
 import { useEffect, useState } from 'react';
-import { FooterResponse, getFooter } from '@/entities';
+import { getFooter } from '@/entities';
+import type { Footer as StrapiFooter } from '@/entities';
 import { useRouter } from 'next/router';
 
 export const Footer = () => {
   const router = useRouter();
 
-  const [footerData, setFooterData] = useState<ApiResponse<FooterResponse, null> | null>(null);
+  const [footerData, setFooterData] = useState<ApiResponse<StrapiFooter, null> | null>(null);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export const Footer = () => {
     )
   }
 
-  const { city, address, contacts, working_time, pages, socials } = footerData.data;
+  const { city, address, contacts, working_time, pages, socials, yandex_map_link } = footerData.data;
   
   return (
     <chakra.footer 
@@ -81,7 +82,7 @@ export const Footer = () => {
               <Link 
                 target="_blank" 
                 rel="noreferer" 
-                href="https://yandex.ru/maps/-/CDFtm2P2" 
+                href={yandex_map_link} 
                 pos="relative" 
                 _hover={{ textDecoration: 'none', color: 'brand.200' }}
                 >

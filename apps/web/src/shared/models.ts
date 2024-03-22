@@ -34,3 +34,16 @@ export type StrapiImageFormat = {
 export type DefaultRequestParams = {
   locale?: string;
 }
+
+export type StrapiYoutubeVideo = {
+  id: number;
+  name: string;
+  video_id: string;
+}
+
+export type StrapiWorkingTime = {
+  id: number;
+  day: string;
+  value: string;
+  opened: boolean;
+}

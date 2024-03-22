@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { chakra } from '@chakra-ui/react';
 
-import { StrapiMedia } from "@/shared"
+import { StrapiMedia, isNotVoid } from "@/shared"
 
 interface WelcomeHeroSectionProps {
   media: StrapiMedia;
+  preview?: StrapiMedia;
 }
 
-export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media}) => {
+export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media, preview}) => {
   const type = media.mime.split('/')[0] === 'image' ? 'image' : 'video';
 
   if (type === 'image') {
@@ -20,7 +21,13 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media}) =
 
   return (
     <chakra.div w="full" h="100vh" pos="absolute" zIndex={-1} overflow="hidden">
-      <video autoPlay muted loop style={{minHeight: "100vh", minWidth: "100%", objectFit: 'cover'}}>
+      <video 
+        autoPlay
+        muted
+        loop
+        style={{minHeight: "100vh", minWidth: "100%", objectFit: 'cover'}} 
+        poster={isNotVoid(preview) ? `${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${preview.url}` : undefined}
+      >
         <source src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${media.url}`} type={media.mime} />
         Your browser does not support the video tag.
       </video>
