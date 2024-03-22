@@ -826,13 +826,13 @@ export interface ApiExhibitionCenterExhibitionCenter
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     gallery: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     excursion_phone: Attribute.String &
@@ -937,6 +937,12 @@ export interface ApiFooterFooter extends Schema.SingleType {
           localized: true;
         };
       }>;
+    yandex_map_link: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -966,6 +972,7 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
     singularName: 'partner';
     pluralName: 'partners';
     displayName: 'Partner';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -993,7 +1000,7 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     description: Attribute.RichText &
@@ -1187,6 +1194,7 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
     singularName: 'welcome-page';
     pluralName: 'welcome-pages';
     displayName: 'WelcomePage';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1198,12 +1206,14 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
   };
   attributes: {
     title: Attribute.String &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
     description: Attribute.RichText &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1213,13 +1223,13 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     gallery: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     youtube_gallery: Attribute.Component<'shared.youtube-video', true> &
