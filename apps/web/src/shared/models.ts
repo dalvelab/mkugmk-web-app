@@ -1,6 +1,11 @@
 export type ApiResponse<Data, Meta> = {
   data: Data | null;
   meta: Meta | null;
+  error: {
+    status: number;
+    message: number;
+    name: number;
+  } | null
 }
 
 export type StrapiMedia = {

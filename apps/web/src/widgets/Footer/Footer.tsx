@@ -1,11 +1,12 @@
 import { Link } from '@chakra-ui/next-js';
 import { Button, chakra, Container, Flex, Grid, Spinner, Text } from "@chakra-ui/react"
 
-import { isVoid, type ApiResponse } from '@/shared';
+import { isVoid, type ApiResponse, isNotVoid } from '@/shared';
 import { useEffect, useState } from 'react';
 import { getFooter } from '@/entities';
 import type { Footer as StrapiFooter } from '@/entities';
 import { useRouter } from 'next/router';
+import { WarningIcon } from '@chakra-ui/icons';
 
 export const Footer = () => {
   const router = useRouter();
@@ -18,6 +19,8 @@ export const Footer = () => {
     getFooter({locale: router.locale}).then((data) => {
       setFooterData(data);
       setLoading(false);
+    }).catch(() => {
+      setLoading(false)
     })
   }, [router.locale]);
 
@@ -54,7 +57,15 @@ export const Footer = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Text fontSize="xl" fontWeight="medium">Нет данных для отображения футера</Text>
+        {(isVoid(footerData) || isVoid(footerData.data)) && isVoid(footerData?.error) && (
+          <Text fontSize="xl" fontWeight="medium">Нет данных для отображения футера</Text>
+        )}
+        {isNotVoid(footerData?.error) && (
+          <Flex gap={1.5} alignItems="center">
+            <WarningIcon color="red" />
+            <Text fontSize="sm">Произошла ошибка при загрузке данных</Text>
+          </Flex>
+        )}
       </chakra.footer>
     )
   }
