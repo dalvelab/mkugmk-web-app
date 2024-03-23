@@ -101,17 +101,16 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
                   h={["240px", "280px", "280px", "280px", "280px"]} 
                   pos="relative"
                 >
-                  {process.env.NODE_ENV !== 'development' && (
-                    <chakra.iframe
-                      w={["428px", "500px", "500px", "500px", "500px"]} 
-                      h={["240px", "280px", "280px", "280px", "280px"]} 
-                      borderRadius="12px"
-                      src={`https://www.youtube.com/embed/${video.video_id}?feature=oembed`} 
-                      title="YouTube video player" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    />
-                  )}
+                  <chakra.iframe
+                    w={["428px", "500px", "500px", "500px", "500px"]} 
+                    h={["240px", "280px", "280px", "280px", "280px"]} 
+                    borderRadius="12px"
+                    src={`https://www.youtube-nocookie.com/embed/${video.video_id}`} 
+                    title="YouTube video player" 
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                  />
                 </chakra.div>
                 <Text color="brand.black" fontSize="xl">{video.name}</Text>
               </Flex>
