@@ -884,6 +884,64 @@ export interface ApiExhibitionCenterExhibitionCenter
   };
 }
 
+export interface ApiExhibitionCenterPageExhibitionCenterPage
+  extends Schema.SingleType {
+  collectionName: 'exhibition_center_pages';
+  info: {
+    singularName: 'exhibition-center-page';
+    pluralName: 'exhibition-center-pages';
+    displayName: 'Exhibition Center Page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    exhibition_centers: Attribute.Relation<
+      'api::exhibition-center-page.exhibition-center-page',
+      'oneToMany',
+      'api::exhibition-center.exhibition-center'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::exhibition-center-page.exhibition-center-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::exhibition-center-page.exhibition-center-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::exhibition-center-page.exhibition-center-page',
+      'oneToMany',
+      'api::exhibition-center-page.exhibition-center-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiFooterFooter extends Schema.SingleType {
   collectionName: 'footers';
   info: {
@@ -1286,6 +1344,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::exhibition-center.exhibition-center': ApiExhibitionCenterExhibitionCenter;
+      'api::exhibition-center-page.exhibition-center-page': ApiExhibitionCenterPageExhibitionCenterPage;
       'api::footer.footer': ApiFooterFooter;
       'api::partner.partner': ApiPartnerPartner;
       'api::ticket.ticket': ApiTicketTicket;

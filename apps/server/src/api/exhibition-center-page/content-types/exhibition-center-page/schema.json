@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "exhibition_center_pages",
+  "info": {
+    "singularName": "exhibition-center-page",
+    "pluralName": "exhibition-center-pages",
+    "displayName": "Exhibition Center Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    },
+    "exhibition_centers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::exhibition-center.exhibition-center"
+    }
+  }
+}
