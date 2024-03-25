@@ -14,7 +14,7 @@ export const AboutDropdown: React.FC<AboutDropdownProps> = ({exhibition_centers}
       <NavbarLink href="/exhibition-centers" text="Выставочные центры" level={2} />
       <Flex pl={5}>
         {exhibition_centers.map(({id, name}) => (
-          <NavbarLink key={id} href="/exhibition-centers" text={name} level={3} />
+          <NavbarLink key={id} href={`/exhibition-centers/${id}`} text={name} level={3} />
         ))}
       </Flex>
       <NavbarLink href="/partners" text="Партнеры" level={2} />

@@ -65,8 +65,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
           >
           <Flex flexDir="column" justifyContent="center" alignItems="center" gap={5}>
             <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-            <Text textAlign="center" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>{description}
-            </Text>
+            <Text textAlign="center" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>{description}</Text>
           </Flex>
         </Container>
       </chakra.section>

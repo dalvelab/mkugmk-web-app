@@ -7,7 +7,7 @@ import { HamburgerIcon, SearchIcon, WarningIcon } from '@chakra-ui/icons';
 import { LanguageSelect } from '@/features';
 
 import { AboutDropdown } from './Dropdowns';
-import { type ExibitionCenter, DropdownLink, NavbarLink, getExibitionCenters } from '@/entities';
+import { type ExhibitionCenter, DropdownLink, NavbarLink, getExibitionCenters } from '@/entities';
 import { type ApiResponse, isNotVoid } from '@/shared';
 import { useRouter } from 'next/router';
 
@@ -20,7 +20,7 @@ export const Navbar = () => {
   const [scrollY, setScrollY] = useState(0); 
 
   // Loading Exhibition centers list to render it in AboutDropdown
-  const [exhibitionCentersData, setExhibitionCentersData] = useState<ApiResponse<ExibitionCenter[], null> | null>(null);
+  const [exhibitionCentersData, setExhibitionCentersData] = useState<ApiResponse<ExhibitionCenter[], null> | null>(null);
   const [isLoading, setLoading] = useState(false);
 
 	const handleScroll = useCallback((e: Event) => {

@@ -6,10 +6,17 @@ import { appWithTranslation } from 'next-i18next'
 import { Navbar, Footer } from "@/widgets";
 import { chakraMKUGMKConfig, SEO, LanguageProvider } from '@/shared';
 import { ScrollUpButton } from "@/features";
+import { useRouter } from "next/router";
 
 const theme = extendTheme({ ...chakraMKUGMKConfig })
 
 function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  const pagesWithoutMargin = ['/'];
+
+  const marginTop = pagesWithoutMargin.includes(router.pathname) ? 0 : [16, 16, 16, 20, 20];
+
   return (
     <>
       <SEO>
@@ -19,7 +26,7 @@ function App({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={theme}>
         <LanguageProvider>
           <Navbar />
-          <chakra.main>
+          <chakra.main mt={marginTop}>
             <Component {...pageProps} />
             <ScrollUpButton />
           </chakra.main>
