@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next'
 import { Button, chakra, Container, Flex, IconButton, Spinner, Text, useMediaQuery } from "@chakra-ui/react"
 import { HamburgerIcon, SearchIcon, WarningIcon } from '@chakra-ui/icons';
 
@@ -10,10 +9,11 @@ import { AboutDropdown, VisitorsDropdown } from './Dropdowns';
 import { type ExhibitionCenter, DropdownLink, NavbarLink, getExibitionCenters } from '@/entities';
 import { type ApiResponse, isNotVoid } from '@/shared';
 import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
 
 export const Navbar = () => {
   const router = useRouter();
-  const { t } = useTranslation('navigation');
+  const t = useTranslations('Navigation');
   const [isLargerThan1100] = useMediaQuery('(min-width: 1100px)')
 
   const [visible, setVisible] = useState(true);
@@ -80,7 +80,7 @@ export const Navbar = () => {
             fontWeight="medium"
             color="brand.black"
           >
-            <DropdownLink text={t('link_about')}>
+            <DropdownLink text={t('menu.about')}>
               {isLoading && <Spinner/>}
               {isNotVoid(exhibitionCentersData?.error) && (
                 <Flex gap={1.5} alignItems="center">
@@ -92,11 +92,11 @@ export const Navbar = () => {
                 <AboutDropdown exhibition_centers={exhibitionCentersData.data} />
               )}
             </DropdownLink>
-            <DropdownLink text={t('link_visitors')}>
+            <DropdownLink text={t('menu.visitors')}>
                 <VisitorsDropdown />
             </DropdownLink>
-            <NavbarLink href="/news" text={t('link_news')} level={1} />
-            <NavbarLink href="/contacts" text={t('link_contacts')} level={1} />
+            <NavbarLink href="/news" text={t('menu.news')} level={1} />
+            <NavbarLink href="/contacts" text={t('menu.contacts')} level={1} />
           </Flex>
           <Flex gap={[0, 4, 4, 0, 5]} display="flex" alignItems="center">
             <Link href="/buy-ticket">

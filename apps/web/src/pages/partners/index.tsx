@@ -6,7 +6,6 @@ import { getPartners } from '@/entities';
 import { isVoid, EmptyState, isEmpty } from '@/shared';
 import type { Partner } from '@/entities';
 import type { ApiResponse } from '@/shared';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Partners({ partners }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = partners;
@@ -87,8 +86,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}
 
   return {
     props: {
-      // @ts-ignore
-      ...(await serverSideTranslations(locale, ['common', 'navigation'])),
+      messages: (await import(`../../i18n/${locale}.json`)).default,
       partners
      }
   }

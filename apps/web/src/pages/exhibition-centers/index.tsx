@@ -1,5 +1,4 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { chakra, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { getExibitionCentersPage, ExhibitionCenterCard } from '@/entities';
@@ -70,8 +69,7 @@ export const getServerSideProps: GetServerSideProps<ExhibitionCentersProps> = as
 
   return {
     props: {
-      // @ts-ignore
-      ...(await serverSideTranslations(locale, ['navigation'])),
+      messages: (await import(`../../i18n/${locale}.json`)).default,
       pageContent
      }
   }

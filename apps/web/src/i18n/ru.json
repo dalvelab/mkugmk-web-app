@@ -1,0 +1,24 @@
+{
+  "Navigation": {
+    "title": "Музейный компплекс",
+    "city": "г. Верхняя Пышма",
+    "buy_ticket": "Купить билет",
+    "menu": {
+      "about": "О комплексе",
+      "visitors": "Посетителям",
+      "news": "События и новости",
+      "contacts": "Контакты"
+    },
+    "about_dropdown": {
+      "exhibition_centers": "Выставочные центры",
+      "partners": "Партнеры"
+    }
+  },
+  "Index": {
+    "name": "Музейный комплекс военной и гражданской техники",
+    "buy_ticket": "Купить билет"
+  },
+  "ExhibitionCenter": {
+    "buy_ticket": "Купить билет"
+  }
+}

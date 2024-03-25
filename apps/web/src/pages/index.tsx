@@ -1,17 +1,16 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'next-intl';
 import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui/react";
 
 import { getWelcomePage, WelcomeHeroSection, WelcomeGallery } from '@/entities';
 import { isVoid, EmptyState, isEmpty, Slider, isNotEmpty, isNotVoid } from '@/shared';
 import type { WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Home({ pageContent }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
 
-  const { t } = useTranslation('common');
+  const t = useTranslations('Index');
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
@@ -50,7 +49,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
               textTransform="uppercase" 
               color="white"
             >
-              {t('museum_name')}
+              {t('name')}
             </Heading>
             <Button mt={10} size="lg" colorScheme="green">
               {t('buy_ticket')}
@@ -134,12 +133,9 @@ interface HomeProps {
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
   const pageContent = await getWelcomePage({locale});
 
-  console.log(locale);
-
   return {
     props: {
-      // @ts-ignore
-      ...(await serverSideTranslations(locale, ['common', 'navigation'])),
+      messages: (await import(`../i18n/${locale}.json`)).default,
       pageContent
      }
   }

@@ -1,6 +1,7 @@
-import { NavbarLink } from "@/entities/Navbar/ui/NavbarLink";
+import { useTranslations } from "next-intl";
 import { Flex } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+
+import { NavbarLink } from "@/entities/Navbar/ui/NavbarLink";
 
 interface AboutDropdownProps {
   exhibition_centers: {
@@ -10,7 +11,7 @@ interface AboutDropdownProps {
 }
 
 export const AboutDropdown: React.FC<AboutDropdownProps> = ({exhibition_centers}) => {
-  const { t } = useTranslation('navigation');
+  const t = useTranslations('Navigation');
 
   const exhibitionCentersLinkName = t('about_dropdown.exhibition_centers');
   const partnersLinkName = t('about_dropdown.partners');

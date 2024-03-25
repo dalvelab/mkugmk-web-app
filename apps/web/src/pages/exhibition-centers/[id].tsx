@@ -1,18 +1,17 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useTranslation } from 'next-i18next'
 import { chakra, Container, Heading, Flex, Button, Text, Grid, HStack, StackDivider } from "@chakra-ui/react";
 
 import { getSingleExibitionCenter, WelcomeHeroSection, WelcomeGallery } from '@/entities';
 import { isVoid, EmptyState, isEmpty, Slider, isNotEmpty, isNotVoid } from '@/shared';
 import type { ExhibitionCenter } from '@/entities';
 import type { ApiResponse } from '@/shared';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = exhibitionCenter;
 
-  const { t } = useTranslation('common');
+  const t = useTranslations('ExhibitionCenter');
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
@@ -155,8 +154,7 @@ export const getServerSideProps: GetServerSideProps<ExhibitionCenterProps> = asy
   
   return {
     props: {
-      // @ts-ignore
-      ...(await serverSideTranslations(locale, ['navigation', 'common'])),
+      messages: (await import(`../../i18n/${locale}.json`)).default,
       exhibitionCenter
      }
   }

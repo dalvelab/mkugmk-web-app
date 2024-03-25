@@ -1,17 +1,13 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useTranslation } from 'next-i18next'
 import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui/react";
 
 import { getWelcomePage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, Slider } from '@/shared';
 import type { WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function BuyTicket({ pageContent }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
-
-  const { t } = useTranslation('common');
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
@@ -41,8 +37,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}
 
   return {
     props: {
-      // @ts-ignore
-      ...(await serverSideTranslations(locale, ['common', 'navigation'])),
+      messages: (await import(`../../i18n/${locale}.json`)).default,
       pageContent
      }
   }

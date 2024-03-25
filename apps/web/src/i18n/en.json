@@ -1,0 +1,24 @@
+{
+  "Navigation": {
+    "title": "Museum Complex",
+    "city": "Verkhnyaya Pyshma",
+    "buy_ticket": "Buy ticket",
+    "menu": {
+      "about": "About",
+      "visitors": "Visitors",
+      "news": "News",
+      "contacts": "Contacts"
+    },
+    "about_dropdown": {
+      "exhibition_centers": "Exhibition Centers",
+      "partners": "Partners"
+    }
+  },
+  "Index": {
+    "name": "Museum complex of something",
+    "buy_ticket": "Buy ticket"
+  },
+  "ExhibitionCenter": {
+    "buy_ticket": "Buy ticket"
+  }
+}
