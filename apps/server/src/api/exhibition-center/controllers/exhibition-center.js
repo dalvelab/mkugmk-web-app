@@ -23,4 +23,13 @@ module.exports = createCoreController('api::exhibition-center.exhibition-center'
 
     return { data: response };
   },
+  async findOne(ctx) {
+    const id = ctx.request.params.id;
+
+    const response = await strapi.entityService.findOne('api::exhibition-center.exhibition-center', id, {
+      populate: ['gallery', 'banner', 'youtube_gallery', 'working_time'],
+    });
+
+    return {data: response}
+  }
 }));
