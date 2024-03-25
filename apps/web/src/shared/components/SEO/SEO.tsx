@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode } from "react"
 
-import { CANONICAL_DOMAIN } from '../constants';
+import { CANONICAL_DOMAIN } from '../../constants';
 
 interface SEOProps {
   children: ReactNode;

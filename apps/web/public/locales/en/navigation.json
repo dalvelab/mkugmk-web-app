@@ -5,5 +5,9 @@
     "link_visitors": "Visitors",
     "link_news": "News",
     "link_contacts": "Contacts",
+    "about_dropdown": {
+        "exhibition_centers": "Exhibition centers",
+        "partners": "Partners"
+    },
     "buy_ticket": "Buy Ticket"
 }

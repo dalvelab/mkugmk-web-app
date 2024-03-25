@@ -1,3 +1,3 @@
 export * from './SEO';
-export * from './EmptyPage';
+export * from './EmptyState';
 export * from './Slider';

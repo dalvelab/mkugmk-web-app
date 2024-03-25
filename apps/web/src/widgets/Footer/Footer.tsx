@@ -58,12 +58,16 @@ export const Footer = () => {
         alignItems="center"
       >
         {(isVoid(footerData) || isVoid(footerData.data)) && isVoid(footerData?.error) && (
-          <Text fontSize="xl" fontWeight="medium">Нет данных для отображения футера</Text>
+          <Text fontSize="xl" fontWeight="medium">
+            {router.locale === 'ru' ? 'Нет данных для отображения футера' : 'No data for footer rendering'}
+          </Text>
         )}
         {isNotVoid(footerData?.error) && (
           <Flex gap={1.5} alignItems="center">
             <WarningIcon color="red" />
-            <Text fontSize="sm">Произошла ошибка при загрузке данных</Text>
+            <Text fontSize="sm">
+              {router.locale === 'ru' ? 'Произошла ошибка при загрузке данных' : 'Error loading data'}
+            </Text>
           </Flex>
         )}
       </chakra.footer>

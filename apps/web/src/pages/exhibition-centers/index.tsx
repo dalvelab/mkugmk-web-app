@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { chakra, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { getExibitionCentersPage, ExhibitionCenterCard } from '@/entities';
-import { isVoid ,EmptyPage, isEmpty } from '@/shared';
+import { isVoid ,EmptyState, isEmpty } from '@/shared';
 import type { ExhibitionCentersPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
@@ -11,7 +11,7 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
   const { data } = pageContent;
 
   if (isVoid(data) || isEmpty(data)) {
-    return <EmptyPage />
+    return <EmptyState />
   }
 
   const { title, description, exhibition_centers } = data;
@@ -50,6 +50,7 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
           flexDir="column"
           alignItems="flex-start"
           pos="relative"
+          gap={6}
           >
           {exhibition_centers.map((exhibition_center) => (
             <ExhibitionCenterCard key={exhibition_center.id} exhibition_center={exhibition_center} />
@@ -70,7 +71,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}
   return {
     props: {
       // @ts-ignore
-      ...(await serverSideTranslations(locale, ['common', 'navigation'])),
+      ...(await serverSideTranslations(locale, ['navigation'])),
       pageContent
      }
   }

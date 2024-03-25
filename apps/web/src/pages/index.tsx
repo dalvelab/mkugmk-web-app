@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui/react";
 
 import { getWelcomePage, WelcomeHeroSection, WelcomeGallery } from '@/entities';
-import { isVoid ,EmptyPage, isEmpty, Slider } from '@/shared';
+import { isVoid, EmptyState, isEmpty, Slider, isNotEmpty } from '@/shared';
 import type { WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -14,7 +14,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
   const { t } = useTranslation('common');
 
   if (isVoid(data) || isEmpty(data)) {
-    return <EmptyPage />
+    return <EmptyState />
   }
   
   const { title, description, banner, youtube_gallery, gallery, video_preview } = data;
@@ -23,12 +23,12 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
     <>
       <chakra.section 
         pos="relative" 
-        minH="100vh"
+        h="100vh"
         display="flex" 
         flexDir="column"
         justifyContent="center"
       >
-        <chakra.div pos="absolute" left={0} top={0} w="full" h="100vh" bg="black" opacity={0.6} zIndex={0} />
+        <chakra.div pos="absolute" left={0} top={0} w="full" h="100%" bg="black" opacity={0.6} zIndex={0} />
         <WelcomeHeroSection media={banner} preview={video_preview} />
         <Container
           maxWidth="container.xl"
@@ -52,11 +52,13 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
             >
               {t('museum_name')}
             </Heading>
-            <Button mt={10} size="lg" colorScheme="green">Купить билет</Button>
+            <Button mt={10} size="lg" colorScheme="green">
+              {t('buy_ticket')}
+            </Button>
           </Flex>
         </Container>
       </chakra.section>
-      <chakra.section pt={[0, 20, 20, 20, 20]} pb={10} pos="relative">
+      <chakra.section pt={[10, 20, 20, 20, 20]} pb={10} pos="relative">
         <Container 
           maxWidth="container.xl" 
           display="flex"
@@ -79,44 +81,46 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
           <WelcomeGallery images={gallery} />
         </Container>
       </chakra.section>
-      <chakra.section pt={10} pb={10} pos="relative">
-        <Container 
-          maxWidth="container.xl"
-          display="flex"
-          flexDir="column"
-          pos="relative"
-        >
-          <Heading as="h3" color="brand.black" fontSize="4xl" pb={5}>Видеогалерея</Heading>
-          <Slider length={youtube_gallery.length}>
-            {youtube_gallery.map((video) => (
-              <Flex 
-                key={video.id} 
-                w={["428px", "500px", "500px", "500px", "500px"]} 
-                flexDir="column"
-                gap={3}
-              >
-                <chakra.div 
-                  w="full" 
-                  h={["240px", "280px", "280px", "280px", "280px"]} 
-                  pos="relative"
+      {isNotEmpty(youtube_gallery) && (
+        <chakra.section pt={10} pb={10} pos="relative">
+          <Container 
+            maxWidth="container.xl"
+            display="flex"
+            flexDir="column"
+            pos="relative"
+          >
+            <Heading as="h3" color="brand.black" fontSize="4xl" pb={5}>Видеогалерея</Heading>
+            <Slider length={youtube_gallery.length}>
+              {youtube_gallery.map((video) => (
+                <Flex 
+                  key={video.id} 
+                  w={["428px", "500px", "500px", "500px", "500px"]} 
+                  flexDir="column"
+                  gap={3}
                 >
-                  <chakra.iframe
-                    w={["428px", "500px", "500px", "500px", "500px"]} 
+                  <chakra.div 
+                    w="full" 
                     h={["240px", "280px", "280px", "280px", "280px"]} 
-                    borderRadius="12px"
-                    src={`https://www.youtube-nocookie.com/embed/${video.video_id}`} 
-                    title="YouTube video player" 
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    loading="lazy"
-                  />
-                </chakra.div>
-                <Text color="brand.black" fontSize="xl">{video.name}</Text>
-              </Flex>
-            ))}
-          </Slider>
-        </Container>
-      </chakra.section>
+                    pos="relative"
+                  >
+                    <chakra.iframe
+                      w={["428px", "500px", "500px", "500px", "500px"]} 
+                      h={["240px", "280px", "280px", "280px", "280px"]} 
+                      borderRadius="12px"
+                      src={`https://www.youtube-nocookie.com/embed/${video.video_id}`} 
+                      title="YouTube video player" 
+                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  </chakra.div>
+                  <Text color="brand.black" fontSize="xl">{video.name}</Text>
+                </Flex>
+              ))}
+            </Slider>
+          </Container>
+        </chakra.section>
+      )}
     </>
   );
 }
