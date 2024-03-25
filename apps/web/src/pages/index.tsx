@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui/react";
 
 import { getWelcomePage, WelcomeHeroSection, WelcomeGallery } from '@/entities';
-import { isVoid, EmptyState, isEmpty, Slider, isNotEmpty } from '@/shared';
+import { isVoid, EmptyState, isEmpty, Slider, isNotEmpty, isNotVoid } from '@/shared';
 import type { WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -78,7 +78,9 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
           flexDir="column"
           pos="relative"
           >
-          <WelcomeGallery images={gallery} />
+          {isNotVoid(gallery) && isNotEmpty(gallery) && (
+            <WelcomeGallery images={gallery} />
+          )}
         </Container>
       </chakra.section>
       {isNotEmpty(youtube_gallery) && (
@@ -131,6 +133,8 @@ interface HomeProps {
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
   const pageContent = await getWelcomePage({locale});
+
+  console.log(locale);
 
   return {
     props: {

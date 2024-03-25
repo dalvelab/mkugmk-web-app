@@ -61,11 +61,11 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
   );
 }
 
-interface HomeProps {
+interface ExhibitionCentersProps {
   pageContent: ApiResponse<ExhibitionCentersPage, null>
 }
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
+export const getServerSideProps: GetServerSideProps<ExhibitionCentersProps> = async ({locale}) => {
   const pageContent = await getExibitionCentersPage({locale});
 
   return {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import { isNotEmpty } from "../utils";
 
 type SupportedLanguages = 'ru' | 'en';
 
@@ -31,6 +32,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = (props) => {
 
   const handleLanguageChange = (language: SupportedLanguages) => {
     setLanguage(language);
+
+    if (isNotEmpty(router.query)) {
+      router.push('/', '/', {locale: language});  
+
+      return;
+    }
+
     router.push(router.pathname, router.pathname, { locale: language });
   };
 

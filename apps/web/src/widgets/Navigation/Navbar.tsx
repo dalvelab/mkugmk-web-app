@@ -6,7 +6,7 @@ import { HamburgerIcon, SearchIcon, WarningIcon } from '@chakra-ui/icons';
 
 import { LanguageSelect } from '@/features';
 
-import { AboutDropdown } from './Dropdowns';
+import { AboutDropdown, VisitorsDropdown } from './Dropdowns';
 import { type ExhibitionCenter, DropdownLink, NavbarLink, getExibitionCenters } from '@/entities';
 import { type ApiResponse, isNotVoid } from '@/shared';
 import { useRouter } from 'next/router';
@@ -92,7 +92,9 @@ export const Navbar = () => {
                 <AboutDropdown exhibition_centers={exhibitionCentersData.data} />
               )}
             </DropdownLink>
-            <DropdownLink text={t('link_visitors')}><div /></DropdownLink>
+            <DropdownLink text={t('link_visitors')}>
+                <VisitorsDropdown />
+            </DropdownLink>
             <NavbarLink href="/news" text={t('link_news')} level={1} />
             <NavbarLink href="/contacts" text={t('link_contacts')} level={1} />
           </Flex>
@@ -108,7 +110,7 @@ export const Navbar = () => {
                 </Button>
               </chakra.div>
             </Link>
-            <Flex gap={2} display={["none", "none", "none", "flex", "flex"]}>
+            <Flex gap={2} display={isLargerThan1100 ? "flex" : "none"}>
               <IconButton icon={<SearchIcon />} aria-label='Открыть поиск' bg="transparent" _hover={{bg: "brand.border"}} />
               <LanguageSelect />
             </Flex>

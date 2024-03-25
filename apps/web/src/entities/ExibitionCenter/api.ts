@@ -19,6 +19,17 @@ export async function getExibitionCenters(params: GetExibitionCenters): Promise<
   return res.json();
 }
 
+interface GetSingleExibitionCenter extends DefaultRequestParams {
+  id: number;
+};
+
+export async function getSingleExibitionCenter(params: GetSingleExibitionCenter): Promise<ApiResponse<ExhibitionCenter, null>> {
+  const { id, locale } = params;
+
+  const res = await fetch(`${process.env.DB_HOST}/exhibition-centers/${id}?locale=${locale}`);
+
+  return res.json();
+}
 
 interface GetExibitionCentersPage extends DefaultRequestParams {};
 

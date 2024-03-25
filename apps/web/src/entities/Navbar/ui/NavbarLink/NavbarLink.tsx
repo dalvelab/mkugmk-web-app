@@ -10,7 +10,6 @@ export const NavbarLink: React.FC<NavbarLinkProps> = ({level, text, href}) => {
   return (
     <Link 
       href={href}
-      fontSize="md" 
       fontWeight={level !== 3 ? 'medium' : 'regular'}
       color={level !== 3 ? 'brand.black' : 'brand.gray'}
       _hover={{textDecoration: 'none', color: 'green.500'}}

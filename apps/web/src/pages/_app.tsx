@@ -13,7 +13,7 @@ const theme = extendTheme({ ...chakraMKUGMKConfig })
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const pagesWithoutMargin = ['/'];
+  const pagesWithoutMargin = ['/', '/exhibition-centers/[id]'];
 
   const marginTop = pagesWithoutMargin.includes(router.pathname) ? 0 : [16, 16, 16, 20, 20];
 
