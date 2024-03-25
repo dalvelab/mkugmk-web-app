@@ -52,3 +52,10 @@ export type StrapiWorkingTime = {
   value: string;
   opened: boolean;
 }
+
+export type StrapiContact = {
+  id: number;
+  type: 'phone' | 'email' | 'address';
+  text: string;
+  caption: string | null;
+}

@@ -1,4 +1,4 @@
-import { StrapiWorkingTime } from "@/shared";
+import { StrapiContact, StrapiWorkingTime } from "@/shared";
 
 export type Footer = {
   id: number;
@@ -6,12 +6,7 @@ export type Footer = {
   address: string;
   locale: string;
   yandex_map_link: string;
-  contacts: {
-    id: number;
-    type: 'phone' | 'email' | 'address';
-    text: string;
-    caption: string | null;
-  }[];
+  contacts: StrapiContact[];
   pages: {
     id: number;
     name: string;

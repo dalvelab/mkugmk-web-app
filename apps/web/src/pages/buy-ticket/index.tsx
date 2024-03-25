@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { chakra, Container, Heading, Flex, Button, Text, Grid } from "@chakra-ui/react";
 
 import { getWelcomePage } from '@/entities';
-import { isVoid ,EmptyPage, isEmpty, Slider } from '@/shared';
+import { isVoid, EmptyState, isEmpty, Slider } from '@/shared';
 import type { WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -14,7 +14,7 @@ export default function BuyTicket({ pageContent }: InferGetServerSidePropsType<t
   const { t } = useTranslation('common');
 
   if (isVoid(data) || isEmpty(data)) {
-    return <EmptyPage />
+    return <EmptyState />
   }
 
   return (
