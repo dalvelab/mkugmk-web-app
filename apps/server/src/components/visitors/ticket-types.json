@@ -1,26 +1,27 @@
 {
-  "collectionName": "components_services_tickets",
+  "collectionName": "components_visitors_ticket_types",
   "info": {
     "displayName": "Ticket",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "name": {
-      "type": "string"
-    },
     "additional_text": {
       "type": "string"
     },
     "categories": {
-      "displayName": "TicketCategory",
       "type": "component",
       "repeatable": true,
-      "component": "services.ticket-category"
+      "component": "visitors.ticket-category",
+      "required": true
     },
     "available_on_website": {
       "type": "boolean",
       "default": false,
+      "required": true
+    },
+    "name": {
+      "type": "string",
       "required": true
     }
   }

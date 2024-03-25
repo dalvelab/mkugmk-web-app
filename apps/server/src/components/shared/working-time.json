@@ -7,10 +7,6 @@
   },
   "options": {},
   "attributes": {
-    "day": {
-      "type": "string",
-      "required": true
-    },
     "value": {
       "type": "string",
       "required": true
@@ -19,6 +15,18 @@
       "type": "boolean",
       "default": true,
       "required": true
+    },
+    "day": {
+      "type": "enumeration",
+      "enum": [
+        "понедельник",
+        "вторник",
+        "среда",
+        "четверг",
+        "пятница",
+        "суббота",
+        "воскресенье"
+      ]
     }
   }
 }

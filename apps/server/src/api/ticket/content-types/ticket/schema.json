@@ -35,9 +35,9 @@
       },
       "unique": true
     },
-    "exhibition_center": {
+    "exhibition_centers": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::exhibition-center.exhibition-center"
     },
     "pushkin_card": {

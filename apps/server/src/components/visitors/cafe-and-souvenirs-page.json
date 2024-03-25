@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_visitors_cafe_and_souvenirs_pages",
+  "info": {
+    "displayName": "Cafe And Souvenirs Page"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "cafes_and_souvenirs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.info-card"
+    }
+  }
+}

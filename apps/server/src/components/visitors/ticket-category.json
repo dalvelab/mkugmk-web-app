@@ -1,7 +1,8 @@
 {
   "collectionName": "components_services_ticket_categories",
   "info": {
-    "displayName": "TicketCategory"
+    "displayName": "Ticket Category",
+    "description": ""
   },
   "options": {},
   "attributes": {

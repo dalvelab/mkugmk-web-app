@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_visitors_tickets_pages",
+  "info": {
+    "displayName": "Tickets Page",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "documents": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "secondary_title": {
+      "type": "string",
+      "required": true
+    },
+    "secondary_description": {
+      "type": "richtext"
+    },
+    "other_services": {
+      "type": "component",
+      "repeatable": true,
+      "component": "visitors.other"
+    },
+    "tickets": {
+      "displayName": "TicketTypes",
+      "type": "component",
+      "repeatable": true,
+      "component": "visitors.ticket-types",
+      "required": true
+    }
+  }
+}

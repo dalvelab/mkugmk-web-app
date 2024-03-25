@@ -60,7 +60,7 @@
           "localized": true
         }
       },
-      "component": "shared.social"
+      "component": "footer.social"
     },
     "pages": {
       "type": "component",
@@ -70,7 +70,7 @@
           "localized": true
         }
       },
-      "component": "shared.page"
+      "component": "footer.page"
     },
     "yandex_map_link": {
       "pluginOptions": {

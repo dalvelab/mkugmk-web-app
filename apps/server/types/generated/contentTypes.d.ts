@@ -983,13 +983,13 @@ export interface ApiFooterFooter extends Schema.SingleType {
           localized: true;
         };
       }>;
-    socials: Attribute.Component<'shared.social', true> &
+    socials: Attribute.Component<'footer.social', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    pages: Attribute.Component<'shared.page', true> &
+    pages: Attribute.Component<'footer.page', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1024,12 +1024,12 @@ export interface ApiFooterFooter extends Schema.SingleType {
   };
 }
 
-export interface ApiPartnerPartner extends Schema.CollectionType {
-  collectionName: 'partners';
+export interface ApiPartnersPagePartnersPage extends Schema.SingleType {
+  collectionName: 'partners_pages';
   info: {
-    singularName: 'partner';
-    pluralName: 'partners';
-    displayName: 'Partner';
+    singularName: 'partners-page';
+    pluralName: 'partners-pages';
+    displayName: 'Partners Page';
     description: '';
   };
   options: {
@@ -1041,33 +1041,15 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
     };
   };
   attributes: {
-    name: Attribute.String &
+    partners: Attribute.Component<'shared.info-card', true> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    small_description: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    image: Attribute.Media &
+    title: Attribute.String &
       Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    description: Attribute.RichText &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    contacts: Attribute.Component<'shared.contact', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1076,21 +1058,21 @@ export interface ApiPartnerPartner extends Schema.CollectionType {
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::partner.partner',
+      'api::partners-page.partners-page',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::partner.partner',
+      'api::partners-page.partners-page',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     localizations: Attribute.Relation<
-      'api::partner.partner',
+      'api::partners-page.partners-page',
       'oneToMany',
-      'api::partner.partner'
+      'api::partners-page.partners-page'
     >;
     locale: Attribute.String;
   };
@@ -1128,9 +1110,9 @@ export interface ApiTicketTicket extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    exhibition_center: Attribute.Relation<
+    exhibition_centers: Attribute.Relation<
       'api::ticket.ticket',
-      'oneToOne',
+      'oneToMany',
       'api::exhibition-center.exhibition-center'
     >;
     pushkin_card: Attribute.Boolean &
@@ -1164,12 +1146,12 @@ export interface ApiTicketTicket extends Schema.CollectionType {
   };
 }
 
-export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
-  collectionName: 'tickets_pages';
+export interface ApiVisitorsInfoVisitorsInfo extends Schema.CollectionType {
+  collectionName: 'visitors_infos';
   info: {
-    singularName: 'tickets-page';
-    pluralName: 'tickets-pages';
-    displayName: 'TicketsPage';
+    singularName: 'visitors-info';
+    pluralName: 'visitors-infos';
+    displayName: 'Visitors Info';
     description: '';
   };
   options: {
@@ -1181,43 +1163,13 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
     };
   };
   attributes: {
-    title: Attribute.String &
+    tickets_page: Attribute.Component<'visitors.tickets-page'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    description: Attribute.RichText &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    documents: Attribute.Media &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    secondary_title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    secondary_description: Attribute.RichText &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    tickets: Attribute.Component<'services.ticket', true> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    other_services: Attribute.Component<'services.other', true> &
+    interactive_playground_page: Attribute.Component<'visitors.interactive-playgroud-page'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1226,21 +1178,21 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::tickets-page.tickets-page',
+      'api::visitors-info.visitors-info',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::tickets-page.tickets-page',
+      'api::visitors-info.visitors-info',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     localizations: Attribute.Relation<
-      'api::tickets-page.tickets-page',
+      'api::visitors-info.visitors-info',
       'oneToMany',
-      'api::tickets-page.tickets-page'
+      'api::visitors-info.visitors-info'
     >;
     locale: Attribute.String;
   };
@@ -1251,7 +1203,7 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
   info: {
     singularName: 'welcome-page';
     pluralName: 'welcome-pages';
-    displayName: 'WelcomePage';
+    displayName: 'Welcome Page';
     description: '';
   };
   options: {
@@ -1346,9 +1298,9 @@ declare module '@strapi/types' {
       'api::exhibition-center.exhibition-center': ApiExhibitionCenterExhibitionCenter;
       'api::exhibition-center-page.exhibition-center-page': ApiExhibitionCenterPageExhibitionCenterPage;
       'api::footer.footer': ApiFooterFooter;
-      'api::partner.partner': ApiPartnerPartner;
+      'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
       'api::ticket.ticket': ApiTicketTicket;
-      'api::tickets-page.tickets-page': ApiTicketsPageTicketsPage;
+      'api::visitors-info.visitors-info': ApiVisitorsInfoVisitorsInfo;
       'api::welcome-page.welcome-page': ApiWelcomePageWelcomePage;
     }
   }
