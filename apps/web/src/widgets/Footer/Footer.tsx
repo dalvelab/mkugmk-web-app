@@ -1,28 +1,30 @@
 import { Link } from '@chakra-ui/next-js';
 import { Button, chakra, Container, Flex, Grid, Spinner, Text } from "@chakra-ui/react"
 
-import { isVoid, type ApiResponse, isNotVoid } from '@/shared';
+import { isVoid, type ApiResponse, isNotVoid, createWorkingSchedule } from '@/shared';
 import { useEffect, useState } from 'react';
 import { getFooter } from '@/entities';
 import type { Footer as StrapiFooter } from '@/entities';
 import { useRouter } from 'next/router';
 import { WarningIcon } from '@chakra-ui/icons';
+import { useTranslations } from 'next-intl';
 
 export const Footer = () => {
-  const router = useRouter();
+  const { locale } = useRouter();
+  const t = useTranslations('Footer');
 
   const [footerData, setFooterData] = useState<ApiResponse<StrapiFooter, null> | null>(null);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    getFooter({locale: router.locale}).then((data) => {
+    getFooter({locale}).then((data) => {
       setFooterData(data);
       setLoading(false);
     }).catch(() => {
       setLoading(false)
     })
-  }, [router.locale]);
+  }, [locale]);
 
   if (isLoading) {
     return (
@@ -59,14 +61,14 @@ export const Footer = () => {
       >
         {(isVoid(footerData) || isVoid(footerData.data)) && isVoid(footerData?.error) && (
           <Text fontSize="xl" fontWeight="medium">
-            {router.locale === 'ru' ? 'Нет данных для отображения футера' : 'No data for footer rendering'}
+            {locale === 'ru' ? 'Нет данных для отображения футера' : 'No data for footer rendering'}
           </Text>
         )}
         {isNotVoid(footerData?.error) && (
           <Flex gap={1.5} alignItems="center">
             <WarningIcon color="red" />
             <Text fontSize="sm">
-              {router.locale === 'ru' ? 'Произошла ошибка при загрузке данных' : 'Error loading data'}
+              {locale === 'ru' ? 'Произошла ошибка при загрузке данных' : 'Error loading data'}
             </Text>
           </Flex>
         )}
@@ -75,6 +77,8 @@ export const Footer = () => {
   }
 
   const { city, address, contacts, working_time, pages, socials, yandex_map_link } = footerData.data;
+
+  const formattedSchedule = createWorkingSchedule(working_time, locale);
   
   return (
     <chakra.footer 
@@ -110,7 +114,7 @@ export const Footer = () => {
               size="lg" 
               colorScheme="green"
             >
-              Купить билет
+              {t('buy_ticket_button')}
             </Button>
           </Grid>
           <Grid 
@@ -119,7 +123,7 @@ export const Footer = () => {
             gap={[8, 5, 5, 5, 5]}
             >
             <Flex flexDir="column" gap={2}>
-              <Text fontSize="lg" fontWeight="medium">Контакты</Text>
+              <Text fontSize="lg" fontWeight="medium">{t('contacts')}</Text>
               <Flex gap={1} flexDir="column">
                 {contacts.map((contact) => (
                   <Link key={contact.id} href="/">
@@ -129,40 +133,46 @@ export const Footer = () => {
               </Flex>
             </Flex>
             <Flex flexDir="column" gap={2}>
-              <Text fontSize="lg" fontWeight="medium">Режим работы кассы:</Text>
+              <Text fontSize="lg" fontWeight="medium">{t('ticket_office')}</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
-                {working_time.map((time) => (
-                  <Grid key={time.id} gridTemplateColumns="1fr 1fr" gap={4}>
-                    <Text>{time.day}</Text>
-                    <Text>{time.value}</Text>
+                {formattedSchedule.map(({day, value, id}) => (
+                  <Grid key={id} gridTemplateColumns="1fr 1fr" textTransform="capitalize" gap={4}>
+                    <chakra.span>{day}</chakra.span>
+                    <chakra.span>{value}</chakra.span>
                   </Grid>
                 ))}
               </Flex>
             </Flex>
             <Flex flexDir="column" gap={2}>
-              <Text fontSize="lg" fontWeight="medium" color="brand.black">Социальные сети</Text>
+              <Text fontSize="lg" fontWeight="medium" color="brand.black">{t('socials')}</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 {socials.map((social) => (
-                  <Link key={social.id} href="/">
+                  <Link key={social.id} href={social.link} target='_blank'>
                     <Text>{social.name}</Text>
                   </Link>
                 ))}
               </Flex>
             </Flex>
             <Flex flexDir="column" gap={2}>
-              <Text fontSize="lg" fontWeight="medium">Посетителям</Text>
+              <Text fontSize="lg" fontWeight="medium">{t('visitors')}</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 {pages.map((page) => (
-                  <Link key={page.id} href="/">
+                  <Link key={page.id} href={page.link} target='_blank'>
                     <Text>{page.name}</Text>
                   </Link>
                 ))}
+                <Link href="/">
+                  <Text>{t('leave_feedback')}</Text>
+                </Link>
+                <Link href="/">
+                  <Text>{t('order_call')}</Text>
+                </Link>
               </Flex>
             </Flex>
           </Grid>
         </Flex>
         <chakra.div mt={8}>
-          <Text fontSize="xs" color="brand.gray">Частное учреждение культуры «Музейный комплекс», 2024</Text>
+          <Text fontSize="xs" color="brand.gray">Частное учреждение культуры «Музейный комплекс»</Text>
         </chakra.div>
       </Container>
     </chakra.footer> 

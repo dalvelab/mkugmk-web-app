@@ -5,21 +5,29 @@ import { chakra, Container, Heading, Flex, Button, Text, Grid, HStack, StackDivi
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getSingleExibitionCenter } from '@/entities';
-import { isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid } from '@/shared';
+import { isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, createWorkingSchedule, OpenStatus } from '@/shared';
 import type { ExhibitionCenter } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
+import { useRouter } from 'next/router';
+import { getWorkingHoursForToday } from '@/shared/utils/dates';
 
 export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = exhibitionCenter;
+  const { locale } = useRouter();
 
-  const t = useTranslations('ExhibitionCenter');
+  const t = useTranslations('ExhibitionCenterSingle');
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
   
-  const { name, description, banner, youtube_gallery, gallery, excursion_phone } = data;
+  const { name, description, banner, youtube_gallery, gallery, excursion_phone, working_time } = data;
+
+  const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
+
+  const formattedSchedule = createWorkingSchedule(working_time, locale);
+  const workTimeToday = getWorkingHoursForToday(working_time, dayOfWeek, locale);
 
   return (
     <>
@@ -51,7 +59,9 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
             h="full"
             flexDir="column"
             justifyContent="center"
-            alignItems="flex-start">
+            alignItems="flex-start"
+            gap={3}
+            >
             <Heading 
               as="h1" 
               fontSize={["3xl", "4xl", "5xl", "5xl", "5xl"]} 
@@ -60,8 +70,9 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
             >
               {name}
             </Heading>
-            <Button mt={10} size="lg" colorScheme="green">
-              {t('buy_ticket')}
+            <OpenStatus workTimeToday={workTimeToday} theme='dark' />
+            <Button mt={6} size="lg" colorScheme="green">
+              {t('buy_ticket_button')}
             </Button>
           </Flex>
         </Container>
@@ -77,7 +88,9 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
             gap={[3, 4, 6, 6, 10]}
             flexDir={["column", "column", "row", "row", "row"]}
           >
-            <Heading whiteSpace="nowrap" as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>О музее</Heading>
+            <Heading whiteSpace="nowrap" as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
+              {t('about_museum')}
+            </Heading>
             <Text textAlign="justify" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>{description}</Text>
           </HStack>
         </Container>
@@ -115,7 +128,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
               alignItems={["flex-start", "flex-start", "center", "center", "center"]}
             >
             <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
-              Полезная информация
+              {t('useful_information')}
             </Heading>
             <Grid 
               w="100%"
@@ -124,40 +137,45 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
               gap={4}
             >
               <Flex flexDir="column" gap={2}>
-                <chakra.span fontSize='md' color="brand.gray">Режим работы</chakra.span>
+                <chakra.span fontSize='xl' color="brand.gray">
+                  {t('working_schedule')}
+                </chakra.span>
                 <Flex 
                   flexDir="column" 
                   gap={1} 
-                  fontSize={["lg", "xl", "xl", "xl", "xl"]} 
+                  fontSize="lg" 
                   color="brand.black"
                 >
-                  <Grid gridTemplateColumns="1fr 1fr" justifyContent="space-between">
-                    <chakra.span>пн</chakra.span>
-                    <chakra.span>выходной</chakra.span>
-                  </Grid>
-                  <Grid gridTemplateColumns="1fr 1fr" justifyContent="space-between">
-                    <chakra.span>вт-вс</chakra.span>
-                    <chakra.span>10:00 - 19:00</chakra.span>
-                  </Grid>
+                  {formattedSchedule.map(({day, value, id}) => (
+                    <Grid key={id} gridTemplateColumns="1fr 1fr" textTransform="capitalize" gap={10}>
+                      <chakra.span>{day}</chakra.span>
+                      <chakra.span>{value}</chakra.span>
+                    </Grid>
+                  ))}
                 </Flex>
               </Flex>
               <Flex flexDir="column" gap={2}>
-                <chakra.span fontSize='md' color="brand.gray">Билеты</chakra.span>
+                <chakra.span fontSize='xl' color="brand.gray">
+                  {t('tickets')}
+                </chakra.span>
                 <Link 
                   href="/tickets" 
-                  fontSize={["lg", "xl", "xl", "xl", "xl"]} 
+                  fontSize="lg"
                   color="brand.black"
+                  textDecoration="underline"
                 >
-                  Посмотреть цены
+                  {t('view_prices_link')}
                 </Link>
               </Flex>
               {isNotEmpty(excursion_phone) && (
                 <Flex flexDir="column" gap={2}>
-                  <chakra.span fontSize='md' color="brand.gray">Заказать экскурсию</chakra.span>
+                  <chakra.span fontSize='xl' color="brand.gray">
+                    {t('order_excursion')}
+                  </chakra.span>
                   <Link 
                     href={`tel:${excursion_phone}`} 
                     target='_blank' 
-                    fontSize={["lg", "xl", "xl", "xl", "xl"]}
+                    fontSize="lg"
                   >
                     {excursion_phone}
                   </Link>

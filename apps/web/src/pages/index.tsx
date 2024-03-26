@@ -58,7 +58,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
           </Flex>
         </Container>
       </chakra.section>
-      <chakra.section pt={[10, 20, 20, 20, 20]} pb={10} pos="relative">
+      <chakra.section pt={[10, 20, 20, 20, 20]} pb={[10, 20, 20, 20, 20]} pos="relative">
         <Container 
           maxWidth="container.xl" 
           display="flex"
@@ -71,7 +71,7 @@ export default function Home({ pageContent }: InferGetServerSidePropsType<typeof
           </Flex>
         </Container>
       </chakra.section>
-      <chakra.section pt={[0, 10, 10, 10, 10]} pb={[0, 10, 10, 10, 10]} pos="relative">
+      <chakra.section bgColor="brand.black" pt={[10, 20, 20, 20, 20]} pb={[10, 20, 20, 20, 20]} pos="relative">
         <Container 
           maxWidth="container.xl"
           display="flex"

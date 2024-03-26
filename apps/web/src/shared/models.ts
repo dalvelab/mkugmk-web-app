@@ -46,11 +46,20 @@ export type StrapiYoutubeVideo = {
   video_id: string;
 }
 
+export type WeekDay = 'mon' | 'tue' | 'wed' | 'thurs' | 'fri' | 'sat' | 'sun';
+
 export type StrapiWorkingTime = {
   id: number;
-  day: string;
+  day: WeekDay;
   value: string;
   opened: boolean;
+}
+
+export type StrapiSocialNetwork = {
+  id: number;
+  type: 'vk' | 'telegram' | 'youtube';
+  link: string;
+  name: string;
 }
 
 export type StrapiContact = {

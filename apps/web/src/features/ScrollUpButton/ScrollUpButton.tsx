@@ -31,11 +31,12 @@ export const ScrollUpButton = () => {
 							mb={2}
 							isRound
 							icon={<ArrowUpIcon boxSize={7} />}
-							bg="brand.black"
-							color='white'
+							bg="white"
+							color='black'
 							aria-label="Кнопка наверх"
 							zIndex={1}
 							onClick={scrollToTop}
+							mixBlendMode="difference"
 					>
 					</IconButton>
 			) : null

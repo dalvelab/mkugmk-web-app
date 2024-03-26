@@ -19,6 +19,25 @@
     "buy_ticket": "Buy ticket"
   },
   "ExhibitionCenter": {
-    "buy_ticket": "Buy ticket"
+    "buy_ticket": "Buy ticket",
+    "more_button": "More details"
+  },
+  "ExhibitionCenterSingle": {
+    "about_museum": "About museum",
+    "buy_ticket_button": "Buy ticket",
+    "useful_information": "Useful information",
+    "working_schedule": "Work schedule",
+    "tickets": "Tickets",
+    "order_excursion": "Order an excursion",
+    "view_prices_link": "See the prices"
+  },
+  "Footer": {
+    "contacts": "Contacts",
+    "ticket_office": "Ticket office opening hours",
+    "socials": "Socials",
+    "visitors": "Visitors",
+    "buy_ticket_button": "Buy ticket",
+    "order_call": "Order call",
+    "leave_feedback": "Leave feedback"
   }
 }

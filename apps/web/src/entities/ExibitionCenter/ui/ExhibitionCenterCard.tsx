@@ -2,24 +2,22 @@ import { chakra, keyframes, Button, Box, Flex, Heading, Text } from "@chakra-ui/
 import { ExhibitionCenter } from "../models";
 import Image from "next/image";
 import Link from "next/link";
-
-const pulse = keyframes`  
-  50% {
-    width: 22px;
-    height: 22px;
-  }   
-  100% {
-    width: 10px;
-    height: 10px;
-  } 
-`;
+import { getWorkingHoursForToday } from "@/shared/utils/dates";
+import { OpenStatus } from "@/shared";
+import { useTranslations } from "next-intl";
 
 interface ExhibitionCenterCardProps {
   exhibition_center: ExhibitionCenter;
+  dayOfWeek: number;
+  locale?: string;
 }
 
-export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhibition_center}) => {
-  const { id, name, card_description, banner } = exhibition_center;
+export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhibition_center, dayOfWeek, locale}) => {
+  const { id, name, card_description, banner, working_time } = exhibition_center;
+
+  const workTimeToday = getWorkingHoursForToday(working_time,  dayOfWeek, locale);
+
+  const t = useTranslations('ExhibitionCenter');
 
   return (
     <Flex 
@@ -38,31 +36,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhib
         flexDir={["column-reverse", "column-reverse", "column-reverse", "row", "row"]}
       >
         <Flex flexDir="column" gap={[2, 2, 2, 6, 6]} color="brand.black">
-          <Flex gap={3} alignItems="center" pl={1}>
-            <Box 
-              bgColor="green.500" 
-              w={3} 
-              h={3} 
-              borderRadius="50%"
-              pos="relative"
-              _after={{
-                content: '""',
-                w: '10px',
-                h: '10px',
-                bgColor: 'rgba(16,224,146, .2)',
-                pos: "absolute",
-                borderRadius: "50%",
-                top: '50%',
-                left: '50%',
-                transform: "auto",
-                translateX: "-50%",
-                translateY: "-50%",
-                zIndex: 1,
-                animation: `${pulse} 2s infinite`
-              }}
-            />
-            <chakra.span fontSize="sm">Сегодня открыто с 9:00 до 19:00</chakra.span>
-          </Flex>
+          <OpenStatus workTimeToday={workTimeToday} theme='light' />
           <Flex maxW="600px" gap={[4, 4, 4, 5, 5]} flexDir="column" alignItems='flex-start'>
             <Heading 
               as='h2'
@@ -78,7 +52,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhib
                 color="white" 
                 _hover={{bgColor: "brand.black"}}
               >
-                Подробнее
+                {t('more_button')}
               </Button>
             </Link>
           </Flex>

@@ -5,15 +5,19 @@ import { getExibitionCentersPage, ExhibitionCenterCard } from '@/entities';
 import { isVoid ,EmptyState, isEmpty } from '@/shared';
 import type { ExhibitionCentersPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
+import { useRouter } from 'next/router';
 
 export default function ExhibitionCenters({ pageContent }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
+  const { locale } = useRouter();
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
 
   const { title, description, exhibition_centers } = data;
+
+  const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
 
   return (
     <>
@@ -52,7 +56,12 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
           gap={6}
           >
           {exhibition_centers.map((exhibition_center) => (
-            <ExhibitionCenterCard key={exhibition_center.id} exhibition_center={exhibition_center} />
+            <ExhibitionCenterCard 
+              key={exhibition_center.id} 
+              exhibition_center={exhibition_center}
+              dayOfWeek={dayOfWeek}
+              locale={locale}
+            />
           ))}
         </Container>
       </chakra.section>

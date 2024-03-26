@@ -65,8 +65,9 @@ export const Navbar = () => {
       top={0} 
       left={0}
       zIndex={2}
+      paddingInlineStart={4}
+      paddingInlineEnd={4}
       >
-      <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="space-between" alignItems="center" gap={2}>
           <Link href="/">
             <Text fontSize="xl" textTransform="uppercase" fontWeight="bold">{t('title')}</Text>
@@ -124,7 +125,6 @@ export const Navbar = () => {
             />
           </Flex>
         </Flex>
-      </Container>
       {/* <Sidebar onClose={() => setOpened(false)} isOpen={opened} /> */}
     </chakra.nav>
   )

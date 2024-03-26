@@ -1,4 +1,4 @@
-import { StrapiContact, StrapiWorkingTime } from "@/shared";
+import { StrapiContact, StrapiSocialNetwork, StrapiWorkingTime } from "@/shared";
 
 export type Footer = {
   id: number;
@@ -12,11 +12,6 @@ export type Footer = {
     name: string;
     link: string;
   }[];
-  socials: {
-    id: number;
-    type: 'vk' | 'telegram' | 'youtube';
-    link: string;
-    name: string;
-  }[]
-  working_time: StrapiWorkingTime[]
+  socials: StrapiSocialNetwork[];
+  working_time: StrapiWorkingTime[];
 }
