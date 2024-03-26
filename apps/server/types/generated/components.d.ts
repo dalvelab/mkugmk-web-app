@@ -108,7 +108,7 @@ export interface VisitorsCafeAndSouvenirsPage extends Schema.Component {
 export interface VisitorsInteractivePlaygroudPage extends Schema.Component {
   collectionName: 'components_visitors_interactive_playgroud_pages';
   info: {
-    displayName: 'Interactive Playgroud page';
+    displayName: 'Interactive Playgroud Page';
     description: '';
   };
   attributes: {
@@ -139,7 +139,7 @@ export interface VisitorsTicketCategory extends Schema.Component {
     description: '';
   };
   attributes: {
-    type: Attribute.Enumeration<['adult', 'child', 'benefit']>;
+    name: Attribute.String;
     caption: Attribute.String;
     price: Attribute.Integer;
   };

@@ -6,13 +6,8 @@
   },
   "options": {},
   "attributes": {
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "adult",
-        "child",
-        "benefit"
-      ]
+    "name": {
+      "type": "string"
     },
     "caption": {
       "type": "string"

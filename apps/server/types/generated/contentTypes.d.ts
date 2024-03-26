@@ -1041,14 +1041,14 @@ export interface ApiPartnersPagePartnersPage extends Schema.SingleType {
     };
   };
   attributes: {
-    partners: Attribute.Component<'shared.info-card', true> &
+    title: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    title: Attribute.String &
+    partners: Attribute.Component<'shared.info-card', true> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -1146,13 +1146,12 @@ export interface ApiTicketTicket extends Schema.CollectionType {
   };
 }
 
-export interface ApiVisitorsInfoVisitorsInfo extends Schema.CollectionType {
-  collectionName: 'visitors_infos';
+export interface ApiVisitorsPageVisitorsPage extends Schema.SingleType {
+  collectionName: 'visitors_pages';
   info: {
-    singularName: 'visitors-info';
-    pluralName: 'visitors-infos';
-    displayName: 'Visitors Info';
-    description: '';
+    singularName: 'visitors-page';
+    pluralName: 'visitors-pages';
+    displayName: 'Visitors Pages';
   };
   options: {
     draftAndPublish: false;
@@ -1175,24 +1174,30 @@ export interface ApiVisitorsInfoVisitorsInfo extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    cafe_and_souvenirs_page: Attribute.Component<'visitors.cafe-and-souvenirs-page'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::visitors-info.visitors-info',
+      'api::visitors-page.visitors-page',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::visitors-info.visitors-info',
+      'api::visitors-page.visitors-page',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     localizations: Attribute.Relation<
-      'api::visitors-info.visitors-info',
+      'api::visitors-page.visitors-page',
       'oneToMany',
-      'api::visitors-info.visitors-info'
+      'api::visitors-page.visitors-page'
     >;
     locale: Attribute.String;
   };
@@ -1300,7 +1305,7 @@ declare module '@strapi/types' {
       'api::footer.footer': ApiFooterFooter;
       'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
       'api::ticket.ticket': ApiTicketTicket;
-      'api::visitors-info.visitors-info': ApiVisitorsInfoVisitorsInfo;
+      'api::visitors-page.visitors-page': ApiVisitorsPageVisitorsPage;
       'api::welcome-page.welcome-page': ApiWelcomePageWelcomePage;
     }
   }
