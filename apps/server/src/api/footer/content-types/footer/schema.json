@@ -22,7 +22,7 @@
       "component": "shared.working-time",
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       }
     },

@@ -817,9 +817,10 @@ export interface ApiExhibitionCenterExhibitionCenter
         };
       }>;
     working_time: Attribute.Component<'shared.working-time', true> &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     banner: Attribute.Media &
@@ -962,7 +963,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
     working_time: Attribute.Component<'shared.working-time', true> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     city: Attribute.String &
