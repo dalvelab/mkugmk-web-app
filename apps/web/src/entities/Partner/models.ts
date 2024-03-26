@@ -1,10 +1,6 @@
-import { StrapiContact, StrapiMedia } from "@/shared";
+import { StrapiInfoCard, StrapiMedia } from "@/shared";
 
-export type Partner = {
-  id: number;
-  name: string;
-  small_description: string;
-  image: StrapiMedia;
-  description: string;
-  contacts: StrapiContact[];
+export type PartnerPage = {
+  title: string;
+  partners: StrapiInfoCard[];
 }

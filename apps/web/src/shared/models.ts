@@ -59,3 +59,12 @@ export type StrapiContact = {
   text: string;
   caption: string | null;
 }
+
+export type StrapiInfoCard = {
+  id: number;
+  name: string;
+  short_description: string;
+  image: StrapiMedia;
+  description: string;
+  type: 'partners' | 'cafes_and_souvenirs'
+}

@@ -1,12 +1,14 @@
 import type { ApiResponse, DefaultRequestParams } from "@/shared";
-import type { Partner } from "./models";
+import type { PartnerPage } from "./models";
 
-interface GetPartners extends DefaultRequestParams {};
+interface GetPartners extends DefaultRequestParams {
 
-export async function getPartners(params: GetPartners): Promise<ApiResponse<Partner[], null>> {
+};
+
+export async function getPartnersPage(params: GetPartners): Promise<ApiResponse<PartnerPage, null>> {
   const { locale } = params;
 
-  const res = await fetch(`${process.env.DB_HOST}/partners?locale=${locale}`);
+  const res = await fetch(`${process.env.DB_HOST}/partners-page?locale=${locale}`);
 
   return res.json();
 }

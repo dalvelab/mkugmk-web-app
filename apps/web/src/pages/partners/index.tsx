@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { chakra, Container, Heading, Flex, Text, Grid } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-import { getPartners } from '@/entities';
-import { isVoid, EmptyState, isEmpty } from '@/shared';
-import type { Partner } from '@/entities';
+import { getPartnersPage } from '@/entities';
+import { isVoid, EmptyState, isEmpty, isNotEmpty } from '@/shared';
+import type { PartnerPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
 export default function Partners({ partners }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -36,7 +36,7 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
             gridTemplateColumns="1fr 1fr 1fr 1fr"
             gap={10}
           >
-            {data.map((partner) => (
+            {isNotEmpty(data.partners) && data.partners.map((partner) => (
               <Flex
                 key={partner.id}
                 w='280px'
@@ -66,7 +66,7 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
                 </chakra.div>
                 <Flex p={4} gap={2} flexDir="column">
                   <Text fontSize="lg" fontWeight="medium">{partner.name}</Text>
-                  <Text fontSize="sm" color='brand.gray' lineHeight="110%">{partner.small_description}</Text>
+                  <Text fontSize="sm" color='brand.gray' lineHeight="110%">{partner.short_description}</Text>
                 </Flex>
               </Flex>
             ))}
@@ -78,11 +78,11 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
 }
 
 interface HomeProps {
-  partners: ApiResponse<Partner[], null>
+  partners: ApiResponse<PartnerPage, null>
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
-  const partners = await getPartners({locale});
+  const partners = await getPartnersPage({locale});
 
   return {
     props: {
