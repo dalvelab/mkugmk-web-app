@@ -1,12 +1,14 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { chakra, Container, Heading, Flex, Button, Text, Grid, HStack, StackDivider } from "@chakra-ui/react";
-
-import { getSingleExibitionCenter, WelcomeHeroSection, WelcomeGallery } from '@/entities';
-import { isVoid, EmptyState, isEmpty, Slider, isNotEmpty, isNotVoid } from '@/shared';
-import type { ExhibitionCenter } from '@/entities';
-import type { ApiResponse } from '@/shared';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Link } from '@chakra-ui/next-js';
+import { chakra, Container, Heading, Flex, Button, Text, Grid, HStack, StackDivider } from "@chakra-ui/react";
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+
+import { getSingleExibitionCenter } from '@/entities';
+import { isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid } from '@/shared';
+import type { ExhibitionCenter } from '@/entities';
+import type { ApiResponse } from '@/shared';
+import { YoutubeVideoSlider } from '@/features';
 
 export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = exhibitionCenter;
@@ -17,7 +19,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
     return <EmptyState />
   }
   
-  const { name, description, banner, youtube_gallery, gallery } = data;
+  const { name, description, banner, youtube_gallery, gallery, excursion_phone } = data;
 
   return (
     <>
@@ -72,73 +74,99 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
           >
           <HStack 
             divider={<StackDivider borderColor="brand.border" />} 
-            gap={10}
+            gap={[3, 4, 6, 6, 10]}
+            flexDir={["column", "column", "row", "row", "row"]}
           >
             <Heading whiteSpace="nowrap" as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>О музее</Heading>
             <Text textAlign="justify" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>{description}</Text>
           </HStack>
         </Container>
       </chakra.section>
-      <chakra.section pt={[0, 10, 10, 10, 10]} pb={10} pos="relative">
-        <Container 
-          maxWidth="container.xl"
-          display="flex"
-          flexDir="column"
-          pos="relative"
+      <chakra.section pt={[0, 10, 10, 10, 10]} pb={[0, 10, 10, 10, 10]} pos="relative">
+        <Container maxWidth="container.xl" display="flex" flexDir="column" pos="relative">
+          <Grid 
+            gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr', '1fr 1fr']}
+            gap={5}
           >
-          <Grid gridTemplateColumns='1fr 1fr'>
           {isNotVoid(gallery) && isNotEmpty(gallery) && gallery.map((image) => (
-              <chakra.div key={image.id} h="400px">
+              <chakra.div 
+                key={image.id} 
+                h={["300px", "400px", "320px", "400px", "400px"]} 
+                pos="relative"
+              >
                 <Image 
                   fill
                   src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`}
                   alt='Изображение музея'
+                  style={{objectFit: 'cover', borderRadius: "12px"}}
                 />
               </chakra.div>
             ))}
           </Grid>
         </Container>
       </chakra.section>
-      {isNotEmpty(youtube_gallery) && (
-        <chakra.section pt={10} pb={10} pos="relative">
-          <Container 
-            maxWidth="container.xl"
-            display="flex"
-            flexDir="column"
-            pos="relative"
-          >
-            <Heading as="h3" color="brand.black" fontSize="4xl" pb={5}>Видеогалерея</Heading>
-            <Slider length={youtube_gallery.length}>
-              {youtube_gallery.map((video) => (
+      <YoutubeVideoSlider youtube_gallery={youtube_gallery} />
+      <chakra.section pt={[0, 10, 10, 10, 10]} pb={10} pos="relative">
+        <Container maxWidth="container.xl" display="flex" flexDir="column" pos="relative">
+          <HStack 
+              divider={<StackDivider borderColor="brand.border" />} 
+              gap={[3, 4, 6, 6, 10]}
+              flexDir={["column", "column", "row", "row", "row"]}
+              alignItems={["flex-start", "flex-start", "center", "center", "center"]}
+            >
+            <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
+              Полезная информация
+            </Heading>
+            <Grid 
+              w="100%"
+              gridTemplateColumns={["auto", "auto", "auto", "auto auto auto", "auto auto auto"]}
+              justifyContent="space-between"
+              gap={4}
+            >
+              <Flex flexDir="column" gap={2}>
+                <chakra.span fontSize='md' color="brand.gray">Режим работы</chakra.span>
                 <Flex 
-                  key={video.id} 
-                  w={["428px", "500px", "500px", "500px", "500px"]} 
-                  flexDir="column"
-                  gap={3}
+                  flexDir="column" 
+                  gap={1} 
+                  fontSize={["lg", "xl", "xl", "xl", "xl"]} 
+                  color="brand.black"
                 >
-                  <chakra.div 
-                    w="full" 
-                    h={["240px", "280px", "280px", "280px", "280px"]} 
-                    pos="relative"
-                  >
-                    <chakra.iframe
-                      w={["428px", "500px", "500px", "500px", "500px"]} 
-                      h={["240px", "280px", "280px", "280px", "280px"]} 
-                      borderRadius="12px"
-                      src={`https://www.youtube-nocookie.com/embed/${video.video_id}`} 
-                      title="YouTube video player" 
-                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      loading="lazy"
-                    />
-                  </chakra.div>
-                  <Text color="brand.black" fontSize="xl">{video.name}</Text>
+                  <Grid gridTemplateColumns="1fr 1fr" justifyContent="space-between">
+                    <chakra.span>пн</chakra.span>
+                    <chakra.span>выходной</chakra.span>
+                  </Grid>
+                  <Grid gridTemplateColumns="1fr 1fr" justifyContent="space-between">
+                    <chakra.span>вт-вс</chakra.span>
+                    <chakra.span>10:00 - 19:00</chakra.span>
+                  </Grid>
                 </Flex>
-              ))}
-            </Slider>
-          </Container>
-        </chakra.section>
-      )}
+              </Flex>
+              <Flex flexDir="column" gap={2}>
+                <chakra.span fontSize='md' color="brand.gray">Билеты</chakra.span>
+                <Link 
+                  href="/tickets" 
+                  fontSize={["lg", "xl", "xl", "xl", "xl"]} 
+                  color="brand.black"
+                >
+                  Посмотреть цены
+                </Link>
+              </Flex>
+              {isNotEmpty(excursion_phone) && (
+                <Flex flexDir="column" gap={2}>
+                  <chakra.span fontSize='md' color="brand.gray">Заказать экскурсию</chakra.span>
+                  <Link 
+                    href={`tel:${excursion_phone}`} 
+                    target='_blank' 
+                    fontSize={["lg", "xl", "xl", "xl", "xl"]}
+                  >
+                    {excursion_phone}
+                  </Link>
+                </Flex>
+              )}
+            </Grid>
+          </HStack>
+        </Container>
+      </chakra.section>
     </>
   );
 }
