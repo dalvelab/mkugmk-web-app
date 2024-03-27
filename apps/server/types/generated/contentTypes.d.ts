@@ -848,6 +848,71 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
   };
 }
 
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    type: Attribute.Enumeration<['news', 'event']> &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    image: Attribute.Media &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::event.event',
+      'oneToMany',
+      'api::event.event'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiExhibitionCenterExhibitionCenter
   extends Schema.CollectionType {
   collectionName: 'exhibition_centers';
@@ -1144,75 +1209,6 @@ export interface ApiPartnersPagePartnersPage extends Schema.SingleType {
   };
 }
 
-export interface ApiSingleNewsSingleNews extends Schema.CollectionType {
-  collectionName: 'news';
-  info: {
-    singularName: 'single-news';
-    pluralName: 'news';
-    displayName: 'News';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    description: Attribute.RichText &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    type: Attribute.Enumeration<
-      [
-        '\u0441\u043E\u0431\u044B\u0442\u0438\u0435',
-        '\u043D\u043E\u0432\u043E\u0441\u0442\u044C'
-      ]
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    image: Attribute.Media &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::single-news.single-news',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::single-news.single-news',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::single-news.single-news',
-      'oneToMany',
-      'api::single-news.single-news'
-    >;
-    locale: Attribute.String;
-  };
-}
-
 export interface ApiTicketTicket extends Schema.CollectionType {
   collectionName: 'tickets';
   info: {
@@ -1437,11 +1433,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::complex-operation-management.complex-operation-management': ApiComplexOperationManagementComplexOperationManagement;
       'api::contacts-page.contacts-page': ApiContactsPageContactsPage;
+      'api::event.event': ApiEventEvent;
       'api::exhibition-center.exhibition-center': ApiExhibitionCenterExhibitionCenter;
       'api::exhibition-center-page.exhibition-center-page': ApiExhibitionCenterPageExhibitionCenterPage;
       'api::footer.footer': ApiFooterFooter;
       'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
-      'api::single-news.single-news': ApiSingleNewsSingleNews;
       'api::ticket.ticket': ApiTicketTicket;
       'api::visitors-page.visitors-page': ApiVisitorsPageVisitorsPage;
       'api::welcome-page.welcome-page': ApiWelcomePageWelcomePage;

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * single-news router
+ * event router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::single-news.single-news');
+module.exports = createCoreRouter('api::event.event');
