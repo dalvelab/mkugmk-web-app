@@ -1,4 +1,4 @@
-import { StrapiWorkingTime } from "@/shared";
+import { StrapiWorkingTime, isVoid } from "@/shared";
 import { chakra, keyframes, Box, Flex } from "@chakra-ui/react"
 
 const pulse = keyframes`  
@@ -13,11 +13,15 @@ const pulse = keyframes`
 `;
 
 interface OpenStatusProps {
-  workTimeToday: StrapiWorkingTime;
+  workTimeToday?: StrapiWorkingTime;
   theme: 'light' | 'dark';
 }
 
 export const OpenStatus: React.FC<OpenStatusProps> = ({ workTimeToday, theme }) => {
+  if (isVoid(workTimeToday)) {
+    return null;
+  }
+
   return (
     <Flex gap={3} alignItems="center" pl={1}>
       <Box 

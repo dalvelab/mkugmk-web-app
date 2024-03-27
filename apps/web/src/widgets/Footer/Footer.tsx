@@ -76,7 +76,7 @@ export const Footer = () => {
     )
   }
 
-  const { city, address, contacts, working_time, pages, socials, yandex_map_link } = footerData.data;
+  const { city, address, contacts, working_time, pages, socials, map_link } = footerData.data;
 
   const formattedSchedule = createWorkingSchedule(working_time, locale);
   
@@ -101,7 +101,7 @@ export const Footer = () => {
               <Link 
                 target="_blank" 
                 rel="noreferer" 
-                href={yandex_map_link} 
+                href={isNotVoid(map_link) ? map_link : '/'} 
                 pos="relative" 
                 _hover={{ textDecoration: 'none', color: 'brand.200' }}
                 >

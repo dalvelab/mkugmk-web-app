@@ -5,7 +5,7 @@ export type Footer = {
   city: string;
   address: string;
   locale: string;
-  yandex_map_link: string;
+  map_link?: string;
   contacts: StrapiContact[];
   pages: {
     id: number;

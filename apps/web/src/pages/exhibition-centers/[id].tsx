@@ -60,7 +60,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
             flexDir="column"
             justifyContent="center"
             alignItems="flex-start"
-            gap={3}
+            gap={5}
             >
             <Heading 
               as="h1" 
@@ -71,7 +71,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
               {name}
             </Heading>
             <OpenStatus workTimeToday={workTimeToday} theme='dark' />
-            <Button mt={6} size="lg" colorScheme="green">
+            <Button mt={2} size="lg" colorScheme="green">
               {t('buy_ticket_button')}
             </Button>
           </Flex>

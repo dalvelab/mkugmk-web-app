@@ -1,4 +1,4 @@
-import type { StrapiWorkingTime, WeekDay } from "../models";
+import type { StrapiWorkingTime } from "../models";
 
 import { rusFullDayNamesMap, engFullDayNamesMap } from '../constants';
 import { isEmpty, isNotEmpty, isVoid } from "./misc";
@@ -74,7 +74,9 @@ export function getWorkingHoursForToday(data: StrapiWorkingTime[], dayOfWeek: nu
   const openedText = locale === 'ru' ? 'Сегодня открыто с' : 'Today is opened from';
   const untillText = locale === 'ru' ? 'до' : 'untill';
 
-  const today = data[dayOfWeek];
+  const index = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+
+  const today = data[index];
 
   if (isVoid(today)) {
     return {
