@@ -20,8 +20,7 @@ export const WelcomeGallery: React.FC<WelcomeGalleryProps> = ({images}) => {
         <chakra.div 
           className={styles.gallery_image} 
           key={image.id} 
-          pos="relative" 
-          cursor={isNotVoid(image.caption) ? 'pointer' : 'auto'}
+          pos="relative"
         >
           <Image 
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} 

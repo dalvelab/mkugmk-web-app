@@ -37,6 +37,7 @@ export const ScrollUpButton = () => {
 							zIndex={1}
 							onClick={scrollToTop}
 							mixBlendMode="difference"
+							transform="translate3d(0, 0, 0)"
 					>
 					</IconButton>
 			) : null
