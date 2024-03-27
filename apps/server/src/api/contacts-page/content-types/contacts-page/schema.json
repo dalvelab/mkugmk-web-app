@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "contacts_pages",
+  "info": {
+    "singularName": "contacts-page",
+    "pluralName": "contacts-pages",
+    "displayName": "Contacts Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}

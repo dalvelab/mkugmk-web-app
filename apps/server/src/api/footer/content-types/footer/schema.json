@@ -47,7 +47,7 @@
       "repeatable": true,
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
       "component": "shared.contact"
@@ -72,7 +72,7 @@
       },
       "component": "footer.page"
     },
-    "yandex_map_link": {
+    "map_link": {
       "pluginOptions": {
         "i18n": {
           "localized": true

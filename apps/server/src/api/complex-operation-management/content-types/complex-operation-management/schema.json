@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "complex_operation_managements",
+  "info": {
+    "singularName": "complex-operation-management",
+    "pluralName": "complex-operation-managements",
+    "displayName": "Complex Operation Management"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "common_operating_hours": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.working-time"
+    },
+    "special_days_operating_hours": {
+      "displayName": "OperatingHoursInCurrentDay",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.operating-hours-in-current-day"
+    }
+  }
+}

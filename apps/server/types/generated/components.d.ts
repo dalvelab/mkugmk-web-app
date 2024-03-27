@@ -57,6 +57,18 @@ export interface SharedInfoCard extends Schema.Component {
   };
 }
 
+export interface SharedOperatingHoursInCurrentDay extends Schema.Component {
+  collectionName: 'components_shared_operating_hours_in_current_days';
+  info: {
+    displayName: 'OperatingHoursInCurrentDay';
+  };
+  attributes: {
+    time: Attribute.String & Attribute.Required;
+    day: Attribute.Date & Attribute.Required;
+    opened: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+  };
+}
+
 export interface SharedWorkingTime extends Schema.Component {
   collectionName: 'components_shared_working_times';
   info: {
@@ -179,6 +191,7 @@ declare module '@strapi/types' {
       'footer.social': FooterSocial;
       'shared.contact': SharedContact;
       'shared.info-card': SharedInfoCard;
+      'shared.operating-hours-in-current-day': SharedOperatingHoursInCurrentDay;
       'shared.working-time': SharedWorkingTime;
       'shared.youtube-video': SharedYoutubeVideo;
       'visitors.cafe-and-souvenirs-page': VisitorsCafeAndSouvenirsPage;

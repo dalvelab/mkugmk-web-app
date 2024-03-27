@@ -783,6 +783,71 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiComplexOperationManagementComplexOperationManagement
+  extends Schema.SingleType {
+  collectionName: 'complex_operation_managements';
+  info: {
+    singularName: 'complex-operation-management';
+    pluralName: 'complex-operation-managements';
+    displayName: 'Complex Operation Management';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    common_operating_hours: Attribute.Component<'shared.working-time', true>;
+    special_days_operating_hours: Attribute.Component<
+      'shared.operating-hours-in-current-day',
+      true
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::complex-operation-management.complex-operation-management',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::complex-operation-management.complex-operation-management',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactsPageContactsPage extends Schema.SingleType {
+  collectionName: 'contacts_pages';
+  info: {
+    singularName: 'contacts-page';
+    pluralName: 'contacts-pages';
+    displayName: 'Contacts Page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contacts-page.contacts-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contacts-page.contacts-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiExhibitionCenterExhibitionCenter
   extends Schema.CollectionType {
   collectionName: 'exhibition_centers';
@@ -981,7 +1046,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
     contacts: Attribute.Component<'shared.contact', true> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     socials: Attribute.Component<'footer.social', true> &
@@ -996,7 +1061,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
           localized: true;
         };
       }>;
-    yandex_map_link: Attribute.String &
+    map_link: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1074,6 +1139,75 @@ export interface ApiPartnersPagePartnersPage extends Schema.SingleType {
       'api::partners-page.partners-page',
       'oneToMany',
       'api::partners-page.partners-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiSingleNewsSingleNews extends Schema.CollectionType {
+  collectionName: 'news';
+  info: {
+    singularName: 'single-news';
+    pluralName: 'news';
+    displayName: 'News';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    type: Attribute.Enumeration<
+      [
+        '\u0441\u043E\u0431\u044B\u0442\u0438\u0435',
+        '\u043D\u043E\u0432\u043E\u0441\u0442\u044C'
+      ]
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    image: Attribute.Media &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::single-news.single-news',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::single-news.single-news',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::single-news.single-news',
+      'oneToMany',
+      'api::single-news.single-news'
     >;
     locale: Attribute.String;
   };
@@ -1301,10 +1435,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::complex-operation-management.complex-operation-management': ApiComplexOperationManagementComplexOperationManagement;
+      'api::contacts-page.contacts-page': ApiContactsPageContactsPage;
       'api::exhibition-center.exhibition-center': ApiExhibitionCenterExhibitionCenter;
       'api::exhibition-center-page.exhibition-center-page': ApiExhibitionCenterPageExhibitionCenterPage;
       'api::footer.footer': ApiFooterFooter;
       'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
+      'api::single-news.single-news': ApiSingleNewsSingleNews;
       'api::ticket.ticket': ApiTicketTicket;
       'api::visitors-page.visitors-page': ApiVisitorsPageVisitorsPage;
       'api::welcome-page.welcome-page': ApiWelcomePageWelcomePage;
