@@ -1,7 +1,7 @@
 import type { StrapiWorkingTime, WeekDay } from "../models";
 
 import { rusFullDayNamesMap, engFullDayNamesMap } from '../constants';
-import { isNotEmpty, isVoid } from "./misc";
+import { isEmpty, isNotEmpty, isVoid } from "./misc";
 
 export function createWorkingSchedule(data: StrapiWorkingTime[], locale: string | undefined = 'ru') {
   const formatted: Array<{
@@ -11,8 +11,33 @@ export function createWorkingSchedule(data: StrapiWorkingTime[], locale: string 
     opened: boolean;
   }> = [];
 
+  if (isEmpty(data)) {
+    return [
+      {
+        id: 0,
+        day: '',
+        value: '',
+        opened: false,
+      }
+    ]
+  }
+
+  const openedCenters = data.filter((center) => center.opened);
+  
   const dayNames = locale === 'ru' ? rusFullDayNamesMap : engFullDayNamesMap;
   const weekday = locale === 'ru' ? 'выходной' : 'closed';
+  const closed = locale === 'ru' ? 'временно закрыто' : 'temporarily closed';
+
+  if (isEmpty(openedCenters)) {
+    return [
+      {
+        id: 0,
+        day: `${dayNames[data[0].day]}-${dayNames[data[data.length - 1].day]}`,
+        value: closed,
+        opened: false,
+      }
+    ]
+  }
 
   for (let i = 0; i < data.length; i++) {
     const day = {
