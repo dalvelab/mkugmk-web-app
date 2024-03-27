@@ -23,8 +23,11 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media, pr
     <chakra.div w="full" h="100%" pos="absolute" zIndex={-1} overflow="hidden">
       <video 
         autoPlay
-        muted
+        playsInline
+        aria-hidden
         loop
+        tabIndex={-1}
+        preload="auto"
         style={{minHeight: "100vh", minWidth: "100%", objectFit: 'cover'}} 
         poster={isNotVoid(preview) ? `${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${preview.url}` : undefined}
       >
