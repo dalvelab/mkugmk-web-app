@@ -3,7 +3,9 @@
     "title": "Музейный комплекс",
     "city": "г. Верхняя Пышма",
     "buy_ticket": "Купить билет",
+    "sidebar_back": "Назад",
     "menu": {
+      "home": "Главная",
       "about": "О комплексе",
       "visitors": "Посетителям",
       "news": "События и новости",
@@ -12,6 +14,13 @@
     "about_dropdown": {
       "exhibition_centers": "Выставочные центры",
       "partners": "Партнеры"
+    },
+    "visitors_dropdown": {
+      "tickets": "Билеты",
+      "working_schedule": "График работы",
+      "navigation": "Навигация",
+      "interactive_playground": "Интерактивная площадка",
+      "cafe_and_souvenirs": "Кафе и сувениры"
     }
   },
   "Index": {

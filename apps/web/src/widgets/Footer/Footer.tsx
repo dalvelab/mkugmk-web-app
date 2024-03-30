@@ -1,30 +1,23 @@
 import { Link } from '@chakra-ui/next-js';
 import { Button, chakra, Container, Flex, Grid, Spinner, Text } from "@chakra-ui/react"
+import { useQuery } from "@tanstack/react-query";
 
-import { isVoid, type ApiResponse, isNotVoid, createWorkingSchedule } from '@/shared';
-import { useEffect, useState } from 'react';
+import { isVoid, isNotVoid, createWorkingSchedule } from '@/shared';
 import { getFooter } from '@/entities';
-import type { Footer as StrapiFooter } from '@/entities';
 import { useRouter } from 'next/router';
 import { WarningIcon } from '@chakra-ui/icons';
 import { useTranslations } from 'next-intl';
 
 export const Footer = () => {
-  const { locale } = useRouter();
   const t = useTranslations('Footer');
+  const { locale } = useRouter();
 
-  const [footerData, setFooterData] = useState<ApiResponse<StrapiFooter, null> | null>(null);
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    getFooter({locale}).then((data) => {
-      setFooterData(data);
-      setLoading(false);
-    }).catch(() => {
-      setLoading(false)
-    })
-  }, [locale]);
+  const { data: response, isLoading, isError } = useQuery(
+    {
+      queryKey: ['footer'],
+      queryFn: () => getFooter({ locale }),
+      refetchOnWindowFocus: false,
+  });
 
   if (isLoading) {
     return (
@@ -45,7 +38,7 @@ export const Footer = () => {
     )
   }
 
-  if (isVoid(footerData) || isVoid(footerData.data)) {
+  if (isVoid(response) || isVoid(response.data)) {
     return (
       <chakra.footer 
         w="full" 
@@ -59,12 +52,12 @@ export const Footer = () => {
         justifyContent="center"
         alignItems="center"
       >
-        {(isVoid(footerData) || isVoid(footerData.data)) && isVoid(footerData?.error) && (
+        {(isVoid(response) || isVoid(response.data)) && isVoid(response?.error) && (
           <Text fontSize="xl" fontWeight="medium">
             {locale === 'ru' ? 'Нет данных для отображения футера' : 'No data for footer rendering'}
           </Text>
         )}
-        {isNotVoid(footerData?.error) && (
+        {isNotVoid(response?.error) || isError && (
           <Flex gap={1.5} alignItems="center">
             <WarningIcon color="red" />
             <Text fontSize="sm">
@@ -76,7 +69,7 @@ export const Footer = () => {
     )
   }
 
-  const { city, address, contacts, working_time, pages, socials, map_link } = footerData.data;
+  const { city, address, contacts, working_time, pages, socials, map_link } = response.data;
 
   const formattedSchedule = createWorkingSchedule(working_time, locale);
   

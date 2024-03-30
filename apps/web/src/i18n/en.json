@@ -3,7 +3,9 @@
     "title": "Museum Complex",
     "city": "Verkhnyaya Pyshma",
     "buy_ticket": "Buy ticket",
+    "sidebar_back": "Back",
     "menu": {
+      "home": "Home",
       "about": "About",
       "visitors": "Visitors",
       "news": "News",
@@ -12,6 +14,13 @@
     "about_dropdown": {
       "exhibition_centers": "Exhibition Centers",
       "partners": "Partners"
+    },
+    "visitors_dropdown": {
+      "tickets": "Tickets",
+      "working_schedule": "Working Hours",
+      "navigation": "Navigation",
+      "interactive_playground": "Interactive Playground",
+      "cafe_and_souvenirs": "Cafe and souvenirs"
     }
   },
   "Index": {

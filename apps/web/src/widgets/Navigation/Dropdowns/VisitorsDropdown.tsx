@@ -1,20 +1,17 @@
 import { NavbarLink } from "@/entities/Navbar/ui/NavbarLink";
 import { Flex } from "@chakra-ui/react";
-// import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 export const VisitorsDropdown = ({}) => {
-  // const { t } = useTranslation('navigation');
-
-  // const exhibitionCentersLinkName = t('about_dropdown.exhibition_centers');
-  // const partnersLinkName = t('about_dropdown.partners');
+  const t = useTranslations('navigation');
 
   return (
     <Flex flexDir='column' gap={3} alignItems="flex-start">
-      <NavbarLink href="/tickets" text="Билеты" level={2} />
-      <NavbarLink href="/working-hours" text="График работы" level={2} />
-      <NavbarLink href="/navigation" text="Навигация" level={2} />
-      <NavbarLink href="/interactive-playground" text="Интерактивная площадка" level={2} />
-      <NavbarLink href="/cafe-and-souvenirs" text="Кафе и сувениры" level={2} />
+      <NavbarLink href="/tickets" text={t('visitors_dropdown.tickets')} level={2} />
+      <NavbarLink href="/working-hours" text={t('visitors_dropdown.working_schedule')} level={2} />
+      <NavbarLink href="/navigation" text={t('visitors_dropdown.navigation')} level={2} />
+      <NavbarLink href="/interactive-playground" text={t('visitors_dropdown.interactive_playground')} level={2} />
+      <NavbarLink href="/cafe-and-souvenirs" text={t('visitors_dropdown.cafe_and_souvenirs')} level={2} />
     </Flex>
   )
 }
