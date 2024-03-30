@@ -1,11 +1,16 @@
-import Image from 'next/image';
-import { chakra, Container, Heading, Flex, Text, Grid } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Image from 'next/image';
+import { chakra, Container, Heading, Flex, Text, Grid, shouldForwardProp } from "@chakra-ui/react";
+import { isValidMotionProp, motion } from 'framer-motion';
 
 import { getPaginatedEvents } from '@/entities';
 import { Link, isVoid, EmptyState, isEmpty, isNotEmpty, getformatDateLocale } from '@/shared';
-import type { EventWithPagination, PartnerPage } from '@/entities';
+import type { EventWithPagination } from '@/entities';
 import type { ApiResponse, StrapiMeta } from '@/shared';
+
+const ChakraBox = chakra(motion.div, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+})
 
 export default function Events({ events }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = events;
@@ -36,9 +41,13 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
             gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "repeat(3, minmax(300px, 400px))", "repeat(3, minmax(300px, 400px))"]}
             gap={[5, 5, 5, 5, 8]}
           >
-            {isNotEmpty(data) && data.map((event) => (
-              <Link key={event.id} href={`/news/${event.id}`}>
-                <Flex
+            {isNotEmpty(data) && data.map((event, index) => (
+              <Link 
+                key={event.id} 
+                href={`/news/${event.id}`}
+              >
+                <ChakraBox
+                  display="flex"
                   bg="white"
                   height="full"
                   flexDir="column"
@@ -46,6 +55,22 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
                   pos="relative"
                   borderRadius="12px"
                   boxShadow="0 2px 4px 0 rgba(0, 0, 0, 0.09)"
+                  // @ts-ignore
+                  transition={{
+                    duration: index < 6 ? 0.15 * index : 0.9,
+                    ease: "easeInOut",
+                  }}
+                  initial={{
+                    opacity: 0,
+                    transform: 'translateX(-10%)',
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    transform: 'translateX(0)',
+                  }}
+                  viewport={{
+                    once: true
+                  }}
                 >
                   <chakra.div 
                     pos="relative" 
@@ -76,7 +101,7 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
                       </chakra.span>
                     </Flex>
                   </Flex>
-                </Flex>
+                </ChakraBox>
               </Link>
             ))}
           </Grid>

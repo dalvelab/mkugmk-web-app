@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getWorkingHoursForToday } from "@/shared/utils/dates";
 import { OpenStatus } from "@/shared";
 import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
 
 interface ExhibitionCenterCardProps {
   exhibition_center: ExhibitionCenter;
@@ -21,12 +22,17 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhib
 
   return (
     <Flex 
+      as={motion.div}
+      display="flex"
       w="100%"
       py={[4, 6, 6, 6, 8]}
       px={[4, 6, 6, 6, 10]}
       border="1px solid"
       borderColor="brand.border"
       borderRadius="12px"
+      initial={{ opacity: 0, transform: 'translateX(-100%)' }}
+      whileInView={{ opacity: 1, transform: 'translateX(0)' }}
+      viewport={{ once: true }}
     >
       <Flex
         w="100%"

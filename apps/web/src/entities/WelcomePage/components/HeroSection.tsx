@@ -25,6 +25,7 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media, pr
         autoPlay
         playsInline
         aria-hidden
+        muted
         loop
         tabIndex={-1}
         preload="auto"
