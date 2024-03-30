@@ -14,10 +14,6 @@ const queryClient = new QueryClient();
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const pagesWithoutMargin = ['/', '/exhibition-centers/[id]'];
-
-  // const marginTop = pagesWithoutMargin.includes(router.pathname) ? 0 : [16, 16, 16, 20, 20];
-
   return (
     <NextIntlClientProvider locale={router.locale} messages={pageProps.messages} timeZone="Asia/Yekaterinburg">
       <SEO>
@@ -28,10 +24,10 @@ function App({ Component, pageProps }: AppProps) {
         <ChakraProvider theme={theme}>
           <LanguageProvider>
             <Navbar />
-            <chakra.main>
+            <chakra.main pb={8}>
               <Component {...pageProps} />
-              <ScrollUpButton />
             </chakra.main>
+            <ScrollUpButton />
             <Footer />
           </LanguageProvider>
         </ChakraProvider>

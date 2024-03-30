@@ -16,6 +16,7 @@ export const SEO: React.FC<SEOProps> = ({ children }) => {
       {children}
       <meta property="og:url" content={CANONICAL_DOMAIN + asPath} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="theme-color" content="#FFFFFF" />
       <link rel="canonical" href={CANONICAL_DOMAIN + asPath} />
       <link rel="icon" href="/favicon.ico" />
     </Head>

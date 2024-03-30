@@ -55,14 +55,28 @@ export const Navbar = () => {
         zIndex={10}
         paddingInlineStart={4}
         paddingInlineEnd={4}
-        transition=".35s, ease-in-out"
+        transition=".1s, ease-in-out"
         animate={visible ? 'visible' : 'hidden'}
         variants={{
           visible: { y: 0 },
           hidden: { y: 'calc(-100% - 2px)' }, // - 2px for border hide
         }}
         >
-          <Flex ps={isLargerThan1100 ? 4 : 0} w="full" h="full" justifyContent="space-between" alignItems="center" gap={2}>
+          <Flex
+            as={motion.div}
+            ps={isLargerThan1100 ? 4 : 0} 
+            display="flex"
+            w="full" 
+            h="full" 
+            justifyContent="space-between" 
+            alignItems="center" 
+            gap={2}
+            animate={visible ? 'visible' : 'hidden'}
+            variants={{
+              visible: { visibility: 'visible' },
+              hidden: { visibility: 'hidden' },
+            }}
+          >
             <Link href="/">
               <Text fontSize="xl" textTransform="uppercase" fontWeight="bold">{t('title')}</Text>
               <Text lineHeight="14px" fontWeight="medium" fontSize="sm">{t('city')}</Text>

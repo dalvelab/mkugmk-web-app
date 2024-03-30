@@ -1,11 +1,20 @@
 export type ApiResponse<Data, Meta> = {
   data: Data | null;
-  meta: Meta | null;
+  meta: Meta | StrapiMeta | null;
   error: {
     status: number;
     message: number;
     name: number;
   } | null
+}
+
+export type StrapiMeta = {
+  pagination: {
+    page: number,
+    pageSize: number,
+    pageCount: number,
+    total: number
+  }
 }
 
 export type StrapiMedia = {

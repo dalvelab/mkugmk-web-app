@@ -33,7 +33,7 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
           <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>Партнеры</Heading>
           <Grid
             mt={7}
-            gridTemplateColumns="1fr 1fr 1fr 1fr"
+            gridTemplateColumns="auto auto auto auto"
             gap={10}
           >
             {isNotEmpty(data.partners) && data.partners.map((partner) => (
@@ -56,6 +56,7 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
                   alignItems="center"
                   borderTopLeftRadius="12px"
                   borderTopRightRadius="12px"
+                  overflow="hidden"
                 >
                   <Image 
                     width={partner.image.width} 
@@ -77,11 +78,11 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
   );
 }
 
-interface HomeProps {
+interface PartnerProps {
   partners: ApiResponse<PartnerPage, null>
 }
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
+export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
   const partners = await getPartnersPage({locale});
 
   return {

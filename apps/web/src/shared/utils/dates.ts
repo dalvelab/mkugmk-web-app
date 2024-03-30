@@ -94,3 +94,11 @@ export function getWorkingHoursForToday(data: StrapiWorkingTime[], dayOfWeek: nu
       : closedText
   }
 }
+
+export function getformatDateLocale(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
+  return new Date(date).toLocaleString('ru-RU', { timeZone }).split(',')[0];
+}
+
+export function getformatDateLocaleTime(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
+  return new Date(date).toLocaleString('ru-RU', { timeZone }).split(',')[1].trim().substring(0, 5)
+}

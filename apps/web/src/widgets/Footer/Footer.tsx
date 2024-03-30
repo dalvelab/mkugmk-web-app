@@ -21,7 +21,7 @@ export const Footer = () => {
 
   if (isLoading) {
     return (
-      <chakra.footer 
+      <chakra.footer
         w="full" 
         h="auto" 
         minH={40} 
@@ -74,7 +74,7 @@ export const Footer = () => {
   const formattedSchedule = createWorkingSchedule(working_time, locale);
   
   return (
-    <chakra.footer 
+    <chakra.footer
       w="full" 
       h="auto" 
       minH={40} 
