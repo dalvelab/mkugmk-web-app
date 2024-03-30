@@ -22,49 +22,45 @@ export const Navbar = () => {
   const { scrollY } = useScroll();
   const { data: response, isLoading, isError } = useQuery(
     {
-      queryKey: ['navigation'],
+      queryKey: [`navigation-${locale}`],
       queryFn: () => getExibitionCenters({locale, isPopulated: false, isClientRequest: true}),
       refetchOnWindowFocus: false,
   });
 
   const [visible, setVisible] = useState(true);
-  const [prevScrollY, setPrevScrollY] = useState(0); 
   const [isOpened, setOpened] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest < 0) {
-      setVisible(true);
-    }
-
-    if (latest - prevScrollY >= 0) {
+    const previous = scrollY.getPrevious();
+    
+    if (isNotVoid(previous) && latest > previous && latest > 150) {
       setVisible(false);
     } else {
       setVisible(true);
     }
-
-    setPrevScrollY(latest);
   });
 
   return (
     <>
       <chakra.nav
         as={motion.nav}
-        transition="0.15s ease-in-out"
-        transform={visible ? 'translateY(0)' : 'translateY(-100%)'}
         w="full" 
         h={[16, 16, 16, 20, 20]}
-        pos="fixed" 
+        pos="sticky" 
         borderBottom="1px solid"
         borderColor="brand.border" 
         bgColor="white"
         top={0} 
         left={0}
-        zIndex={2}
+        zIndex={10}
         paddingInlineStart={4}
         paddingInlineEnd={4}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        transition=".35s, ease-in-out"
+        animate={visible ? 'visible' : 'hidden'}
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: 'calc(-100% - 2px)' }, // - 2px for border hide
+        }}
         >
           <Flex ps={isLargerThan1100 ? 4 : 0} w="full" h="full" justifyContent="space-between" alignItems="center" gap={2}>
             <Link href="/">

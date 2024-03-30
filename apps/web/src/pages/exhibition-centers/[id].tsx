@@ -33,7 +33,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
     <>
       <chakra.section 
         pos="relative" 
-        h="100vh"
+        h={["calc(100vh - 64px)", "calc(100vh - 64px)", "calc(100vh - 64px)", "calc(100vh - 80px)", "calc(100vh - 80px)"]}
         display="flex" 
         flexDir="column"
         justifyContent="center"

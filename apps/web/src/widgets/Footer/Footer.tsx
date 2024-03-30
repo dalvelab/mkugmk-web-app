@@ -14,7 +14,7 @@ export const Footer = () => {
 
   const { data: response, isLoading, isError } = useQuery(
     {
-      queryKey: ['footer'],
+      queryKey: [`footer=${locale}`],
       queryFn: () => getFooter({ locale }),
       refetchOnWindowFocus: false,
   });

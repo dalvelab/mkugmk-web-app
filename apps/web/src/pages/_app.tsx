@@ -16,7 +16,7 @@ function App({ Component, pageProps }: AppProps) {
 
   const pagesWithoutMargin = ['/', '/exhibition-centers/[id]'];
 
-  const marginTop = pagesWithoutMargin.includes(router.pathname) ? 0 : [16, 16, 16, 20, 20];
+  // const marginTop = pagesWithoutMargin.includes(router.pathname) ? 0 : [16, 16, 16, 20, 20];
 
   return (
     <NextIntlClientProvider locale={router.locale} messages={pageProps.messages} timeZone="Asia/Yekaterinburg">
@@ -28,7 +28,7 @@ function App({ Component, pageProps }: AppProps) {
         <ChakraProvider theme={theme}>
           <LanguageProvider>
             <Navbar />
-            <chakra.main mt={marginTop}>
+            <chakra.main>
               <Component {...pageProps} />
               <ScrollUpButton />
             </chakra.main>
