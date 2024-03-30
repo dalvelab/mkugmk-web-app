@@ -28,20 +28,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpened, exhibition_
       <ModalContent>
         <ModalHeader zIndex={2}>
           <Flex w="full" justifyContent="space-between">
-            <LanguageSelect />
             <Flex gap={4}>
+              <LanguageSelect size="lg" />
               <IconButton 
-                icon={<SearchIcon />} 
+                boxSize={12}
+                icon={<SearchIcon boxSize={5} />} 
                 aria-label='Открыть поиск' 
                 _hover={{bg: "brand.border"}} 
               />
-              <IconButton
+            </Flex>
+            <IconButton
+                boxSize={12}
                 icon={<CloseIcon boxSize={4} />} 
                 _hover={{bg: "brand.border"}} 
                 aria-label='Закрыть меню'
                 onClick={handleSidebarClose}
               />
-            </Flex>
           </Flex>
         </ModalHeader>
         <ModalBody>

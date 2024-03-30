@@ -2,7 +2,11 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { useLanguage } from "@/shared";
 
-export const LanguageSelect = () => {
+interface LanguageSelectProps {
+	size?: 'sm' | 'lg';
+}
+
+export const LanguageSelect: React.FC<LanguageSelectProps> = ({ size = 'sm'}) => {
   const { language, handleLanguageChange } = useLanguage();
 
 	return (
@@ -11,8 +15,10 @@ export const LanguageSelect = () => {
 				bg={["gray.100", "gray.100", "gray.100", "transparent", "transparent"]}
 				fontWeight="500"
 				as={Button}
-				rightIcon={<ChevronDownIcon />} 
+				fontSize={size === 'sm' ? "md" : 'lg'}
+				rightIcon={<ChevronDownIcon boxSize={size === 'sm' ? 4 : 6} />} 
 				_active={{bg: "gray.100"}}
+				py={size === 'sm' ? 4 : 6}
 			>
 				{language === 'ru' ? 'RU' : 'EN'}
 			</MenuButton>

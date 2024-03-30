@@ -22,8 +22,8 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhib
   return (
     <Flex 
       w="100%"
-      py={[6, 6, 6, 6, 8]}
-      px={[6, 6, 6, 6, 10]}
+      py={[4, 6, 6, 6, 8]}
+      px={[4, 6, 6, 6, 10]}
       border="1px solid"
       borderColor="brand.border"
       borderRadius="12px"

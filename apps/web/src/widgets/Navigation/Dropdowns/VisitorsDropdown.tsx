@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
 export const VisitorsDropdown = ({}) => {
-  const t = useTranslations('navigation');
+  const t = useTranslations('Navigation');
 
   return (
     <Flex flexDir='column' gap={3} alignItems="flex-start">

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Button, chakra,  Flex, IconButton, Spinner, Text, useMediaQuery } from "@chakra-ui/react"
 import { HamburgerIcon, SearchIcon, WarningIcon } from '@chakra-ui/icons';
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useQuery } from '@tanstack/react-query';
 
 import { LanguageSelect } from '@/features';
@@ -32,6 +32,10 @@ export const Navbar = () => {
   const [isOpened, setOpened] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest < 0) {
+      setVisible(true);
+    }
+
     if (latest - prevScrollY >= 0) {
       setVisible(false);
     } else {
@@ -43,7 +47,8 @@ export const Navbar = () => {
 
   return (
     <>
-      <chakra.nav 
+      <chakra.nav
+        as={motion.nav}
         transition="0.15s ease-in-out"
         transform={visible ? 'translateY(0)' : 'translateY(-100%)'}
         w="full" 
@@ -57,6 +62,9 @@ export const Navbar = () => {
         zIndex={2}
         paddingInlineStart={4}
         paddingInlineEnd={4}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
         >
           <Flex ps={isLargerThan1100 ? 4 : 0} w="full" h="full" justifyContent="space-between" alignItems="center" gap={2}>
             <Link href="/">

@@ -9,6 +9,7 @@ import type { ApiResponse } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
 import { useRouter } from 'next/router';
 import { getWorkingHoursForToday } from '@/shared/utils/dates';
+import { motion } from 'framer-motion';
 
 export default function Home({ pageContent, complexSettings }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
@@ -44,7 +45,16 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
         flexDir="column"
         justifyContent="center"
       >
-        <chakra.div pos="absolute" left={0} top={0} w="full" h="100%" bg="black" opacity={0.6} zIndex={0} />
+        <chakra.div
+          pos="absolute"
+          left={0}
+          top={0}
+          w="full"
+          h="100%"
+          bg="black"
+          opacity={0.6}
+          zIndex={0}
+        />
         <WelcomeHeroSection media={banner} preview={video_preview} />
         <Container
           maxWidth="container.xl"
@@ -53,14 +63,19 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
           flexDir="column"
           justifyContent="center"
           pos="relative"
-          >
-          <Flex 
+        >
+          <Flex
+            as={motion.div}
+            display="flex"
             w={["full", "full", "full", "900px", "900px"]} 
             h="full"
             flexDir="column"
             justifyContent="center"
             alignItems="flex-start"
             gap={5}
+            initial={{ opacity: 0, transform: 'translateY(-100%)' }}
+            whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+            viewport={{ once: true }}
             >
             <Heading 
               as="h1" 
