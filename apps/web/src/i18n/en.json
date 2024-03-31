@@ -40,6 +40,9 @@
     "order_excursion": "Order an excursion",
     "view_prices_link": "See the prices"
   },
+  "News": {
+    "title": "News"
+  },
   "Footer": {
     "contacts": "Contacts",
     "ticket_office": "Ticket office opening hours",

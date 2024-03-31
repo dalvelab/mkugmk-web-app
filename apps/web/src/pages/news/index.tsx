@@ -1,113 +1,47 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Image from 'next/image';
-import { chakra, Container, Heading, Flex, Text, Grid, shouldForwardProp } from "@chakra-ui/react";
-import { isValidMotionProp, motion } from 'framer-motion';
+import { chakra, Heading, Grid } from "@chakra-ui/react";
+import { useTranslations } from 'next-intl';
 
-import { getPaginatedEvents } from '@/entities';
-import { Link, isVoid, EmptyState, isEmpty, isNotEmpty, getformatDateLocale } from '@/shared';
+import { CardEvent, getPaginatedEvents } from '@/entities';
+import { isVoid, EmptyState, isEmpty, isNotEmpty, CustomContainer } from '@/shared';
 import type { EventWithPagination } from '@/entities';
 import type { ApiResponse, StrapiMeta } from '@/shared';
 
-const ChakraBox = chakra(motion.div, {
-  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
-})
-
 export default function Events({ events }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = events;
+
+  const t = useTranslations('News');
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
 
   return (
-    <>
-      <chakra.section
-        pt={8}
-        pb={10}
-        pos="relative" 
-        minH="100vh" 
-        display="flex" 
+    <chakra.section
+      pt={6}
+      pb={10}
+      minH="100vh"
+    >
+      <CustomContainer
+        withBackButton
+        maxWidth="container.xl"
+        alignItems="flex-start"
+        display="flex"
         flexDir="column"
+        pos="relative"
       >
-        <Container
-          maxWidth="container.xl"
-          display="flex"
-          flexDir="column"
-          pos="relative"
+        <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{t('title')}</Heading>
+        <Grid
+          mt={10}
+          gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "repeat(3, minmax(300px, 400px))", "repeat(3, minmax(300px, 400px))"]}
+          gap={[5, 5, 5, 5, 8]}
         >
-          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>Новости и события</Heading>
-          <Grid
-            mt={10}
-            gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "repeat(3, minmax(300px, 400px))", "repeat(3, minmax(300px, 400px))"]}
-            gap={[5, 5, 5, 5, 8]}
-          >
-            {isNotEmpty(data) && data.map((event, index) => (
-              <Link 
-                key={event.id} 
-                href={`/news/${event.id}`}
-              >
-                <ChakraBox
-                  display="flex"
-                  bg="white"
-                  height="full"
-                  flexDir="column"
-                  cursor="pointer"
-                  pos="relative"
-                  borderRadius="12px"
-                  boxShadow="0 2px 4px 0 rgba(0, 0, 0, 0.09)"
-                  // @ts-ignore
-                  transition={{
-                    duration: index < 6 ? 0.15 * index : 0.9,
-                    ease: "easeInOut",
-                  }}
-                  initial={{
-                    opacity: 0,
-                    transform: 'translateX(-10%)',
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    transform: 'translateX(0)',
-                  }}
-                  viewport={{
-                    once: true
-                  }}
-                >
-                  <chakra.div 
-                    pos="relative" 
-                    w='100%' 
-                    h={["240px", "300px", "260px", "220px", "220px"]}
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    borderTopLeftRadius="12px"
-                    borderTopRightRadius="12px"
-                    overflow="hidden"
-                  >
-                    <Image 
-                      fill
-                      src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${event.attributes.image.data.attributes.url}`}
-                      style={{objectFit: 'cover'}} 
-                      alt="Изображение новости" 
-                    />
-                  </chakra.div>
-                  <Flex p={4} flexGrow={1} flexDir="column">
-                    <Text fontSize="xl" fontWeight="semibold">{event.attributes.title}</Text>
-                    <Text mt={2} pb={2} fontSize="md">
-                      Короткое описание
-                    </Text>
-                    <Flex mt={2} marginTop="auto" alignSelf="flex-end">
-                      <chakra.span fontSize="xs" color="brand.gray">
-                        {getformatDateLocale(new Date(event.attributes.createdAt))}
-                      </chakra.span>
-                    </Flex>
-                  </Flex>
-                </ChakraBox>
-              </Link>
-            ))}
-          </Grid>
-        </Container>
-      </chakra.section>
-    </>
+          {isNotEmpty(data) && data.map((event, index) => (
+            <CardEvent key={event.id} event={event} index={index} />
+          ))}
+        </Grid>
+      </CustomContainer>
+    </chakra.section>
   );
 }
 

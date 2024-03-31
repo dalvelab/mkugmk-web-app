@@ -40,6 +40,9 @@
     "order_excursion": "Заказать экскурсию",
     "view_prices_link": "Посмотреть цены"
   },
+  "News": {
+    "title": "Новости и события"
+  },
   "Footer": {
     "contacts": "Контакты",
     "ticket_office": "Режим работы кассы",

@@ -1,0 +1,49 @@
+.markdown {
+  font-size: 20px;
+}
+
+.markdown p {
+  line-height: 1.5;
+  margin-top: 12px;
+  text-align: justify;
+}
+
+.markdown li {
+  margin-top: 20px;
+}
+
+.markdown ol,
+.markdown ul {
+  margin-left: 32px;
+}
+
+.markdown p:first-child {
+  margin-top: 0;
+}
+
+.markdown blockquote {
+  margin-top: 16px;
+  margin-left: 12px;
+  position: relative;
+}
+
+.markdown blockquote p {
+  margin-left: 8px;
+}
+
+.markdown blockquote::before {
+  content: '';
+  width: 3px;
+  height: 100%;
+  background-color: #000;
+  margin-top: 16px;
+  position: absolute;
+  left: -12px;
+  bottom: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .markdown {
+    font-size: 16px;
+  }
+}

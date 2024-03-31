@@ -1,16 +1,23 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@chakra-ui/next-js';
+import { useRouter } from 'next/router';
 import { chakra, Container, Heading, Flex, Button, Text, Grid, HStack, StackDivider } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getSingleExibitionCenter } from '@/entities';
-import { isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, createWorkingSchedule, OpenStatus } from '@/shared';
+import { isVoid,
+  EmptyState,
+  isEmpty,
+  isNotEmpty,
+  isNotVoid,
+  createWorkingSchedule,
+  OpenStatus,
+  getWorkingHoursForToday 
+} from '@/shared';
+import { YoutubeVideoSlider } from '@/features';
 import type { ExhibitionCenter } from '@/entities';
 import type { ApiResponse } from '@/shared';
-import { YoutubeVideoSlider } from '@/features';
-import { useRouter } from 'next/router';
-import { getWorkingHoursForToday } from '@/shared/utils/dates';
 
 export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = exhibitionCenter;

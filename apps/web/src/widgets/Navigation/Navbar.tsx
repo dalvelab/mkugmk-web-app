@@ -107,7 +107,7 @@ export const Navbar = () => {
               <NavbarLink href="/news" text={t('menu.news')} level={1} />
               <NavbarLink href="/contacts" text={t('menu.contacts')} level={1} />
             </Flex>
-            <Flex gap={[0, 4, 4, 0, 5]} display="flex" alignItems="center">
+            <Flex gap={[0, 4, 4, 0, 4]} display="flex" alignItems="center">
               <Link href="/buy-ticket">
                 {/* Добавлен div потому что иначен не работает display на кнопке на последнем разрешении */}
                 <chakra.div display={["none", "block", "block", "none", "block"]}>
