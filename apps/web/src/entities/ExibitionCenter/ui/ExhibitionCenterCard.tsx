@@ -30,7 +30,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhib
       border="1px solid"
       borderColor="brand.border"
       borderRadius="12px"
-      initial={{ opacity: 0, transform: 'translateX(-100%)' }}
+      initial={{ opacity: 0, transform: 'translateX(-10%)' }}
       whileInView={{ opacity: 1, transform: 'translateX(0)' }}
       viewport={{ once: true }}
     >

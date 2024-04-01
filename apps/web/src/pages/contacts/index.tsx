@@ -1,6 +1,6 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Heading, Grid, Flex, Button } from "@chakra-ui/react";
-import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/router';
 
 import { getContactsPage } from '@/entities';
 import { Link, isVoid, EmptyState, isEmpty, isNotEmpty, CustomContainer, Markdown } from '@/shared';
@@ -10,7 +10,7 @@ import type { ApiResponse } from '@/shared';
 export default function Events({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
 
-  const t = useTranslations('News');
+  const { locale } = useRouter();
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
@@ -65,30 +65,32 @@ export default function Events({ page }: InferGetServerSidePropsType<typeof getS
                 </Flex>
               </Grid>
             ))}
-            <Grid
-              p={5}
-              templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]} 
-              gap={4} 
-              justifyContent="space-between"
-              alignItems="flex-start"
-              borderTop="1px solid"
-              borderColor="brand.border"
-            >
-              <Flex gap={1} flexDir="column">
-                <chakra.span fontSize="lg" fontWeight="medium">Предложения по покупке техники для Музейного комплекса</chakra.span>
-                <chakra.span fontSize="xs" color="brand.gray">
-                  Коммерческие предложения будут реализованы на договорной основе и по безналичному расчету
-                </chakra.span>
-              </Flex>
-              <Button
-                bgColor="brand.black"
-                color="white"
-                _hover={{bgColor: "brand.black"}} 
-                justifySelf={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}
+            {locale === 'ru' ? (
+              <Grid
+                p={5}
+                templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]} 
+                gap={4} 
+                justifyContent="space-between"
+                alignItems="flex-start"
+                borderTop="1px solid"
+                borderColor="brand.border"
               >
-                Связаться
-              </Button>
-            </Grid>
+                <Flex gap={1} flexDir="column">
+                  <chakra.span fontSize="lg" fontWeight="medium">Предложения по покупке техники для Музейного комплекса</chakra.span>
+                  <chakra.span fontSize="xs" color="brand.gray">
+                    Коммерческие предложения будут реализованы на договорной основе и по безналичному расчету
+                  </chakra.span>
+                </Flex>
+                <Button
+                  bgColor="brand.black"
+                  color="white"
+                  _hover={{bgColor: "brand.black"}} 
+                  justifySelf={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}
+                >
+                  Связаться
+                </Button>
+              </Grid>
+            ): null}
           </Flex>
         ) : null}
       </CustomContainer>

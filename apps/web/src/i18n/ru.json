@@ -43,6 +43,9 @@
   "News": {
     "title": "Новости и события"
   },
+  "Buy_Tickets": {
+    "title": "Купить билеты"
+  },
   "Footer": {
     "contacts": "Контакты",
     "ticket_office": "Режим работы кассы",

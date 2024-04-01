@@ -43,6 +43,9 @@
   "News": {
     "title": "News"
   },
+  "Buy_Tickets": {
+    "title": "Buy tickets"
+  },
   "Footer": {
     "contacts": "Contacts",
     "ticket_office": "Ticket office opening hours",

@@ -19,7 +19,7 @@ export const AboutDropdown: React.FC<AboutDropdownProps> = ({exhibition_centers}
   return (
     <Flex flexDir='column' gap={3} alignItems="flex-start">
       <NavbarLink href="/exhibition-centers" text={exhibitionCentersLinkName} level={2} />
-      <Flex pl={5}>
+      <Flex pl={5} flexDir="column" gap={2}>
         {exhibition_centers.map(({id, name}) => (
           <NavbarLink key={id} href={`/exhibition-centers/${id}`} text={name} level={3} />
         ))}
