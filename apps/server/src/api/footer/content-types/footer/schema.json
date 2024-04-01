@@ -50,7 +50,7 @@
           "localized": false
         }
       },
-      "component": "shared.contact"
+      "component": "footer.contact"
     },
     "socials": {
       "type": "component",

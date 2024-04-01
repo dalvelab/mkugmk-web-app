@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_shared_contacts",
+  "collectionName": "components_footer_contacts",
   "info": {
-    "displayName": "Contact",
+    "displayName": "ContactFooter",
     "description": ""
   },
   "options": {},

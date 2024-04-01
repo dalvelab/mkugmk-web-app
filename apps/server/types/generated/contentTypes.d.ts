@@ -823,6 +823,7 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
     singularName: 'contacts-page';
     pluralName: 'contacts-pages';
     displayName: 'Contacts Page';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -830,6 +831,7 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
   attributes: {
     title: Attribute.String;
     description: Attribute.RichText;
+    contacts: Attribute.Component<'contacts.department-contact', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1108,7 +1110,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
           localized: true;
         };
       }>;
-    contacts: Attribute.Component<'shared.contact', true> &
+    contacts: Attribute.Component<'footer.contact', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;

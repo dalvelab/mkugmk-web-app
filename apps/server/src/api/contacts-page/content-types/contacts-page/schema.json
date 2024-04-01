@@ -4,7 +4,8 @@
   "info": {
     "singularName": "contacts-page",
     "pluralName": "contacts-pages",
-    "displayName": "Contacts Page"
+    "displayName": "Contacts Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,12 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "contacts": {
+      "displayName": "DepartmentContact",
+      "type": "component",
+      "repeatable": true,
+      "component": "contacts.department-contact"
     }
   }
 }

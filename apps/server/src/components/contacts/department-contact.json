@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_contacts_department_contacts",
+  "info": {
+    "displayName": "DepartmentContact"
+  },
+  "options": {},
+  "attributes": {
+    "department": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    }
+  }
+}

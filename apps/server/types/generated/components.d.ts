@@ -1,5 +1,32 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ContactsDepartmentContact extends Schema.Component {
+  collectionName: 'components_contacts_department_contacts';
+  info: {
+    displayName: 'DepartmentContact';
+  };
+  attributes: {
+    department: Attribute.String;
+    caption: Attribute.String;
+    email: Attribute.Email;
+    phone: Attribute.String;
+  };
+}
+
+export interface FooterContact extends Schema.Component {
+  collectionName: 'components_footer_contacts';
+  info: {
+    displayName: 'ContactFooter';
+    description: '';
+  };
+  attributes: {
+    type: Attribute.Enumeration<['email', 'phone', 'address']> &
+      Attribute.Required;
+    text: Attribute.String & Attribute.Required;
+    caption: Attribute.String;
+  };
+}
+
 export interface FooterPage extends Schema.Component {
   collectionName: 'components_shared_pages';
   info: {
@@ -22,20 +49,6 @@ export interface FooterSocial extends Schema.Component {
     type: Attribute.Enumeration<['vk', 'telegram', 'youtube']>;
     link: Attribute.String & Attribute.Required;
     name: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface SharedContact extends Schema.Component {
-  collectionName: 'components_shared_contacts';
-  info: {
-    displayName: 'Contact';
-    description: '';
-  };
-  attributes: {
-    type: Attribute.Enumeration<['email', 'phone', 'address']> &
-      Attribute.Required;
-    text: Attribute.String & Attribute.Required;
-    caption: Attribute.String;
   };
 }
 
@@ -187,9 +200,10 @@ export interface VisitorsTicketsPage extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'contacts.department-contact': ContactsDepartmentContact;
+      'footer.contact': FooterContact;
       'footer.page': FooterPage;
       'footer.social': FooterSocial;
-      'shared.contact': SharedContact;
       'shared.info-card': SharedInfoCard;
       'shared.operating-hours-in-current-day': SharedOperatingHoursInCurrentDay;
       'shared.working-time': SharedWorkingTime;
