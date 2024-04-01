@@ -2,6 +2,10 @@
   font-size: 20px;
 }
 
+.markdown a {
+  text-decoration: underline;
+}
+
 .markdown p {
   line-height: 1.5;
   margin-top: 12px;
