@@ -834,9 +834,24 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
     };
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.RichText;
-    contacts: Attribute.Component<'contacts.department-contact', true>;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    contacts: Attribute.Component<'contacts.department-contact', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

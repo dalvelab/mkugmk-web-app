@@ -4,9 +4,10 @@ export interface ContactsDepartmentContact extends Schema.Component {
   collectionName: 'components_contacts_department_contacts';
   info: {
     displayName: 'DepartmentContact';
+    description: '';
   };
   attributes: {
-    department: Attribute.String;
+    department: Attribute.String & Attribute.Required;
     caption: Attribute.String;
     email: Attribute.Email;
     phone: Attribute.String;
