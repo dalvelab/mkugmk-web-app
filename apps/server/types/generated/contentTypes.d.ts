@@ -826,7 +826,12 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
   };
   attributes: {
     title: Attribute.String;
@@ -834,7 +839,6 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
     contacts: Attribute.Component<'contacts.department-contact', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::contacts-page.contacts-page',
       'oneToOne',
@@ -847,6 +851,12 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::contacts-page.contacts-page',
+      'oneToMany',
+      'api::contacts-page.contacts-page'
+    >;
+    locale: Attribute.String;
   };
 }
 
