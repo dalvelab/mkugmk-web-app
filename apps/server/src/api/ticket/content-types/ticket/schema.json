@@ -16,15 +16,6 @@
     }
   },
   "attributes": {
-    "infotech_link": {
-      "type": "string",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "name": {
       "type": "string",
       "required": true,
@@ -48,6 +39,15 @@
       },
       "type": "boolean",
       "default": false,
+      "required": true
+    },
+    "infotech_link": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
       "required": true
     }
   }

@@ -1253,13 +1253,6 @@ export interface ApiTicketTicket extends Schema.CollectionType {
     };
   };
   attributes: {
-    infotech_link: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     name: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
@@ -1281,6 +1274,13 @@ export interface ApiTicketTicket extends Schema.CollectionType {
         };
       }> &
       Attribute.DefaultTo<false>;
+    infotech_link: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
