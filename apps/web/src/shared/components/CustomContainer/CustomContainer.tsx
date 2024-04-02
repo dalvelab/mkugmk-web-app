@@ -16,14 +16,15 @@ export const CustomContainer: React.FC<SectionProps> = ({ children, withBackButt
     <Container {...props}>
       {withBackButton && (
         <Button
-          pb={8}
+          mb={[4, 8, 8, 8, 8]}
           leftIcon={<ArrowBackIcon />}
           variant="link"
           color="brand.gray"
-          fontSize="lg"
+          fontSize={["md", "lg", "lg", "lg", "lg"]}
           fontWeight="regular"
           _hover={{ textDecoration: 'none', color: 'brand.black' }}
           onClick={back}
+          justifySelf="flex-start"
         >
           {text}
         </Button>

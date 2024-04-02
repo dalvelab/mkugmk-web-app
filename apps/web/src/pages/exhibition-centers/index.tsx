@@ -2,7 +2,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { getExibitionCentersPage, ExhibitionCenterCard } from '@/entities';
-import { isVoid ,EmptyState, isEmpty } from '@/shared';
+import { isVoid ,EmptyState, isEmpty, CustomContainer } from '@/shared';
 import type { ExhibitionCentersPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { useRouter } from 'next/router';
@@ -28,17 +28,19 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
         display="flex" 
         flexDir="column"
       >
-        <Container
+        <CustomContainer
+          withBackButton
           maxWidth="container.xl"
           display="flex"
           flexDir="column"
           pos="relative"
+          alignItems="flex-start"
           >
           <Flex flexDir="column" alignItems="flex-start" gap={5}>
             <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
             <Text fontSize={["xl", "xl", "xl", "2xl", "2xl"]}>{description}</Text>
           </Flex>
-        </Container>
+        </CustomContainer>
       </chakra.section>
       <chakra.section
         pb={10} 

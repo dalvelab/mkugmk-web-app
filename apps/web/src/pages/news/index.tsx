@@ -32,7 +32,7 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
       >
         <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{t('title')}</Heading>
         <Grid
-          mt={10}
+          mt={4}
           gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "repeat(3, minmax(300px, 400px))", "repeat(3, minmax(300px, 400px))"]}
           gap={[5, 5, 5, 5, 8]}
         >
