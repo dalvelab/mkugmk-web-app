@@ -157,6 +157,7 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
                 .map((exhibition_center) => (
                   <TicketCard
                     key={exhibition_center.id}
+                    mode={mode}
                     exhibition_center={exhibition_center}
                     addCenterToSelected={addCenterToSelected}
                     selected={selected}

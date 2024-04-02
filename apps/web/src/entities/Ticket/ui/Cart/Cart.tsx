@@ -4,8 +4,8 @@ import { Button, chakra, Flex, Grid, Heading } from "@chakra-ui/react";
 import { ExhibitionCenter } from "@/entities";
 import { isNotVoid } from "@/shared";
 
-import { CartTicketCard } from "./CartTicketCard";
-import type { Ticket } from '../models';
+import { CartTicketCard } from "./Card";
+import type { Ticket } from '../../models';
 
 function getSelectedByIds(ids: number[], centers: ExhibitionCenter[]) {
   const result = [];
