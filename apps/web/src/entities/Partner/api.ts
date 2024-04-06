@@ -1,9 +1,7 @@
 import type { ApiResponse, DefaultRequestParams } from "@/shared";
 import type { PartnerPage } from "./models";
 
-interface GetPartners extends DefaultRequestParams {
-
-};
+interface GetPartners extends DefaultRequestParams {};
 
 export async function getPartnersPage(params: GetPartners): Promise<ApiResponse<PartnerPage, null>> {
   const { locale } = params;

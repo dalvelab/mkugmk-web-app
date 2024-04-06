@@ -72,7 +72,6 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
       <CustomContainer
         withBackButton
         maxWidth="container.xl"
-        alignItems="flex-start"
         display="flex"
         flexDir="column"
         pos="relative"

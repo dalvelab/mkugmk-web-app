@@ -91,7 +91,7 @@ export const Navbar = () => {
             >
               <DropdownLink text={t('menu.about')}>
                 {isLoading && <Spinner/>}
-                {isNotVoid(response?.error) && isError && (
+                {isNotVoid(response?.error) || isError && (
                   <Flex gap={1.5} alignItems="center">
                     <WarningIcon color="red" />
                     <Text fontSize="sm">Произошла ошибка при загрузке данных</Text>

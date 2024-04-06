@@ -49,6 +49,8 @@ export const Footer = () => {
         borderColor="brand.border" 
         pos="relative"
         display="flex"
+        flexDir="column"
+        gap={2}
         justifyContent="center"
         alignItems="center"
       >
@@ -130,7 +132,7 @@ export const Footer = () => {
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 {formattedSchedule.map(({day, value, id, opened}) => (
                   <Grid key={id} gridTemplateColumns="1fr 1fr" gap={4}>
-                    <chakra.span>{day}:</chakra.span>
+                    <chakra.span>{day}</chakra.span>
                     <chakra.span color={opened ? 'brand.black' : 'red.500'}>{value}</chakra.span>
                   </Grid>
                 ))}

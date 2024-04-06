@@ -25,6 +25,7 @@ export const CustomContainer: React.FC<SectionProps> = ({ children, withBackButt
           _hover={{ textDecoration: 'none', color: 'brand.black' }}
           onClick={back}
           justifySelf="flex-start"
+          alignSelf="flex-start"
         >
           {text}
         </Button>

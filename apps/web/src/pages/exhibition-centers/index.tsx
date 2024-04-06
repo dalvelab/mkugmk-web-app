@@ -34,7 +34,6 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
           display="flex"
           flexDir="column"
           pos="relative"
-          alignItems="flex-start"
           >
           <Flex flexDir="column" alignItems="flex-start" gap={5}>
             <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>

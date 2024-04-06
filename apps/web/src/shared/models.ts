@@ -81,8 +81,15 @@ export type StrapiContact = {
 export type StrapiInfoCard = {
   id: number;
   name: string;
-  short_description: string;
+  short_description?: string;
   image: StrapiMedia;
   description: string;
-  type: 'partners' | 'cafes_and_souvenirs'
+  type: 'partners' | 'cafes_and_souvenirs' | 'interactive_playground';
+  modal_image: StrapiMedia | null;
+  address: string;
+  phone?: string;
+  working_hours?: string;
+  email?: string;
+  tickets?: string;
+  reference_to_other_source?: string;
 }

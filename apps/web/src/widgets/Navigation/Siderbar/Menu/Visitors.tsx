@@ -26,11 +26,11 @@ export const Visitors: React.FC<VisitorsProps> = ({ back, onClick }) => {
       >
         {t('sidebar_back')}
       </Button>
-      <Link href="/tickets" onClick={onClick}>{t('visitors_dropdown.tickets')}</Link>
-      <Link href="/working-hours" onClick={onClick}>{t('visitors_dropdown.working_schedule')}</Link>
-      <Link href="/navigation" onClick={onClick}>{t('visitors_dropdown.navigation')}</Link>
-      <Link href="/interactive-playground" onClick={onClick}>{t('visitors_dropdown.interactive_playground')}</Link>
-      <Link href="/cafe-and-souvenirs" onClick={onClick}>{t('visitors_dropdown.cafe_and_souvenirs')}</Link>
+      <Link href="/visitors/tickets" onClick={onClick}>{t('visitors_dropdown.tickets')}</Link>
+      <Link href="/visitors/working-hours" onClick={onClick}>{t('visitors_dropdown.working_schedule')}</Link>
+      <Link href="/visitors/navigation" onClick={onClick}>{t('visitors_dropdown.navigation')}</Link>
+      <Link href="/visitors/interactive-playground" onClick={onClick}>{t('visitors_dropdown.interactive_playground')}</Link>
+      <Link href="/visitors/cafe-and-souvenirs" onClick={onClick}>{t('visitors_dropdown.cafe_and_souvenirs')}</Link>
     </>
   )
 }

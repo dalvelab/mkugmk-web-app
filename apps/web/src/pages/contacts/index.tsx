@@ -27,7 +27,6 @@ export default function Events({ page }: InferGetServerSidePropsType<typeof getS
       <CustomContainer
         withBackButton
         maxWidth="container.xl"
-        alignItems="flex-start"
         display="flex"
         flexDir="column"
         pos="relative"
