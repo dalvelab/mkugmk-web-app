@@ -21,6 +21,13 @@
         "images"
       ]
     },
+    "modal_image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
     "description": {
       "type": "richtext"
     },
@@ -32,6 +39,25 @@
         "interactive_playground"
       ],
       "required": true
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "working_hours": {
+      "type": "string"
+    },
+    "tickets": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "reference_to_other_source": {
+      "type": "string"
     }
   }
 }

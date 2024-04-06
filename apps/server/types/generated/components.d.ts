@@ -63,11 +63,18 @@ export interface SharedInfoCard extends Schema.Component {
     name: Attribute.String & Attribute.Required;
     short_description: Attribute.String;
     image: Attribute.Media & Attribute.Required;
+    modal_image: Attribute.Media;
     description: Attribute.RichText;
     type: Attribute.Enumeration<
       ['partners', 'cafes_and_souvenirs', 'interactive_playground']
     > &
       Attribute.Required;
+    address: Attribute.String & Attribute.Required;
+    phone: Attribute.String;
+    working_hours: Attribute.String;
+    tickets: Attribute.String;
+    email: Attribute.Email;
+    reference_to_other_source: Attribute.String;
   };
 }
 
