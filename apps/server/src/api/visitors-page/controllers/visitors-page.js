@@ -34,7 +34,8 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
           populate: {
             interactive_playgrounds: {
               populate: {
-                image: isInteractivePlaygroundPage
+                image: isInteractivePlaygroundPage,
+                modal_image: isInteractivePlaygroundPage,
               }
             }
           }
@@ -43,7 +44,8 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
           populate: {
             cafes_and_souvenirs: {
               populate: {
-                image: isCafeAndSouvenirsPage
+                image: isCafeAndSouvenirsPage,
+                modal_image: isCafeAndSouvenirsPage
               }
             }
           }
