@@ -1,9 +1,9 @@
-import { chakra, Heading, Grid } from "@chakra-ui/react";
+import { chakra, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { CardsWithModal } from '@/widgets';
 import { getVisitorsPages } from '@/entities';
-import { isVoid, EmptyState, isEmpty, isNotEmpty, CustomContainer, Markdown } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, Markdown } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
@@ -36,15 +36,7 @@ export default function InteractivePlaygraounds({ page }: InferGetServerSideProp
         <chakra.div maxW={["100%", "100%", "90%", "80%", "70%"]} mt={4}>
           <Markdown>{description}</Markdown>
         </chakra.div>
-        <Grid
-          mt={7}
-          gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr 1fr"]}
-          gap={10}
-        >
-          {isNotEmpty(interactive_playgrounds) && interactive_playgrounds.map((card) => (
-            <CardsWithModal key={card.id} data={card} />
-          ))}
-        </Grid>
+        <CardsWithModal data={interactive_playgrounds} />
       </CustomContainer>
     </chakra.section>
   );

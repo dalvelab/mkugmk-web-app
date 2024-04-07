@@ -3,7 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { CardsWithModal } from '@/widgets';
 import { getPartnersPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, isNotEmpty, CustomContainer } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer } from '@/shared';
 import type { PartnerPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
@@ -31,9 +31,7 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
           gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr 1fr"]}
           gap={10}
         >
-          {isNotEmpty(data.partners) && data.partners.map((partner) => (
-            <CardsWithModal key={partner.id} data={partner} />
-          ))}
+        <CardsWithModal data={data.partners} />
         </Grid>
       </CustomContainer>
     </chakra.section>

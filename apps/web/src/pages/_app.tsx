@@ -5,7 +5,7 @@ import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { Navbar, Footer } from "@/widgets";
-import { chakraMKUGMKConfig, SEO, LanguageProvider } from '@/shared';
+import { chakraMKUGMKConfig, SEO } from '@/shared';
 import { ScrollUpButton } from "@/features";
 
 const theme = extendTheme({ ...chakraMKUGMKConfig })
@@ -22,14 +22,12 @@ function App({ Component, pageProps }: AppProps) {
       </SEO>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme}>
-          <LanguageProvider>
             <Navbar />
             <chakra.main pb={8}>
               <Component {...pageProps} />
             </chakra.main>
             <ScrollUpButton />
             <Footer />
-          </LanguageProvider>
         </ChakraProvider>
       </QueryClientProvider>
     </NextIntlClientProvider>

@@ -5,3 +5,4 @@ export * from './OpenStatus';
 export * from './Link';
 export * from './Markdown';
 export * from './CustomContainer';
+export * from './Icons';

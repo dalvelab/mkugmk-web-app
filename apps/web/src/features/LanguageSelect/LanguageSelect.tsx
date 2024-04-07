@@ -1,13 +1,26 @@
+import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { useLanguage } from "@/shared";
+import { isNotEmpty } from "@/shared";
 
 interface LanguageSelectProps {
 	size?: 'sm' | 'lg';
 }
 
+type SupportedLanguages = 'ru' | 'en';
+
 export const LanguageSelect: React.FC<LanguageSelectProps> = ({ size = 'sm'}) => {
-  const { language, handleLanguageChange } = useLanguage();
+  const { locale, push, pathname, query } = useRouter();
+
+	const handleLanguageChange = (language: SupportedLanguages) => {
+    if (isNotEmpty(query)) {
+      push('/', '/', {locale: language});  
+
+      return;
+    }
+
+    push(pathname, pathname, { locale: language });
+  };
 
 	return (
 		<Menu>
@@ -20,11 +33,11 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({ size = 'sm'}) =>
 				_active={{bg: "gray.100"}}
 				py={size === 'sm' ? 4 : 6}
 			>
-				{language === 'ru' ? 'RU' : 'EN'}
+				{locale === 'ru' ? 'RU' : 'EN'}
 			</MenuButton>
 			<MenuList p={2} minW="auto">
 				<MenuItem 
-					bg={language === 'ru' ? "brand.border" : "transparent"} 
+					bg={locale === 'ru' ? "brand.border" : "transparent"} 
 					borderRadius="4px" 
 					onClick={() => handleLanguageChange('ru')}
 					fontSize="lg"
@@ -32,7 +45,7 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({ size = 'sm'}) =>
 					RU
 				</MenuItem>
 				<MenuItem 
-					bg={language === 'en' ? "brand.border" : "transparent"} 
+					bg={locale === 'en' ? "brand.border" : "transparent"} 
 					borderRadius="4px" 
 					onClick={() => handleLanguageChange('en')}
 					fontSize="lg"
