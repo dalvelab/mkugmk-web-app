@@ -129,7 +129,7 @@ interface HomeProps {
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
   const pageContent = await getWelcomePage({locale});
-  const complexSettings = await getComplexOperationManagement({locale});
+  const complexSettings = await getComplexOperationManagement();
 
   return {
     props: {

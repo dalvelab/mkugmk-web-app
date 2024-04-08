@@ -1,6 +1,6 @@
 import type { StrapiWorkingTime } from "../models";
 
-import { rusFullDayNamesMap, engFullDayNamesMap } from '../constants';
+import { rusFullDayNamesMap, engFullDayNamesMap, genetiveRusMonths } from '../constants';
 import { isEmpty, isNotEmpty, isVoid } from "./misc";
 
 export function createWorkingSchedule(data: StrapiWorkingTime[], locale: string | undefined = 'ru') {
@@ -101,4 +101,8 @@ export function getformatDateLocale(date: Date, timeZone: string = 'Asia/Yekater
 
 export function getformatDateLocaleTime(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
   return new Date(date).toLocaleString('ru-RU', { timeZone }).split(',')[1].trim().substring(0, 5)
+}
+
+export function getGenetiveRusMonth(month: number) {
+  return genetiveRusMonths[month - 1];
 }

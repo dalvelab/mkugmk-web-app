@@ -21,3 +21,18 @@ export const engFullDayNamesMap: Record<WeekDay, string> = {
   sat: 'saturday',
   sun: 'sunday'
 }
+
+export const genetiveRusMonths = [
+  'января',
+  'февраля',
+  'марта',
+  'апреля',
+  'мая',
+  'июня',
+  'июля',
+  'августа',
+  'сентября',
+  'октября',
+  'ноября',
+  'декабря'
+]

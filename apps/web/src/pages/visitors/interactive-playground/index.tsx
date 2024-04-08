@@ -7,7 +7,7 @@ import { isVoid, EmptyState, isEmpty, CustomContainer, Markdown } from '@/shared
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
-export default function InteractivePlaygraounds({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function InteractivePlaygrounds({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
 
   if (isVoid(data) || 

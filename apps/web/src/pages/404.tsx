@@ -15,7 +15,7 @@ export default function Custom404() {
       justifyContent='center'
       alignItems="center"
     >
-      <Text fontSize="2xl">{locale === 'ru' ? '404 - Страница не найдена' : '404 - Page not found'}</Text>
+      <Text textAlign="center" fontSize="2xl">{locale === 'ru' ? '404 - Страница не найдена' : '404 - Page not found'}</Text>
     </chakra.section>
   )
 }

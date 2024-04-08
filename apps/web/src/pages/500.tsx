@@ -15,7 +15,7 @@ export default function Custom500() {
       justifyContent='center'
       alignItems="center"
     >
-      <Text fontSize="2xl">{locale === 'ru' ? '500 - Ошибка на стороне сервера' : '500 - Server-side error occurred'}</Text>
+      <Text textAlign="center" fontSize="2xl">{locale === 'ru' ? '500 - Ошибка на стороне сервера' : '500 - Server-side error occurred'}</Text>
     </chakra.section>
   )
 }

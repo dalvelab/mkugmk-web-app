@@ -34,4 +34,7 @@ export type VisitorsPages = {
     description: string;
     cafes_and_souvenirs: StrapiInfoCard[];
   };
+  working_hours_page: {
+    title: string;
+  }
 }
