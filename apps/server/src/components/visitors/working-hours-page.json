@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_visitors_working_hours_pages",
+  "info": {
+    "displayName": "Working Hours Page",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "public_areas": {
+      "displayName": "Public Area Working Hours",
+      "type": "component",
+      "repeatable": true,
+      "component": "visitors.public-area-working-hours"
+    }
+  }
+}

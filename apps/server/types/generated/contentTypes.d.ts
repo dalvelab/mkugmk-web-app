@@ -795,6 +795,7 @@ export interface ApiComplexOperationManagementComplexOperationManagement
     singularName: 'complex-operation-management';
     pluralName: 'complex-operation-managements';
     displayName: 'Complex Operation Management';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -805,6 +806,8 @@ export interface ApiComplexOperationManagementComplexOperationManagement
       'shared.operating-hours-in-current-day',
       true
     >;
+    call_order_request_email: Attribute.Email;
+    sell_exhibitions_offer_email: Attribute.Email;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1315,6 +1318,7 @@ export interface ApiVisitorsPageVisitorsPage extends Schema.SingleType {
     singularName: 'visitors-page';
     pluralName: 'visitors-pages';
     displayName: 'Visitors Pages';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1338,6 +1342,12 @@ export interface ApiVisitorsPageVisitorsPage extends Schema.SingleType {
         };
       }>;
     cafe_and_souvenirs_page: Attribute.Component<'visitors.cafe-and-souvenirs-page'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    working_hours_page: Attribute.Component<'visitors.working-hours-page'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

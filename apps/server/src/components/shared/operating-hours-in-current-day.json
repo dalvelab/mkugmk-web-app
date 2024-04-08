@@ -1,11 +1,12 @@
 {
   "collectionName": "components_shared_operating_hours_in_current_days",
   "info": {
-    "displayName": "OperatingHoursInCurrentDay"
+    "displayName": "OperatingHoursInCurrentDay",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "time": {
+    "value": {
       "type": "string",
       "required": true
     },

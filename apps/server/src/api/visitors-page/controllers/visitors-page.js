@@ -20,6 +20,10 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
       ctx.query.isCafeAndSouvenirsPage && ctx.query.isCafeAndSouvenirsPage === 'true' 
         ? true 
         : false;
+    const isWorkingHoursPage = 
+      ctx.query.isWorkingHoursPage && ctx.query.isWorkingHoursPage === 'true' 
+        ? true 
+        : false;
 
     const response = await strapi.entityService.findMany('api::visitors-page.visitors-page', {
       populate: {
@@ -48,6 +52,11 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
                 modal_image: isCafeAndSouvenirsPage
               }
             }
+          }
+        },
+        working_hours_page: {
+          populate: {
+            public_areas: isWorkingHoursPage
           }
         }
       },

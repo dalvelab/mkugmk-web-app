@@ -82,9 +82,10 @@ export interface SharedOperatingHoursInCurrentDay extends Schema.Component {
   collectionName: 'components_shared_operating_hours_in_current_days';
   info: {
     displayName: 'OperatingHoursInCurrentDay';
+    description: '';
   };
   attributes: {
-    time: Attribute.String & Attribute.Required;
+    value: Attribute.String & Attribute.Required;
     day: Attribute.Date & Attribute.Required;
     opened: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
   };
@@ -157,6 +158,22 @@ export interface VisitorsOther extends Schema.Component {
   };
 }
 
+export interface VisitorsPublicAreaWorkingHours extends Schema.Component {
+  collectionName: 'components_visitors_public_area_working_hours';
+  info: {
+    displayName: 'Public Area Working Hours';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    day: Attribute.Enumeration<
+      ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun']
+    > &
+      Attribute.Required;
+    value: Attribute.String & Attribute.Required;
+    opened: Attribute.Boolean & Attribute.Required;
+  };
+}
+
 export interface VisitorsTicketCategory extends Schema.Component {
   collectionName: 'components_services_ticket_categories';
   info: {
@@ -205,6 +222,21 @@ export interface VisitorsTicketsPage extends Schema.Component {
   };
 }
 
+export interface VisitorsWorkingHoursPage extends Schema.Component {
+  collectionName: 'components_visitors_working_hours_pages';
+  info: {
+    displayName: 'Working Hours Page';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    public_areas: Attribute.Component<
+      'visitors.public-area-working-hours',
+      true
+    >;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -219,9 +251,11 @@ declare module '@strapi/types' {
       'visitors.cafe-and-souvenirs-page': VisitorsCafeAndSouvenirsPage;
       'visitors.interactive-playgroud-page': VisitorsInteractivePlaygroudPage;
       'visitors.other': VisitorsOther;
+      'visitors.public-area-working-hours': VisitorsPublicAreaWorkingHours;
       'visitors.ticket-category': VisitorsTicketCategory;
       'visitors.ticket-types': VisitorsTicketTypes;
       'visitors.tickets-page': VisitorsTicketsPage;
+      'visitors.working-hours-page': VisitorsWorkingHoursPage;
     }
   }
 }

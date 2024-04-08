@@ -4,7 +4,8 @@
   "info": {
     "singularName": "visitors-page",
     "pluralName": "visitors-pages",
-    "displayName": "Visitors Pages"
+    "displayName": "Visitors Pages",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -44,6 +45,16 @@
           "localized": true
         }
       }
+    },
+    "working_hours_page": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "visitors.working-hours-page"
     }
   }
 }
