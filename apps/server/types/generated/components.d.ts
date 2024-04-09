@@ -247,12 +247,13 @@ export interface VisitorsTransport extends Schema.Component {
   collectionName: 'components_visitors_transports';
   info: {
     displayName: 'Transport';
+    description: '';
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
     caption: Attribute.String;
     value: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['pubic_transport', 'other']> &
+    type: Attribute.Enumeration<['public_transport', 'other']> &
       Attribute.Required;
   };
 }

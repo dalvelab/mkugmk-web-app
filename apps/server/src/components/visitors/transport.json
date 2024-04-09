@@ -1,7 +1,8 @@
 {
   "collectionName": "components_visitors_transports",
   "info": {
-    "displayName": "Transport"
+    "displayName": "Transport",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -19,7 +20,7 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "pubic_transport",
+        "public_transport",
         "other"
       ],
       "required": true
