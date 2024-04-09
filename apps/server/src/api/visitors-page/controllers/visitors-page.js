@@ -71,6 +71,7 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
           populate: {
             addresses: isNavigationPage,
             how_to_get_to_museum: isNavigationPage,
+            complex_map: isNavigationPage
           }
         }
       },
