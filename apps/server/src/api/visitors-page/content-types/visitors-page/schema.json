@@ -55,6 +55,16 @@
         }
       },
       "component": "visitors.working-hours-page"
+    },
+    "navigation_page": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "visitors.navigation-page"
     }
   }
 }

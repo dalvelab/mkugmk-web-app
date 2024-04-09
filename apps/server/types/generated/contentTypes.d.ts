@@ -1353,6 +1353,12 @@ export interface ApiVisitorsPageVisitorsPage extends Schema.SingleType {
           localized: true;
         };
       }>;
+    navigation_page: Attribute.Component<'visitors.navigation-page'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

@@ -119,6 +119,17 @@ export interface SharedYoutubeVideo extends Schema.Component {
   };
 }
 
+export interface VisitorsAddress extends Schema.Component {
+  collectionName: 'components_visitors_addresses';
+  info: {
+    displayName: 'Address';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    address: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface VisitorsCafeAndSouvenirsPage extends Schema.Component {
   collectionName: 'components_visitors_cafe_and_souvenirs_pages';
   info: {
@@ -144,6 +155,21 @@ export interface VisitorsInteractivePlaygroudPage extends Schema.Component {
   };
 }
 
+export interface VisitorsNavigationPage extends Schema.Component {
+  collectionName: 'components_visitors_navigation_pages';
+  info: {
+    displayName: 'Navigation Page';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    complex_map: Attribute.Media & Attribute.Required;
+    yandex_map_embed: Attribute.String;
+    addresses: Attribute.Component<'visitors.address', true>;
+    how_to_get_to_museum: Attribute.Component<'visitors.transport', true>;
+  };
+}
+
 export interface VisitorsOther extends Schema.Component {
   collectionName: 'components_services_others';
   info: {
@@ -158,19 +184,14 @@ export interface VisitorsOther extends Schema.Component {
   };
 }
 
-export interface VisitorsPublicAreaWorkingHours extends Schema.Component {
-  collectionName: 'components_visitors_public_area_working_hours';
+export interface VisitorsPublicArea extends Schema.Component {
+  collectionName: 'components_visitors_public_areas';
   info: {
-    displayName: 'Public Area Working Hours';
+    displayName: 'Public Area';
   };
   attributes: {
-    name: Attribute.String & Attribute.Required;
-    day: Attribute.Enumeration<
-      ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun']
-    > &
-      Attribute.Required;
-    value: Attribute.String & Attribute.Required;
-    opened: Attribute.Boolean & Attribute.Required;
+    working_hours: Attribute.Component<'shared.working-time', true>;
+    name: Attribute.String;
   };
 }
 
@@ -222,6 +243,20 @@ export interface VisitorsTicketsPage extends Schema.Component {
   };
 }
 
+export interface VisitorsTransport extends Schema.Component {
+  collectionName: 'components_visitors_transports';
+  info: {
+    displayName: 'Transport';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    caption: Attribute.String;
+    value: Attribute.String & Attribute.Required;
+    type: Attribute.Enumeration<['pubic_transport', 'other']> &
+      Attribute.Required;
+  };
+}
+
 export interface VisitorsWorkingHoursPage extends Schema.Component {
   collectionName: 'components_visitors_working_hours_pages';
   info: {
@@ -230,10 +265,7 @@ export interface VisitorsWorkingHoursPage extends Schema.Component {
   };
   attributes: {
     title: Attribute.String;
-    public_areas: Attribute.Component<
-      'visitors.public-area-working-hours',
-      true
-    >;
+    public_areas: Attribute.Component<'visitors.public-area', true>;
   };
 }
 
@@ -248,13 +280,16 @@ declare module '@strapi/types' {
       'shared.operating-hours-in-current-day': SharedOperatingHoursInCurrentDay;
       'shared.working-time': SharedWorkingTime;
       'shared.youtube-video': SharedYoutubeVideo;
+      'visitors.address': VisitorsAddress;
       'visitors.cafe-and-souvenirs-page': VisitorsCafeAndSouvenirsPage;
       'visitors.interactive-playgroud-page': VisitorsInteractivePlaygroudPage;
+      'visitors.navigation-page': VisitorsNavigationPage;
       'visitors.other': VisitorsOther;
-      'visitors.public-area-working-hours': VisitorsPublicAreaWorkingHours;
+      'visitors.public-area': VisitorsPublicArea;
       'visitors.ticket-category': VisitorsTicketCategory;
       'visitors.ticket-types': VisitorsTicketTypes;
       'visitors.tickets-page': VisitorsTicketsPage;
+      'visitors.transport': VisitorsTransport;
       'visitors.working-hours-page': VisitorsWorkingHoursPage;
     }
   }

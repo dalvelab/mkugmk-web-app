@@ -24,6 +24,10 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
       ctx.query.isWorkingHoursPage && ctx.query.isWorkingHoursPage === 'true' 
         ? true 
         : false;
+    const isNavigationPage = 
+      ctx.query.isNavigationPage && ctx.query.isNavigationPage === 'true' 
+        ? true 
+        : false;
 
     const response = await strapi.entityService.findMany('api::visitors-page.visitors-page', {
       populate: {
@@ -56,7 +60,17 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
         },
         working_hours_page: {
           populate: {
-            public_areas: isWorkingHoursPage
+            public_areas: {
+              populate: {
+                working_hours: isWorkingHoursPage
+              }
+            }
+          }
+        },
+        navigation_page: {
+          populate: {
+            addresses: isNavigationPage,
+            how_to_get_to_museum: isNavigationPage,
           }
         }
       },

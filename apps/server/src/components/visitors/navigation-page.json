@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_visitors_navigation_pages",
+  "info": {
+    "displayName": "Navigation Page",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "complex_map": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "yandex_map_embed": {
+      "type": "string"
+    },
+    "addresses": {
+      "type": "component",
+      "repeatable": true,
+      "component": "visitors.address"
+    },
+    "how_to_get_to_museum": {
+      "type": "component",
+      "repeatable": true,
+      "component": "visitors.transport"
+    }
+  }
+}

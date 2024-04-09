@@ -10,10 +10,10 @@
       "type": "string"
     },
     "public_areas": {
-      "displayName": "Public Area Working Hours",
+      "displayName": "Public Area",
       "type": "component",
       "repeatable": true,
-      "component": "visitors.public-area-working-hours"
+      "component": "visitors.public-area"
     }
   }
 }
