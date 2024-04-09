@@ -103,14 +103,18 @@ export const Footer = () => {
                   <Text fontSize="lg">{address}</Text>
               </Link>
             </Flex>
-            <Button 
-              alignSelf="center" 
+            <Link 
+              href="/buy-ticket"
+              alignSelf="center"
               justifySelf={["flex-start", "flex-start", "flex-start", "flex-end", "flex-end"]} 
-              size="lg" 
-              colorScheme="green"
             >
-              {t('buy_ticket_button')}
-            </Button>
+              <Button
+                size="lg" 
+                colorScheme="green"
+              >
+                {t('buy_ticket_button')}
+              </Button>
+            </Link>
           </Grid>
           <Grid 
             gridTemplateColumns={["auto", "1fr 1fr", "1fr 1fr", "auto auto auto auto", "auto auto auto auto"]} 
@@ -121,7 +125,10 @@ export const Footer = () => {
               <Text fontSize="lg" fontWeight="medium">{t('contacts')}</Text>
               <Flex gap={1} flexDir="column">
                 {contacts.map((contact) => (
-                  <Link key={contact.id} href="/">
+                  <Link 
+                    key={contact.id} 
+                    href={contact.type === 'email' ? `mailto:${contact.text}` : `tel:${contact.text}`}
+                  >
                     <Text>{contact.text}</Text>
                   </Link>
                 ))}

@@ -74,6 +74,7 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
         maxWidth="container.xl"
         display="flex"
         flexDir="column"
+        alignItems='flex-start'
         pos="relative"
       >
         <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{t("title")}</Heading>

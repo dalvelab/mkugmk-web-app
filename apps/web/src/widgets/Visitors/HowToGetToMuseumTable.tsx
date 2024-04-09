@@ -19,7 +19,7 @@ export const HowToGetToMuseumTable: React.FC<HowToGetToMuseumTableProps> = ({ da
         <Thead>
           <Tr>
             <Th
-              fontSize="xl"
+              fontSize={["lg", "xl", "xl", "xl", "xl"]}
               textTransform="none"
               color="brand.black"
               fontWeight="medium"

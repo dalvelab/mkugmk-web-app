@@ -1,4 +1,5 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { chakra, Container, Heading, Flex, Button, Text } from "@chakra-ui/react";
 
@@ -86,9 +87,11 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
               {t('name')}
             </Heading>
             <OpenStatus workTimeToday={workTimeToday} theme="dark" />
-            <Button mt={2} size="lg" colorScheme="green">
-              {t('buy_ticket')}
-            </Button>
+            <Link href="/buy-ticket">
+              <Button mt={2} size="lg" colorScheme="green">
+                {t('buy_ticket')}
+              </Button>
+            </Link>
           </Flex>
         </Container>
       </chakra.section>

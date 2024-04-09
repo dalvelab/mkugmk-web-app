@@ -38,6 +38,7 @@ export const Main: React.FC<MainProps> = ({ onClick, setSelectedMenuBlock }) => 
       </Button>
       <Link href="/news" onClick={onClick}>{t('menu.news')}</Link>
       <Link href="/contacts" onClick={onClick}>{t('menu.contacts')}</Link>
+      <Link href="/buy-ticket" onClick={onClick}>{t('menu.buy-ticket')}</Link>
     </>
   )
 }

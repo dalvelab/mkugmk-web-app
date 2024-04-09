@@ -1,9 +1,9 @@
 import { chakra, Container, Flex, Grid, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-import { getComplexOperationManagement, getExibitionCenters, getVisitorsPages } from '@/entities';
+import { getVisitorsPages } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, FileIcon } from '@/shared';
-import type { ComplexOperationManagement, ExhibitionCenter, VisitorsPages } from '@/entities';
+import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { AddressesTable, HowToGetToMuseumTable } from "@/widgets";
 import Link from "next/link";
@@ -70,7 +70,7 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
           <Heading
             as="h2"
             fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
-            fontWeight="medium"
+            fontWeight="bold"
           >
             Как доехать до Музейного комплекса
           </Heading>
@@ -92,11 +92,11 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
         </Container>
       </chakra.section>
       <chakra.section pb={10}>
-        <Container maxW="container.xl">
+        <Container maxW="container.xl" display="flex" flexDir="column">
           <Heading
             as="h2"
             fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
-            fontWeight="medium"
+            fontWeight="bold"
           >
             Адреса выставочных площадок Музейного комплекса
           </Heading>

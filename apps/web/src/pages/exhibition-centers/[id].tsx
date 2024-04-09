@@ -78,9 +78,11 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
               {name}
             </Heading>
             <OpenStatus workTimeToday={workTimeToday} theme='dark' />
-            <Button mt={2} size="lg" colorScheme="green">
-              {t('buy_ticket_button')}
-            </Button>
+            <Link href="/buy-ticket">
+              <Button mt={2} size="lg" colorScheme="green">
+                {t('buy_ticket_button')}
+              </Button>
+            </Link>
           </Flex>
         </Container>
       </chakra.section>
@@ -92,8 +94,9 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
           >
           <HStack 
             divider={<StackDivider borderColor="brand.border" />} 
-            gap={[3, 4, 6, 6, 10]}
+            gap={[2, 4, 6, 6, 10]}
             flexDir={["column", "column", "row", "row", "row"]}
+            alignItems="flex-start"
           >
             <Heading whiteSpace="nowrap" as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
               {t('about_museum')}
