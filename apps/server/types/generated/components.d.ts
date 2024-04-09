@@ -190,7 +190,7 @@ export interface VisitorsPublicArea extends Schema.Component {
     displayName: 'Public Area';
   };
   attributes: {
-    working_hours: Attribute.Component<'shared.working-time', true>;
+    working_time: Attribute.Component<'shared.working-time', true>;
     name: Attribute.String;
   };
 }

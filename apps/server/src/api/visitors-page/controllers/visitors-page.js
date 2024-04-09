@@ -62,7 +62,7 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
           populate: {
             public_areas: {
               populate: {
-                working_hours: isWorkingHoursPage
+                working_time: isWorkingHoursPage
               }
             }
           }

@@ -5,7 +5,7 @@
   },
   "options": {},
   "attributes": {
-    "working_hours": {
+    "working_time": {
       "type": "component",
       "repeatable": true,
       "component": "shared.working-time"
