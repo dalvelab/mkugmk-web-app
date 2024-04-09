@@ -1,11 +1,11 @@
-import { chakra, Container, Flex, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { chakra, Container, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getComplexOperationManagement, getExibitionCenters, getVisitorsPages } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty } from '@/shared';
 import type { ComplexOperationManagement, ExhibitionCenter, VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
-import { ExhibitionCentersOperatingHours, SpecialDaysOperatinHourseTable } from "@/widgets";
+import { OperatingHoursTable, SpecialDaysOperatinHourseTable } from "@/widgets";
 
 export default function WorkingHours({ page, complexSettings, exhibitionCenters }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
@@ -20,7 +20,7 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
 
   const { working_hours_page } = data;
 
-  const { title } = working_hours_page;
+  const { title, public_areas } = working_hours_page;
   const { data: exhibitionCentersData } = exhibitionCenters;
   const { data: complexSettingsData } = complexSettings;
 
@@ -38,11 +38,11 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
         </CustomContainer>
       </chakra.section>
       {isNotVoid(complexSettingsData) && isNotEmpty(complexSettingsData.special_days_operating_hours) && (
-        <chakra.section pt={10}>
+        <chakra.section pt={5}>
           <Container maxW="container.xl">
             <Heading
               as="h2"
-              fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]}
+              fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"
             >
               График работы в праздничные дни
@@ -56,12 +56,26 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
           <Container maxW="container.xl">
             <Heading
               as="h2"
-              fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]}
+              fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"
             >
               График работы выставочных центров
             </Heading>
-            <ExhibitionCentersOperatingHours data={exhibitionCentersData} />
+            <OperatingHoursTable data={exhibitionCentersData} />
+          </Container>
+        </chakra.section>
+      )}
+      {isNotEmpty(public_areas) && (
+        <chakra.section pt={10}>
+          <Container maxW="container.xl">
+            <Heading
+              as="h2"
+              fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
+              fontWeight="medium"
+            >
+              График работы выставочных центров
+            </Heading>
+            <OperatingHoursTable data={public_areas} />
           </Container>
         </chakra.section>
       )}

@@ -1,4 +1,4 @@
-import { StrapiInfoCard, StrapiMedia } from "@/shared";
+import { StrapiInfoCard, StrapiMedia, StrapiWorkingTime } from "@/shared";
 
 export type VisitorsPages = {
   tickets_page: {
@@ -36,5 +36,10 @@ export type VisitorsPages = {
   };
   working_hours_page: {
     title: string;
+    public_areas: {
+      id: number;
+      name: string;
+      working_time: StrapiWorkingTime[];
+    }[]
   }
 }

@@ -3,13 +3,17 @@ import { useRouter } from "next/router";
 import { chakra, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 
 import { createWorkingSchedule, getWorkingHoursForToday } from "@/shared/utils/dates";
-import { ExhibitionCenter } from "@/entities";
+import { StrapiWorkingTime } from "@/shared";
 
-interface ExhibitionCentersOperatingHoursProps {
-  data: ExhibitionCenter[];
+interface OperatingHoursProps {
+  data: {
+    id: number;
+    working_time: StrapiWorkingTime[];
+    name: string;
+  }[];
 }
 
-export const ExhibitionCentersOperatingHours: React.FC<ExhibitionCentersOperatingHoursProps> = ({data}) => {
+export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
   const { locale } = useRouter();
 
   const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();

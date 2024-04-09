@@ -1,2 +1,2 @@
 export * from './SpecialDaysOperatinHourseTable';
-export * from './ExhibitionCentersOperatingHours';
+export * from './OperatingHoursTable';
