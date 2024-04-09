@@ -123,9 +123,10 @@ export interface VisitorsAddress extends Schema.Component {
   collectionName: 'components_visitors_addresses';
   info: {
     displayName: 'Address';
+    description: '';
   };
   attributes: {
-    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    name: Attribute.String & Attribute.Required;
     address: Attribute.String & Attribute.Required;
   };
 }
