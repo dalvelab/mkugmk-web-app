@@ -66,7 +66,7 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
         </chakra.section>
       )}
       {isNotEmpty(public_areas) && (
-        <chakra.section pt={10}>
+        <chakra.section pt={10} pb={10}>
           <Container maxW="container.xl">
             <Heading
               as="h2"

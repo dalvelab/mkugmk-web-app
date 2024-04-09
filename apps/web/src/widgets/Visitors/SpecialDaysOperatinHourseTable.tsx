@@ -2,11 +2,11 @@ import { ComplexOperationManagement } from "@/entities";
 import { getGenetiveRusMonth } from "@/shared/utils/dates";
 import { chakra, Flex, Table, TableContainer, Tbody, Td, Tr } from "@chakra-ui/react";
 
-interface SpecialDaysOperatinHourseTableTableProps {
+interface SpecialDaysOperatinHourseTableProps {
   data: ComplexOperationManagement["special_days_operating_hours"];
 }
 
-export const SpecialDaysOperatinHourseTable: React.FC<SpecialDaysOperatinHourseTableTableProps> = ({data}) => {
+export const SpecialDaysOperatinHourseTable: React.FC<SpecialDaysOperatinHourseTableProps> = ({data}) => {
   return (
     <TableContainer w="400px">
       <Table

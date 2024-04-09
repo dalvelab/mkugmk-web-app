@@ -14,6 +14,7 @@ interface GetVisitorsPage extends DefaultRequestParams {
   isInteractivePlaygroundPage?: boolean;
   isCafeAndSouvenirsPage?: boolean;
   isWorkingHoursPage?: boolean;
+  isNavigationPage?: boolean;
 };
 
 export async function getVisitorsPages(params: GetVisitorsPage): Promise<ApiResponse<VisitorsPages, null>> {
@@ -22,14 +23,16 @@ export async function getVisitorsPages(params: GetVisitorsPage): Promise<ApiResp
     isCafeAndSouvenirsPage,
     isInteractivePlaygroundPage,
     isTicketsPage,
-    isWorkingHoursPage
+    isWorkingHoursPage,
+    isNavigationPage
   } = params;
 
   const endpoint = `${process.env.DB_HOST}/visitors-page?locale=${locale}` +
     `&${constructBooleanQueryParam('isCafeAndSouvenirsPage', isCafeAndSouvenirsPage)}` +
     `&${constructBooleanQueryParam('isInteractivePlaygroundPage', isInteractivePlaygroundPage)}` +
     `&${constructBooleanQueryParam('isTicketsPage', isTicketsPage)}` +
-    `&${constructBooleanQueryParam('isWorkingHoursPage', isWorkingHoursPage)}`;
+    `&${constructBooleanQueryParam('isWorkingHoursPage', isWorkingHoursPage)}` +
+    `&${constructBooleanQueryParam('isNavigationPage', isNavigationPage)}`;
 
   const res = await fetch(endpoint);
 

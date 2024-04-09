@@ -19,7 +19,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
   const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
 
   return (
-    <TableContainer maxW="800px">
+    <TableContainer w="800px">
       <Table
         mt={5}
         border="1px solid" 
@@ -75,6 +75,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
                         key={id}
                         justifyContent="space-between" 
                         color="brand.black"
+                        gap={4}
                       >
                         <chakra.span>{day}</chakra.span>
                         <chakra.span color={opened ? 'brand.black' : 'red.500'}>{value}</chakra.span>

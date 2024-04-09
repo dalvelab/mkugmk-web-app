@@ -42,4 +42,21 @@ export type VisitorsPages = {
       working_time: StrapiWorkingTime[];
     }[]
   }
+  navigation_page: {
+    title: string;
+    complex_map: StrapiMedia;
+    yandex_map_embed: string;
+    addresses: {
+      id: number;
+      name: string;
+      address: string;
+    }[];
+    how_to_get_to_museum: {
+      id: number;
+      name: string;
+      caption?: string;
+      value: string;
+      type: 'public_transport' | 'other';
+    }[]
+  }
 }
