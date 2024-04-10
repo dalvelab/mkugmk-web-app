@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Button, chakra, Container, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 
 import type { VisitorsPages } from "@/entities"
-import { isNotEmpty, isNotVoid, Markdown } from "@/shared";
+import { isNotVoid, Markdown } from "@/shared";
 
 interface OtherServicesListProps {
   other_services: VisitorsPages["tickets_page"]["other_services"];
@@ -16,7 +16,10 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
 
   function onClick(id: number) {
     setActiveId(id);
-    window.scrollTo({top: tableRef.current?.scrollTop, behavior: 'smooth'})
+
+    if (isNotVoid(tableRef.current)) {
+      window.scrollTo({top: tableRef.current.offsetTop - 100, behavior: 'smooth'})
+    }
   }
 
   const activeService = other_services.find((service) => service.id === activeId);
@@ -54,7 +57,13 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
                   justifyContent="flex-start"
                   onClick={() => onClick(button.id)}
                 >
-                  {button.name}
+                  <Flex flexDir="column" alignItems="flex-start" gap={0.5}>
+                    {button.name}
+                    {isNotVoid(button.caption) ? 
+                      <chakra.span fontSize="xs" noOfLines={1} textOverflow="ellipsis" color='brand.gray'>{button.caption}</chakra.span> : 
+                      null
+                    }
+                  </Flex>
                 </Button>
               ))}
             </Flex>

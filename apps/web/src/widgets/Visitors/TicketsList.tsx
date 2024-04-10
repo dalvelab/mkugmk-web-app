@@ -17,7 +17,11 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
 
   function onClick(id: number) {
     setActiveId(id);
-    window.scrollTo({top: tableRef.current?.getBoundingClientRect().top, behavior: 'smooth'})
+    const top = tableRef.current?.getBoundingClientRect().top;
+
+    if (isNotVoid(top) && isNotVoid(tableRef.current) && top < 150) {
+      window.scrollTo({top: tableRef.current.offsetTop - 100, behavior: 'smooth'})
+    }
   }
 
   const activeTicket = tickets.find((ticket) => ticket.id === activeId);
