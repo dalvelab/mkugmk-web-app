@@ -191,9 +191,9 @@ export interface VisitorsOther extends Schema.Component {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    price: Attribute.String & Attribute.Required;
-    additional_text: Attribute.String;
     caption: Attribute.String;
+    additional_text: Attribute.RichText;
+    value: Attribute.RichText & Attribute.Required;
   };
 }
 

@@ -10,15 +10,15 @@
       "type": "string",
       "required": true
     },
-    "price": {
-      "type": "string",
-      "required": true
-    },
-    "additional_text": {
-      "type": "string"
-    },
     "caption": {
       "type": "string"
+    },
+    "additional_text": {
+      "type": "richtext"
+    },
+    "value": {
+      "type": "richtext",
+      "required": true
     }
   }
 }
