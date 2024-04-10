@@ -33,7 +33,11 @@ module.exports = createCoreController('api::visitors-page.visitors-page', {
       populate: {
         tickets_page: {
           populate: {
-            tickets: isTicketsPage,
+            tickets: {
+              populate: {
+                categories: isTicketsPage
+              }
+            },
             other_services: isTicketsPage,
             documents: isTicketsPage,
           }
