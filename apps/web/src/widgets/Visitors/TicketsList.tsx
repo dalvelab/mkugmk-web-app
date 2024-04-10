@@ -31,6 +31,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
           flexDir={["column", "column", "column", "row", "row"]}
         >
           <Flex
+            minW="340px"
             w={["100%", "auto", "auto", "auto", "auto"]}
             flexDir="column"
             py={3}

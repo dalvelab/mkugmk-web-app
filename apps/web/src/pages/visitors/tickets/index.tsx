@@ -1,8 +1,8 @@
-import { chakra, Container, Heading } from "@chakra-ui/react";
+import { chakra, Container, Flex, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getVisitorsPages } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown, File } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { OtherServicesList, TicketsList } from "@/widgets";
@@ -20,7 +20,15 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
 
   const { tickets_page } = data;
 
-  const { title, description, tickets, secondary_title, secondary_description, other_services } = tickets_page;
+  const {
+    title,
+    description,
+    tickets,
+    secondary_title,
+    secondary_description,
+    other_services,
+    documents
+  } = tickets_page;
 
   return (
     <>
@@ -52,6 +60,16 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
       {isNotVoid(other_services) && isNotEmpty(other_services) && (
         <OtherServicesList other_services={other_services} />
       )}
+      <chakra.section pt={10} pb={10}>
+        <Container maxW="container.xl">
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>Документы</Heading>
+          <Flex mt={6} gap={6} flexWrap="wrap">
+            {documents.map((file) => (
+              <File key={file.id} file={file} />
+            ))}
+          </Flex>
+        </Container>
+      </chakra.section>
     </>
   );
 }

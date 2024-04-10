@@ -2,7 +2,7 @@ import { chakra, Container, Flex, Grid, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getVisitorsPages } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, FileIcon } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, FileIcon, File } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { AddressesTable, HowToGetToMuseumTable } from "@/widgets";
@@ -40,27 +40,7 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
         <Container maxW="container.xl">
           <Flex alignItems='flex-start'>
           {isNotVoid(complex_map) && (
-            <Flex
-              px={5}
-              py={4}
-              border="1px solid" 
-              borderColor="brand.border" 
-              alignItems='center' 
-              gap={3}
-              borderRadius="8px"
-            >
-              <FileIcon />
-              <Flex flexDir='column' gap={0.5} alignItems="flex-start">
-                <chakra.span fontSize='sm' lineHeight="1" fontWeight="medium">Карта музейного комплекса</chakra.span>
-                <Link 
-                  href={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${complex_map.url}`} 
-                  target="_blank"
-                  style={{lineHeight: '1'}}
-                >
-                  <chakra.span fontSize="xs" lineHeight="1" textDecor="underline" color="brand.gray">посмотреть</chakra.span>
-                </Link>
-              </Flex>
-            </Flex>
+            <File name="Карта музейного комплекса" file={complex_map} />
           )}
           </Flex>
         </Container>

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Button, chakra, Container, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 
 import type { VisitorsPages } from "@/entities"
-import { isNotEmpty, isNotVoid } from "@/shared";
+import { isNotEmpty, isNotVoid, Markdown } from "@/shared";
 
 interface OtherServicesListProps {
   other_services: VisitorsPages["tickets_page"]["other_services"];
@@ -22,10 +22,16 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
   const activeService = other_services.find((service) => service.id === activeId);
 
   return (
-    <chakra.section>
+    <chakra.section pb={10}>
       <Container maxW="container.xl">
-        <Flex gap={5} alignItems="flex-start">
+        <Flex
+          gap={5}
+          alignItems="flex-start"
+          flexDir={["column", "column", "column", "row", "row"]}
+        >
           <Flex
+            minW="340px"
+            w={["100%", "auto", "auto", "auto", "auto"]}
             flexDir="column"
             py={3}
             px={5}
@@ -35,7 +41,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
             color="brand.black"
             gap={3}
           >
-            <chakra.span fontSize="xl" fontWeight="semibold">Вид площадки</chakra.span>
+            <chakra.span fontSize="xl" fontWeight="semibold">Вид услуги</chakra.span>
             <Flex flexDir="column" gap={1}>
               {other_services.map((button) => (
                 <Button
@@ -70,7 +76,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
                     py={5}
                     fontWeight="semibold"
                   >
-                    Категория
+                    Стоимость
                   </Th>
                   <Th
                     w="50%"
@@ -90,14 +96,32 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
               <Tbody>
                 {isNotVoid(activeService) && (
                   <Tr>
-                    <Td w="50%" px={5} border="1px solid" borderColor="brand.border" verticalAlign="top">
+                    <Td
+                      w="50%"
+                      minW="280px"
+                      px={5} 
+                      border="1px solid" 
+                      borderColor="brand.border" 
+                      verticalAlign="top"
+                    >
                       <Flex flexDir="column" gap={6}>
-                        <chakra.span >{activeService.name} руб.</chakra.span>
+                        <Markdown>
+                          {activeService.value}
+                        </Markdown>
                       </Flex>
                     </Td>
-                    {isNotEmpty(activeService.additional_text) && (
-                      <Td w="50%" px={5} border="1px solid" borderColor="brand.border" verticalAlign="top">
-                        <chakra.span whiteSpace="pre-wrap">{activeService.additional_text}</chakra.span>
+                    {isNotVoid(activeService.additional_text) && (
+                      <Td
+                        w="50%"
+                        minW="300px"
+                        px={5}
+                        border="1px solid" 
+                        borderColor="brand.border" 
+                        verticalAlign="top"
+                      >
+                        <Markdown>
+                          {activeService.additional_text}
+                        </Markdown>
                       </Td>
                     )}
                   </Tr>

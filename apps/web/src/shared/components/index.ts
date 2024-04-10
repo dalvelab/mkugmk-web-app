@@ -6,3 +6,4 @@ export * from './Link';
 export * from './Markdown';
 export * from './CustomContainer';
 export * from './Icons';
+export * from './File';

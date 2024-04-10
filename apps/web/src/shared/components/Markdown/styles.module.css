@@ -8,8 +8,12 @@
   text-align: justify;
 }
 
-.markdown li {
+.markdown li:first-child {
   margin-top: 20px;
+}
+
+.markdown li {
+  margin-top: 8px;
 }
 
 .markdown ol,

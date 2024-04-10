@@ -9,7 +9,7 @@ export type VisitorsPages = {
     other_services: {
       id: number;
       name: string;
-      prices: number;
+      value: string;
       additional_text?: string;
       caption?: string;
     }[];
