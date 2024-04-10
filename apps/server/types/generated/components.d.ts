@@ -14,6 +14,18 @@ export interface ContactsDepartmentContact extends Schema.Component {
   };
 }
 
+export interface FaqFaq extends Schema.Component {
+  collectionName: 'components_faq_faqs';
+  info: {
+    displayName: 'FAQ';
+  };
+  attributes: {
+    topic: Attribute.String & Attribute.Required;
+    question: Attribute.String & Attribute.Required;
+    answer: Attribute.RichText;
+  };
+}
+
 export interface FooterContact extends Schema.Component {
   collectionName: 'components_footer_contacts';
   info: {
@@ -275,6 +287,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'contacts.department-contact': ContactsDepartmentContact;
+      'faq.faq': FaqFaq;
       'footer.contact': FooterContact;
       'footer.page': FooterPage;
       'footer.social': FooterSocial;

@@ -806,8 +806,6 @@ export interface ApiComplexOperationManagementComplexOperationManagement
       'shared.operating-hours-in-current-day',
       true
     >;
-    call_order_request_email: Attribute.Email;
-    sell_exhibitions_offer_email: Attribute.Email;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -855,6 +853,13 @@ export interface ApiContactsPageContactsPage extends Schema.SingleType {
         };
       }>;
     contacts: Attribute.Component<'contacts.department-contact', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sell_exhibitions_offer_email: Attribute.Email &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1108,6 +1113,65 @@ export interface ApiExhibitionCenterPageExhibitionCenterPage
   };
 }
 
+export interface ApiFaqPageFaqPage extends Schema.SingleType {
+  collectionName: 'faq_pages';
+  info: {
+    singularName: 'faq-page';
+    pluralName: 'faq-pages';
+    displayName: 'FAQ Page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    questions_with_answers: Attribute.Component<'faq.faq', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::faq-page.faq-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::faq-page.faq-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::faq-page.faq-page',
+      'oneToMany',
+      'api::faq-page.faq-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiFooterFooter extends Schema.SingleType {
   collectionName: 'footers';
   info: {
@@ -1162,6 +1226,13 @@ export interface ApiFooterFooter extends Schema.SingleType {
         };
       }>;
     map_link: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sell_exhibitions_offer_email: Attribute.Email &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1484,6 +1555,7 @@ declare module '@strapi/types' {
       'api::event.event': ApiEventEvent;
       'api::exhibition-center.exhibition-center': ApiExhibitionCenterExhibitionCenter;
       'api::exhibition-center-page.exhibition-center-page': ApiExhibitionCenterPageExhibitionCenterPage;
+      'api::faq-page.faq-page': ApiFaqPageFaqPage;
       'api::footer.footer': ApiFooterFooter;
       'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
       'api::ticket.ticket': ApiTicketTicket;

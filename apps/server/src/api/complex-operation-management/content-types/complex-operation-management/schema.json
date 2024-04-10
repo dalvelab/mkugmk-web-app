@@ -22,12 +22,6 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.operating-hours-in-current-day"
-    },
-    "call_order_request_email": {
-      "type": "email"
-    },
-    "sell_exhibitions_offer_email": {
-      "type": "email"
     }
   }
 }
