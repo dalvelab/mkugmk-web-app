@@ -19,7 +19,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
   const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
 
   return (
-    <TableContainer w="800px">
+    <TableContainer maxW="800px">
       <Table
         mt={5}
         border="1px solid" 

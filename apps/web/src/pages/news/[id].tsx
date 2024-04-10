@@ -42,7 +42,7 @@ export default function SingleNews({ event }: InferGetServerSidePropsType<typeof
               <chakra.span fontSize={["sm", "sm", "sm", "md", "md"]} color="brand.gray">{getformatDateLocale(new Date(createdAt))}</chakra.span>
             </Flex>
           </Flex>
-          <chakra.div mt={7}>
+          <chakra.div mt={7} fontSize="lg">
             <Markdown>
               {description}
             </Markdown>

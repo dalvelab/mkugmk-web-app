@@ -33,7 +33,7 @@ export default function InteractivePlaygrounds({ page }: InferGetServerSideProps
         pos="relative"
       >
         <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-        <chakra.div maxW={["100%", "100%", "90%", "80%", "70%"]} mt={4}>
+        <chakra.div maxW={["100%", "100%", "90%", "80%", "70%"]} mt={4} fontSize="lg">
           <Markdown>{description}</Markdown>
         </chakra.div>
         <CardsWithModal data={interactive_playgrounds} />

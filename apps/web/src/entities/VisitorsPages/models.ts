@@ -7,23 +7,26 @@ export type VisitorsPages = {
     description: string;
     secondary_description: string;
     other_services: {
+      id: number;
       name: string;
       prices: number;
       additional_text?: string;
       caption?: string;
     }[];
     tickets: {
+      id: number;
       name: string;
       available_on_website: boolean;
       categories: {
+        id: number;
         name?: string;
         caption?: string;
         price?: number;
       }[]
       additional_text?: string;
-    }
+    }[]
     documents: StrapiMedia[];
-  }[];
+  };
   interactive_playground_page: {
     title: string;
     description: string;
