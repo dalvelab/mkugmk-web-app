@@ -13,7 +13,8 @@ import { isVoid,
   isNotVoid,
   createWorkingSchedule,
   OpenStatus,
-  getWorkingHoursForToday 
+  getWorkingHoursForToday, 
+  Markdown
 } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
 import type { ExhibitionCenter } from '@/entities';
@@ -101,7 +102,9 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
             <Heading whiteSpace="nowrap" as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
               {t('about_museum')}
             </Heading>
-            <Text textAlign="justify" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>{description}</Text>
+            <chakra.div textAlign="justify" fontSize="xl">
+              <Markdown>{description}</Markdown>
+            </chakra.div>
           </HStack>
         </Container>
       </chakra.section>
@@ -157,7 +160,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
                   color="brand.black"
                 >
                   {formattedSchedule.map(({day, value, id}) => (
-                    <Grid key={id} gridTemplateColumns="1fr 1fr" textTransform="capitalize" gap={10}>
+                    <Grid key={id} gridTemplateColumns="1fr 1fr" gap={10}>
                       <chakra.span>{day}</chakra.span>
                       <chakra.span>{value}</chakra.span>
                     </Grid>

@@ -108,18 +108,18 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
           </Flex>
         </Container>
       </chakra.section>
-      <chakra.section bgColor="brand.black" pt={[10, 20, 20, 20, 20]} pb={[10, 20, 20, 20, 20]} pos="relative">
-        <Container 
-          maxWidth="container.xl"
-          display="flex"
-          flexDir="column"
-          pos="relative"
-          >
-          {isNotVoid(gallery) && isNotEmpty(gallery) && (
-            <WelcomeGallery images={gallery} />
-          )}
-        </Container>
-      </chakra.section>
+      {isNotVoid(gallery) && isNotEmpty(gallery) && (
+        <chakra.section bgColor="brand.black" pt={[10, 20, 20, 20, 20]} pb={[10, 20, 20, 20, 20]} pos="relative">
+          <Container 
+            maxWidth="container.xl"
+            display="flex"
+            flexDir="column"
+            pos="relative"
+            >
+              <WelcomeGallery images={gallery} />
+          </Container>
+        </chakra.section>
+      )}
       <YoutubeVideoSlider youtube_gallery={youtube_gallery} />
     </>
   );

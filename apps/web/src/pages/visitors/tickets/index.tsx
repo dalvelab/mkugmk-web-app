@@ -60,6 +60,7 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
       {isNotVoid(other_services) && isNotEmpty(other_services) && (
         <OtherServicesList other_services={other_services} />
       )}
+      {isNotVoid(documents) && (
       <chakra.section pt={10} pb={10}>
         <Container maxW="container.xl">
           <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>Документы</Heading>
@@ -70,6 +71,7 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
           </Flex>
         </Container>
       </chakra.section>
+      )}
     </>
   );
 }

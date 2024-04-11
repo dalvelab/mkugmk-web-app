@@ -17,9 +17,8 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
 
   function onClick(id: number) {
     setActiveId(id);
-    const top = tableRef.current?.getBoundingClientRect().top;
 
-    if (isNotVoid(top) && isNotVoid(tableRef.current) && top < 150) {
+    if (isNotVoid(top) && isNotVoid(tableRef.current)) {
       window.scrollTo({top: tableRef.current.offsetTop - 100, behavior: 'smooth'})
     }
   }
@@ -36,6 +35,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
         >
           <Flex
             minW="340px"
+            maxW="390px"
             w={["100%", "auto", "auto", "auto", "auto"]}
             flexDir="column"
             py={3}
@@ -49,17 +49,18 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
             <chakra.span fontSize="xl" fontWeight="semibold">Вид площадки</chakra.span>
             <Flex flexDir="column" gap={1}>
               {tickets.map((button) => (
-                <Button
+                <chakra.button
+                  display="flex"
+                  py={3}
+                  px={4}
                   key={button.id}
-                  variant="ghost"
                   backgroundColor={button.id === activeId ? "#F4F4F5" : "white"}
-                  fontWeight="regular"
                   _hover={{bgColor: "#F4F4F5"}}
-                  justifyContent="flex-start"
+                  borderRadius={8}
                   onClick={() => onClick(button.id)}
                 >
-                  {button.name}
-                </Button>
+                  <chakra.span whiteSpace="pre-wrap" textAlign="left">{button.name}</chakra.span>
+                </chakra.button>
               ))}
             </Flex>
           </Flex>
@@ -132,18 +133,25 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
                         ))}
                       </Flex>
                     </Td>
-                    {isNotEmpty(activeTicket.additional_text) && (
-                      <Td w="50%" minW="300px" px={5} border="1px solid" borderColor="brand.border" verticalAlign="top">
-                        <Flex flexDir="column" gap={10}>
+                    <Td 
+                      w="50%" 
+                      minW="300px" 
+                      px={5} 
+                      border="1px solid" 
+                      borderColor="brand.border" 
+                      verticalAlign="top"
+                    >
+                      <Flex flexDir="column" gap={10}>
+                        {isNotEmpty(activeTicket.additional_text) && (
                           <chakra.span whiteSpace="pre-wrap">{activeTicket.additional_text}</chakra.span>
-                          {activeTicket.available_on_website && (
-                            <Link href='/buy-ticket' target="_blank">
-                              <Button colorScheme="green">Купить билет</Button>
-                            </Link>
-                          )}
-                        </Flex>
-                      </Td>
-                    )}
+                        )}
+                        {activeTicket.available_on_website && (
+                          <Link href='/buy-ticket' target="_blank">
+                            <Button colorScheme="green">Купить билет</Button>
+                          </Link>
+                        )}
+                      </Flex>
+                    </Td>
                   </Tr>
                 )}
               </Tbody>

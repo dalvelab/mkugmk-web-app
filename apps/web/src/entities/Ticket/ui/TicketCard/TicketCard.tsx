@@ -58,7 +58,8 @@ export const TicketCard: React.FC<TicketProps> = ({
           <Image
             fill
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${exhibition_center.banner.formats?.thumbnail.url}`}
-            alt={`Изображение ${exhibition_center.name}`} 
+            alt={`Изображение ${exhibition_center.name}`}
+            style={{objectFit: 'cover'}}
           />
         }
         {disabled && (

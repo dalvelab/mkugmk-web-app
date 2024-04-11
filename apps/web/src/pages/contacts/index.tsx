@@ -80,14 +80,19 @@ export default function Events({ page }: InferGetServerSidePropsType<typeof getS
                     Коммерческие предложения будут реализованы на договорной основе и по безналичному расчету
                   </chakra.span>
                 </Flex>
-                <Button
-                  bgColor="brand.black"
-                  color="white"
-                  _hover={{bgColor: "brand.black"}} 
+                <Link 
+                  href="https://airtable.com/app10ambf4PK4wk2P/shrzHsLRsgXpqdKBg" 
+                  target="_blank"
                   justifySelf={["flex-start", "flex-start", "flex-end", "flex-end", "flex-end"]}
                 >
-                  Связаться
-                </Button>
+                  <Button
+                    bgColor="brand.black"
+                    color="white"
+                    _hover={{bgColor: "brand.black"}} 
+                  >
+                    Связаться
+                  </Button>
+                </Link>
               </Grid>
             ): null}
           </Flex>

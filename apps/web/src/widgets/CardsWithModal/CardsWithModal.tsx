@@ -43,7 +43,7 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({data}) => {
         {isNotEmpty(data) && data.map(({id, image, name, short_description, type }, index) => (
           <Flex
             key={id}
-            w={['100%', '280px', '280px', '280px', '280px']}
+            w={['100%', '300px', '300px', '300px', '300px']}
             flexDir="column"
             cursor="pointer"
             pos="relative"
@@ -82,7 +82,7 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({data}) => {
             <Flex p={4} gap={2} flexDir="column">
               <Heading as="h3" fontSize="lg" fontWeight="medium">{name}</Heading>
               {isNotVoid(short_description) && (
-                <chakra.span fontSize="sm" color='brand.gray' lineHeight="110%">{short_description}</chakra.span>
+                <chakra.span fontSize="sm" color='brand.gray'>{short_description}</chakra.span>
               )}
             </Flex>
           </Flex>

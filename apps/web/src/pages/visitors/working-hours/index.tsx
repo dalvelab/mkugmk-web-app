@@ -73,7 +73,7 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"
             >
-              График работы выставочных центров
+              График работы общественных пространств
             </Heading>
             <OperatingHoursTable data={public_areas} />
           </Container>

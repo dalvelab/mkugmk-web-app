@@ -25,7 +25,7 @@ export type VisitorsPages = {
       }[]
       additional_text?: string;
     }[]
-    documents: StrapiMedia[];
+    documents: StrapiMedia[] | null;
   };
   interactive_playground_page: {
     title: string;

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { Button, chakra, Container, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { chakra, Container, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 
 import type { VisitorsPages } from "@/entities"
 import { isNotVoid, Markdown } from "@/shared";
@@ -34,6 +34,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
         >
           <Flex
             minW="340px"
+            maxW="390px"
             w={["100%", "auto", "auto", "auto", "auto"]}
             flexDir="column"
             py={3}
@@ -47,29 +48,33 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
             <chakra.span fontSize="xl" fontWeight="semibold">Вид услуги</chakra.span>
             <Flex flexDir="column" gap={1}>
               {other_services.map((button) => (
-                <Button
+                <chakra.button
                   key={button.id}
-                  py={6}
-                  variant="ghost"
+                  py={3}
+                  px={4}
                   backgroundColor={button.id === activeId ? "#F4F4F5" : "white"}
-                  fontWeight="regular"
                   _hover={{bgColor: "#F4F4F5"}}
-                  justifyContent="flex-start"
+                  borderRadius={8}
                   onClick={() => onClick(button.id)}
                 >
                   <Flex flexDir="column" alignItems="flex-start" gap={0.5}>
-                    {button.name}
+                    <chakra.span whiteSpace="pre-wrap" textAlign="left">{button.name}</chakra.span>
                     {isNotVoid(button.caption) ? 
-                      <chakra.span fontSize="xs" noOfLines={1} textOverflow="ellipsis" color='brand.gray'>{button.caption}</chakra.span> : 
-                      null
+                      <chakra.span
+                        fontSize="xs"
+                        noOfLines={1}
+                        textOverflow="ellipsis"
+                        color='brand.gray'>
+                          {button.caption}
+                      </chakra.span> : null
                     }
                   </Flex>
-                </Button>
+                </chakra.button>
               ))}
             </Flex>
           </Flex>
           {/* @ts-ignore */}
-          <TableContainer ref={tableRef} w="800px">
+          <TableContainer ref={tableRef} w="100%">
             <Table
               border="1px solid" 
               borderColor="brand.border"
