@@ -1,8 +1,8 @@
-import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
+import { CloseIcon } from "@chakra-ui/icons";
 import { Flex, Modal, ModalBody, ModalContent, ModalHeader, IconButton } from "@chakra-ui/react"
 import { useState } from "react";
 
-import { LanguageSelect } from "@/features";
+import { LanguageSelect, Search } from "@/features";
 
 import { About, Visitors, Main } from "./Menu";
 import { ExhibitionCenter } from "@/entities";
@@ -30,12 +30,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpened, exhibition_
           <Flex w="full" justifyContent="space-between">
             <Flex gap={4}>
               <LanguageSelect size="lg" />
-              <IconButton 
-                boxSize={12}
-                icon={<SearchIcon boxSize={5} />} 
-                aria-label='Открыть поиск' 
-                _hover={{bg: "brand.border"}} 
-              />
+              <Search type="mobile" />
             </Flex>
             <IconButton
                 boxSize={12}

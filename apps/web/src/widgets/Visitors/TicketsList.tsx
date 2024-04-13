@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { Button, chakra, Container, Flex, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
 
@@ -11,6 +12,8 @@ interface TicketsListProps {
 }
 
 export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
+  const t = useTranslations("Tickets_page");
+
   const [activeId, setActiveId] = useState<number>(tickets[0].id);
 
   const tableRef = useRef<HTMLDivElement | undefined>();
@@ -46,7 +49,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
             color="brand.black"
             gap={3}
           >
-            <chakra.span fontSize="xl" fontWeight="semibold">Вид площадки</chakra.span>
+            <chakra.span fontSize="xl" fontWeight="semibold">{t("type_of_center")}</chakra.span>
             <Flex flexDir="column" gap={1}>
               {tickets.map((button) => (
                 <chakra.button
@@ -93,7 +96,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
                     py={5}
                     fontWeight="semibold"
                   >
-                    Категория
+                    {t("category")}
                   </Th>
                   <Th
                     w="50%"
@@ -106,14 +109,21 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
                     borderColor="brand.border"
                     fontWeight="semibold"
                   >
-                    Примечание
+                    {t("info")}
                   </Th>
                 </Tr>
               </Thead>
               <Tbody>
                 {isNotVoid(activeTicket) && (
                   <Tr>
-                    <Td w="50%" minW="280px" px={5} border="1px solid" borderColor="brand.border" verticalAlign="top">
+                    <Td
+                      w="50%"
+                      minW="280px"
+                      px={5}
+                      border="1px solid" 
+                      borderColor="brand.border" 
+                      verticalAlign="top"
+                    >
                       <Flex flexDir="column" gap={6}>
                         {activeTicket.categories.map((category) => (
                           <Flex
@@ -128,7 +138,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
                                 <chakra.span fontSize="xs" color="brand.gray">{category.caption}</chakra.span>
                               }
                             </Flex>
-                            <chakra.span >{category.price} руб.</chakra.span>
+                            <chakra.span >{category.price} {t("currency")}</chakra.span>
                           </Flex>
                         ))}
                       </Flex>
@@ -147,7 +157,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
                         )}
                         {activeTicket.available_on_website && (
                           <Link href='/buy-ticket' target="_blank">
-                            <Button colorScheme="green">Купить билет</Button>
+                            <Button colorScheme="green">{t("buy_ticket_button")}</Button>
                           </Link>
                         )}
                       </Flex>

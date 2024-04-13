@@ -1,5 +1,6 @@
 import { chakra, Container, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useTranslations } from "next-intl";
 
 import { getComplexOperationManagement, getExibitionCenters, getVisitorsPages } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty } from '@/shared';
@@ -9,6 +10,8 @@ import { OperatingHoursTable, SpecialDaysOperatinHourseTable } from "@/widgets";
 
 export default function WorkingHours({ page, complexSettings, exhibitionCenters }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
+
+  const t = useTranslations("Working_hours_page");
 
   if (isVoid(data) || 
       isEmpty(data) || 
@@ -45,7 +48,7 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"
             >
-              График работы в праздничные дни
+              {t("operating_hours_holidays")}
             </Heading>
             <SpecialDaysOperatinHourseTable data={complexSettingsData.special_days_operating_hours} />
           </Container>
@@ -59,7 +62,7 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"
             >
-              График работы выставочных центров
+              {t("operating_hours_centers")}
             </Heading>
             <OperatingHoursTable data={exhibitionCentersData} />
           </Container>
@@ -73,7 +76,7 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"
             >
-              График работы общественных пространств
+              {t("operating_hours_public")}
             </Heading>
             <OperatingHoursTable data={public_areas} />
           </Container>

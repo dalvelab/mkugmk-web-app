@@ -4,6 +4,7 @@ import { chakra, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@
 
 import { createWorkingSchedule, getWorkingHoursForToday } from "@/shared/utils/dates";
 import { StrapiWorkingTime } from "@/shared";
+import { useTranslations } from "next-intl";
 
 interface OperatingHoursProps {
   data: {
@@ -15,6 +16,8 @@ interface OperatingHoursProps {
 
 export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
   const { locale } = useRouter();
+
+  const t = useTranslations("Working_hours_page");
 
   const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
 
@@ -35,7 +38,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
               px={5}
               py={5}
             >
-              Площадки
+              {t("centers")}
             </Th>
             <Th
               w="50%"
@@ -47,7 +50,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
               border="1px solid"
               borderColor="brand.border"
             >
-              Время работы
+              {t("operating_hours")}
             </Th>
           </Tr>
         </Thead>

@@ -1,5 +1,6 @@
 import { chakra, Container, Flex, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useTranslations } from "next-intl";
 
 import { getVisitorsPages } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown, File } from '@/shared';
@@ -9,6 +10,8 @@ import { OtherServicesList, TicketsList } from "@/widgets";
 
 export default function Tickets({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
+
+  const t = useTranslations("Tickets_page");
 
   if (isVoid(data) || 
       isEmpty(data) || 
@@ -63,7 +66,9 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
       {isNotVoid(documents) && (
       <chakra.section pt={10} pb={10}>
         <Container maxW="container.xl">
-          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>Документы</Heading>
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
+            {t("documents")}
+          </Heading>
           <Flex mt={6} gap={6} flexWrap="wrap">
             {documents.map((file) => (
               <File key={file.id} file={file} />

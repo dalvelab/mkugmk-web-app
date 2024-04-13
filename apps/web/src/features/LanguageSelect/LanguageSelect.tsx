@@ -35,12 +35,11 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({ size = 'sm'}) =>
 			>
 				{locale === 'ru' ? 'RU' : 'EN'}
 			</MenuButton>
-			<MenuList p={2} minW="auto">
+			<MenuList p={2} minW="auto" fontSize={size === 'sm' ? 'md' : "lg"}>
 				<MenuItem 
 					bg={locale === 'ru' ? "brand.border" : "transparent"} 
 					borderRadius="4px" 
 					onClick={() => handleLanguageChange('ru')}
-					fontSize="lg"
 				>
 					RU
 				</MenuItem>
@@ -48,7 +47,6 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({ size = 'sm'}) =>
 					bg={locale === 'en' ? "brand.border" : "transparent"} 
 					borderRadius="4px" 
 					onClick={() => handleLanguageChange('en')}
-					fontSize="lg"
 				>
 					EN
 				</MenuItem>

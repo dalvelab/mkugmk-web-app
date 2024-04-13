@@ -2,14 +2,16 @@ import { chakra, Container, Flex, Grid, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getVisitorsPages } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, FileIcon, File } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, File } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { AddressesTable, HowToGetToMuseumTable } from "@/widgets";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function Navigation({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
+
+  const t = useTranslations('Navigation_page');
 
   if (isVoid(data) || 
       isEmpty(data) || 
@@ -40,7 +42,7 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
         <Container maxW="container.xl">
           <Flex alignItems='flex-start'>
           {isNotVoid(complex_map) && (
-            <File name="Карта музейного комплекса" file={complex_map} />
+            <File name={t("museum_complex_map")} file={complex_map} />
           )}
           </Flex>
         </Container>
@@ -52,7 +54,7 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
             fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
             fontWeight="bold"
           >
-            Как доехать до Музейного комплекса
+            {t("how_to_get_to_museum")}
           </Heading>
           {isNotVoid(how_to_get_to_museum) && isNotEmpty(how_to_get_to_museum) && (
             <Grid 
@@ -60,11 +62,11 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
               gap={10}
             >
               <HowToGetToMuseumTable
-                title="На общественном транспорте из Екатеринбурга" 
+                title={t("public_transport")} 
                 data={how_to_get_to_museum.filter((data) => data.type === 'public_transport')} 
               />
               <HowToGetToMuseumTable
-                title="На автомобиле или экскурсионном автобусе" 
+                title={t("private_transport")} 
                 data={how_to_get_to_museum.filter((data) => data.type === 'other')} 
               />
             </Grid>
@@ -78,7 +80,7 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
             fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
             fontWeight="bold"
           >
-            Адреса выставочных площадок Музейного комплекса
+            {t("addresses")}
           </Heading>
           <AddressesTable data={addresses} />
         </Container>

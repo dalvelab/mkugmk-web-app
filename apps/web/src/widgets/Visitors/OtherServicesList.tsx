@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { chakra, Container, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 
@@ -10,6 +11,8 @@ interface OtherServicesListProps {
 }
 
 export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_services}) => {
+  const t = useTranslations("Tickets_page");
+
   const [activeId, setActiveId] = useState<number>(other_services[0].id);
 
   const tableRef = useRef<HTMLDivElement | undefined>();
@@ -45,7 +48,9 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
             color="brand.black"
             gap={3}
           >
-            <chakra.span fontSize="xl" fontWeight="semibold">Вид услуги</chakra.span>
+            <chakra.span fontSize="xl" fontWeight="semibold">
+              {t("type_of_service")}
+            </chakra.span>
             <Flex flexDir="column" gap={1}>
               {other_services.map((button) => (
                 <chakra.button
@@ -90,7 +95,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
                     py={5}
                     fontWeight="semibold"
                   >
-                    Стоимость
+                    {t("price")}
                   </Th>
                   <Th
                     w="50%"
@@ -103,7 +108,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
                     borderColor="brand.border"
                     fontWeight="semibold"
                   >
-                    Примечание
+                    {t("info")}
                   </Th>
                 </Tr>
               </Thead>

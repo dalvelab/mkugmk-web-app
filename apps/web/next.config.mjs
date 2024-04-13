@@ -10,22 +10,19 @@ const nextConfig = {
     ]
   },
   async rewrites() {
+    const media = {
+      source: '/uploads/:path',
+      destination: `${process.env.NEXT_PUBLIC_API_HOST}/uploads/:path`,
+    };
+    
     return process.env.NODE_ENV === 'development' ? [
-      {
-        source: '/uploads/:path',
-        destination: `${process.env.NEXT_PUBLIC_API_HOST}/uploads/:path`,
-      },
+      media,
       {
         source: '/api/:path',
         destination: `${process.env.NEXT_PUBLIC_API_HOST}/api/:path`,
       },
     ]: 
-    [
-      {
-        source: '/uploads/:path',
-        destination: `${process.env.NEXT_PUBLIC_API_HOST}/uploads/:path`,
-      },
-    ]
+    [media]
   },
   i18n: {
     defaultLocale: 'ru',

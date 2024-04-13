@@ -33,7 +33,7 @@
     "more_button": "Подробнее"
   },
   "ExhibitionCenterSingle": {
-    "about_museum": "О музее",
+    "about_museum": "Описание",
     "buy_ticket_button": "Купить билет",
     "useful_information": "Полезная информация",
     "working_schedule": "Режим работы",
@@ -47,6 +47,30 @@
   "Buy_Tickets": {
     "title": "Купить билеты"
   },
+  "Navigation_page": {
+    "museum_complex_map": "Карта музейного комплекса",
+    "how_to_get_to_museum": "Как доехать до Музейного комплекса",
+    "public_transport": "На общественном транспорте из Екатеринбурга",
+    "private_transport": "На автомобиле или экскурсионном автобусе",
+    "addresses": "Адреса выставочных площадок Музейного комплекса"
+  },
+  "Tickets_page": {
+    "type_of_center": "Вид площадки",
+    "category": "Категория",
+    "buy_ticket_button": "Купить билет",
+    "currency": "руб.",
+    "type_of_service": "Вид услуги",
+    "price": "Стоимость",
+    "info": "Примечание",
+    "documents": "Документы"
+  },
+  "Working_hours_page": {
+    "operating_hours_holidays": "График работы в праздничные дни",
+    "operating_hours_centers": "График работы выставочных центров",
+    "operating_hours_public": "График работы общественных пространств",
+    "operating_hours": "Время работы",
+    "centers": "Площадки"
+  },
   "Footer": {
     "contacts": "Контакты",
     "ticket_office": "Режим работы кассы",
@@ -54,6 +78,9 @@
     "visitors": "Посетителям",
     "buy_ticket_button": "Купить билет",
     "order_call": "Заказать звонок",
-    "leave_feedback": "Оставить отзыв"
+    "leave_feedback": "Оставить отзыв",
+    "order_call_modal_form_name": "Имя",
+    "order_call_modal_form_phone": "Телефон",
+    "order_call_modal_form_message": "Сообщение"
   }
 }

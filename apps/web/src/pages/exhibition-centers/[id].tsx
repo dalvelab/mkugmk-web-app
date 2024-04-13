@@ -132,7 +132,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
         </Container>
       </chakra.section>
       <YoutubeVideoSlider youtube_gallery={youtube_gallery} />
-      <chakra.section pt={[0, 10, 10, 10, 10]} pb={10} pos="relative">
+      <chakra.section pt={10} pb={10} pos="relative">
         <Container maxWidth="container.xl" display="flex" flexDir="column" pos="relative">
           <HStack 
               divider={<StackDivider borderColor="brand.border" />} 
@@ -159,10 +159,10 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
                   fontSize="lg" 
                   color="brand.black"
                 >
-                  {formattedSchedule.map(({day, value, id}) => (
+                  {formattedSchedule.map(({day, value, id, opened}) => (
                     <Grid key={id} gridTemplateColumns="1fr 1fr" gap={10}>
                       <chakra.span>{day}</chakra.span>
-                      <chakra.span>{value}</chakra.span>
+                      <chakra.span color={opened ? 'brand.black' : 'red.500'}>{value}</chakra.span>
                     </Grid>
                   ))}
                 </Flex>

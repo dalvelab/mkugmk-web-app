@@ -7,6 +7,7 @@ import { getFooter } from '@/entities';
 import { useRouter } from 'next/router';
 import { WarningIcon } from '@chakra-ui/icons';
 import { useTranslations } from 'next-intl';
+import { OrderCall } from '@/features';
 
 export const Footer = () => {
   const t = useTranslations('Footer');
@@ -158,17 +159,12 @@ export const Footer = () => {
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium">{t('visitors')}</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
+                <OrderCall />
                 {pages.map((page) => (
                   <Link key={page.id} href={page.link} target='_blank'>
                     <Text>{page.name}</Text>
                   </Link>
                 ))}
-                <Link href="/">
-                  <Text>{t('leave_feedback')}</Text>
-                </Link>
-                <Link href="/">
-                  <Text>{t('order_call')}</Text>
-                </Link>
               </Flex>
             </Flex>
           </Grid>

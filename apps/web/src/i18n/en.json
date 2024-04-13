@@ -33,7 +33,7 @@
     "more_button": "More details"
   },
   "ExhibitionCenterSingle": {
-    "about_museum": "About museum",
+    "about_museum": "About",
     "buy_ticket_button": "Buy ticket",
     "useful_information": "Useful information",
     "working_schedule": "Work schedule",
@@ -46,6 +46,30 @@
   },
   "Buy_Tickets": {
     "title": "Buy tickets"
+  },
+  "Navigation_page": {
+    "museum_complex_map": "Map of Museum complex",
+    "how_to_get_to_museum": "How to get to the Museum complex",
+    "public_transport": "On public transport from Yekaterinburg",
+    "private_transport": "By car or on excursion bus",
+    "addresses": "Exhibition centers addresses"
+  },
+  "Tickets_page": {
+    "type_of_center": "Type of center",
+    "category": "Category",
+    "buy_ticket_button": "Buy tickets",
+    "currency": "RUB",
+    "type_of_service": "Type of service",
+    "price": "Price",
+    "info": "Information",
+    "documents": "Documents"
+  },
+  "Working_hours_page": {
+    "operating_hours_holidays": "Holidays operating hours",
+    "operating_hours_centers": "Exhibition Centers operating hours",
+    "operating_hours_public": "Public places operating hours",
+    "operating_hours": "Operating hours",
+    "centers": "Centers"
   },
   "Footer": {
     "contacts": "Contacts",

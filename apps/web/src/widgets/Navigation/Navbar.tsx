@@ -3,11 +3,11 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Button, chakra,  Flex, IconButton, Spinner, Text, useMediaQuery } from "@chakra-ui/react"
-import { HamburgerIcon, SearchIcon, WarningIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, WarningIcon } from '@chakra-ui/icons';
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useQuery } from '@tanstack/react-query';
 
-import { LanguageSelect } from '@/features';
+import { LanguageSelect, Search } from '@/features';
 import { DropdownLink, NavbarLink, getExibitionCenters } from '@/entities';
 import { isNotVoid } from '@/shared';
 
@@ -120,7 +120,7 @@ export const Navbar = () => {
                 </chakra.div>
               </Link>
               <Flex gap={2} display={isLargerThan1100 ? "flex" : "none"}>
-                <IconButton icon={<SearchIcon />} aria-label='Открыть поиск' bg="transparent" _hover={{bg: "brand.border"}} />
+                <Search type="desktop" />
                 <LanguageSelect />
               </Flex>
               <IconButton
