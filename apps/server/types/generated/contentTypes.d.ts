@@ -1231,7 +1231,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
           localized: true;
         };
       }>;
-    sell_exhibitions_offer_email: Attribute.Email &
+    order_call_email: Attribute.Email &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {

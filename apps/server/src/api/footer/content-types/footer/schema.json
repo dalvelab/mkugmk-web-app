@@ -80,7 +80,7 @@
       },
       "type": "string"
     },
-    "sell_exhibitions_offer_email": {
+    "order_call_email": {
       "pluginOptions": {
         "i18n": {
           "localized": true
