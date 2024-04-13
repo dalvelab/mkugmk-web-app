@@ -32,7 +32,7 @@ export default function SingleNews({ event }: InferGetServerSidePropsType<typeof
             >
               <Image 
                 fill 
-                src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} 
+                src={image.url} 
                 alt="Изображение новости"
                 style={{borderRadius: "8px", objectFit: 'cover'}}
               />

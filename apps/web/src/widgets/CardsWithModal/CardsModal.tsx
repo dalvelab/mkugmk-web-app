@@ -43,11 +43,7 @@ export const CardsModal: React.FC<CardsModalProps> = ({isOpen, onClose, data}) =
           <chakra.div pos="relative" w="full" h="260px">
             <Image 
               fill 
-              src={
-                isNotVoid(modal_image) ? 
-                  `${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${modal_image.url}` : 
-                  `${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`
-              } 
+              src={isNotVoid(modal_image) ? `${modal_image.url}` : `${image.url}`} 
               alt={isNotVoid(modal_image) ? modal_image.name : image.name}
               style={{objectFit: 'cover', borderRadius: '8px'}}
             />

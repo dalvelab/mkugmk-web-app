@@ -28,7 +28,7 @@ export const File: React.FC<FileProps> = ({ file, name }) => {
           {isNotVoid(name) ? name: file.name}
         </chakra.span>
         <Link 
-          href={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${file.url}`} 
+          href={file.url} 
           target="_blank"
           style={{lineHeight: '1'}}
         >

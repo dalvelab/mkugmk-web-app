@@ -14,7 +14,7 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media, pr
   if (type === 'image') {
     return (
       <chakra.div w="full" h="100%" pos="absolute" zIndex={-1}>
-        <Image style={{objectFit: 'cover'}} src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${media.url}`} fill alt="заглавное изображение" />
+        <Image style={{objectFit: 'cover'}} src={media.url} fill alt="заглавное изображение" />
       </chakra.div>
     )
   } 
@@ -30,9 +30,9 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({media, pr
         tabIndex={-1}
         preload="auto"
         style={{minHeight: "100vh", minWidth: "100%", objectFit: 'cover'}} 
-        poster={isNotVoid(preview) ? `${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${preview.url}` : undefined}
+        poster={isNotVoid(preview) ? `${preview.url}` : undefined}
       >
-        <source src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${media.url}`} type={media.mime} />
+        <source src={media.url} type={media.mime} />
         Your browser does not support the video tag.
       </video>
     </chakra.div>

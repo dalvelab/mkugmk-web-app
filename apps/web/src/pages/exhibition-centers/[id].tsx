@@ -50,7 +50,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
         <chakra.div w="full" h="100%" pos="absolute" zIndex={-1}>
           <Image 
             style={{objectFit: 'cover'}} 
-            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.url}`} 
+            src={banner.url} 
             fill alt="заглавное изображение" 
           />
         </chakra.div>
@@ -122,7 +122,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
               >
                 <Image 
                   fill
-                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`}
+                  src={image.url}
                   alt='Изображение музея'
                   style={{objectFit: 'cover', borderRadius: "12px"}}
                 />

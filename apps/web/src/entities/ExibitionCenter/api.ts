@@ -12,7 +12,7 @@ export async function getExibitionCenters(params: GetExibitionCenters): Promise<
 
   const res = await fetch(`
     ${isClientRequest ? 
-      process.env.NEXT_PUBLIC_API_HOST : 
+      '/api' : 
       process.env.DB_HOST}/exhibition-centers?locale=${locale}&isPopulated=${isPopulated}
   `);
 

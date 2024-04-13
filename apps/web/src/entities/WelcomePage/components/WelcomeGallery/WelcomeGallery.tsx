@@ -23,10 +23,7 @@ export const WelcomeGallery: React.FC<WelcomeGalleryProps> = ({images}) => {
           pos="relative"
         >
           <Image 
-            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`} 
-            fill 
-            alt="Изображение галереи" 
-            style={{objectFit: 'cover'}} 
+            src={image.url} fill alt="Изображение галереи" style={{objectFit: 'cover'}} 
           />
           <chakra.div display={isNotVoid(image.caption) ? 'block' : 'none'} className={styles.gallery_image_caption}>
             <chakra.span>{image.caption}</chakra.span>

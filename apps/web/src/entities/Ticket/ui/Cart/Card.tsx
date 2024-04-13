@@ -17,6 +17,11 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
 }) => {
 
   const Description = () => {
+    const thumbnail = isNotVoid(
+      exhibition_center.banner.formats) ? 
+      exhibition_center.banner.formats?.thumbnail.url : 
+      exhibition_center.banner.url;
+
     return (
       <>
         <chakra.div
@@ -28,7 +33,7 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
         >
         <Image
           fill
-          src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${exhibition_center.banner.formats?.thumbnail.url}`}
+          src={thumbnail}
           alt={`Изображение ${exhibition_center.name}`} 
         />
         </chakra.div>

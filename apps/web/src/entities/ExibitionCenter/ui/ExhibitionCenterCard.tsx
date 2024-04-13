@@ -69,7 +69,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({exhib
           pos="relative"
         >
           <Image 
-            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.url}`} 
+            src={banner.url} 
             fill 
             alt="Изображение музея"
             style={{objectFit: 'cover', borderRadius: '12px'}}

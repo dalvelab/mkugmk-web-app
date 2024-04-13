@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { chakra, Grid } from "@chakra-ui/react"
 import { ExhibitionCenter } from '@/entities';
 import { CheckIcon, LockIcon } from '@chakra-ui/icons';
+import { isNotVoid } from '@/shared';
 
 interface TicketProps {
   mode: 'default' | 'pushkin_card';
@@ -18,6 +19,11 @@ export const TicketCard: React.FC<TicketProps> = ({
   }) => {
   const isSelected = selected.find((id) => id === exhibition_center.id);
   const disabled = selected.length > 0 && mode === 'pushkin_card' && !selected.includes(exhibition_center.id);
+
+  const thumbnail = 
+    isNotVoid(exhibition_center.banner.formats) ?
+    exhibition_center.banner.formats.thumbnail.url :
+    exhibition_center.banner.url;
 
   return (
     <Grid
@@ -55,12 +61,7 @@ export const TicketCard: React.FC<TicketProps> = ({
       >
         {isSelected && !disabled && <CheckIcon />}
         {!isSelected && !disabled && 
-          <Image
-            fill
-            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${exhibition_center.banner.formats?.thumbnail.url}`}
-            alt={`Изображение ${exhibition_center.name}`}
-            style={{objectFit: 'cover'}}
-          />
+          <Image fill src={thumbnail} alt={`Изображение ${exhibition_center.name}`} style={{objectFit: 'cover'}} />
         }
         {disabled && (
           <LockIcon />

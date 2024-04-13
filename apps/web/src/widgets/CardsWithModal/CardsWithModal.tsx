@@ -67,13 +67,13 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({data}) => {
                 <Image 
                   width={image.width} 
                   height={image.height}
-                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`}
+                  src={image.url}
                   alt={imageAltGenerator(name, type)} 
                 />
               ) : (
                 <Image 
                   fill
-                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.url}`}
+                  src={image.url}
                   style={{objectFit: 'cover'}}
                   alt={imageAltGenerator(name, type)} 
                 />

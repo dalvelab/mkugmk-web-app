@@ -57,7 +57,7 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
         >
           <Image 
             fill
-            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${event.attributes.image.data.attributes.url}`}
+            src={event.attributes.image.data.attributes.url}
             style={{objectFit: 'cover'}} 
             alt="Изображение новости" 
           />
