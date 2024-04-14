@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
 
@@ -16,8 +17,17 @@ import {
   FormLabel,
   FormControl,
   Input,
-  Textarea
+  Textarea,
+  FormErrorMessage
 } from "@chakra-ui/react";
+import { z } from "zod";
+import { isNotVoid } from "@/shared";
+
+const FormSchema = z.object({
+  name: z.string().min(2, "Имя должно быть минимум 2 символа"),
+  phone: z.string().min(1, "Телефон должен быть указан"),
+  message: z.string().min(1, "Сообщение не может быть пустым"),
+})
 
 export const OrderCall = () => {
   const { locale } = useRouter();
@@ -25,6 +35,25 @@ export const OrderCall = () => {
   const t = useTranslations('Footer');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState<z.ZodError<z.infer<typeof FormSchema>> | null>(null);
+
+  function onClick() {
+    const result = FormSchema.safeParse(form);
+
+    if (!result.success) {
+      setErrors(result.error);
+    }
+  }
+
+  const nameError = errors?.issues.find((issue) => issue.path.includes('name'));
+  const phoneError = errors?.issues.find((issue) => issue.path.includes('phone'));
+  const messageError = errors?.issues.find((issue) => issue.path.includes('message'));
 
   return (
     <>
@@ -52,22 +81,60 @@ export const OrderCall = () => {
           </ModalHeader>
           <ModalBody pb={4}>
             <Flex flexDir="column" gap={5}>
-              <FormControl isRequired>
+              <FormControl isRequired isInvalid={isNotVoid(nameError)}>
                 <FormLabel>{t('order_call_modal_form_name')}</FormLabel>
-                <Input placeholder={t('order_call_modal_form_name')} />
+                <Input
+                  isInvalid={isNotVoid(nameError)}
+                  placeholder={t('order_call_modal_form_name')}
+                  value={form.name}
+                  onChange={(event) => setForm({
+                    ...form,
+                    name: event.target.value
+                  })}
+                  onFocus={() => setErrors(null)}
+                />
+                {isNotVoid(nameError) && (
+                  <FormErrorMessage>{nameError.message}</FormErrorMessage>
+                )}
               </FormControl>
-              <FormControl isRequired>
+              <FormControl isRequired isInvalid={isNotVoid(phoneError)}>
                 <FormLabel>{t('order_call_modal_form_phone')}</FormLabel>
-                <Input placeholder={t('order_call_modal_form_phone')} />
+                <Input
+                  isInvalid={isNotVoid(phoneError)}
+                  placeholder={t('order_call_modal_form_phone')}
+                  value={form.phone}
+                  onChange={(event) => setForm({
+                    ...form,
+                    phone: event.target.value
+                  })}
+                  onFocus={() => setErrors(null)}
+                />
+                {isNotVoid(phoneError) && (
+                  <FormErrorMessage>{phoneError.message}</FormErrorMessage>
+                )}
               </FormControl>
-              <FormControl isRequired>
+              <FormControl isRequired isInvalid={isNotVoid(messageError)}>
                 <FormLabel>{t('order_call_modal_form_message')}</FormLabel>
-                <Textarea placeholder={t('order_call_modal_form_message')} />
+                <Textarea
+                  isInvalid={isNotVoid(messageError)}
+                  placeholder={t('order_call_modal_form_message')}
+                  value={form.message}
+                  onChange={(event) => setForm({
+                    ...form,
+                    message: event.target.value
+                  })}
+                  onFocus={() => setErrors(null)}
+                />
+                {isNotVoid(messageError) && (
+                  <FormErrorMessage>{messageError.message}</FormErrorMessage>
+                )}
               </FormControl>
               <Button
                 bgColor="brand.black"
                 color="white"
                 _hover={{bgColor: "brand.black"}}
+                _focus={{bgColor: "brand.black"}}
+                onClick={onClick}
               >
                 {t('order_call')}
               </Button>
