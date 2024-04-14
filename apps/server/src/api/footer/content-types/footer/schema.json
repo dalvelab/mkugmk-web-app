@@ -79,15 +79,6 @@
         }
       },
       "type": "string"
-    },
-    "order_call_email": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "email",
-      "required": true
     }
   }
 }
