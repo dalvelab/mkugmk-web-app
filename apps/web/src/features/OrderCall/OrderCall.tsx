@@ -18,37 +18,75 @@ import {
   FormControl,
   Input,
   Textarea,
-  FormErrorMessage
+  FormErrorMessage,
+  useToast
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { isNotVoid } from "@/shared";
+import { useMutation } from "@tanstack/react-query";
+import { sendEmailRequest } from "../SendEmail";
 
 const FormSchema = z.object({
-  name: z.string().min(2, "Имя должно быть минимум 2 символа"),
+  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
   phone: z.string().min(1, "Телефон должен быть указан"),
   message: z.string().min(1, "Сообщение не может быть пустым"),
 })
 
+const initalForm = {
+  name: "",
+  phone: "",
+  message: "",
+}
+
 export const OrderCall = () => {
   const { locale } = useRouter();
+  const toast = useToast();
 
   const t = useTranslations('Footer');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    message: "",
-  });
+  const [form, setForm] = useState(initalForm);
   const [errors, setErrors] = useState<z.ZodError<z.infer<typeof FormSchema>> | null>(null);
+
+  const mutation = useMutation({
+    mutationFn: sendEmailRequest,
+    onSuccess: () => {
+      toast({
+        title: 'Успешно!',
+        description: "С вами свяжутся в ближайшее время",
+        status: 'success',
+        duration: 2500,
+        position: 'top-right',
+        isClosable: true,
+      });
+      setForm(initalForm);
+      onClose();
+    },
+    onError: () => {
+      setForm(initalForm);
+
+      toast({
+        title: 'Произошла ошибка.',
+        description: "Попробуйте позже",
+        status: 'error',
+        duration: 2500,
+        position: 'top-right',
+        isClosable: true,
+      })
+    },
+  });
 
   function onClick() {
     const result = FormSchema.safeParse(form);
 
     if (!result.success) {
       setErrors(result.error);
+
+      return;
     }
+
+    mutation.mutate({message: `Заказ звонка с сайта. \n Имя: ${form.name}\n Телефон: ${form.phone}\n Сообщение: ${form.message}`})
   }
 
   const nameError = errors?.issues.find((issue) => issue.path.includes('name'));
@@ -103,9 +141,10 @@ export const OrderCall = () => {
                   isInvalid={isNotVoid(phoneError)}
                   placeholder={t('order_call_modal_form_phone')}
                   value={form.phone}
+                  maxLength={12}
                   onChange={(event) => setForm({
                     ...form,
-                    phone: event.target.value
+                    phone: event.target.value.replace(/[^\d.+]+/g, "")
                   })}
                   onFocus={() => setErrors(null)}
                 />

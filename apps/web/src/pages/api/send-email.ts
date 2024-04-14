@@ -1,16 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { sendEmail } from '@/shared/utils/sendEmail';
+import { sendEmail } from '@/features/SendEmail/send';
  
 type ResponseData = {
   message: string
 }
  
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  sendEmail({to: '', message: ''});
+  if (req.method !== 'POST') {
+    res.status(404).json({message: 'NOT FOUND'});
 
-  res.status(200).json({ message: 'Hello from Next.js!' })
+    return;
+  }
+
+  const { message } = JSON.parse(req.body);
+  
+  try {
+    await sendEmail({ message });
+
+    res.status(200).json({message: 'SUCCESS'});
+  } catch (error) {
+    throw error; 
+  }
 }
