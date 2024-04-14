@@ -7,3 +7,4 @@ export * from './Markdown';
 export * from './CustomContainer';
 export * from './Icons';
 export * from './File';
+export * from './CollapsePanel';

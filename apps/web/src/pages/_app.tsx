@@ -23,7 +23,7 @@ function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme}>
             <Navbar />
-            <chakra.main pb={8}>
+            <chakra.main pb={8} minH="calc(80vh - 80px)">
               <Component {...pageProps} />
             </chakra.main>
             <ScrollUpButton />

@@ -8,3 +8,4 @@ export * from './Event';
 export * from './ContactsPage';
 export * from './Ticket';
 export * from './VisitorsPages';
+export * from './FAQ';

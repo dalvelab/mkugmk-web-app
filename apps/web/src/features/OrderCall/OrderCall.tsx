@@ -62,7 +62,7 @@ export const OrderCall = () => {
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>{t('order_call_modal_form_message')}</FormLabel>
-                <Textarea />
+                <Textarea placeholder={t('order_call_modal_form_message')} />
               </FormControl>
               <Button
                 bgColor="brand.black"
