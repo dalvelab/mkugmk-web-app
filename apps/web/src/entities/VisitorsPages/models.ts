@@ -17,6 +17,7 @@ export type VisitorsPages = {
       id: number;
       name: string;
       available_on_website: boolean;
+      display_preferential_sign: boolean;
       categories: {
         id: number;
         name?: string;

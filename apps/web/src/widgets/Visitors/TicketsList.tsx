@@ -73,18 +73,20 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
               border="1px solid" 
               borderColor="brand.border"
             >
-              <TableCaption
-                px={0}
-                py={0}
-                whiteSpace="pre-wrap"
-                textAlign="left"
-                color="brand.gray"
-                fontSize="xs"
-                fontWeight="regular"
-              >
-                *Льготные билеты могут приобрести пенсионеры РФ, 
-                учащиеся средне специальных и высших учебных  заведений РФ очной формы обучения
-              </TableCaption>
+              {activeTicket?.display_preferential_sign && (
+                <TableCaption
+                  px={0}
+                  py={0}
+                  whiteSpace="pre-wrap"
+                  textAlign="left"
+                  color="brand.gray"
+                  fontSize="xs"
+                  fontWeight="regular"
+                >
+                  *Льготные билеты могут приобрести пенсионеры РФ, 
+                  учащиеся средне специальных и высших учебных  заведений РФ очной формы обучения
+                </TableCaption>
+              )}
               <Thead>
                 <Tr>
                   <Th

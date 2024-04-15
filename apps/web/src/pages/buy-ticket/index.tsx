@@ -149,6 +149,7 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
               gap={5}
             >
               {data
+                .filter((exhibition_centers) => exhibition_centers.ticket_sale_enabled)
                 .filter((exhibition_center) => 
                   mode === 'pushkin_card' ? 
                   exhibition_center.type === 'exhibition_center' : 

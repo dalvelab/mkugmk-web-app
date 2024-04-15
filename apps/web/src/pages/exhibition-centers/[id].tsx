@@ -30,7 +30,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
     return <EmptyState />
   }
   
-  const { name, description, banner, youtube_gallery, gallery, excursion_phone, working_time } = data;
+  const { name, description, banner, youtube_gallery, gallery, excursion_phone, working_time, ticket_sale_enabled } = data;
 
   const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
 
@@ -79,11 +79,13 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
               {name}
             </Heading>
             <OpenStatus workTimeToday={workTimeToday} theme='dark' />
-            <Link href="/buy-ticket">
-              <Button mt={2} size="lg" colorScheme="green">
-                {t('buy_ticket_button')}
-              </Button>
-            </Link>
+            {ticket_sale_enabled && (
+              <Link href="/buy-ticket">
+                <Button mt={2} size="lg" colorScheme="green">
+                  {t('buy_ticket_button')}
+                </Button>
+              </Link>
+            )}
           </Flex>
         </Container>
       </chakra.section>

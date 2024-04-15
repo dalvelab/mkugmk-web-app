@@ -2,7 +2,7 @@ import { chakra, Container, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
-import { getComplexOperationManagement, getExibitionCenters, getVisitorsPages, getWorkingHoursPage } from '@/entities';
+import { getComplexOperationManagement, getExibitionCenters, getWorkingHoursPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty } from '@/shared';
 import type { ComplexOperationManagement, ExhibitionCenter, VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
