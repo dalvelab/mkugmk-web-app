@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "rules_pages",
+  "info": {
+    "singularName": "rules-page",
+    "pluralName": "rules-pages",
+    "displayName": "Rules Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}

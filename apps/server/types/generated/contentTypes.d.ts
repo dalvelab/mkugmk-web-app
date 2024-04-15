@@ -1462,6 +1462,47 @@ export interface ApiPartnersPagePartnersPage extends Schema.SingleType {
   };
 }
 
+export interface ApiRulesPageRulesPage extends Schema.SingleType {
+  collectionName: 'rules_pages';
+  info: {
+    singularName: 'rules-page';
+    pluralName: 'rules-pages';
+    displayName: 'Rules Page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::rules-page.rules-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::rules-page.rules-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::rules-page.rules-page',
+      'oneToMany',
+      'api::rules-page.rules-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiTicketTicket extends Schema.CollectionType {
   collectionName: 'tickets';
   info: {
@@ -1807,6 +1848,7 @@ declare module '@strapi/types' {
       'api::interactive-playground-page.interactive-playground-page': ApiInteractivePlaygroundPageInteractivePlaygroundPage;
       'api::navigation-page.navigation-page': ApiNavigationPageNavigationPage;
       'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
+      'api::rules-page.rules-page': ApiRulesPageRulesPage;
       'api::ticket.ticket': ApiTicketTicket;
       'api::tickets-page.tickets-page': ApiTicketsPageTicketsPage;
       'api::visitors-page.visitors-page': ApiVisitorsPageVisitorsPage;
