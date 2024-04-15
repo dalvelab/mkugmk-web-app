@@ -1,40 +1,52 @@
-import { isVoid, type ApiResponse, type DefaultRequestParams } from "@/shared";
+import { type ApiResponse, type DefaultRequestParams } from "@/shared";
 import type { VisitorsPages } from "./models";
 
-function constructBooleanQueryParam(name: string, param?: boolean) {
-  if (!param) {
-    return `${name}=false`
-  }
+interface GetCafeAndSouvenirsPage extends DefaultRequestParams {};
 
-  return `${name}=true`;
+export async function getCafeAndSouvenirsPage(params: GetCafeAndSouvenirsPage): Promise<ApiResponse<VisitorsPages["cafe_and_souvenirs_page"], null>> {
+  const { locale } = params;
+
+  const res = await fetch(`${process.env.DB_HOST}/cafe-and-souvenirs-page?locale=${locale}`);
+
+  return res.json();
 }
 
-interface GetVisitorsPage extends DefaultRequestParams {
-  isTicketsPage?: boolean;
-  isInteractivePlaygroundPage?: boolean;
-  isCafeAndSouvenirsPage?: boolean;
-  isWorkingHoursPage?: boolean;
-  isNavigationPage?: boolean;
-};
+interface GetInteractivePlaygroundPage extends DefaultRequestParams {};
 
-export async function getVisitorsPages(params: GetVisitorsPage): Promise<ApiResponse<VisitorsPages, null>> {
-  const { 
-    locale,
-    isCafeAndSouvenirsPage,
-    isInteractivePlaygroundPage,
-    isTicketsPage,
-    isWorkingHoursPage,
-    isNavigationPage
-  } = params;
+export async function getInteractivePlaygroundPage(params: GetInteractivePlaygroundPage): Promise<ApiResponse<VisitorsPages["interactive_playground_page"], null>> {
+  const { locale } = params;
 
-  const endpoint = `${process.env.DB_HOST}/visitors-page?locale=${locale}` +
-    `&${constructBooleanQueryParam('isCafeAndSouvenirsPage', isCafeAndSouvenirsPage)}` +
-    `&${constructBooleanQueryParam('isInteractivePlaygroundPage', isInteractivePlaygroundPage)}` +
-    `&${constructBooleanQueryParam('isTicketsPage', isTicketsPage)}` +
-    `&${constructBooleanQueryParam('isWorkingHoursPage', isWorkingHoursPage)}` +
-    `&${constructBooleanQueryParam('isNavigationPage', isNavigationPage)}`;
+  const res = await fetch(`${process.env.DB_HOST}/interactive-playground-page?locale=${locale}`);
 
-  const res = await fetch(endpoint);
+  return res.json();
+}
+
+interface GetNavigationPage extends DefaultRequestParams {};
+
+export async function getNavigationPage(params: GetNavigationPage): Promise<ApiResponse<VisitorsPages["navigation_page"], null>> {
+  const { locale } = params;
+
+  const res = await fetch(`${process.env.DB_HOST}/navigation-page?locale=${locale}`);
+
+  return res.json();
+}
+
+interface GetTicketsPage extends DefaultRequestParams {};
+
+export async function getTicketsPage(params: GetTicketsPage): Promise<ApiResponse<VisitorsPages["tickets_page"], null>> {
+  const { locale } = params;
+
+  const res = await fetch(`${process.env.DB_HOST}/tickets-page?locale=${locale}`);
+
+  return res.json();
+}
+
+interface GetWorkingHoursPage extends DefaultRequestParams {};
+
+export async function getWorkingHoursPage(params: GetWorkingHoursPage): Promise<ApiResponse<VisitorsPages["working_hours_page"], null>> {
+  const { locale } = params;
+
+  const res = await fetch(`${process.env.DB_HOST}/working-hours-page?locale=${locale}`);
 
   return res.json();
 }

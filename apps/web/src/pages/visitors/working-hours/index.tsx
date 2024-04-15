@@ -2,7 +2,7 @@ import { chakra, Container, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
-import { getComplexOperationManagement, getExibitionCenters, getVisitorsPages } from '@/entities';
+import { getComplexOperationManagement, getExibitionCenters, getVisitorsPages, getWorkingHoursPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty } from '@/shared';
 import type { ComplexOperationManagement, ExhibitionCenter, VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
@@ -13,17 +13,11 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
 
   const t = useTranslations("Working_hours_page");
 
-  if (isVoid(data) || 
-      isEmpty(data) || 
-      isVoid(data.working_hours_page) || 
-      isEmpty(data.working_hours_page)
-    ) {
+  if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
 
-  const { working_hours_page } = data;
-
-  const { title, public_areas } = working_hours_page;
+  const { title, public_areas } = data;
   const { data: exhibitionCentersData } = exhibitionCenters;
   const { data: complexSettingsData } = complexSettings;
 
@@ -87,13 +81,13 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
 }
 
 interface PartnerProps {
-  page: ApiResponse<VisitorsPages, null>;
+  page: ApiResponse<VisitorsPages["working_hours_page"], null>;
   complexSettings: ApiResponse<ComplexOperationManagement, null>;
   exhibitionCenters: ApiResponse<ExhibitionCenter[], null>;
 }
 
 export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getVisitorsPages({locale, isWorkingHoursPage: true});
+  const page = await getWorkingHoursPage({locale});
   const complexSettings = await getComplexOperationManagement();
   const exhibitionCenters = await getExibitionCenters({locale, isPopulated: true});
 

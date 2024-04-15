@@ -1,7 +1,7 @@
 import { chakra, Container, Flex, Grid, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-import { getVisitorsPages } from '@/entities';
+import { getNavigationPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, File } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
@@ -13,17 +13,11 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
 
   const t = useTranslations('Navigation_page');
 
-  if (isVoid(data) || 
-      isEmpty(data) || 
-      isVoid(data.navigation_page) || 
-      isEmpty(data.navigation_page)
-    ) {
+  if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
 
-  const { navigation_page } = data;
-
-  const { title, addresses, complex_map, how_to_get_to_museum } = navigation_page;
+  const { title, addresses, complex_map, how_to_get_to_museum } = data;
 
   return (
     <>
@@ -90,11 +84,11 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
 }
 
 interface PartnerProps {
-  page: ApiResponse<VisitorsPages, null>;
+  page: ApiResponse<VisitorsPages["navigation_page"], null>;
 }
 
 export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getVisitorsPages({locale, isNavigationPage: true});
+  const page = await getNavigationPage({locale});
 
   return {
     props: {

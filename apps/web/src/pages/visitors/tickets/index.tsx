@@ -2,7 +2,7 @@ import { chakra, Container, Flex, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
-import { getVisitorsPages } from '@/entities';
+import { getTicketsPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown, File } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
@@ -13,15 +13,9 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
 
   const t = useTranslations("Tickets_page");
 
-  if (isVoid(data) || 
-      isEmpty(data) || 
-      isVoid(data.tickets_page) || 
-      isEmpty(data.tickets_page)
-    ) {
+  if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
-
-  const { tickets_page } = data;
 
   const {
     title,
@@ -31,7 +25,7 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
     secondary_description,
     other_services,
     documents
-  } = tickets_page;
+  } = data;
 
   return (
     <>
@@ -82,11 +76,11 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
 }
 
 interface PartnerProps {
-  page: ApiResponse<VisitorsPages, null>;
+  page: ApiResponse<VisitorsPages["tickets_page"], null>;
 }
 
 export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getVisitorsPages({locale, isTicketsPage: true});
+  const page = await getTicketsPage({locale});
 
   return {
     props: {

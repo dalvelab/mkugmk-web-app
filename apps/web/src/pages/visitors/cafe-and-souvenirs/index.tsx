@@ -2,7 +2,7 @@ import { chakra, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { CardsWithModal } from '@/widgets';
-import { getVisitorsPages } from '@/entities';
+import { getCafeAndSouvenirsPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, Markdown } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
@@ -10,17 +10,11 @@ import type { ApiResponse } from '@/shared';
 export default function CafeAndSouvenirs({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
 
-  if (isVoid(data) || 
-      isEmpty(data) || 
-      isVoid(data.cafe_and_souvenirs_page) || 
-      isEmpty(data.cafe_and_souvenirs_page)
-    ) {
+  if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
 
-  const { cafe_and_souvenirs_page } = data;
-
-  const { title, description, cafes_and_souvenirs } = cafe_and_souvenirs_page;
+  const { title, description, cafes_and_souvenirs } = data;
 
   return (
     <chakra.section pt={6} pb={10}>
@@ -44,11 +38,11 @@ export default function CafeAndSouvenirs({ page }: InferGetServerSidePropsType<t
 }
 
 interface PartnerProps {
-  page: ApiResponse<VisitorsPages, null>
+  page: ApiResponse<VisitorsPages["cafe_and_souvenirs_page"], null>
 }
 
 export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getVisitorsPages({locale, isCafeAndSouvenirsPage: true});
+  const page = await getCafeAndSouvenirsPage({locale});
 
   return {
     props: {

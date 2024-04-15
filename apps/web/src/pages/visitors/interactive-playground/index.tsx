@@ -2,7 +2,7 @@ import { chakra, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { CardsWithModal } from '@/widgets';
-import { getVisitorsPages } from '@/entities';
+import { getInteractivePlaygroundPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, Markdown } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
@@ -10,17 +10,11 @@ import type { ApiResponse } from '@/shared';
 export default function InteractivePlaygrounds({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
 
-  if (isVoid(data) || 
-      isEmpty(data) || 
-      isVoid(data.interactive_playground_page) || 
-      isEmpty(data.interactive_playground_page)
-    ) {
+  if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
   }
 
-  const { interactive_playground_page } = data;
-
-  const { title, description, interactive_playgrounds } = interactive_playground_page;
+  const { title, description, interactive_playgrounds } = data;
 
   return (
     <chakra.section pt={6} pb={10}>
@@ -43,11 +37,11 @@ export default function InteractivePlaygrounds({ page }: InferGetServerSideProps
 }
 
 interface PartnerProps {
-  page: ApiResponse<VisitorsPages, null>
+  page: ApiResponse<VisitorsPages["interactive_playground_page"], null>
 }
 
 export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getVisitorsPages({locale, isInteractivePlaygroundPage: true});
+  const page = await getInteractivePlaygroundPage({locale});
 
   return {
     props: {
