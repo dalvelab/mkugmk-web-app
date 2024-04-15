@@ -64,3 +64,9 @@ export type VisitorsPages = {
     }[]
   }
 }
+
+export type RulesPage = {
+  id: number;
+  title: string;
+  description: string;
+}
