@@ -788,6 +788,65 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCafeAndSouvenirsPageCafeAndSouvenirsPage
+  extends Schema.SingleType {
+  collectionName: 'cafe_and_souvenirs_pages';
+  info: {
+    singularName: 'cafe-and-souvenirs-page';
+    pluralName: 'cafe-and-souvenirs-pages';
+    displayName: 'Cafe And Souvenirs Page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    cafes_and_souvenirs: Attribute.Component<'shared.info-card', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cafe-and-souvenirs-page.cafe-and-souvenirs-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::cafe-and-souvenirs-page.cafe-and-souvenirs-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::cafe-and-souvenirs-page.cafe-and-souvenirs-page',
+      'oneToMany',
+      'api::cafe-and-souvenirs-page.cafe-and-souvenirs-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiComplexOperationManagementComplexOperationManagement
   extends Schema.SingleType {
   collectionName: 'complex_operation_managements';
@@ -1032,6 +1091,14 @@ export interface ApiExhibitionCenterExhibitionCenter
           localized: true;
         };
       }>;
+    ticket_sale_enabled: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1254,6 +1321,93 @@ export interface ApiFooterFooter extends Schema.SingleType {
   };
 }
 
+export interface ApiInteractivePlaygroundPageInteractivePlaygroundPage
+  extends Schema.SingleType {
+  collectionName: 'interactive_playground_pages';
+  info: {
+    singularName: 'interactive-playground-page';
+    pluralName: 'interactive-playground-pages';
+    displayName: 'Interactive Playground Page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.RichText;
+    interactive_playgrounds: Attribute.Component<'shared.info-card', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::interactive-playground-page.interactive-playground-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::interactive-playground-page.interactive-playground-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::interactive-playground-page.interactive-playground-page',
+      'oneToMany',
+      'api::interactive-playground-page.interactive-playground-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiNavigationPageNavigationPage extends Schema.SingleType {
+  collectionName: 'navigation_pages';
+  info: {
+    singularName: 'navigation-page';
+    pluralName: 'navigation-pages';
+    displayName: 'Navigation Page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    complex_map: Attribute.Media;
+    yandex_map_embed: Attribute.String;
+    addresses: Attribute.Component<'visitors.address', true>;
+    how_to_get_to_museum: Attribute.Component<'visitors.transport', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::navigation-page.navigation-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::navigation-page.navigation-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::navigation-page.navigation-page',
+      'oneToMany',
+      'api::navigation-page.navigation-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiPartnersPagePartnersPage extends Schema.SingleType {
   collectionName: 'partners_pages';
   info: {
@@ -1371,6 +1525,53 @@ export interface ApiTicketTicket extends Schema.CollectionType {
       'api::ticket.ticket',
       'oneToMany',
       'api::ticket.ticket'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
+  collectionName: 'tickets_pages';
+  info: {
+    singularName: 'tickets-page';
+    pluralName: 'tickets-pages';
+    displayName: 'Tickets Page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.RichText;
+    documents: Attribute.Media;
+    secondary_title: Attribute.String;
+    other_services: Attribute.Component<'visitors.other', true>;
+    tickets: Attribute.Component<'visitors.ticket-types', true>;
+    secondary_description: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tickets-page.tickets-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tickets-page.tickets-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::tickets-page.tickets-page',
+      'oneToMany',
+      'api::tickets-page.tickets-page'
     >;
     locale: Attribute.String;
   };
@@ -1525,6 +1726,58 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
   };
 }
 
+export interface ApiWorkingHoursPageWorkingHoursPage extends Schema.SingleType {
+  collectionName: 'working_hours_pages';
+  info: {
+    singularName: 'working-hours-page';
+    pluralName: 'working-hours-pages';
+    displayName: 'Working Hours Page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    public_areas: Attribute.Component<'visitors.public-area', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::working-hours-page.working-hours-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::working-hours-page.working-hours-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::working-hours-page.working-hours-page',
+      'oneToMany',
+      'api::working-hours-page.working-hours-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1543,6 +1796,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::cafe-and-souvenirs-page.cafe-and-souvenirs-page': ApiCafeAndSouvenirsPageCafeAndSouvenirsPage;
       'api::complex-operation-management.complex-operation-management': ApiComplexOperationManagementComplexOperationManagement;
       'api::contacts-page.contacts-page': ApiContactsPageContactsPage;
       'api::event.event': ApiEventEvent;
@@ -1550,10 +1804,14 @@ declare module '@strapi/types' {
       'api::exhibition-center-page.exhibition-center-page': ApiExhibitionCenterPageExhibitionCenterPage;
       'api::faq-page.faq-page': ApiFaqPageFaqPage;
       'api::footer.footer': ApiFooterFooter;
+      'api::interactive-playground-page.interactive-playground-page': ApiInteractivePlaygroundPageInteractivePlaygroundPage;
+      'api::navigation-page.navigation-page': ApiNavigationPageNavigationPage;
       'api::partners-page.partners-page': ApiPartnersPagePartnersPage;
       'api::ticket.ticket': ApiTicketTicket;
+      'api::tickets-page.tickets-page': ApiTicketsPageTicketsPage;
       'api::visitors-page.visitors-page': ApiVisitorsPageVisitorsPage;
       'api::welcome-page.welcome-page': ApiWelcomePageWelcomePage;
+      'api::working-hours-page.working-hours-page': ApiWorkingHoursPageWorkingHoursPage;
     }
   }
 }

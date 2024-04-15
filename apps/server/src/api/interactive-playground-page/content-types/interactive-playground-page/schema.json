@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "interactive_playground_pages",
+  "info": {
+    "singularName": "interactive-playground-page",
+    "pluralName": "interactive-playground-pages",
+    "displayName": "Interactive Playground Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "interactive_playgrounds": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.info-card"
+    }
+  }
+}

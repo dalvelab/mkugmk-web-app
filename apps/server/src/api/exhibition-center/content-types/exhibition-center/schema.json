@@ -112,6 +112,16 @@
         }
       },
       "type": "string"
+    },
+    "ticket_sale_enabled": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

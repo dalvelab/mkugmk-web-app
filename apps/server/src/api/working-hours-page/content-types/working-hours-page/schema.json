@@ -1,0 +1,38 @@
+{
+  "kind": "singleType",
+  "collectionName": "working_hours_pages",
+  "info": {
+    "singularName": "working-hours-page",
+    "pluralName": "working-hours-pages",
+    "displayName": "Working Hours Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "public_areas": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "visitors.public-area"
+    }
+  }
+}

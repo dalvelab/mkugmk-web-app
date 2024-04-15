@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "cafe_and_souvenirs_pages",
+  "info": {
+    "singularName": "cafe-and-souvenirs-page",
+    "pluralName": "cafe-and-souvenirs-pages",
+    "displayName": "Cafe And Souvenirs Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    },
+    "cafes_and_souvenirs": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.info-card"
+    }
+  }
+}

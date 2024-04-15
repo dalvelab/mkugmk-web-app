@@ -23,6 +23,11 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "display_preferential_sign": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

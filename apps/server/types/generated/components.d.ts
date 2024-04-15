@@ -235,6 +235,9 @@ export interface VisitorsTicketTypes extends Schema.Component {
       Attribute.Required &
       Attribute.DefaultTo<false>;
     name: Attribute.String & Attribute.Required;
+    display_preferential_sign: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -245,14 +248,7 @@ export interface VisitorsTicketsPage extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText;
-    documents: Attribute.Media;
-    secondary_title: Attribute.String & Attribute.Required;
-    secondary_description: Attribute.RichText;
     other_services: Attribute.Component<'visitors.other', true>;
-    tickets: Attribute.Component<'visitors.ticket-types', true> &
-      Attribute.Required;
   };
 }
 
