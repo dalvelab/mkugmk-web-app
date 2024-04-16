@@ -1618,76 +1618,6 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
   };
 }
 
-export interface ApiVisitorsPageVisitorsPage extends Schema.SingleType {
-  collectionName: 'visitors_pages';
-  info: {
-    singularName: 'visitors-page';
-    pluralName: 'visitors-pages';
-    displayName: 'Visitors Pages';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    tickets_page: Attribute.Component<'visitors.tickets-page'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    interactive_playground_page: Attribute.Component<'visitors.interactive-playgroud-page'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    cafe_and_souvenirs_page: Attribute.Component<'visitors.cafe-and-souvenirs-page'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    working_hours_page: Attribute.Component<'visitors.working-hours-page'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    navigation_page: Attribute.Component<'visitors.navigation-page'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::visitors-page.visitors-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::visitors-page.visitors-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::visitors-page.visitors-page',
-      'oneToMany',
-      'api::visitors-page.visitors-page'
-    >;
-    locale: Attribute.String;
-  };
-}
-
 export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
   collectionName: 'welcome_pages';
   info: {
@@ -1851,7 +1781,6 @@ declare module '@strapi/types' {
       'api::rules-page.rules-page': ApiRulesPageRulesPage;
       'api::ticket.ticket': ApiTicketTicket;
       'api::tickets-page.tickets-page': ApiTicketsPageTicketsPage;
-      'api::visitors-page.visitors-page': ApiVisitorsPageVisitorsPage;
       'api::welcome-page.welcome-page': ApiWelcomePageWelcomePage;
       'api::working-hours-page.working-hours-page': ApiWorkingHoursPageWorkingHoursPage;
     }
