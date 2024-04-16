@@ -119,7 +119,6 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
                 {isNotVoid(activeTicket) && (
                   <Tr>
                     <Td
-                      w="50%"
                       minW="280px"
                       px={5}
                       border="1px solid" 
@@ -135,9 +134,15 @@ export const TicketsList: React.FC<TicketsListProps> = ({tickets}) => {
                             gap={5}
                           >
                             <Flex flexDir="column" gap={1}>
-                              <chakra.span >{category.name}</chakra.span>
+                              <chakra.span>{category.name}</chakra.span>
                               {isNotVoid(category.caption) && 
-                                <chakra.span fontSize="xs" color="brand.gray">{category.caption}</chakra.span>
+                                <chakra.span
+                                  fontSize="xs"
+                                  color="brand.gray"
+                                  whiteSpace="pre-wrap"
+                                >
+                                  {category.caption}
+                                </chakra.span>
                               }
                             </Flex>
                             <chakra.span >{category.price} {t("currency")}</chakra.span>
