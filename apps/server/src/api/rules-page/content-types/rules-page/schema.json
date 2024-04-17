@@ -4,7 +4,8 @@
   "info": {
     "singularName": "rules-page",
     "pluralName": "rules-pages",
-    "displayName": "Rules Page"
+    "displayName": "Rules Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -21,6 +22,16 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "type_for_meilisearch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true,
+      "default": "rules"
     }
   }
 }

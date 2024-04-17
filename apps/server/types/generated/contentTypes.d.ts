@@ -795,6 +795,7 @@ export interface ApiCafeAndSouvenirsPageCafeAndSouvenirsPage
     singularName: 'cafe-and-souvenirs-page';
     pluralName: 'cafe-and-souvenirs-pages';
     displayName: 'Cafe And Souvenirs Page';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -824,6 +825,13 @@ export interface ApiCafeAndSouvenirsPageCafeAndSouvenirsPage
           localized: true;
         };
       }>;
+    type_for_meilisearch: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<'cafe-and-souvenirs'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1328,6 +1336,7 @@ export interface ApiInteractivePlaygroundPageInteractivePlaygroundPage
     singularName: 'interactive-playground-page';
     pluralName: 'interactive-playground-pages';
     displayName: 'Interactive Playground Page';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1341,6 +1350,14 @@ export interface ApiInteractivePlaygroundPageInteractivePlaygroundPage
     title: Attribute.String & Attribute.Required;
     description: Attribute.RichText;
     interactive_playgrounds: Attribute.Component<'shared.info-card', true>;
+    type_for_meilisearch: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<'interactive-playground'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1370,6 +1387,7 @@ export interface ApiNavigationPageNavigationPage extends Schema.SingleType {
     singularName: 'navigation-page';
     pluralName: 'navigation-pages';
     displayName: 'Navigation Page';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1385,6 +1403,14 @@ export interface ApiNavigationPageNavigationPage extends Schema.SingleType {
     yandex_map_embed: Attribute.String;
     addresses: Attribute.Component<'visitors.address', true>;
     how_to_get_to_museum: Attribute.Component<'visitors.transport', true>;
+    type_for_meilisearch: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<'navigation'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1468,6 +1494,7 @@ export interface ApiRulesPageRulesPage extends Schema.SingleType {
     singularName: 'rules-page';
     pluralName: 'rules-pages';
     displayName: 'Rules Page';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1480,6 +1507,14 @@ export interface ApiRulesPageRulesPage extends Schema.SingleType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.RichText;
+    type_for_meilisearch: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<'rules'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1595,6 +1630,14 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
     other_services: Attribute.Component<'visitors.other', true>;
     tickets: Attribute.Component<'visitors.ticket-types', true>;
     secondary_description: Attribute.RichText;
+    type_for_meilisearch: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<'tickets'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1703,6 +1746,7 @@ export interface ApiWorkingHoursPageWorkingHoursPage extends Schema.SingleType {
     singularName: 'working-hours-page';
     pluralName: 'working-hours-pages';
     displayName: 'Working Hours Page';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1726,6 +1770,14 @@ export interface ApiWorkingHoursPageWorkingHoursPage extends Schema.SingleType {
           localized: true;
         };
       }>;
+    type_for_meilisearch: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<'working-hours'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

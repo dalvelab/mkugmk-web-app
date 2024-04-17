@@ -4,7 +4,8 @@
   "info": {
     "singularName": "cafe-and-souvenirs-page",
     "pluralName": "cafe-and-souvenirs-pages",
-    "displayName": "Cafe And Souvenirs Page"
+    "displayName": "Cafe And Souvenirs Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -41,6 +42,15 @@
         }
       },
       "component": "shared.info-card"
+    },
+    "type_for_meilisearch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "default": "cafe-and-souvenirs"
     }
   }
 }

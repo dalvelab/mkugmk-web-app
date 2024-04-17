@@ -4,7 +4,8 @@
   "info": {
     "singularName": "interactive-playground-page",
     "pluralName": "interactive-playground-pages",
-    "displayName": "Interactive Playground Page"
+    "displayName": "Interactive Playground Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -26,6 +27,16 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.info-card"
+    },
+    "type_for_meilisearch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true,
+      "default": "interactive-playground"
     }
   }
 }

@@ -46,6 +46,16 @@
     },
     "secondary_description": {
       "type": "richtext"
+    },
+    "type_for_meilisearch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true,
+      "default": "tickets"
     }
   }
 }

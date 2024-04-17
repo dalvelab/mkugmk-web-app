@@ -4,7 +4,8 @@
   "info": {
     "singularName": "working-hours-page",
     "pluralName": "working-hours-pages",
-    "displayName": "Working Hours Page"
+    "displayName": "Working Hours Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -33,6 +34,16 @@
         }
       },
       "component": "visitors.public-area"
+    },
+    "type_for_meilisearch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true,
+      "default": "working-hours"
     }
   }
 }

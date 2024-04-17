@@ -4,7 +4,8 @@
   "info": {
     "singularName": "navigation-page",
     "pluralName": "navigation-pages",
-    "displayName": "Navigation Page"
+    "displayName": "Navigation Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -20,12 +21,12 @@
       "required": true
     },
     "complex_map": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": false
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "yandex_map_embed": {
       "type": "string"
@@ -39,6 +40,16 @@
       "type": "component",
       "repeatable": true,
       "component": "visitors.transport"
+    },
+    "type_for_meilisearch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true,
+      "default": "navigation"
     }
   }
 }
