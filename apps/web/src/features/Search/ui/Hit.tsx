@@ -22,7 +22,7 @@ export const Hit: React.FC<HitProps> = ({ closeModal, title, type, link }) => {
   }
 
   return (
-    <Link href={`/visitors/${link}`} onClick={closeModal}>
+    <Link href={link} onClick={closeModal}>
       <Flex
         py={2}
         px={5}

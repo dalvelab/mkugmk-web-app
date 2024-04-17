@@ -16,20 +16,10 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 
 import { isNotEmpty, isNotVoid } from "@/shared";
-import { VisitorsPageType } from "@/entities";
 
 import { Hit } from "./Hit";
 import { MeilisearchResponse } from "../models";
 import { SearchForm } from "./SearchForm";
-
-const visitorsPagesRouteMap: Record<VisitorsPageType, string> = {
-  'tickets': '/tickets',
-  'cafe-and-souvenirs': '/cafe-and-souvenirs',
-  'navigation': '/navigation',
-  'interactive-playground': '/interactive-playground',
-  'rules': '/rules',
-  'working-hours': '/working-hours'
-}
 
 interface Search {
   type: 'desktop' | 'mobile';
@@ -105,11 +95,11 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
             {isNotEmpty(visitors) && (
                 visitors.flatMap((page) => page.hits).map((page) => (
                   <Hit
-                    key={page.id}
+                    key={`${page.title}-${page.id}`}
                     type='visitors'
                     title={page.title}
                     closeModal={closeModal}
-                    link={visitorsPagesRouteMap[page.type_for_meilisearch]}
+                    link={`/visitors/${page.type_for_meilisearch}`}
                   />
                 ))
               )}
@@ -120,7 +110,7 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
                     type='exhibition_center'
                     title={center.name}
                     closeModal={closeModal}
-                    link={`/${center.id}`}
+                    link={`/exhibition-centers/${center.id}`}
                   />
                 ))
               )}
@@ -131,7 +121,7 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
                     type='news'
                     title={event.title}
                     closeModal={closeModal}
-                    link={`/${event.id}`}
+                    link={`/news/${event.id}`}
                   />
                 ))
               )}
