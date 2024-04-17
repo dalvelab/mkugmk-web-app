@@ -1,7 +1,5 @@
 import { ExhibitionCenter, VisitorsPages, Event } from "@/entities";
 
-// export type IndexUids = 'event' | 'visitors' | 'exhibition-center';
-
 export type MeilisearchRequest = {
 	queries: {
     indexUid: keyof KeyValueMap,
@@ -19,7 +17,7 @@ export type MeilisearchRequest = {
 
 export interface KeyValueMap {
   event: Omit<Event, 'image'>;
-  visitors: Pick<VisitorsPages["tickets_page"], 'title' | 'description'>;
+  visitors: Pick<VisitorsPages["tickets_page"], 'title' | 'description' | 'id' | 'type_for_meilisearch'>;
   'exhibition-center': Omit<ExhibitionCenter, 'gallery' | 'youtube_gallery' | 'banner' | 'working_time'>;
 }
 

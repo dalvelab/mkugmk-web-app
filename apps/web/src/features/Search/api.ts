@@ -16,20 +16,6 @@ export async function createMeilisearchRequest(request: CreateMeilisearchRequest
       {
         queries: [
           {
-            indexUid: "exhibition-center",
-            attributesToHighlight: ["*"],
-            highlightPostTag: "</ais-highlight-0000000000>",
-            highlightPreTag: "<ais-highlight-0000000000>",
-            q: request.query,
-            facets: [],
-            limit: 10,
-            offset: 0,
-            attributesToSearchOn: [
-              "name",
-              "description"
-            ]
-          },
-          {
             indexUid: "visitors",
             attributesToHighlight: ["*"],
             highlightPostTag: "</ais-highlight-0000000000>",
@@ -41,6 +27,20 @@ export async function createMeilisearchRequest(request: CreateMeilisearchRequest
             attributesToSearchOn: [
               "title",
               "description",
+            ]
+          },
+          {
+            indexUid: "exhibition-center",
+            attributesToHighlight: ["*"],
+            highlightPostTag: "</ais-highlight-0000000000>",
+            highlightPreTag: "<ais-highlight-0000000000>",
+            q: request.query,
+            facets: [],
+            limit: 10,
+            offset: 0,
+            attributesToSearchOn: [
+              "name",
+              "description"
             ]
           },
           {

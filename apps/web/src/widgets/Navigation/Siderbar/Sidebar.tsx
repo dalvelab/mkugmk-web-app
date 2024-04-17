@@ -30,7 +30,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpened, exhibition_
           <Flex w="full" justifyContent="space-between">
             <Flex gap={4}>
               <LanguageSelect size="lg" />
-              <Search type="mobile" />
+              <Search type="mobile" onSidebarClose={onClose}/>
             </Flex>
             <IconButton
                 boxSize={12}

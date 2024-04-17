@@ -1,7 +1,6 @@
-import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 import { 
-  chakra,
   Button,
   Modal,
   ModalBody,
@@ -10,26 +9,34 @@ import {
   ModalHeader,
   ModalOverlay,
   Flex,
-  Input,
   IconButton,
   useDisclosure,
   ModalFooter,
-  InputGroup,
-  InputLeftElement,
-  Tag
 } from "@chakra-ui/react"
 import { SearchIcon } from "@chakra-ui/icons";
-import { createMeilisearchRequest } from "../api";
-import { debounce, isEmpty, isNotEmpty, isNotVoid } from "@/shared";
-import { useCallback, useEffect, useState } from "react";
+
+import { isNotEmpty, isNotVoid } from "@/shared";
+import { VisitorsPageType } from "@/entities";
+
+import { Hit } from "./Hit";
 import { MeilisearchResponse } from "../models";
-import Link from "next/link";
+import { SearchForm } from "./SearchForm";
+
+const visitorsPagesRouteMap: Record<VisitorsPageType, string> = {
+  'tickets': '/tickets',
+  'cafe-and-souvenirs': '/cafe-and-souvenirs',
+  'navigation': '/navigation',
+  'interactive-playground': '/interactive-playground',
+  'rules': '/rules',
+  'working-hours': '/working-hours'
+}
 
 interface Search {
   type: 'desktop' | 'mobile';
+  onSidebarClose?: VoidFunction;
 }
 
-export const Search: React.FC<Search> = ({ type }) => {
+export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
   const { isOpen, onClose, onOpen} = useDisclosure();
 
   const [data, setData] = useState<MeilisearchResponse<any>["results"]>([]);
@@ -39,33 +46,11 @@ export const Search: React.FC<Search> = ({ type }) => {
   }, [])
 
   function closeModal() {
+    if (isNotVoid(onSidebarClose)) {
+      onSidebarClose();
+    }
     onClose();
     setData([]);
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getTest = useCallback(
-    debounce(async (args: string[]) => {
-      const response = await createMeilisearchRequest({query: args[0]});
-
-      if (isNotVoid(response.results)) {
-        setData(response.results)
-        
-        return;
-      }
-
-      setData([]);
-    }, 250), 
-    []
-  );
-
-  function onChange(value: string) {
-    if (isEmpty(value)) {
-      setData([]);
-      return;
-    }
-
-    getTest(value)
   }
 
   const exhibition_centers: MeilisearchResponse<"exhibition-center">["results"] =
@@ -77,7 +62,12 @@ export const Search: React.FC<Search> = ({ type }) => {
     isNotVoid(data) ?
     data.filter((query) => query.indexUid === "event") : 
     [];
-  
+
+  const visitors: MeilisearchResponse<"visitors">["results"] =
+    isNotVoid(data) ?
+    data.filter((query) => query.indexUid === "visitors") : 
+    [];
+
   return (
     <>
       <IconButton
@@ -100,12 +90,7 @@ export const Search: React.FC<Search> = ({ type }) => {
           </ModalHeader>
           <ModalBody pb={4}>
             <Flex pt={4} flexDir="column" gap={5}>
-            <InputGroup size="lg">
-              <InputLeftElement pointerEvents='none'>
-                <SearchIcon color="brand.gray" />
-              </InputLeftElement>
-              <Input size="lg" placeholder='Введите поисковый запрос' onChange={(e) => onChange(e.target.value)} />
-            </InputGroup>
+            <SearchForm setData={setData} />
             <Flex
               flexDir="column"
               gap={1}
@@ -117,40 +102,37 @@ export const Search: React.FC<Search> = ({ type }) => {
                 }
               }}
             >
+            {isNotEmpty(visitors) && (
+                visitors.flatMap((page) => page.hits).map((page) => (
+                  <Hit
+                    key={page.id}
+                    type='visitors'
+                    title={page.title}
+                    closeModal={closeModal}
+                    link={visitorsPagesRouteMap[page.type_for_meilisearch]}
+                  />
+                ))
+              )}
               {isNotEmpty(exhibition_centers) && (
                 exhibition_centers.flatMap((center) => center.hits).map((center) => (
-                  <Link key={center.id} href={`/exhibition-centers/${center.id}`} onClick={closeModal}>
-                    <Flex
-                      py={2}
-                      px={5}
-                      _hover={{bgColor: "#F4F4F5"}} 
-                      borderRadius={4}
-                      flexDir="column"
-                      alignItems="flex-start"
-                      gap={2}
-                    >
-                      <Tag size="sm" colorScheme="green">о комплексе</Tag>
-                      <chakra.span fontSize="lg">{center.name}</chakra.span>
-                    </Flex>
-                  </Link>
+                  <Hit
+                    key={center.id}
+                    type='exhibition_center'
+                    title={center.name}
+                    closeModal={closeModal}
+                    link={`/${center.id}`}
+                  />
                 ))
               )}
               {isNotEmpty(events) && (
                 events.flatMap((event) => event.hits).map((event) => (
-                  <Link key={event.id} href={`/news/${event.id}`} onClick={closeModal}>
-                    <Flex
-                      py={2}
-                      px={5}
-                      _hover={{bgColor: "#F4F4F5"}} 
-                      borderRadius={4}
-                      flexDir="column"
-                      alignItems="flex-start"
-                      gap={2}
-                    >
-                      <Tag size="sm" colorScheme="blue">новости</Tag>
-                      <chakra.span fontSize="lg">{event.title}</chakra.span>
-                    </Flex>
-                  </Link>
+                  <Hit
+                    key={event.id}
+                    type='news'
+                    title={event.title}
+                    closeModal={closeModal}
+                    link={`/${event.id}`}
+                  />
                 ))
               )}
             </Flex>
