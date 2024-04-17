@@ -114,19 +114,19 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
         <Container maxWidth="container.xl" display="flex" flexDir="column" pos="relative">
           <Grid 
             gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr', '1fr 1fr']}
-            gap={5}
+            gap={2}
           >
           {isNotVoid(gallery) && isNotEmpty(gallery) && gallery.map((image) => (
               <chakra.div 
                 key={image.id} 
-                h={["300px", "400px", "320px", "400px", "400px"]} 
+                h={["300px", "400px", "320px", "400px", "500px"]} 
                 pos="relative"
               >
                 <Image 
                   fill
                   src={image.url}
                   alt='Изображение музея'
-                  style={{objectFit: 'cover', borderRadius: "12px"}}
+                  style={{objectFit: 'cover', borderRadius: "8px"}}
                 />
               </chakra.div>
             ))}

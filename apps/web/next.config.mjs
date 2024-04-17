@@ -16,6 +16,10 @@ const nextConfig = {
         destination: `${process.env.NEXT_PUBLIC_API_HOST}/uploads/:path`,
       },
       {
+        source: '/api/meilisearch',
+        destination: `${process.env.NEXT_PUBLIC_MEILISEARCH_HOST}/multi-search`
+      },
+      {
         source: '/api/:path',
         destination: `${process.env.NEXT_PUBLIC_API_HOST}/api/:path`,
       },

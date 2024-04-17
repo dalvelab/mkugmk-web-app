@@ -1,8 +1,10 @@
-export type indexUids = 'event' | 'faq-page' | 'visitors' | 'exhibition-center' | 'contacts-page';
+import { ExhibitionCenter, VisitorsPages, Event } from "@/entities";
+
+// export type IndexUids = 'event' | 'visitors' | 'exhibition-center';
 
 export type MeilisearchRequest = {
 	queries: {
-    indexUid: indexUids,
+    indexUid: keyof KeyValueMap,
     attributesToHighlight: string[],
     highlightPostTag: string;
     highlightPreTag: string;
@@ -15,10 +17,18 @@ export type MeilisearchRequest = {
 	}[]
 }
 
-export type MeilisearchResponse = {
-  results: 		{
-    indexUid: string,
-    hits: [],
+export interface KeyValueMap {
+  event: Omit<Event, 'image'>;
+  visitors: Pick<VisitorsPages["tickets_page"], 'title' | 'description'>;
+  'exhibition-center': Omit<ExhibitionCenter, 'gallery' | 'youtube_gallery' | 'banner' | 'working_time'>;
+}
+
+export type SpecificTypeForKey<K extends keyof KeyValueMap> = KeyValueMap[K];
+
+export type MeilisearchResponse<T extends keyof KeyValueMap> = {
+  results: {
+    indexUid: T,
+    hits: SpecificTypeForKey<T>[],
     query: string,
     processingTimeMs: number,
     limit: number,
@@ -26,7 +36,7 @@ export type MeilisearchResponse = {
     estimatedTotalHits: number,
     facetDistribution: {},
     facetStats: {}
-  }[]
+  }[] | null;
   message: string;
 	code: string;
 	type: string;
