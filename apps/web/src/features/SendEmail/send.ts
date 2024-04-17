@@ -4,7 +4,7 @@ interface EmailOptions {
   message: string;
 }
 
-export function sendEmail(options: EmailOptions) {
+export async function sendEmail(options: EmailOptions) {
   const transporter = nodemailer.createTransport({
     // @ts-ignore
     host: process.env.SMTP_HOST,
@@ -23,5 +23,14 @@ export function sendEmail(options: EmailOptions) {
     text: options.message,
   };
 
-  return transporter.sendMail(message);
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(message, (err, info) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(info);
+      }
+    });
+  });
 };
