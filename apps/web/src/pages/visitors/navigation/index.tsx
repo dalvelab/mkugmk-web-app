@@ -17,7 +17,7 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
     return <EmptyState />
   }
 
-  const { title, addresses, complex_map, how_to_get_to_museum } = data;
+  const { title, addresses, complex_map, how_to_get_to_museum, yandex_map_embed } = data;
 
   return (
     <>
@@ -79,6 +79,25 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
           <AddressesTable data={addresses} />
         </Container>
       </chakra.section>
+      {isNotEmpty(yandex_map_embed) && (
+        <chakra.section pb={10}>
+          <Container maxW="container.xl" display="flex" flexDir="column">
+            <Heading
+              as="h2"
+              fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
+              fontWeight="bold"
+            >
+              Музейный комплекс на картах
+            </Heading>
+            <chakra.iframe
+              mt={5}
+              src={yandex_map_embed}
+              width="1280" 
+              height="500">
+            </chakra.iframe>
+          </Container>
+        </chakra.section>
+      )}
     </>
   );
 }
