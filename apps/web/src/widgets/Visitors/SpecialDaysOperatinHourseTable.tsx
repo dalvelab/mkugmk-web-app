@@ -23,7 +23,7 @@ export const SpecialDaysOperatinHourseTable: React.FC<SpecialDaysOperatinHourseT
                     {Number(day.substring(8, 10))} {" "}
                     {getGenetiveRusMonth(Number(day.substring(5, 7)))}
                   </chakra.span>
-                  <chakra.span fontSize="lg" color={opened ? 'brand.black' : 'red.500'}>{value}</chakra.span>
+                  <chakra.span fontSize="lg" color={opened ? 'brand.black' : 'red.500'}>{value.toLowerCase()}</chakra.span>
                 </Flex>
               </Td>
             </Tr>

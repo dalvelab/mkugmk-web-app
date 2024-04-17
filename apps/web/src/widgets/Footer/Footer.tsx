@@ -160,6 +160,9 @@ export const Footer = () => {
               <Text fontSize="lg" fontWeight="medium">{t('visitors')}</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 <OrderCall />
+                <Link href="/faq">
+                  FAQ
+                </Link>
                 {pages.map((page) => (
                   <Link key={page.id} href={page.link} target='_blank'>
                     <Text>{page.name}</Text>

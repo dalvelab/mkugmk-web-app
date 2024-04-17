@@ -174,7 +174,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
                   {t('tickets')}
                 </chakra.span>
                 <Link 
-                  href="/tickets" 
+                  href="/visitors/tickets" 
                   fontSize="lg"
                   color="brand.black"
                   textDecoration="underline"

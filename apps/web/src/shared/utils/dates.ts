@@ -49,7 +49,7 @@ export function createWorkingSchedule(data: StrapiWorkingTime[], locale: string 
 
     if (
         isNotEmpty(formatted) && 
-        formatted[formatted.length - 1].value === data[i].value &&
+        formatted[formatted.length - 1].value.toLowerCase() === data[i].value.toLowerCase() &&
         formatted[formatted.length - 1].opened === data[i].opened
       ) {
       const prevDayName = formatted[formatted.length - 1].day;
@@ -58,7 +58,7 @@ export function createWorkingSchedule(data: StrapiWorkingTime[], locale: string 
       formatted[formatted.length - 1] = {
           ...formatted[formatted.length - 1],
           day: `${concatinatedName}-${dayNames[data[i].day]}`,
-          value: data[i].value,
+          value: data[i].value.toLowerCase(),
           opened: data[i].opened,
         }
     } else {

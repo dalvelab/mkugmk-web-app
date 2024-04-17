@@ -24,8 +24,9 @@ function generateTicketsMap(tickets: Ticket[]) {
 
   for (let i = 0; i < tickets.length; i++) {
     const key = tickets[i].exhibition_centers
-      .map((center) => center.id)
-      .reduce((acc, cur) => acc + cur, 0)
+      .sort((a, b) => a.id - b.id)
+      .map((center) => center.id.toString())
+      .reduce((acc, cur) => acc.concat(cur), '')
       .toString();
 
     map[key] = tickets[i].infotech_link;
@@ -52,7 +53,10 @@ export const Cart: React.FC<CartProps> = ({
   const selectedCenters = getSelectedByIds(selected, exhibition_centers);
   const isExhibitionCenterSelected = selectedCenters.some((center) => center.type === 'exhibition_center');
 
-  const totalSelected = selected.reduce((acc, cur) => acc + cur, 0);
+  const totalSelected = selected
+    .sort((a, b) => a - b)
+    .map((id) => id.toString())
+    .reduce((acc, cur) => acc + cur, '');
   const generatedTickets = useMemo(() => generateTicketsMap(tickets), [tickets]);
 
   return (
