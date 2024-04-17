@@ -32,12 +32,14 @@ export const SearchForm: React.FC<SearchForm> = ({setData, inputRef}) => {
   );
 
   function onChange(value: string) {
-    if (isEmpty(value)) {
+    const omitSpaces = value.trim();
+
+    if (isEmpty(omitSpaces) || omitSpaces.length < 2) {
       setData([]);
       return;
     }
 
-    getTest(value)
+    getTest(omitSpaces)
   }
 
   return (
