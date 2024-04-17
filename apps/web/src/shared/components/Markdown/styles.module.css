@@ -8,6 +8,12 @@
   text-align: justify;
 }
 
+@media screen and (max-width: 500px) {
+  .markdown p {
+    text-align: left;
+  }
+}
+
 .markdown li:first-child {
   margin-top: 20px;
 }

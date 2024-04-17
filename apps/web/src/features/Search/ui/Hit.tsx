@@ -1,24 +1,32 @@
+import { isNotVoid } from "@/shared";
 import { chakra, Flex, Tag } from "@chakra-ui/react"
 import Link from "next/link"
 
 interface HitProps {
-  type: 'visitors' | 'news' | 'exhibition_center';
+  type: 'visitors' | 'news' | 'exhibition_center' | 'faq-page' | 'partners-page' | 'contacts-page';
   link: string;
   title: string;
   closeModal: VoidFunction;
+  caption?: string;
 }
 
-export const Hit: React.FC<HitProps> = ({ closeModal, title, type, link }) => {
+export const Hit: React.FC<HitProps> = ({ closeModal, title, type, link, caption }) => {
   const tagMap: Record<HitProps["type"], string> = {
     'exhibition_center': 'о музее',
     'news': 'новости',
-    'visitors': 'посетителям'
+    'visitors': 'посетителям',
+    'faq-page': 'часто задаваемые вопросы',
+    'partners-page': 'партнеры',
+    'contacts-page': 'контакты'
   }
 
   const tagColorScheme: Record<HitProps["type"], string> = {
     'exhibition_center': 'green',
     'news': 'blue',
-    'visitors': 'purple'
+    'visitors': 'purple',
+    'faq-page': 'orange',
+    'partners-page': 'gray',
+    'contacts-page': 'red',
   }
 
   return (
@@ -33,7 +41,10 @@ export const Hit: React.FC<HitProps> = ({ closeModal, title, type, link }) => {
         gap={2}
       >
         <Tag size="sm" colorScheme={tagColorScheme[type]}>{tagMap[type]}</Tag>
-        <chakra.span fontSize="lg">{title}</chakra.span>
+        <Flex flexDir="column">
+          <chakra.span fontSize="lg">{title}</chakra.span>
+          {isNotVoid(caption) ? <chakra.span noOfLines={1} fontSize="sm" color="brand.gray">{caption}</chakra.span> : null}
+        </Flex>
       </Flex>
     </Link>
   )

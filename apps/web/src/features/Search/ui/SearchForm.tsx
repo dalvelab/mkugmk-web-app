@@ -10,9 +10,10 @@ import { MeilisearchResponse } from "../models";
 
 interface SearchForm {
   setData: (data: MeilisearchResponse<any>["results"]) => void;
+  inputRef: React.MutableRefObject<HTMLInputElement | null>;
 }
 
-export const SearchForm: React.FC<SearchForm> = ({setData}) => {
+export const SearchForm: React.FC<SearchForm> = ({setData, inputRef}) => {
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getTest = useCallback(
@@ -42,9 +43,9 @@ export const SearchForm: React.FC<SearchForm> = ({setData}) => {
   return (
     <InputGroup size="lg">
       <InputLeftElement pointerEvents='none'>
-        <SearchIcon color="brand.gray" />
+        <SearchIcon color="brand.gray"/>
       </InputLeftElement>
-      <Input size="lg" placeholder='Введите поисковый запрос' onChange={(e) => onChange(e.target.value)} />
+      <Input ref={inputRef} size="lg" placeholder='Введите поисковый запрос' onChange={(e) => onChange(e.target.value)} />
     </InputGroup>
   )
 } 

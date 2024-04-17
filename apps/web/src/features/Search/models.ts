@@ -1,4 +1,4 @@
-import { ExhibitionCenter, VisitorsPages, Event } from "@/entities";
+import { ExhibitionCenter, VisitorsPages, Event, FaqPage, PartnerPage, ContactsPage } from "@/entities";
 
 export type MeilisearchRequest = {
 	queries: {
@@ -16,9 +16,12 @@ export type MeilisearchRequest = {
 }
 
 export interface KeyValueMap {
-  event: Omit<Event, 'image'>;
-  visitors: Pick<VisitorsPages["tickets_page"], 'title' | 'description' | 'id' | 'type_for_meilisearch'>;
+  'event': Omit<Event, 'image'>;
+  'visitors': Pick<VisitorsPages["tickets_page"], 'title' | 'description' | 'id' | 'type_for_meilisearch'>;
   'exhibition-center': Omit<ExhibitionCenter, 'gallery' | 'youtube_gallery' | 'banner' | 'working_time'>;
+  'faq-page': FaqPage;
+  'partners-page': PartnerPage;
+  'contacts-page': ContactsPage;
 }
 
 export type SpecificTypeForKey<K extends keyof KeyValueMap> = KeyValueMap[K];

@@ -17,9 +17,6 @@ export async function createMeilisearchRequest(request: CreateMeilisearchRequest
         queries: [
           {
             indexUid: "visitors",
-            attributesToHighlight: ["*"],
-            highlightPostTag: "</ais-highlight-0000000000>",
-            highlightPreTag: "<ais-highlight-0000000000>",
             q: request.query,
             facets: [],
             limit: 6,
@@ -31,12 +28,9 @@ export async function createMeilisearchRequest(request: CreateMeilisearchRequest
           },
           {
             indexUid: "exhibition-center",
-            attributesToHighlight: ["*"],
-            highlightPostTag: "</ais-highlight-0000000000>",
-            highlightPreTag: "<ais-highlight-0000000000>",
             q: request.query,
             facets: [],
-            limit: 10,
+            limit: 6,
             offset: 0,
             attributesToSearchOn: [
               "name",
@@ -45,9 +39,6 @@ export async function createMeilisearchRequest(request: CreateMeilisearchRequest
           },
           {
             indexUid: "event",
-            attributesToHighlight: ["*"],
-            highlightPostTag: "</ais-highlight-0000000000>",
-            highlightPreTag: "<ais-highlight-0000000000>",
             q: request.query,
             facets: [],
             limit: 5,
@@ -59,18 +50,34 @@ export async function createMeilisearchRequest(request: CreateMeilisearchRequest
           },
           {
             indexUid: "faq-page",
-            attributesToHighlight: ["*"],
-            highlightPostTag: "</ais-highlight-0000000000>",
-            highlightPreTag: "<ais-highlight-0000000000>",
+            q: request.query,
+            facets: [],
+            limit: 10,
+            offset: 0,
+            attributesToSearchOn: [
+              "questions_with_answers.topic",
+              "questions_with_answers.question"
+            ]
+          },
+          {
+            indexUid: "partners-page",
+            q: request.query,
+            facets: [],
+            limit: 2,
+            offset: 0,
+            attributesToSearchOn: [
+              "partners.name",
+            ]
+          },
+          {
+            indexUid: "contacts-page",
             q: request.query,
             facets: [],
             limit: 5,
             offset: 0,
             attributesToSearchOn: [
               "title",
-              "questions_with_answers.topic",
-              "questions_with_answers.question",
-              "questions_with_answers.answer"
+              "contacts.department"
             ]
           }
         ]
