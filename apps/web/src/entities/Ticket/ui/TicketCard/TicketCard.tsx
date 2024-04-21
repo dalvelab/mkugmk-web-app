@@ -27,7 +27,7 @@ export const TicketCard: React.FC<TicketProps> = ({
 
   return (
     <Grid
-      as={isSelected ? "div" : "button"}
+      as={disabled ? "div" : "button"}
       pos="relative"
       gridTemplateColumns={["44px auto", "44px auto", "44px auto", "44px auto", "52px auto"]}
       p={[4, 4, 3, 4, 5]}

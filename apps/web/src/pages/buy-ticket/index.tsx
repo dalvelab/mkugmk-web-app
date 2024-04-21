@@ -28,6 +28,9 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
 
   function addCenterToSelected(id: number) {
     if (selected.includes(id) || mode === 'pushkin_card' && selected.length > 0) {
+      
+      deleteSelected(id);
+      
       return;
     }
 
@@ -40,6 +43,33 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
     }
 
     setSelected([...selected, id]);
+  }
+
+  function deleteSelected(id: number) {
+    // Reject deleting:
+      // default mode - user clicked on alwaysIncluded, but selected includes not only alwaysIncluded
+      // pushkin_card - user already made his choice (it is prohibited to select more than 1 center in this mode)
+    if (
+      mode === 'default' && id === alwaysIncluded?.id && selected.length > 1 ||
+      mode === 'pushkin_card' && !selected.includes(id)
+    ) {
+      return;
+    }
+
+    // We just clean cart if pushkin_card mode selected or
+    // user has selected only alwaysIncluded entity and want to remove it
+    if (
+      mode === 'pushkin_card' && selected.includes(id) || 
+      id === alwaysIncluded?.id && selected.length === 1
+    ) {
+      setSelected([]);
+
+      return;
+    }
+
+    // This part of code works only for default tickets mode and if user has selected
+    // something except alwaysIncluded
+    deleteCenterFromSelected(id);
   }
 
   function deleteCenterFromSelected(deleteItemId: number) {
