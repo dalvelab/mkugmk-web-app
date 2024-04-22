@@ -59,7 +59,6 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
         display="flex"
         flexDir="column"
         pos="relative"
-        alignItems="flex-start"
       >
         <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{t('title')}</Heading>
         <Menu>
@@ -75,6 +74,7 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
                 bg="transparent"
                 _active={{bgColor: "transparent"}}
                 _hover={{bgColor: "transparent"}}
+                alignSelf="flex-start"
               >
                 <chakra.div
                   maxW="180px"
@@ -121,7 +121,7 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
           </chakra.span>}
           {isNotEmpty(filteredData) && filteredData.map((event, index) => (
             <CardEvent key={event.id} event={event} index={index} />
-            ))}
+          ))}
         </Grid>
       </CustomContainer>
     </chakra.section>

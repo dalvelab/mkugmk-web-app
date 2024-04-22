@@ -8,6 +8,8 @@ import { Navbar, Footer } from "@/widgets";
 import { chakraMKUGMKConfig, SEO } from '@/shared';
 import { ScrollUpButton } from "@/features";
 
+import '../shared/styles.css';
+
 const theme = extendTheme({ ...chakraMKUGMKConfig })
 const queryClient = new QueryClient();
 

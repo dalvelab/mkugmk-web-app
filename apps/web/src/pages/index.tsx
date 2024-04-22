@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { chakra, Container, Heading, Flex, Button, Text } from "@chakra-ui/react";
 
-import { getWelcomePage, WelcomeHeroSection, WelcomeGallery, getComplexOperationManagement } from '@/entities';
-import { isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, OpenStatus } from '@/shared';
+import { getWelcomePage, WelcomeHeroSection, getComplexOperationManagement } from '@/entities';
+import { Gallery, isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, OpenStatus } from '@/shared';
 import type { ComplexOperationManagement, WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
@@ -109,14 +109,19 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
         </Container>
       </chakra.section>
       {isNotVoid(gallery) && isNotEmpty(gallery) && (
-        <chakra.section bgColor="brand.black" pt={[10, 20, 20, 20, 20]} pb={[10, 20, 20, 20, 20]} pos="relative">
+        <chakra.section
+          bgColor="brand.black"
+          pt={[10, 20, 20, 20, 20]}
+          pb={[10, 20, 20, 20, 20]}
+          pos="relative"
+        >
           <Container 
             maxWidth="container.xl"
             display="flex"
             flexDir="column"
             pos="relative"
             >
-              <WelcomeGallery images={gallery} />
+              <Gallery images={gallery} />
           </Container>
         </chakra.section>
       )}

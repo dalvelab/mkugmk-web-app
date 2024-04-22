@@ -8,3 +8,5 @@ export * from './CustomContainer';
 export * from './Icons';
 export * from './File';
 export * from './CollapsePanel';
+export * from './ChakraBox';
+export * from './Gallery';

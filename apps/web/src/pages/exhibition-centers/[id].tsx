@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@chakra-ui/next-js';
 import { useRouter } from 'next/router';
-import { chakra, Container, Heading, Flex, Button, Text, Grid, HStack, StackDivider } from "@chakra-ui/react";
+import { chakra, Container, Heading, Flex, Button, Grid, HStack, StackDivider } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getSingleExibitionCenter } from '@/entities';
@@ -14,7 +14,8 @@ import { isVoid,
   createWorkingSchedule,
   OpenStatus,
   getWorkingHoursForToday, 
-  Markdown
+  Markdown,
+  Gallery
 } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
 import type { ExhibitionCenter } from '@/entities';
@@ -110,31 +111,29 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
           </HStack>
         </Container>
       </chakra.section>
-      <chakra.section pt={[0, 10, 10, 10, 10]} pb={[0, 10, 10, 10, 10]} pos="relative">
-        <Container maxWidth="container.xl" display="flex" flexDir="column" pos="relative">
-          <Grid 
-            gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr', '1fr 1fr']}
-            gap={2}
-          >
-          {isNotVoid(gallery) && isNotEmpty(gallery) && gallery.map((image) => (
-              <chakra.div 
-                key={image.id} 
-                h={["300px", "400px", "320px", "400px", "500px"]} 
-                pos="relative"
-              >
-                <Image 
-                  fill
-                  src={image.url}
-                  alt='Изображение музея'
-                  style={{objectFit: 'cover', borderRadius: "8px"}}
-                />
-              </chakra.div>
-            ))}
-          </Grid>
-        </Container>
-      </chakra.section>
+      {isNotVoid(gallery) && isNotEmpty(gallery) && (
+        <chakra.section
+          bgColor="brand.black"
+          pt={[10, 20, 20, 20, 20]}
+          pb={[10, 20, 20, 20, 20]}
+          pos="relative"
+        >
+          <Container 
+            maxWidth="container.xl"
+            display="flex"
+            flexDir="column"
+            pos="relative"
+            >
+              <Gallery images={gallery} />
+          </Container>
+        </chakra.section>
+      )}
       <YoutubeVideoSlider youtube_gallery={youtube_gallery} />
-      <chakra.section pt={10} pb={10} pos="relative">
+      <chakra.section 
+        pt={[10, 20, 20, 20, 20]}
+        pb={[10, 20, 20, 20, 20]}
+        pos="relative"
+      >
         <Container maxWidth="container.xl" display="flex" flexDir="column" pos="relative">
           <HStack 
               divider={<StackDivider borderColor="brand.border" />} 
