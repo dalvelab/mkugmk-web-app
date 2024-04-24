@@ -5,3 +5,4 @@ export * from './utils';
 export {
   CANONICAL_DOMAIN,
 } from './constants'
+export { ComplextOperatingHoursProvider, useComplextOperatingHours } from './contexts';

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { chakra, Container, Heading, Flex, Button, Text } from "@chakra-ui/react";
 
 import { getWelcomePage, WelcomeHeroSection, getComplexOperationManagement } from '@/entities';
-import { Gallery, isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, OpenStatus } from '@/shared';
+import { Gallery, isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, OpenStatus, useComplextOperatingHours } from '@/shared';
 import type { ComplexOperationManagement, WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
@@ -19,6 +19,7 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
   const { locale } = useRouter();
 
   const t = useTranslations('Index');
+  const complexOperatingSettings = useComplextOperatingHours();
 
   if (
     isVoid(data) || 
@@ -34,7 +35,12 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
 
   const workTimeToday = 
     isNotVoid(complexSettingsData.common_operating_hours) ?
-      getWorkingHoursForToday(complexSettingsData.common_operating_hours, dayOfWeek, locale) : 
+      getWorkingHoursForToday({
+        data: complexSettingsData.common_operating_hours, 
+        dayOfWeek, 
+        locale,
+        isSpecialDayToday: complexOperatingSettings?.isOpened
+      }) : 
       undefined
 
   return (

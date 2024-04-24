@@ -1,10 +1,10 @@
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 
 import { chakra, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 
 import { createWorkingSchedule, getWorkingHoursForToday } from "@/shared/utils/dates";
-import { StrapiWorkingTime } from "@/shared";
-import { useTranslations } from "next-intl";
+import { StrapiWorkingTime, useComplextOperatingHours } from "@/shared";
 
 interface OperatingHoursProps {
   data: {
@@ -14,10 +14,11 @@ interface OperatingHoursProps {
   }[];
 }
 
-export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
+export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({ data }) => {
   const { locale } = useRouter();
 
   const t = useTranslations("Working_hours_page");
+  const complexOperatingSettings = useComplextOperatingHours();
 
   const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
 
@@ -57,7 +58,12 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({data}) => {
         <Tbody>
           {data.map(({id, name, working_time }) => {
             const formattedSchedule = createWorkingSchedule(working_time, locale);
-            const workTimeToday = getWorkingHoursForToday(working_time, dayOfWeek, locale);
+            const workTimeToday = getWorkingHoursForToday({
+              data: working_time,
+              dayOfWeek,
+              locale,
+              isSpecialDayToday: complexOperatingSettings?.isOpened
+            });
 
             return (
               <Tr key={id}>

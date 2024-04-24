@@ -64,6 +64,10 @@ export type StrapiWorkingTime = {
   opened: boolean;
 }
 
+export type StrapiSpecialDay = Omit<StrapiWorkingTime, 'day'> & {
+  day: string;
+}
+
 export type StrapiSocialNetwork = {
   id: number;
   type: 'vk' | 'telegram' | 'youtube';

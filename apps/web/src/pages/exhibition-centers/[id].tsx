@@ -15,7 +15,8 @@ import { isVoid,
   OpenStatus,
   getWorkingHoursForToday, 
   Markdown,
-  Gallery
+  Gallery,
+  useComplextOperatingHours
 } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
 import type { ExhibitionCenter } from '@/entities';
@@ -26,6 +27,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
   const { locale } = useRouter();
 
   const t = useTranslations('ExhibitionCenterSingle');
+  const complexOperatingSettings = useComplextOperatingHours();
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
@@ -36,7 +38,12 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
   const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
 
   const formattedSchedule = createWorkingSchedule(working_time, locale);
-  const workTimeToday = getWorkingHoursForToday(working_time, dayOfWeek, locale);
+  const workTimeToday = getWorkingHoursForToday({
+    data: working_time,
+    dayOfWeek,
+    locale,
+    isSpecialDayToday: complexOperatingSettings?.isOpened
+  });
 
   return (
     <>

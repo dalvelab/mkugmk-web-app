@@ -1,7 +1,7 @@
-import type { StrapiWorkingTime } from "../models";
+import type { StrapiSpecialDay, StrapiWorkingTime } from "../models";
 
 import { rusFullDayNamesMap, engFullDayNamesMap, genetiveRusMonths } from '../constants';
-import { isEmpty, isNotEmpty, isVoid } from "./misc";
+import { isEmpty, isNotEmpty, isNotVoid, isVoid } from "./misc";
 
 export function createWorkingSchedule(data: StrapiWorkingTime[], locale: string | undefined = 'ru') {
   const formatted: Array<{
@@ -69,10 +69,25 @@ export function createWorkingSchedule(data: StrapiWorkingTime[], locale: string 
   return formatted;
 }
 
-export function getWorkingHoursForToday(data: StrapiWorkingTime[], dayOfWeek: number, locale: string | 'undefined' = 'ru'): StrapiWorkingTime {
+export function getWorkingHoursForToday({data, dayOfWeek, locale = 'ru', isSpecialDayToday}: {
+  data: StrapiWorkingTime[];
+  dayOfWeek: number;
+  locale: string | undefined;
+  isSpecialDayToday?: boolean;
+}): StrapiWorkingTime {
   const closedText = locale === 'ru' ? 'Сегодня закрыто' : 'Today the museum is closed';
   const openedText = locale === 'ru' ? 'Сегодня открыто с' : 'Today is opened from';
   const untillText = locale === 'ru' ? 'до' : 'untill';
+
+  // CHECK IF TODAY'S DATE INCLUDED INTO SPECIAL DAYS
+  if (isNotVoid(isSpecialDayToday) && !isSpecialDayToday) {
+    return {
+      id: 0,
+      opened: false,
+      day: 'mon',
+      value: closedText,
+    }
+  }
 
   const index = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
 
@@ -94,6 +109,22 @@ export function getWorkingHoursForToday(data: StrapiWorkingTime[], dayOfWeek: nu
       : closedText
   }
 }
+
+export function checkComplexOperatingHours(days: StrapiSpecialDay[]) {
+  const date = new Date();
+  const formattedDate = `${date.getFullYear()}-${('0' + (date.getMonth() +1 )).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+
+  let isAvailable = true;
+
+  for (let i = 0; i < days.length; i++) {
+    if (formattedDate === days[i].day && !days[i].opened) {
+      isAvailable = false;
+      break;
+    }
+  }
+
+  return isAvailable
+} 
 
 export function getformatDateLocale(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
   return new Date(date).toLocaleString('ru-RU', { timeZone }).split(',')[0];

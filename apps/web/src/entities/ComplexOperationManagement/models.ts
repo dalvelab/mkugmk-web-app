@@ -1,11 +1,6 @@
-import { StrapiWorkingTime } from "@/shared"
+import { StrapiWorkingTime, StrapiSpecialDay } from "@/shared"
 
 export type ComplexOperationManagement = {
   common_operating_hours: StrapiWorkingTime[];
-  special_days_operating_hours: {
-    id: number;
-    value: string;
-    day: string;
-    opened: string;
-  }[]
+  special_days_operating_hours: StrapiSpecialDay[]
 }
