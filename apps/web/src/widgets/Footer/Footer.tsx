@@ -139,7 +139,7 @@ export const Footer = () => {
               <Text fontSize="lg" fontWeight="medium">{t('ticket_office')}</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 {formattedSchedule.map(({day, value, id, opened}) => (
-                  <Grid key={id} gridTemplateColumns="1fr 1fr" gap={4}>
+                  <Grid key={id} gridTemplateColumns="auto auto" justifyContent="space-between" gap={4}>
                     <chakra.span>{day}</chakra.span>
                     <chakra.span color={opened ? 'brand.black' : 'red.500'}>{value}</chakra.span>
                   </Grid>
