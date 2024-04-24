@@ -161,7 +161,7 @@ export const Footer = () => {
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 <OrderCall />
                 <Link href="/faq">
-                  FAQ
+                  Вопрос — Ответ
                 </Link>
                 {pages.map((page) => (
                   <Link key={page.id} href={page.link} target='_blank'>

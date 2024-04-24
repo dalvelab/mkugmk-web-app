@@ -2,11 +2,12 @@ import { chakra, Container, Flex, Grid, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getNavigationPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, File } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, File, Link } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { AddressesTable, HowToGetToMuseumTable } from "@/widgets";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function Navigation({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
@@ -32,15 +33,27 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
           <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
         </CustomContainer>
       </chakra.section>
-      <chakra.section pb={10}>
-        <Container maxW="container.xl">
-          <Flex alignItems='flex-start'>
-          {isNotVoid(complex_map) && (
-            <File name={t("museum_complex_map")} file={complex_map} />
-          )}
-          </Flex>
-        </Container>
-      </chakra.section>
+      {isNotVoid(complex_map) && (
+        <chakra.section pb={10}>
+          <Container maxW="container.xl">
+              <>
+                <chakra.span fontSize="lg">Нажмите на схему для открытия в {" "}
+                  <Link href={complex_map.url} target="_blank" color="green.500">отдельном окне</Link>
+                </chakra.span>
+                <chakra.div
+                  mt={2}
+                  w={["100%", "100%", "740px", "740px", "740px"]}
+                  h={["80vw", "70vw", "500px", "500px", "500px"]}
+                  pos="relative"
+                >
+                  <Link href={complex_map.url} target="_blank">
+                    <Image src={complex_map.url} fill alt="Карта комплекса" />
+                  </Link>
+                </chakra.div>
+              </>
+          </Container>
+        </chakra.section>
+      )}
       <chakra.section pb={10}>
         <Container maxW="container.xl">
           <Heading
