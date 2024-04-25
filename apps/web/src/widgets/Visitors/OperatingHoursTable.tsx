@@ -87,7 +87,13 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({ data }) => 
                         gap={4}
                       >
                         <chakra.span>{day}</chakra.span>
-                        <chakra.span color={opened ? 'brand.black' : 'red.500'}>{value}</chakra.span>
+                        <chakra.span
+                          color={opened ? 'brand.black' : 'red.500'} 
+                          whiteSpace="pre-wrap"
+                          textAlign="right"
+                        >
+                          {value}
+                        </chakra.span>
                       </Flex>
                     ))}
                   </Flex>
