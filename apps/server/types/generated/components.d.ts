@@ -11,6 +11,7 @@ export interface ContactsDepartmentContact extends Schema.Component {
     caption: Attribute.String;
     email: Attribute.Email;
     phone: Attribute.String;
+    enable_order_call_modal: Attribute.Boolean;
   };
 }
 
@@ -217,7 +218,7 @@ export interface VisitorsTicketCategory extends Schema.Component {
   attributes: {
     name: Attribute.String;
     caption: Attribute.String;
-    price: Attribute.Integer;
+    price: Attribute.String;
   };
 }
 

@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "benefits_pages",
+  "info": {
+    "singularName": "benefits-page",
+    "pluralName": "benefits-pages",
+    "displayName": "Benefits Page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    }
+  }
+}

@@ -18,6 +18,9 @@
     },
     "phone": {
       "type": "string"
+    },
+    "enable_order_call_modal": {
+      "type": "boolean"
     }
   }
 }

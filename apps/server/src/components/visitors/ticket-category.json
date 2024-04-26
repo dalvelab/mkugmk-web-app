@@ -13,7 +13,7 @@
       "type": "string"
     },
     "price": {
-      "type": "integer"
+      "type": "string"
     }
   }
 }

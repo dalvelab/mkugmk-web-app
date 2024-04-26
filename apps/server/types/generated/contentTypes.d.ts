@@ -788,6 +788,57 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiBenefitsPageBenefitsPage extends Schema.SingleType {
+  collectionName: 'benefits_pages';
+  info: {
+    singularName: 'benefits-page';
+    pluralName: 'benefits-pages';
+    displayName: 'Benefits Page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::benefits-page.benefits-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::benefits-page.benefits-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::benefits-page.benefits-page',
+      'oneToMany',
+      'api::benefits-page.benefits-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiCafeAndSouvenirsPageCafeAndSouvenirsPage
   extends Schema.SingleType {
   collectionName: 'cafe_and_souvenirs_pages';
@@ -961,6 +1012,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
     singularName: 'event';
     pluralName: 'events';
     displayName: 'Event';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -992,6 +1044,12 @@ export interface ApiEventEvent extends Schema.CollectionType {
         };
       }>;
     description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publish_date: Attribute.Date &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1819,6 +1877,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::benefits-page.benefits-page': ApiBenefitsPageBenefitsPage;
       'api::cafe-and-souvenirs-page.cafe-and-souvenirs-page': ApiCafeAndSouvenirsPageCafeAndSouvenirsPage;
       'api::complex-operation-management.complex-operation-management': ApiComplexOperationManagementComplexOperationManagement;
       'api::contacts-page.contacts-page': ApiContactsPageContactsPage;

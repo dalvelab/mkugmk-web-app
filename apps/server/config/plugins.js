@@ -82,6 +82,9 @@ module.exports = ({ env }) => ({
       },
       'rules-page': {
         indexName: 'visitors',
+      },
+      'benefits-page': {
+        indexName: 'visitors',
       }
     }
   }
