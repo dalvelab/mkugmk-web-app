@@ -19,7 +19,8 @@ import {
   Input,
   Textarea,
   FormErrorMessage,
-  useToast
+  useToast,
+  ButtonProps
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { isNotVoid } from "@/shared";
@@ -38,7 +39,11 @@ const initalForm = {
   message: "",
 }
 
-export const OrderCall = () => {
+interface OrderCallProps {
+  buttonStyles?: ButtonProps["__css"];
+}
+
+export const OrderCall: React.FC<OrderCallProps> = ({buttonStyles}) => {
   const { locale } = useRouter();
   const toast = useToast();
 
@@ -89,6 +94,12 @@ export const OrderCall = () => {
     mutation.mutate({message: `Заказ звонка с сайта. \n Имя: ${form.name}\n Телефон: ${form.phone}\n Сообщение: ${form.message}`})
   }
 
+  function onCloseModal() {
+    onClose();
+    setErrors(null);
+    setForm(initalForm);
+  }
+
   const nameError = errors?.issues.find((issue) => issue.path.includes('name'));
   const phoneError = errors?.issues.find((issue) => issue.path.includes('phone'));
   const messageError = errors?.issues.find((issue) => issue.path.includes('message'));
@@ -99,7 +110,7 @@ export const OrderCall = () => {
         onClick={onOpen}
         variant='link'
         fontWeight="regular"
-        color="brand.black"
+        __css={buttonStyles}
       >
         {t('order_call')}
       </Button>
@@ -107,7 +118,7 @@ export const OrderCall = () => {
         size={["full", "lg", "lg", "lg", "lg"]}
         autoFocus={false}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={onCloseModal}
       >
         <ModalOverlay />
         <ModalContent>

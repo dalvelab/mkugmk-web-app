@@ -1,7 +1,7 @@
-import { chakra, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Button, chakra, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 
 import type { VisitorsPages } from "@/entities";
-import { isNotVoid, type StrapiWorkingTime } from "@/shared";
+import { isNotVoid } from "@/shared";
 
 interface HowToGetToMuseumTableProps {
   title: string;
@@ -58,10 +58,19 @@ export const HowToGetToMuseumTable: React.FC<HowToGetToMuseumTableProps> = ({ da
                         {info.caption}
                       </chakra.span> : 
                       null}
+                      {info.type === 'other' && (
+                      <chakra.a href="https://yandex.ru/maps/-/CDRhq0lT" target="_blank">
+                        <Button mt={4} bg="brand.black" color="white" _hover={{bgColor: 'brand.black'}}>
+                          Проложить маршрут
+                        </Button>
+                      </chakra.a>
+                    )}
                   </Flex>
-                  <chakra.span fontSize="lg">
-                    {info.value}
-                  </chakra.span>
+                  <Flex flexDir="column" gap={5}>
+                    <chakra.span fontSize="lg">
+                      {info.value}
+                    </chakra.span>
+                  </Flex>
                 </Flex>
               </Td>
             </Tr>

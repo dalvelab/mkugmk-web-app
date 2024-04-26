@@ -3,7 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Flex, Heading } from "@chakra-ui/react";
 
 import { getSingleEvent } from '@/entities';
-import { getformatDateLocale, isVoid, EmptyState, isEmpty, Markdown, CustomContainer } from '@/shared';
+import { getformatDateLocale, isVoid, EmptyState, isEmpty, Markdown, CustomContainer, isNotVoid } from '@/shared';
 import type { Event } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
@@ -14,7 +14,7 @@ export default function SingleNews({ event }: InferGetServerSidePropsType<typeof
     return <EmptyState />
   }
   
-  const { title, description, createdAt, image } = data;
+  const { title, description, createdAt, publish_date, image } = data;
 
   return (
     <chakra.section pt={6} pb={10}>
@@ -39,7 +39,11 @@ export default function SingleNews({ event }: InferGetServerSidePropsType<typeof
             </chakra.div>
             <Flex flexDir="column" alignItems="flex-start" gap={[1, 1, 1, 2, 2]}>
               <Heading as='h1' fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]}>{title}</Heading>
-              <chakra.span fontSize={["sm", "sm", "sm", "md", "md"]} color="brand.gray">{getformatDateLocale(new Date(createdAt))}</chakra.span>
+              <chakra.span fontSize={["sm", "sm", "sm", "md", "md"]} color="brand.gray">
+                {isNotVoid(publish_date) ? 
+                getformatDateLocale(new Date(publish_date)) : 
+                getformatDateLocale(new Date(createdAt))}
+              </chakra.span>
             </Flex>
           </Flex>
           <chakra.div mt={7} fontSize="lg">

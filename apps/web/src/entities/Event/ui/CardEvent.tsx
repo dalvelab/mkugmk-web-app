@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Flex, Text, chakra } from "@chakra-ui/react";
 
-import { getformatDateLocale, ChakraBox, Link } from "@/shared";
+import { getformatDateLocale, ChakraBox, Link, isNotVoid, Markdown } from "@/shared";
 
 import { EventWithPagination } from "../models";
 
@@ -64,7 +64,9 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
         </Text>
         <Flex mt={2} marginTop="auto" alignSelf="flex-end">
           <chakra.span fontSize="xs" color="brand.gray">
-            {getformatDateLocale(new Date(event.attributes.createdAt))}
+            {isNotVoid(event.attributes.publish_date) ? 
+              getformatDateLocale(new Date(event.attributes.publish_date)) : 
+              getformatDateLocale(new Date(event.attributes.createdAt))}
           </chakra.span>
         </Flex>
       </Flex>

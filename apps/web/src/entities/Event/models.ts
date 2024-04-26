@@ -7,6 +7,7 @@ export type EventWithPagination = {
     type: 'news' | 'event';
     description: string;
     createdAt: string;
+    publish_date: string;
     image: {
       data: {
         id: number;
@@ -22,5 +23,6 @@ export type Event = {
   type: 'news' | 'event';
   description: string;
   createdAt: string;
+  publish_date: string;
   image: StrapiMedia;
 }

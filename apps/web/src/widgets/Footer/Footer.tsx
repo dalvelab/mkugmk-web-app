@@ -159,7 +159,7 @@ export const Footer = () => {
             <Flex flexDir="column" gap={2}>
               <Text fontSize="lg" fontWeight="medium">{t('visitors')}</Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
-                <OrderCall />
+                <OrderCall buttonStyles={{color: 'brand.black'}} />
                 <Link href="/faq">
                   Вопрос — Ответ
                 </Link>

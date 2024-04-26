@@ -1,5 +1,5 @@
 import { type ApiResponse, type DefaultRequestParams } from "@/shared";
-import type { RulesPage, VisitorsPages } from "./models";
+import type { BenefitTicketsPage, RulesPage, VisitorsPages } from "./models";
 
 interface GetCafeAndSouvenirsPage extends DefaultRequestParams {};
 
@@ -57,6 +57,14 @@ export async function getRulesPage(params: GetRulesPage): Promise<ApiResponse<Ru
   const { locale } = params;
 
   const res = await fetch(`${process.env.DB_HOST}/rules-page?locale=${locale}`);
+
+  return res.json();
+}
+
+export async function getBenefitTicketsPage(params: GetRulesPage): Promise<ApiResponse<BenefitTicketsPage, null>> {
+  const { locale } = params;
+
+  const res = await fetch(`${process.env.DB_HOST}/benefits-page?locale=${locale}`);
 
   return res.json();
 }

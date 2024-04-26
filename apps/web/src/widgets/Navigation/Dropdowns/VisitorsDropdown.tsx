@@ -13,6 +13,7 @@ export const VisitorsDropdown = ({}) => {
       <NavbarLink href="/visitors/interactive-playground" text={t('visitors_dropdown.interactive_playground')} level={2} />
       <NavbarLink href="/visitors/cafe-and-souvenirs" text={t('visitors_dropdown.cafe_and_souvenirs')} level={2} />
       <NavbarLink href="/visitors/rules" text={t('visitors_dropdown.rules')} level={2} />
+      <NavbarLink href="/visitors/benefit-tickets-page" text={t('visitors_dropdown.benefit_tickets')} level={2} />
     </Flex>
   )
 }

@@ -91,3 +91,10 @@ export type RulesPage = {
   title: string;
   description: string;
 }
+
+export type BenefitTicketsPage = {
+  id: number;
+  type_for_meilisearch: VisitorsPageType;
+  title: string;
+  description: string;
+}

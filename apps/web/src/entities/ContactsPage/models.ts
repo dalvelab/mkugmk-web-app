@@ -8,6 +8,7 @@ export type ContactsPage = {
     department?: string;
     caption?: string;
     email?: string;
+    enable_order_call_modal: boolean;
     phone?: string;
   }[]
 }

@@ -6,6 +6,7 @@ import { getContactsPage } from '@/entities';
 import { Link, isVoid, EmptyState, isEmpty, isNotEmpty, CustomContainer, Markdown } from '@/shared';
 import type { ContactsPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
+import { OrderCall } from '@/features';
 
 export default function Events({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
@@ -61,6 +62,16 @@ export default function Events({ page }: InferGetServerSidePropsType<typeof getS
                 >
                   {isNotEmpty(contact?.email) && <Link href={`mailto:${contact.email}`} target="_blank">{contact.email}</Link>}
                   {isNotEmpty(contact?.phone) && <Link href={`tel:${contact.phone}`} target="_blank">{contact.phone}</Link>}
+                  {contact.enable_order_call_modal && (
+                    // <Button
+                    // variant="link"
+                    // textDecor="underline"
+                    // _hover={{color: "green.500"}}
+                    // >
+                    //   Заказать звонок
+                    // </Button>
+                    <OrderCall buttonStyles={{textDecor: 'underline', _hover: {'color': 'green.500'}}} />
+                  )}
                 </Flex>
               </Grid>
             ))}

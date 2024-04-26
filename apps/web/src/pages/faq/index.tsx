@@ -1,12 +1,12 @@
-import { chakra, Container, Flex, Heading } from "@chakra-ui/react";
+import { chakra, Container, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
 import { getFaqPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown } from '@/shared';
-import type { FaqPage, VisitorsPages } from '@/entities';
+import type { FaqPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
-import { FAQ, OtherServicesList, TicketsList } from "@/widgets";
+import { FAQ } from "@/widgets";
 
 export default function FAQPage({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
