@@ -4,7 +4,8 @@
   "info": {
     "singularName": "benefits-page",
     "pluralName": "benefits-pages",
-    "displayName": "Benefits Page"
+    "displayName": "Benefits Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -30,6 +31,16 @@
         }
       },
       "type": "richtext"
+    },
+    "type_for_meilisearch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "default": "benefit-tickets-page",
+      "required": true
     }
   }
 }

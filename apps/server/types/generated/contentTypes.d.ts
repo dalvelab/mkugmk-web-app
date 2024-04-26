@@ -794,6 +794,7 @@ export interface ApiBenefitsPageBenefitsPage extends Schema.SingleType {
     singularName: 'benefits-page';
     pluralName: 'benefits-pages';
     displayName: 'Benefits Page';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -816,6 +817,14 @@ export interface ApiBenefitsPageBenefitsPage extends Schema.SingleType {
           localized: true;
         };
       }>;
+    type_for_meilisearch: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<'benefit-tickets-page'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
