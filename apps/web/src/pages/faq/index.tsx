@@ -3,7 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
 import { getFaqPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown, SEO } from '@/shared';
 import type { FaqPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { FAQ } from "@/widgets";
@@ -21,6 +21,10 @@ export default function FAQPage({ page }: InferGetServerSidePropsType<typeof get
 
   return (
     <>
+      <SEO>
+        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+        <meta name="description" content={description} />
+      </SEO>
       <chakra.section pt={6} pb={10}>
         <CustomContainer
           withBackButton
@@ -30,7 +34,7 @@ export default function FAQPage({ page }: InferGetServerSidePropsType<typeof get
           pos="relative"
         >
           <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-          <chakra.div maxW={["100%", "100%", "90%", "80%", "80%"]} mt={4} fontSize="lg">
+          <chakra.div maxW={["100%", "100%", "90%", "80%", "80%"]} mt={4} fontSize="lg" textAlign="justify">
             <Markdown>{description}</Markdown>
           </chakra.div>
         </CustomContainer>

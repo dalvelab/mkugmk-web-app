@@ -3,7 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
 import { getTicketsPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown, File } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, Markdown, File, SEO } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { OtherServicesList, TicketsList } from "@/widgets";
@@ -29,6 +29,12 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
 
   return (
     <>
+      <SEO>
+        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta property="og:type" content="website" />
+      </SEO>
       <chakra.section pt={6} pb={10}>
         <CustomContainer
           withBackButton
@@ -38,7 +44,7 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
           pos="relative"
         >
           <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-          <chakra.div maxW={["100%", "100%", "90%", "80%", "80%"]} mt={4} fontSize="lg">
+          <chakra.div maxW={["100%", "100%", "90%", "80%", "80%"]} mt={4} fontSize="lg" textAlign="justify">
             <Markdown>{description}</Markdown>
           </chakra.div>
         </CustomContainer>
@@ -49,7 +55,7 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
       <chakra.section pt={10} pb={10}>
         <Container maxW="container.xl">
           <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{secondary_title}</Heading>
-          <chakra.div maxW={["100%", "100%", "90%", "80%", "80%"]} mt={4} fontSize="lg">
+          <chakra.div maxW={["100%", "100%", "90%", "80%", "80%"]} mt={4} fontSize="lg" textAlign="justify">
             <Markdown>{secondary_description}</Markdown>
           </chakra.div>
         </Container>

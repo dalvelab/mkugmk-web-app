@@ -64,7 +64,7 @@ export const CardsModal: React.FC<CardsModalProps> = ({isOpen, onClose, data}) =
               <Property text={tickets} variant='tickets' />
             )}
           </Flex>
-          <chakra.div fontSize="md" pt={5}>
+          <chakra.div fontSize="md" pt={5} textAlign="justify">
             <Markdown>
               {description}
             </Markdown>

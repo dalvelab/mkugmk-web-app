@@ -2,7 +2,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { getExibitionCentersPage, ExhibitionCenterCard } from '@/entities';
-import { isVoid ,EmptyState, isEmpty, CustomContainer } from '@/shared';
+import { isVoid ,EmptyState, isEmpty, CustomContainer, SEO } from '@/shared';
 import type { ExhibitionCentersPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { useRouter } from 'next/router';
@@ -21,6 +21,10 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
 
   return (
     <>
+      <SEO>
+        <title>Выставочные центры | Музейный комплекс - Верхняя Пышма</title>
+        <meta name="description" content={description} />
+      </SEO>
       <chakra.section
         pt={8}
         pb={10} 

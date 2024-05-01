@@ -4,7 +4,7 @@ import { chakra, Heading, Grid, Flex, Button, Text } from "@chakra-ui/react";
 import { useTranslations } from 'next-intl';
 
 import { Cart, TicketCard, getExibitionCenters, getTickets } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, SEO } from '@/shared';
 import type { ExhibitionCenter, Ticket } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { InfoOutlineIcon } from '@chakra-ui/icons';
@@ -94,119 +94,125 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
   }
 
   return (
-    <chakra.section
-      pt={6}
-      pb={10}
-      minH="100vh"
-    >
-      <CustomContainer
-        withBackButton
-        maxWidth="container.xl"
-        display="flex"
-        flexDir="column"
-        alignItems='flex-start'
-        pos="relative"
+    <>
+      <SEO>
+      <title>Купить билет | Музейный комплекс - Верхняя Пышма</title>
+      <meta name="description" content="Билеты в музейный комплекс можно приобрести онлайн или в кассе" />
+      </SEO>
+      <chakra.section
+        pt={6}
+        pb={10}
+        minH="100vh"
       >
-        <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{t("title")}</Heading>
-        <Flex
-          mt={4}
-          p={1.5}
-          bgColor="#F4F4F5"
-          borderRadius="8px"
+        <CustomContainer
+          withBackButton
+          maxWidth="container.xl"
+          display="flex"
+          flexDir="column"
+          alignItems='flex-start'
+          pos="relative"
         >
-          <Button
-            px={[3, 7, 7, 7, 7]}
-            py={[3, 5, 5, 5, 5]}
-            fontSize={["xs", "md", "md", "md", "md"]}
-            bgColor={mode === "default" ? "brand.black" : "transparent"}
-            color={mode === "default" ? "white" : "brand.black"}
-            _hover={{bgColor: mode === "default" ? "brand.black" : "transparent"}}
-            onClick={() => changeMode('default')}
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{t("title")}</Heading>
+          <Flex
+            mt={4}
+            p={1.5}
+            bgColor="#F4F4F5"
+            borderRadius="8px"
           >
-            Стандартные билеты
-          </Button>
-          <Button
-            px={[3, 7, 7, 7, 7]}
-            py={[3, 5, 5, 5, 5]}
-            fontSize={["xs", "md", "md", "md", "md"]}
-            bgColor={mode === "pushkin_card" ? "brand.black" : "transparent"}
-            color={mode === "pushkin_card" ? "white" : "brand.black"}
-            _hover={{bgColor: mode === "pushkin_card" ? "brand.black" : "transparent"}}
-            onClick={() => changeMode('pushkin_card')}
-          >
-            Пушкинская карта
-          </Button>
-        </Flex>
-        <Text mt={5} fontSize="lg" color="brand.gray">
-          {mode === 'default' ? 
-            "Выберите один или несколько выставочных центров" :
-            "Выберите один выставочный центр" 
-          }
-        </Text>
-        <Grid
-          w="100%"
-          mt={4}
-          gap={4}
-          gridTemplateColumns={
-            ["auto",
-            "auto",
-            "auto",
-            "minmax(auto, 700px) 360px",
-            "minmax(auto, 780px) 360px"
-            ]
-          }
-          justifyContent="space-between"
-          alignItems="flex-start"
-        >
-          <Flex w="100%" flexDir="column" gap={6}>
-            <Flex
-              p={3}
-              gap={[3, 4, 4, 4, 4]}
-              border="1px solid"
-              borderColor="brand.border"
-              borderRadius="4px"
-              alignItems={["flex-start", "center", "center", "center", "center"]}
-              flexDir={["column", "row", "row", "row", "row"]}
+            <Button
+              px={[3, 7, 7, 7, 7]}
+              py={[3, 5, 5, 5, 5]}
+              fontSize={["xs", "md", "md", "md", "md"]}
+              bgColor={mode === "default" ? "brand.black" : "transparent"}
+              color={mode === "default" ? "white" : "brand.black"}
+              _hover={{bgColor: mode === "default" ? "brand.black" : "transparent"}}
+              onClick={() => changeMode('default')}
             >
-              <InfoOutlineIcon fontSize="3xl" />
-              <chakra.span color="brand.black" fontSize="sm" fontWeight="medium">
-                При приобретении входного билета в один из выставочных центров вход на “Открытую площадку” бесплатный. 
-                В данном случае билет приобретать не нужно.
-              </chakra.span>
-            </Flex>
-            <Grid
-              templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]}
-              gap={5}
+              Стандартные билеты
+            </Button>
+            <Button
+              px={[3, 7, 7, 7, 7]}
+              py={[3, 5, 5, 5, 5]}
+              fontSize={["xs", "md", "md", "md", "md"]}
+              bgColor={mode === "pushkin_card" ? "brand.black" : "transparent"}
+              color={mode === "pushkin_card" ? "white" : "brand.black"}
+              _hover={{bgColor: mode === "pushkin_card" ? "brand.black" : "transparent"}}
+              onClick={() => changeMode('pushkin_card')}
             >
-              {data
-                .filter((exhibition_centers) => exhibition_centers.ticket_sale_enabled)
-                .filter((exhibition_center) => 
-                  mode === 'pushkin_card' ? 
-                  exhibition_center.type === 'exhibition_center' : 
-                  true
-                )
-                .map((exhibition_center) => (
-                  <TicketCard
-                    key={exhibition_center.id}
-                    mode={mode}
-                    exhibition_center={exhibition_center}
-                    addCenterToSelected={addCenterToSelected}
-                    selected={selected}
-                  />
-                )
-              )}
-            </Grid>
+              Пушкинская карта
+            </Button>
           </Flex>
-          <Cart
-            selected={selected}
-            deleteCenterFromSelected={deleteCenterFromSelected}
-            tickets={ticketsFilteredByMode}
-            exhibition_centers={data}
-            includedOpenSpace={alwaysIncluded}
-          />
-        </Grid>
-      </CustomContainer>
-    </chakra.section>
+          <Text mt={5} fontSize="lg" color="brand.gray">
+            {mode === 'default' ? 
+              "Выберите один или несколько выставочных центров" :
+              "Выберите один выставочный центр" 
+            }
+          </Text>
+          <Grid
+            w="100%"
+            mt={4}
+            gap={4}
+            gridTemplateColumns={
+              ["auto",
+              "auto",
+              "auto",
+              "minmax(auto, 700px) 360px",
+              "minmax(auto, 780px) 360px"
+              ]
+            }
+            justifyContent="space-between"
+            alignItems="flex-start"
+          >
+            <Flex w="100%" flexDir="column" gap={6}>
+              <Flex
+                p={3}
+                gap={[3, 4, 4, 4, 4]}
+                border="1px solid"
+                borderColor="brand.border"
+                borderRadius="4px"
+                alignItems={["flex-start", "center", "center", "center", "center"]}
+                flexDir={["column", "row", "row", "row", "row"]}
+              >
+                <InfoOutlineIcon fontSize="3xl" />
+                <chakra.span color="brand.black" fontSize="sm" fontWeight="medium">
+                  При приобретении входного билета в один из выставочных центров вход на “Открытую площадку” бесплатный. 
+                  В данном случае билет приобретать не нужно.
+                </chakra.span>
+              </Flex>
+              <Grid
+                templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]}
+                gap={5}
+              >
+                {data
+                  .filter((exhibition_centers) => exhibition_centers.ticket_sale_enabled)
+                  .filter((exhibition_center) => 
+                    mode === 'pushkin_card' ? 
+                    exhibition_center.type === 'exhibition_center' : 
+                    true
+                  )
+                  .map((exhibition_center) => (
+                    <TicketCard
+                      key={exhibition_center.id}
+                      mode={mode}
+                      exhibition_center={exhibition_center}
+                      addCenterToSelected={addCenterToSelected}
+                      selected={selected}
+                    />
+                  )
+                )}
+              </Grid>
+            </Flex>
+            <Cart
+              selected={selected}
+              deleteCenterFromSelected={deleteCenterFromSelected}
+              tickets={ticketsFilteredByMode}
+              exhibition_centers={data}
+              includedOpenSpace={alwaysIncluded}
+            />
+          </Grid>
+        </CustomContainer>
+      </chakra.section>
+    </>
   );
 }
 

@@ -16,7 +16,8 @@ import { isVoid,
   getWorkingHoursForToday, 
   Markdown,
   Gallery,
-  useComplextOperatingHours
+  useComplextOperatingHours,
+  SEO
 } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
 import type { ExhibitionCenter } from '@/entities';
@@ -47,6 +48,12 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
 
   return (
     <>
+      <SEO>
+      <title>{name} | Музейный комплекс - Верхняя Пышма</title>
+      <meta property="og:title" content={`${name} | Музейный комплекс - Верхняя Пышма`} />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content={banner.url} />
+      </SEO>
       <chakra.section 
         pos="relative" 
         h={["calc(100vh - 64px)", "calc(100vh - 64px)", "calc(100vh - 64px)", "calc(100vh - 80px)", "calc(100vh - 80px)"]}

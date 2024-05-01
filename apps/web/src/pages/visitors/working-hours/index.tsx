@@ -3,7 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
 import { getComplexOperationManagement, getExibitionCenters, getWorkingHoursPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, SEO } from '@/shared';
 import type { ComplexOperationManagement, ExhibitionCenter, VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { OperatingHoursTable, SpecialDaysOperatinHourseTable } from "@/widgets";
@@ -23,6 +23,11 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
 
   return (
     <>
+      <SEO>
+        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta property="og:type" content="website" />
+      </SEO>
       <chakra.section pt={6}>
         <CustomContainer
           withBackButton

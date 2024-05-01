@@ -123,7 +123,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
                       borderColor="brand.border" 
                       verticalAlign="top"
                     >
-                      <Flex flexDir="column" gap={6}>
+                      <Flex flexDir="column" gap={6} textAlign="justify">
                         <Markdown>
                           {activeService.value}
                         </Markdown>
@@ -137,6 +137,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({other_servi
                         border="1px solid" 
                         borderColor="brand.border" 
                         verticalAlign="top"
+                        textAlign="justify"
                       >
                         <Markdown>
                           {activeService.additional_text}

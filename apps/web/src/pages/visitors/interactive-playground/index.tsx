@@ -3,7 +3,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { CardsWithModal } from '@/widgets';
 import { getInteractivePlaygroundPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, Markdown } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, Markdown, SEO } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
@@ -17,22 +17,30 @@ export default function InteractivePlaygrounds({ page }: InferGetServerSideProps
   const { title, description, interactive_playgrounds } = data;
 
   return (
-    <chakra.section pt={6} pb={10}>
-      <CustomContainer
-        withBackButton
-        maxWidth="container.xl"
-        minH="70vh"
-        display="flex"
-        flexDir="column"
-        pos="relative"
-      >
-        <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-        <chakra.div maxW={["100%", "100%", "90%", "80%", "70%"]} mt={4} fontSize="lg">
-          <Markdown>{description}</Markdown>
-        </chakra.div>
-        <CardsWithModal data={interactive_playgrounds} />
-      </CustomContainer>
-    </chakra.section>
+    <>
+      <SEO>
+        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta property="og:type" content="website" />
+      </SEO>
+      <chakra.section pt={6} pb={10}>
+        <CustomContainer
+          withBackButton
+          maxWidth="container.xl"
+          minH="70vh"
+          display="flex"
+          flexDir="column"
+          pos="relative"
+        >
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
+          <chakra.div maxW={["100%", "100%", "90%", "80%", "70%"]} mt={4} fontSize="lg" textAlign="justify">
+            <Markdown>{description}</Markdown>
+          </chakra.div>
+          <CardsWithModal data={interactive_playgrounds} />
+        </CustomContainer>
+      </chakra.section>
+    </>
   );
 }
 

@@ -1,10 +1,10 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { chakra, Container, Heading, Flex, Button, Text } from "@chakra-ui/react";
+import { chakra, Container, Heading, Flex, Button } from "@chakra-ui/react";
 
 import { getWelcomePage, WelcomeHeroSection, getComplexOperationManagement } from '@/entities';
-import { Gallery, isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, OpenStatus, useComplextOperatingHours } from '@/shared';
+import { Gallery, isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, OpenStatus, useComplextOperatingHours, Markdown } from '@/shared';
 import type { ComplexOperationManagement, WelcomePage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { YoutubeVideoSlider } from '@/features';
@@ -110,7 +110,11 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
           >
           <Flex flexDir="column" justifyContent="center" alignItems="center" gap={5}>
             <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-            <Text textAlign="center" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>{description}</Text>
+            <chakra.div textAlign="center" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>
+              <Markdown>
+              {description}
+              </Markdown>
+            </chakra.div>
           </Flex>
         </Container>
       </chakra.section>

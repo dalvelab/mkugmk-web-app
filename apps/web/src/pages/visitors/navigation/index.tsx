@@ -2,7 +2,7 @@ import { chakra, Container, Flex, Grid, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import { getNavigationPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, File, Link } from '@/shared';
+import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, File, Link, SEO } from '@/shared';
 import type { VisitorsPages } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { AddressesTable, HowToGetToMuseumTable } from "@/widgets";
@@ -22,6 +22,11 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
 
   return (
     <>
+      <SEO>
+        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta property="og:type" content="website" />
+      </SEO>
       <chakra.section pt={6} pb={5}>
         <CustomContainer
           withBackButton

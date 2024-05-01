@@ -40,7 +40,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({ question, answer }
         />
       </chakra.button>
       <Collapse in={isOpen} animateOpacity>
-        <chakra.div px={4} py={4} color="brand.gray">
+        <chakra.div px={4} py={4} color="brand.gray" textAlign="justify">
           <Markdown>{answer}</Markdown>
         </chakra.div>
         <Divider borderColor="brand.border" />

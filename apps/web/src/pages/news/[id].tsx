@@ -3,7 +3,16 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Flex, Heading } from "@chakra-ui/react";
 
 import { getSingleEvent } from '@/entities';
-import { getformatDateLocale, isVoid, EmptyState, isEmpty, Markdown, CustomContainer, isNotVoid } from '@/shared';
+import { 
+  getformatDateLocale,
+  isVoid,
+  EmptyState,
+  isEmpty,
+  Markdown,
+  CustomContainer,
+  isNotVoid,
+  SEO 
+} from '@/shared';
 import type { Event } from '@/entities';
 import type { ApiResponse } from '@/shared';
 
@@ -17,43 +26,52 @@ export default function SingleNews({ event }: InferGetServerSidePropsType<typeof
   const { title, description, createdAt, publish_date, image } = data;
 
   return (
-    <chakra.section pt={6} pb={10}>
-      <CustomContainer withBackButton maxWidth="container.xl" flexDir="column">
-        <Flex flexDir="column">
-          <Flex
-            gap={[5, 5, 5, 10, 10]}
-            alignItems={["flex-start", "flex-start", "flex-start", "center", "center"]}
-            flexDir={["column", "column", "column", "row", "row"]}
-          >
-            <chakra.div
-              pos="relative"
-              minW={["full", "full", "75%", "540px", "600px"]}
-              h={["248px", "360px", "380px", "380px", "400px"]}
+    <>
+      <SEO>
+        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={image.url} />
+      </SEO>
+      <chakra.section pt={6} pb={10}>
+        <CustomContainer withBackButton maxWidth="container.xl" flexDir="column">
+          <Flex flexDir="column">
+            <Flex
+              gap={[5, 5, 5, 10, 10]}
+              alignItems={["flex-start", "flex-start", "flex-start", "center", "center"]}
+              flexDir={["column", "column", "column", "row", "row"]}
             >
-              <Image 
-                fill 
-                src={image.url} 
-                alt="Изображение новости"
-                style={{borderRadius: "8px", objectFit: 'cover'}}
-              />
-            </chakra.div>
-            <Flex flexDir="column" alignItems="flex-start" gap={[1, 1, 1, 2, 2]}>
-              <Heading as='h1' fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]}>{title}</Heading>
-              <chakra.span fontSize={["sm", "sm", "sm", "md", "md"]} color="brand.gray">
-                {isNotVoid(publish_date) ? 
-                getformatDateLocale(new Date(publish_date)) : 
-                getformatDateLocale(new Date(createdAt))}
-              </chakra.span>
+              <chakra.div
+                pos="relative"
+                minW={["full", "full", "75%", "540px", "600px"]}
+                h={["248px", "360px", "380px", "380px", "400px"]}
+              >
+                <Image 
+                  fill 
+                  src={image.url} 
+                  alt="Изображение новости"
+                  style={{borderRadius: "8px", objectFit: 'cover'}}
+                />
+              </chakra.div>
+              <Flex flexDir="column" alignItems="flex-start" gap={[1, 1, 1, 2, 2]}>
+                <Heading as='h1' fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]}>{title}</Heading>
+                <chakra.span fontSize={["sm", "sm", "sm", "md", "md"]} color="brand.gray">
+                  {isNotVoid(publish_date) ? 
+                  getformatDateLocale(new Date(publish_date)) : 
+                  getformatDateLocale(new Date(createdAt))}
+                </chakra.span>
+              </Flex>
             </Flex>
+            <chakra.div mt={7} fontSize="lg" textAlign="justify">
+              <Markdown>
+                {description}
+              </Markdown>
+            </chakra.div>
           </Flex>
-          <chakra.div mt={7} fontSize="lg">
-            <Markdown>
-              {description}
-            </Markdown>
-          </chakra.div>
-        </Flex>
-      </CustomContainer>
-    </chakra.section>
+        </CustomContainer>
+      </chakra.section>
+    </>
   );
 }
 
