@@ -22,8 +22,7 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
 
   return (
     <>
-      <SEO>
-        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+      <SEO title={title}>
         <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
         <meta property="og:type" content="website" />
       </SEO>

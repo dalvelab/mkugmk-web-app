@@ -49,9 +49,7 @@ export default function Events({ events }: InferGetServerSidePropsType<typeof ge
 
   return (
     <>
-      <SEO>
-        <title>Новости и события | Музейный комплекс - Верхняя Пышма</title>
-      </SEO>
+      <SEO title={t("title")} />
       <chakra.section
       pt={6}
       pb={10}

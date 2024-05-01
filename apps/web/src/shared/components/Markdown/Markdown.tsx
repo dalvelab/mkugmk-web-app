@@ -8,10 +8,22 @@ interface MarkdownProps {
   children: string;
 }
 
+interface LinkRendererProps extends Omit<HTMLLinkElement, 'children'> {
+  children: React.ReactNode;
+}
+
+function LinkRenderer(props: LinkRendererProps) {
+  return (
+    <a href={props.href} target="_blank" rel="noreferrer">
+      {props.children}
+    </a>
+  );
+}
+
 export const Markdown: React.FC<MarkdownProps> = ({children}) => {
   return (
     // @ts-ignore
-    <ReactMarkdown className={styles.markdown} rehypePlugins={[rehypeRaw]}>
+    <ReactMarkdown components={{ a: LinkRenderer }} className={styles.markdown} rehypePlugins={[rehypeRaw]}>
       {DOMPurify.sanitize(children)}
     </ReactMarkdown>
   )

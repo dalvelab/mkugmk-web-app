@@ -1,7 +1,7 @@
 import { Button, chakra, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 
 import type { VisitorsPages } from "@/entities";
-import { isNotVoid } from "@/shared";
+import { isNotVoid, Markdown } from "@/shared";
 
 interface HowToGetToMuseumTableProps {
   title: string;
@@ -55,7 +55,7 @@ export const HowToGetToMuseumTable: React.FC<HowToGetToMuseumTableProps> = ({ da
                         color="brand.gray"
                         whiteSpace="pre-wrap"
                       >
-                        {info.caption}
+                        <Markdown>{info.caption}</Markdown>
                       </chakra.span> : 
                       null}
                       {info.type === 'other' && (

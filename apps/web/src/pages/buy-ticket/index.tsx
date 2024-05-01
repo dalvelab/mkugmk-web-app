@@ -95,8 +95,7 @@ export default function BuyTicket({ exhibition_centers, tickets }: InferGetServe
 
   return (
     <>
-      <SEO>
-      <title>Купить билет | Музейный комплекс - Верхняя Пышма</title>
+      <SEO title={t("title")}>
       <meta name="description" content="Билеты в музейный комплекс можно приобрести онлайн или в кассе" />
       </SEO>
       <chakra.section

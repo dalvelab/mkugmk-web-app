@@ -21,8 +21,7 @@ export default function FAQPage({ page }: InferGetServerSidePropsType<typeof get
 
   return (
     <>
-      <SEO>
-        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+      <SEO title={title}>
         <meta name="description" content={description} />
       </SEO>
       <chakra.section pt={6} pb={10}>

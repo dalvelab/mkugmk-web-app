@@ -6,9 +6,12 @@ import { getPartnersPage } from '@/entities';
 import { isVoid, EmptyState, isEmpty, CustomContainer, SEO } from '@/shared';
 import type { PartnerPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
+import { useTranslations } from "next-intl";
 
 export default function Partners({ partners }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = partners;
+
+  const t = useTranslations();
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
@@ -16,9 +19,7 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
 
   return (
     <>
-      <SEO>
-        <title>Партнеры | Музейный комплекс - Верхняя Пышма</title>
-      </SEO>
+      <SEO title={t('Navigation.about_dropdown.partners')} />
       <chakra.section pt={6} pb={10}>
         <CustomContainer
           withBackButton
@@ -29,7 +30,7 @@ export default function Partners({ partners }: InferGetServerSidePropsType<typeo
           pos="relative"
           alignItems="flex-start"
         >
-          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>Партнеры</Heading>
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{t('Navigation.about_dropdown.partners')}</Heading>
           <Grid
             mt={7}
             gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr 1fr"]}

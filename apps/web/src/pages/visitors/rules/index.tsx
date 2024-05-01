@@ -17,9 +17,7 @@ export default function Rules({ page }: InferGetServerSidePropsType<typeof getSe
 
   return (
     <>
-      <SEO>
-        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
-      </SEO>
+      <SEO title={title} />
       <chakra.section pt={6}>
       <CustomContainer
         withBackButton

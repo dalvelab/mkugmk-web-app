@@ -29,8 +29,7 @@ export default function Tickets({ page }: InferGetServerSidePropsType<typeof get
 
   return (
     <>
-      <SEO>
-        <title>{title} | Музейный комплекс - Верхняя Пышма</title>
+      <SEO title={title}>
         <meta name="description" content={description} />
         <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
         <meta property="og:type" content="website" />

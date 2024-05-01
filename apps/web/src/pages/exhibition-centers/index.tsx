@@ -6,10 +6,13 @@ import { isVoid ,EmptyState, isEmpty, CustomContainer, SEO } from '@/shared';
 import type { ExhibitionCentersPage } from '@/entities';
 import type { ApiResponse } from '@/shared';
 import { useRouter } from 'next/router';
+import { useTranslations } from 'next-intl';
 
 export default function ExhibitionCenters({ pageContent }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
   const { locale } = useRouter();
+
+  const t = useTranslations("Navigation");
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />
@@ -21,8 +24,7 @@ export default function ExhibitionCenters({ pageContent }: InferGetServerSidePro
 
   return (
     <>
-      <SEO>
-        <title>Выставочные центры | Музейный комплекс - Верхняя Пышма</title>
+      <SEO title={t("about_dropdown.exhibition_centers")}>
         <meta name="description" content={description} />
       </SEO>
       <chakra.section

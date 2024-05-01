@@ -1,7 +1,7 @@
 import { chakra, Container, Flex, Heading, Text } from '@chakra-ui/react';
 
 import type { StrapiYoutubeVideo } from "@/shared";
-import { isNotEmpty, isNotVoid, Slider } from "@/shared";
+import { isNotEmpty, isNotVoid, Slider, YoutubeVideoEmbed } from "@/shared";
 
 interface YoutubeVideoSliderProps {
   youtube_gallery?: StrapiYoutubeVideo[];
@@ -31,16 +31,7 @@ export const YoutubeVideoSlider: React.FC<YoutubeVideoSliderProps> = ({youtube_g
                   h={["240px", "280px", "280px", "280px", "280px"]} 
                   pos="relative"
                 >
-                  <chakra.iframe
-                    w={["428px", "500px", "500px", "500px", "500px"]} 
-                    h={["240px", "280px", "280px", "280px", "280px"]} 
-                    borderRadius="12px"
-                    src={`https://www.youtube-nocookie.com/embed/${video.video_id}`} 
-                    title="YouTube video player" 
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    loading="lazy"
-                  />
+                  <YoutubeVideoEmbed id={video.video_id} />
                 </chakra.div>
                 <Text color="brand.black" fontSize="xl">{video.name}</Text>
               </Flex>

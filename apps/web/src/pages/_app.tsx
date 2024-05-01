@@ -19,7 +19,6 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <NextIntlClientProvider locale={router.locale} messages={pageProps.messages} timeZone="Asia/Yekaterinburg">
       <SEO>
-        <title>Музейный комплекс - Верхняя Пышма</title>
         <meta name="description" content="Крупнейший выставочный комплекс военной и автомобильной техники в России. Расположен в г. Верхняя Пышма, ул. Александра Козицына, 2" />
       </SEO>
       <QueryClientProvider client={queryClient}>

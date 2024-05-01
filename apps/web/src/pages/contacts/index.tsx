@@ -21,9 +21,7 @@ export default function Events({ page }: InferGetServerSidePropsType<typeof getS
 
   return (
     <>
-      <SEO>
-      <title>Контакты | Музейный комплекс - Верхняя Пышма</title>
-      </SEO>
+      <SEO title={title} />
       <chakra.section
       pt={6}
       pb={10}

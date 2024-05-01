@@ -48,8 +48,7 @@ export default function ExhibitionCenter({ exhibitionCenter }: InferGetServerSid
 
   return (
     <>
-      <SEO>
-      <title>{name} | Музейный комплекс - Верхняя Пышма</title>
+      <SEO title={name}>
       <meta property="og:title" content={`${name} | Музейный комплекс - Верхняя Пышма`} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={banner.url} />
