@@ -1,13 +1,12 @@
 import { StrapiInfoCard, StrapiMedia, StrapiWorkingTime } from "@/shared";
 
-export type VisitorsPageType = 
-  'tickets' | 
-  'cafe-and-souvenirs' | 
-  'interactive-playground'| 
-  'navigation' | 
-  'rules' | 
-  'working-hours'
-  ;
+export type VisitorsPageType =
+  | "tickets"
+  | "cafe-and-souvenirs"
+  | "interactive-playground"
+  | "navigation"
+  | "rules"
+  | "working-hours";
 
 export type VisitorsPages = {
   tickets_page: {
@@ -35,9 +34,9 @@ export type VisitorsPages = {
         name?: string;
         caption?: string;
         price?: number;
-      }[]
+      }[];
       additional_text?: string;
-    }[]
+    }[];
     documents: StrapiMedia[] | null;
   };
   interactive_playground_page: {
@@ -62,8 +61,8 @@ export type VisitorsPages = {
       id: number;
       name: string;
       working_time: StrapiWorkingTime[];
-    }[]
-  }
+    }[];
+  };
   navigation_page: {
     id: number;
     type_for_meilisearch: VisitorsPageType;
@@ -80,21 +79,21 @@ export type VisitorsPages = {
       name: string;
       caption?: string;
       value: string;
-      type: 'public_transport' | 'other';
-    }[]
-  }
-}
+      type: "public_transport" | "other";
+    }[];
+  };
+};
 
 export type RulesPage = {
   id: number;
   type_for_meilisearch: VisitorsPageType;
   title: string;
   description: string;
-}
+};
 
 export type BenefitTicketsPage = {
   id: number;
   type_for_meilisearch: VisitorsPageType;
   title: string;
   description: string;
-}
+};

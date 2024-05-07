@@ -1,1 +1,1 @@
-export * from './ComplexOperatingHours';
+export * from "./ComplexOperatingHours";

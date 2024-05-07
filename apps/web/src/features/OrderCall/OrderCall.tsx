@@ -111,6 +111,7 @@ export const OrderCall: React.FC<OrderCallProps> = ({buttonStyles}) => {
         variant='link'
         fontWeight="regular"
         __css={buttonStyles}
+        _hover={{textDecor: "underline"}}
       >
         {t('order_call')}
       </Button>

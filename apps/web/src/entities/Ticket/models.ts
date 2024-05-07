@@ -6,4 +6,4 @@ export type Ticket = {
   name: string;
   pushkin_card: boolean;
   exhibition_centers: ExhibitionCenter[];
-}
+};

@@ -9,4 +9,4 @@ export type WelcomePage = {
   banner: StrapiMedia;
   video_preview: StrapiMedia;
   youtube_gallery: StrapiYoutubeVideo[];
-}
+};

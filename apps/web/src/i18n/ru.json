@@ -26,7 +26,8 @@
       "interactive_playground": "Интерактивная площадка",
       "cafe_and_souvenirs": "Кафе и сувениры",
       "rules": "Правила посещения",
-      "benefit_tickets": "Льготное посещение"
+      "benefit_tickets": "Льготное посещение",
+      "faq": "Вопрос — Ответ"
     }
   },
   "Index": {
@@ -54,10 +55,10 @@
   },
   "Navigation_page": {
     "museum_complex_map": "Карта музейного комплекса",
-    "how_to_get_to_museum": "Как доехать до Музейного комплекса",
+    "how_to_get_to_museum": "Как добраться?",
     "public_transport": "На общественном транспорте из Екатеринбурга",
     "private_transport": "На автомобиле или экскурсионном автобусе",
-    "addresses": "Адреса выставочных площадок Музейного комплекса"
+    "addresses": "Адреса Выставочных центров"
   },
   "Tickets_page": {
     "type_of_center": "Вид площадки",
@@ -82,7 +83,7 @@
     "socials": "Социальные сети",
     "visitors": "Посетителям",
     "buy_ticket_button": "Купить билет",
-    "order_call": "Заказать звонок",
+    "order_call": "Записаться на экскурсию",
     "leave_feedback": "Оставить отзыв",
     "order_call_modal_form_name": "Имя",
     "order_call_modal_form_phone": "Телефон",

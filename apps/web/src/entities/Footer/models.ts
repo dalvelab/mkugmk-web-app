@@ -1,4 +1,8 @@
-import { StrapiContact, StrapiSocialNetwork, StrapiWorkingTime } from "@/shared";
+import {
+  StrapiContact,
+  StrapiSocialNetwork,
+  StrapiWorkingTime,
+} from "@/shared";
 
 export type Footer = {
   id: number;
@@ -14,4 +18,4 @@ export type Footer = {
   }[];
   socials: StrapiSocialNetwork[];
   working_time: StrapiWorkingTime[];
-}
+};

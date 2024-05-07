@@ -1,12 +1,12 @@
-import { InterFont } from '../fonts';
+import { InterFont } from "../fonts";
 
 export const chakraMKUGMKConfig = {
   colors: {
     brand: {
-      'green': '#4ADE80',
-      'black': '#09090B',
-      'border': '#E2E8F0',
-      'gray': '#64748B',
+      green: "#4ADE80",
+      black: "#09090B",
+      border: "#E2E8F0",
+      gray: "#64748B",
     },
   },
   fonts: {
@@ -16,7 +16,7 @@ export const chakraMKUGMKConfig = {
   },
   sizes: {
     container: {
-      xl: '1440px'
-    }
-  }
-}
+      xl: "1440px",
+    },
+  },
+};

@@ -1,10 +1,10 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { ReactNode } from "react"
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { ReactNode } from "react";
 
-import { CANONICAL_DOMAIN } from '../../constants';
-import { useTranslations } from 'next-intl';
-import { isNotEmpty, isNotVoid } from '@/shared/utils';
+import { CANONICAL_DOMAIN } from "../../constants";
+import { useTranslations } from "next-intl";
+import { isNotEmpty, isNotVoid } from "@/shared/utils";
 
 interface SEOProps {
   title?: string;
@@ -16,7 +16,10 @@ export const SEO: React.FC<SEOProps> = ({ children, title }) => {
 
   const t = useTranslations("Settings");
 
-  const metaTitle = isNotVoid(title) && isNotEmpty(title) ?  `${title} | ${t("title_prefix")}` : t("title_prefix");
+  const metaTitle =
+    isNotVoid(title) && isNotEmpty(title)
+      ? `${title} | ${t("title_prefix")}`
+      : t("title_prefix");
 
   return (
     <Head>
@@ -28,5 +31,5 @@ export const SEO: React.FC<SEOProps> = ({ children, title }) => {
       <link rel="canonical" href={CANONICAL_DOMAIN + asPath} />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-  )
-}
+  );
+};

@@ -42,7 +42,7 @@
 }
 
 .markdown blockquote::before {
-  content: '';
+  content: "";
   width: 3px;
   height: 100%;
   background-color: #000;

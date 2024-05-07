@@ -10,5 +10,5 @@ export type ContactsPage = {
     email?: string;
     enable_order_call_modal: boolean;
     phone?: string;
-  }[]
-}
+  }[];
+};

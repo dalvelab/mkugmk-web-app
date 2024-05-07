@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
-import { SearchIcon } from "@chakra-ui/icons"
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react"
+import { SearchIcon } from "@chakra-ui/icons";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 
 import { debounce, isEmpty, isNotVoid } from "@/shared";
 
@@ -13,21 +13,20 @@ interface SearchForm {
   inputRef: React.MutableRefObject<HTMLInputElement | null>;
 }
 
-export const SearchForm: React.FC<SearchForm> = ({setData, inputRef}) => {
-  
+export const SearchForm: React.FC<SearchForm> = ({ setData, inputRef }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getTest = useCallback(
     debounce(async (args: string[]) => {
-      const response = await createMeilisearchRequest({query: args[0]});
+      const response = await createMeilisearchRequest({ query: args[0] });
 
       if (isNotVoid(response.results)) {
-        setData(response.results)
-        
+        setData(response.results);
+
         return;
       }
 
       setData([]);
-    }, 250), 
+    }, 250),
     []
   );
 
@@ -39,15 +38,20 @@ export const SearchForm: React.FC<SearchForm> = ({setData, inputRef}) => {
       return;
     }
 
-    getTest(omitSpaces)
+    getTest(omitSpaces);
   }
 
   return (
     <InputGroup size="lg">
-      <InputLeftElement pointerEvents='none'>
-        <SearchIcon color="brand.gray"/>
+      <InputLeftElement pointerEvents="none">
+        <SearchIcon color="brand.gray" />
       </InputLeftElement>
-      <Input ref={inputRef} size="lg" placeholder='Введите поисковый запрос' onChange={(e) => onChange(e.target.value)} />
+      <Input
+        ref={inputRef}
+        size="lg"
+        placeholder="Введите поисковый запрос"
+        onChange={(e) => onChange(e.target.value)}
+      />
     </InputGroup>
-  )
-} 
+  );
+};

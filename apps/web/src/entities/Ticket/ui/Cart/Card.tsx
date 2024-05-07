@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import { chakra, Flex, Grid, IconButton } from "@chakra-ui/react"
-import { ExhibitionCenter } from '@/entities';
-import { DeleteIcon } from '@chakra-ui/icons';
-import { isNotVoid } from '@/shared';
+import Image from "next/image";
+import { chakra, Flex, Grid, IconButton } from "@chakra-ui/react";
+import { ExhibitionCenter } from "@/entities";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { isNotVoid } from "@/shared";
 
 interface CartTicketCardProps {
   exhibition_center: ExhibitionCenter;
@@ -10,17 +10,15 @@ interface CartTicketCardProps {
   deleteCenterFromSelected?: (id: number) => void;
 }
 
-export const CartTicketCard: React.FC<CartTicketCardProps> = ({ 
+export const CartTicketCard: React.FC<CartTicketCardProps> = ({
   widthDeleteButton = false,
   exhibition_center,
   deleteCenterFromSelected,
 }) => {
-
   const Description = () => {
-    const thumbnail = isNotVoid(
-      exhibition_center.banner.formats) ? 
-      exhibition_center.banner.formats?.thumbnail.url : 
-      exhibition_center.banner.url;
+    const thumbnail = isNotVoid(exhibition_center.banner.formats)
+      ? exhibition_center.banner.formats?.thumbnail.url
+      : exhibition_center.banner.url;
 
     return (
       <>
@@ -31,22 +29,24 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
           borderRadius="50%"
           overflow="hidden"
         >
-        <Image
-          fill
-          src={thumbnail}
-          alt={`Изображение ${exhibition_center.name}`} 
-        />
+          <Image
+            fill
+            src={thumbnail}
+            alt={`Изображение ${exhibition_center.name}`}
+          />
         </chakra.div>
-        <chakra.span fontSize={["sm", "md", "md", "md", "sm"]}>{exhibition_center.name}</chakra.span>
+        <chakra.span fontSize={["sm", "md", "md", "md", "sm"]}>
+          {exhibition_center.name}
+        </chakra.span>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <Flex
       px={4}
       py={4}
-      border="1px solid" 
+      border="1px solid"
       borderColor="brand.border"
       alignItems="center"
       justifyContent={widthDeleteButton ? "space-between" : "flex-start"}
@@ -59,19 +59,22 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
             <Description />
           </Grid>
           <IconButton
-              size="sm"
-              bgColor="transparent"
-              color="brand.gray"
-              icon={<DeleteIcon boxSize={4} />}
-              aria-label="удалить выбранный центр"
-              _hover={{bgColor: "brand.border", color: "brand.black"}}
-              onClick={isNotVoid(deleteCenterFromSelected) ? () => deleteCenterFromSelected(exhibition_center.id) : undefined}
-            />
-          </>
-          ) : (
-            <Description />
-          )
-        }
+            size="sm"
+            bgColor="transparent"
+            color="brand.gray"
+            icon={<DeleteIcon boxSize={4} />}
+            aria-label="удалить выбранный центр"
+            _hover={{ bgColor: "brand.border", color: "brand.black" }}
+            onClick={
+              isNotVoid(deleteCenterFromSelected)
+                ? () => deleteCenterFromSelected(exhibition_center.id)
+                : undefined
+            }
+          />
+        </>
+      ) : (
+        <Description />
+      )}
     </Flex>
-  )
-}
+  );
+};

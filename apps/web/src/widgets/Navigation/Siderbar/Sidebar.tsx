@@ -1,5 +1,12 @@
 import { CloseIcon } from "@chakra-ui/icons";
-import { Flex, Modal, ModalBody, ModalContent, ModalHeader, IconButton } from "@chakra-ui/react"
+import {
+  Flex,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  IconButton,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 import { LanguageSelect, Search } from "@/features";
@@ -13,43 +20,54 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-type MenuBlocks = 'about' | 'visitors' | 'main';
+type MenuBlocks = "about" | "visitors" | "main";
 
-export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpened, exhibition_centers }) => {
-  const [selectedMenuBlock, setSelectedMenuBlock] = useState<MenuBlocks>('main');
+export const Sidebar: React.FC<SidebarProps> = ({
+  onClose,
+  isOpened,
+  exhibition_centers,
+}) => {
+  const [selectedMenuBlock, setSelectedMenuBlock] =
+    useState<MenuBlocks>("main");
 
   const handleSidebarClose = () => {
-    setSelectedMenuBlock('main');
+    setSelectedMenuBlock("main");
     onClose();
-  }
+  };
 
   return (
-    <Modal autoFocus={false} onClose={handleSidebarClose} size="full" isOpen={isOpened} motionPreset="slideInRight">
+    <Modal
+      autoFocus={false}
+      onClose={handleSidebarClose}
+      size="full"
+      isOpen={isOpened}
+      motionPreset="slideInRight"
+    >
       <ModalContent>
         <ModalHeader zIndex={2}>
           <Flex w="full" justifyContent="space-between">
             <Flex gap={4}>
               <LanguageSelect size="lg" />
-              <Search type="mobile" onSidebarClose={onClose}/>
+              <Search type="mobile" onSidebarClose={onClose} />
             </Flex>
             <IconButton
-                boxSize={12}
-                icon={<CloseIcon boxSize={4} />} 
-                _hover={{bg: "brand.border"}} 
-                aria-label='Закрыть меню'
-                onClick={handleSidebarClose}
-              />
+              boxSize={12}
+              icon={<CloseIcon boxSize={4} />}
+              _hover={{ bg: "brand.border" }}
+              aria-label="Закрыть меню"
+              onClick={handleSidebarClose}
+            />
           </Flex>
         </ModalHeader>
         <ModalBody>
           <Flex
-            w="full" 
-            height="100vh" 
+            w="full"
+            height="100vh"
             flexDir="column"
-            alignItems="flex-start" 
-            bgColor="white" 
-            pos="fixed" 
-            top={0} 
+            alignItems="flex-start"
+            bgColor="white"
+            pos="fixed"
+            top={0}
             left={0}
             justifyContent="center"
             fontSize={["3xl", "4xl", "4xl", "4xl", "3xl"]}
@@ -57,18 +75,28 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpened, exhibition_
             pl={6}
             gap={4}
           >
-            {selectedMenuBlock === 'main' ? (
-              <Main onClick={handleSidebarClose} setSelectedMenuBlock={setSelectedMenuBlock}/>
-            ): null}
-            {selectedMenuBlock === 'about' ? (
-              <About exhibition_centers={exhibition_centers} back={() => setSelectedMenuBlock('main')} onClick={handleSidebarClose} />
+            {selectedMenuBlock === "main" ? (
+              <Main
+                onClick={handleSidebarClose}
+                setSelectedMenuBlock={setSelectedMenuBlock}
+              />
             ) : null}
-            {selectedMenuBlock === 'visitors' ? (
-              <Visitors back={() => setSelectedMenuBlock('main')} onClick={handleSidebarClose} />
+            {selectedMenuBlock === "about" ? (
+              <About
+                exhibition_centers={exhibition_centers}
+                back={() => setSelectedMenuBlock("main")}
+                onClick={handleSidebarClose}
+              />
+            ) : null}
+            {selectedMenuBlock === "visitors" ? (
+              <Visitors
+                back={() => setSelectedMenuBlock("main")}
+                onClick={handleSidebarClose}
+              />
             ) : null}
           </Flex>
         </ModalBody>
       </ModalContent>
     </Modal>
-  )
-}
+  );
+};

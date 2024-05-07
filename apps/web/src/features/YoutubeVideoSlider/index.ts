@@ -1,1 +1,1 @@
-export * from './YoutubeVideoSlider';
+export * from "./YoutubeVideoSlider";

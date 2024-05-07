@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 interface EmailOptions {
   message: string;
@@ -33,4 +33,4 @@ export async function sendEmail(options: EmailOptions) {
       }
     });
   });
-};
+}

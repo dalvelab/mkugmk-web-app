@@ -6,5 +6,5 @@ export type FaqPage = {
     topic: string;
     question: string;
     answer: string;
-  }[]
-}
+  }[];
+};

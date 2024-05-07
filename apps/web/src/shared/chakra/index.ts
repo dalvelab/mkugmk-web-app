@@ -1,1 +1,1 @@
-export { chakraMKUGMKConfig } from './config';
+export { chakraMKUGMKConfig } from "./config";

@@ -1,54 +1,81 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { chakra, Container, Heading, Flex, Button } from "@chakra-ui/react";
 
-import { getWelcomePage, WelcomeHeroSection, getComplexOperationManagement } from '@/entities';
-import { Gallery, isVoid, EmptyState, isEmpty, isNotEmpty, isNotVoid, OpenStatus, useComplextOperatingHours, Markdown } from '@/shared';
-import type { ComplexOperationManagement, WelcomePage } from '@/entities';
-import type { ApiResponse } from '@/shared';
-import { YoutubeVideoSlider } from '@/features';
-import { useRouter } from 'next/router';
-import { getWorkingHoursForToday } from '@/shared/utils/dates';
-import { motion } from 'framer-motion';
+import {
+  getWelcomePage,
+  WelcomeHeroSection,
+  getComplexOperationManagement,
+} from "@/entities";
+import {
+  Gallery,
+  isVoid,
+  EmptyState,
+  isEmpty,
+  isNotEmpty,
+  isNotVoid,
+  OpenStatus,
+  useComplextOperatingHours,
+  Markdown,
+} from "@/shared";
+import type { ComplexOperationManagement, WelcomePage } from "@/entities";
+import type { ApiResponse } from "@/shared";
+import { YoutubeVideoSlider } from "@/features";
+import { useRouter } from "next/router";
+import { getWorkingHoursForToday } from "@/shared/utils/dates";
+import { motion } from "framer-motion";
 
-export default function Home({ pageContent, complexSettings }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({
+  pageContent,
+  complexSettings,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
   const { data: complexSettingsData } = complexSettings;
 
   const { locale } = useRouter();
 
-  const t = useTranslations('Index');
+  const t = useTranslations("Index");
   const complexOperatingSettings = useComplextOperatingHours();
 
-  if (
-    isVoid(data) || 
-    isEmpty(data) || 
-    isVoid(complexSettingsData)
-  ) {
-    return <EmptyState />
+  if (isVoid(data) || isEmpty(data) || isVoid(complexSettingsData)) {
+    return <EmptyState />;
   }
-  
-  const { title, description, banner, youtube_gallery, gallery, video_preview } = data;
 
-  const dayOfWeek = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Yekaterinburg'})).getDay();
+  const {
+    title,
+    description,
+    banner,
+    youtube_gallery,
+    gallery,
+    video_preview,
+  } = data;
 
-  const workTimeToday = 
-    isNotVoid(complexSettingsData.common_operating_hours) ?
-      getWorkingHoursForToday({
-        data: complexSettingsData.common_operating_hours, 
-        dayOfWeek, 
+  const dayOfWeek = new Date(
+    new Date().toLocaleString("en", { timeZone: "Asia/Yekaterinburg" })
+  ).getDay();
+
+  const workTimeToday = isNotVoid(complexSettingsData.common_operating_hours)
+    ? getWorkingHoursForToday({
+        data: complexSettingsData.common_operating_hours,
+        dayOfWeek,
         locale,
-        isSpecialDayToday: complexOperatingSettings?.isOpened
-      }) : 
-      undefined
+        isSpecialDayToday: complexOperatingSettings?.isOpened,
+      })
+    : undefined;
 
   return (
     <>
-      <chakra.section 
-        pos="relative" 
-        h={["calc(100vh - 64px)", "calc(100vh - 64px)", "calc(100vh - 64px)", "calc(100vh - 80px)", "calc(100vh - 80px)"]}
-        display="flex" 
+      <chakra.section
+        pos="relative"
+        h={[
+          "calc(100vh - 64px)",
+          "calc(100vh - 64px)",
+          "calc(100vh - 64px)",
+          "calc(100vh - 80px)",
+          "calc(100vh - 80px)",
+        ]}
+        display="flex"
         flexDir="column"
         justifyContent="center"
       >
@@ -74,46 +101,58 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
           <Flex
             as={motion.div}
             display="flex"
-            w={["full", "full", "full", "900px", "900px"]} 
+            w={["full", "full", "full", "900px", "900px"]}
             h="full"
             flexDir="column"
             justifyContent="center"
             alignItems="flex-start"
             gap={5}
-            initial={{ opacity: 0, transform: 'translateY(-100%)' }}
-            whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+            initial={{ opacity: 0, transform: "translateY(-100%)" }}
+            whileInView={{ opacity: 1, transform: "translateY(0)" }}
             viewport={{ once: true }}
-            >
-            <Heading 
-              as="h1" 
-              fontSize={["3xl", "4xl", "5xl", "5xl", "5xl"]} 
-              textTransform="uppercase" 
+          >
+            <Heading
+              as="h1"
+              fontSize={["3xl", "4xl", "5xl", "5xl", "5xl"]}
+              textTransform="uppercase"
               color="white"
             >
-              {t('name')}
+              {t("name")}
             </Heading>
             <OpenStatus workTimeToday={workTimeToday} theme="dark" />
             <Link href="/buy-ticket">
               <Button mt={2} size="lg" colorScheme="green">
-                {t('buy_ticket')}
+                {t("buy_ticket")}
               </Button>
             </Link>
           </Flex>
         </Container>
       </chakra.section>
-      <chakra.section pt={[10, 20, 20, 20, 20]} pb={[10, 20, 20, 20, 20]} pos="relative">
-        <Container 
-          maxWidth="container.xl" 
+      <chakra.section
+        pt={[10, 20, 20, 20, 20]}
+        pb={[10, 20, 20, 20, 20]}
+        pos="relative"
+      >
+        <Container
+          maxWidth="container.xl"
           display="flex"
           flexDir="column"
           pos="relative"
+        >
+          <Flex
+            flexDir="column"
+            justifyContent="center"
+            alignItems="center"
+            gap={5}
           >
-          <Flex flexDir="column" justifyContent="center" alignItems="center" gap={5}>
-            <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-            <chakra.div textAlign="center" fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>
-              <Markdown>
-              {description}
-              </Markdown>
+            <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
+              {title}
+            </Heading>
+            <chakra.div
+              textAlign="center"
+              fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
+            >
+              <Markdown>{description}</Markdown>
             </chakra.div>
           </Flex>
         </Container>
@@ -125,13 +164,13 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
           pb={[10, 20, 20, 20, 20]}
           pos="relative"
         >
-          <Container 
+          <Container
             maxWidth="container.xl"
             display="flex"
             flexDir="column"
             pos="relative"
-            >
-              <Gallery images={gallery} />
+          >
+            <Gallery images={gallery} />
           </Container>
         </chakra.section>
       )}
@@ -141,19 +180,21 @@ export default function Home({ pageContent, complexSettings }: InferGetServerSid
 }
 
 interface HomeProps {
-  pageContent: ApiResponse<WelcomePage, null>
-  complexSettings: ApiResponse<ComplexOperationManagement, null>
+  pageContent: ApiResponse<WelcomePage, null>;
+  complexSettings: ApiResponse<ComplexOperationManagement, null>;
 }
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async ({locale}) => {
-  const pageContent = await getWelcomePage({locale});
+export const getServerSideProps: GetServerSideProps<HomeProps> = async ({
+  locale,
+}) => {
+  const pageContent = await getWelcomePage({ locale });
   const complexSettings = await getComplexOperationManagement();
 
   return {
     props: {
       messages: (await import(`../i18n/${locale}.json`)).default,
       pageContent,
-      complexSettings
-     }
-  }
+      complexSettings,
+    },
+  };
 };

@@ -7,57 +7,76 @@ import { isNotVoid } from "../utils";
 
 export type ComplexOperationManagement = {
   common_operating_hours: StrapiWorkingTime[];
-  special_days_operating_hours: StrapiSpecialDay[]
-}
+  special_days_operating_hours: StrapiSpecialDay[];
+};
 
-async function getComplexOperationManagement(): Promise<ApiResponse<ComplexOperationManagement, null>> {
+async function getComplexOperationManagement(): Promise<
+  ApiResponse<ComplexOperationManagement, null>
+> {
   const res = await fetch(`/api/complex-operation-management`);
 
-  return res.json()
+  return res.json();
 }
 
 type ComplextOperatingHoursContextType = {
-  isOpened?: boolean
+  isOpened?: boolean;
 };
 
-const ComplextOperatingHoursContext = createContext<ComplextOperatingHoursContextType | null>(null);
+const ComplextOperatingHoursContext =
+  createContext<ComplextOperatingHoursContextType | null>(null);
 
-export const ComplextOperatingHoursProvider = ({children}: {children: React.ReactNode}) => {
+export const ComplextOperatingHoursProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [value, setValue] = useState<ComplextOperatingHoursContextType>({
-    isOpened: undefined
+    isOpened: undefined,
   });
 
-  const { data: response, isLoading, isError, isSuccess } = useQuery(
-    {
-      queryKey: [`complex-operation-hours`],
-      queryFn: () => getComplexOperationManagement(),
-      refetchOnWindowFocus: false,
+  const {
+    data: response,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useQuery({
+    queryKey: [`complex-operation-hours`],
+    queryFn: () => getComplexOperationManagement(),
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
     if (isError) {
       setValue({
-        isOpened: true
-      })
+        isOpened: true,
+      });
     }
 
     if (isSuccess && isNotVoid(response.data)) {
-      const isOpened = checkComplexOperatingHours(response.data.special_days_operating_hours);
+      const isOpened = checkComplexOperatingHours(
+        response.data.special_days_operating_hours
+      );
 
       setValue({
-        isOpened
-      })
+        isOpened,
+      });
     }
   }, [isError, isSuccess, response?.data]);
 
-  return <ComplextOperatingHoursContext.Provider value={value}>{children}</ComplextOperatingHoursContext.Provider>
-}
+  return (
+    <ComplextOperatingHoursContext.Provider value={value}>
+      {children}
+    </ComplextOperatingHoursContext.Provider>
+  );
+};
 
 export function useComplextOperatingHours() {
-  const context = useContext(ComplextOperatingHoursContext)
+  const context = useContext(ComplextOperatingHoursContext);
 
   if (context === undefined) {
-    throw new Error(`useComplextOperatingHours must be used within a ComplextOperatingHoursContext`)
+    throw new Error(
+      `useComplextOperatingHours must be used within a ComplextOperatingHoursContext`
+    );
   }
 
   return context;

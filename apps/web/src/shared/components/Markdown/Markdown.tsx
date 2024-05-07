@@ -2,13 +2,13 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import DOMPurify from "isomorphic-dompurify";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 interface MarkdownProps {
   children: string;
 }
 
-interface LinkRendererProps extends Omit<HTMLLinkElement, 'children'> {
+interface LinkRendererProps extends Omit<HTMLLinkElement, "children"> {
   children: React.ReactNode;
 }
 
@@ -20,11 +20,16 @@ function LinkRenderer(props: LinkRendererProps) {
   );
 }
 
-export const Markdown: React.FC<MarkdownProps> = ({children}) => {
+export const Markdown: React.FC<MarkdownProps> = ({ children }) => {
   return (
-    // @ts-ignore
-    <ReactMarkdown components={{ a: LinkRenderer }} className={styles.markdown} rehypePlugins={[rehypeRaw]}>
+    <ReactMarkdown
+      // @ts-ignore
+      components={{ a: LinkRenderer }}
+      className={styles.markdown}
+      // @ts-ignore
+      rehypePlugins={[rehypeRaw]}
+    >
       {DOMPurify.sanitize(children)}
     </ReactMarkdown>
-  )
-}
+  );
+};
