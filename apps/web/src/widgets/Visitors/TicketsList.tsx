@@ -43,6 +43,11 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
 
   const activeTicket = tickets.find((ticket) => ticket.id === activeId);
 
+  const isAdditionalColumnActive =
+    isNotVoid(activeTicket) &&
+    (isNotEmpty(activeTicket.additional_text) ||
+      activeTicket.available_on_website);
+
   return (
     <chakra.section>
       <Container maxW="container.xl">
@@ -96,6 +101,8 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
                     fontSize="xl"
                     textTransform="none"
                     color="brand.black"
+                    border="1px solid"
+                    borderColor="brand.border"
                     px={5}
                     py={5}
                     fontWeight="semibold"
@@ -109,8 +116,6 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
                     color="brand.black"
                     px={5}
                     py={5}
-                    border="1px solid"
-                    borderColor="brand.border"
                     fontWeight="semibold"
                   >
                     {t("info")}
@@ -132,6 +137,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
                           <Flex
                             key={category.id}
                             justifyContent="space-between"
+                            alignItems="center"
                             fontSize={["md", "lg", "lg", "lg", "lg"]}
                             gap={5}
                           >
@@ -148,15 +154,16 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
                                 </chakra.span>
                               )}
                             </Flex>
-                            <chakra.span>
-                              {category.price} {t("currency")}
-                            </chakra.span>
+                            {isNotVoid(category.price) && (
+                              <chakra.span>
+                                {category.price} {t("currency")}
+                              </chakra.span>
+                            )}
                           </Flex>
                         ))}
                       </Flex>
                     </Td>
                     <Td
-                      w="50%"
                       minW="300px"
                       px={5}
                       border="1px solid"
