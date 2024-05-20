@@ -1038,13 +1038,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    type: Attribute.Enumeration<['news', 'event']> &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
     image: Attribute.Media &
       Attribute.Required &
       Attribute.SetPluginOptions<{

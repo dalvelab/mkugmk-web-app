@@ -24,19 +24,6 @@
       },
       "type": "string"
     },
-    "type": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "news",
-        "event"
-      ],
-      "required": true
-    },
     "image": {
       "type": "media",
       "multiple": false,
