@@ -112,13 +112,6 @@ export default function Events({
                       </Link>
                     )}
                     {contact.enable_order_call_modal && (
-                      // <Button
-                      // variant="link"
-                      // textDecor="underline"
-                      // _hover={{color: "green.500"}}
-                      // >
-                      //   Заказать звонок
-                      // </Button>
                       <OrderCall
                         buttonStyles={{
                           textDecor: "underline",
@@ -148,10 +141,6 @@ export default function Events({
                   <Flex gap={1} flexDir="column">
                     <chakra.span fontSize="lg" fontWeight="medium">
                       Предложения по покупке техники для Музейного комплекса
-                    </chakra.span>
-                    <chakra.span fontSize="xs" color="brand.gray">
-                      Коммерческие предложения будут реализованы на договорной
-                      основе и по безналичному расчету
                     </chakra.span>
                   </Flex>
                   <Link

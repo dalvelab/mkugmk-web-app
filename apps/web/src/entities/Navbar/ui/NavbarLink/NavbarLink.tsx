@@ -17,6 +17,7 @@ export const NavbarLink: React.FC<NavbarLinkProps> = ({
       fontWeight={level !== 3 ? "medium" : "regular"}
       color={level !== 3 ? "brand.black" : "brand.gray"}
       _hover={{ textDecoration: "none", color: "green.500" }}
+      whiteSpace="nowrap"
     >
       {text}
     </Link>

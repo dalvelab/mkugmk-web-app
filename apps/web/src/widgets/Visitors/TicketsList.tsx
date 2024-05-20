@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import type { VisitorsPages } from "@/entities";
-import { isNotEmpty, isNotVoid, Markdown } from "@/shared";
+import { formatCurrency, isNotEmpty, isNotVoid, Markdown } from "@/shared";
 import Link from "next/link";
 
 interface TicketsListProps {
@@ -156,7 +156,8 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
                             </Flex>
                             {isNotVoid(category.price) && (
                               <chakra.span>
-                                {category.price} {t("currency")}
+                                {formatCurrency.format(category.price)}{" "}
+                                {t("currency")}
                               </chakra.span>
                             )}
                           </Flex>
@@ -177,7 +178,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
                           </chakra.span>
                         )}
                         {activeTicket.available_on_website && (
-                          <Link href="/buy-ticket" target="_blank">
+                          <Link href="/buy-ticket">
                             <Button colorScheme="green">
                               {t("buy_ticket_button")}
                             </Button>

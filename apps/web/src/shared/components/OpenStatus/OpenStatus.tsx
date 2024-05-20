@@ -52,7 +52,7 @@ export const OpenStatus: React.FC<OpenStatusProps> = ({
         }}
       />
       <chakra.span
-        fontSize="sm"
+        fontSize="md"
         color={theme === "dark" ? "white" : "brand.black"}
       >
         {workTimeToday.value}

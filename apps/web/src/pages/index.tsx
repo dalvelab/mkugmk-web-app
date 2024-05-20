@@ -151,6 +151,7 @@ export default function Home({
             <chakra.div
               textAlign="center"
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
+              maxW={["100%", "100%", "100%", "100%", "80%"]}
             >
               <Markdown>{description}</Markdown>
             </chakra.div>

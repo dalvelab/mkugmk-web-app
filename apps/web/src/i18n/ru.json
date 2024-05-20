@@ -9,9 +9,10 @@
     "sidebar_back": "Назад",
     "menu": {
       "home": "Главная",
-      "about": "О комплексе",
+      "about": "О нас",
       "visitors": "Посетителям",
-      "news": "События и новости",
+      "news": "Новости",
+      "cafe": "Кафе",
       "contacts": "Контакты",
       "buy-ticket": "Купить билет"
     },
@@ -24,14 +25,14 @@
       "working_schedule": "График работы",
       "navigation": "Навигация",
       "interactive_playground": "Интерактивная площадка",
-      "cafe_and_souvenirs": "Кафе и сувениры",
+      "cafe": "Кафе",
       "rules": "Правила посещения",
       "benefit_tickets": "Льготное посещение",
       "faq": "Вопрос — Ответ"
     }
   },
   "Index": {
-    "name": "Музейный комплекс военной и гражданской техники",
+    "name": "Музейный комплекс гражданской и военной техники",
     "buy_ticket": "Купить билет"
   },
   "ExhibitionCenter": {
@@ -48,7 +49,7 @@
     "view_prices_link": "Посмотреть цены"
   },
   "News": {
-    "title": "Новости и события"
+    "title": "Новости"
   },
   "Buy_Tickets": {
     "title": "Купить билеты"
@@ -68,7 +69,7 @@
     "type_of_service": "Вид услуги",
     "price": "Стоимость",
     "info": "Примечание",
-    "documents": "Документы"
+    "documents": "Прейскурант"
   },
   "Working_hours_page": {
     "operating_hours_holidays": "График работы в праздничные дни",

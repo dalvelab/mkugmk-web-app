@@ -14,3 +14,4 @@ export {
   getformatDateLocaleTime,
 } from "./dates";
 export { debounce } from "./debounce";
+export { formatCurrency } from "./format";

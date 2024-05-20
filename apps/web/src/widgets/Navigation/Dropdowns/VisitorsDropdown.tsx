@@ -1,4 +1,4 @@
-import { NavbarLink } from "@/entities/Navbar/ui/NavbarLink";
+import { NavbarLink } from "@/entities";
 import { Flex, Grid } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
@@ -30,7 +30,7 @@ export const VisitorsDropdown = ({}) => {
         />
         <NavbarLink
           href="/visitors/cafe-and-souvenirs"
-          text={t("visitors_dropdown.cafe_and_souvenirs")}
+          text={t("visitors_dropdown.cafe")}
           level={2}
         />
         <NavbarLink

@@ -44,6 +44,9 @@ export const Main: React.FC<MainProps> = ({
       <Link href="/news" onClick={onClick}>
         {t("menu.news")}
       </Link>
+      <Link href="/visitors/cafe-and-souvenirs" onClick={onClick}>
+        {t("menu.cafe")}
+      </Link>
       <Link href="/contacts" onClick={onClick}>
         {t("menu.contacts")}
       </Link>

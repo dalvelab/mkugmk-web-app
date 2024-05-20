@@ -128,6 +128,11 @@ export const Navbar = () => {
               <VisitorsDropdown />
             </DropdownLink>
             <NavbarLink href="/news" text={t("menu.news")} level={1} />
+            <NavbarLink
+              href="/visitors/cafe-and-souvenirs"
+              text={t("menu.cafe")}
+              level={1}
+            />
             <NavbarLink href="/contacts" text={t("menu.contacts")} level={1} />
           </Flex>
           <Flex gap={[0, 4, 4, 0, 4]} display="flex" alignItems="center">

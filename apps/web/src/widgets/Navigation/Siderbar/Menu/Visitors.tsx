@@ -39,7 +39,7 @@ export const Visitors: React.FC<VisitorsProps> = ({ back, onClick }) => {
         {t("visitors_dropdown.interactive_playground")}
       </Link>
       <Link href="/visitors/cafe-and-souvenirs" onClick={onClick}>
-        {t("visitors_dropdown.cafe_and_souvenirs")}
+        {t("visitors_dropdown.cafe")}
       </Link>
       <Link href="/visitors/rules" onClick={onClick}>
         {t("visitors_dropdown.rules")}

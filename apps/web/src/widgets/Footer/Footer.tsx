@@ -129,7 +129,6 @@ export const Footer = () => {
                 rel="noreferer"
                 href={isNotVoid(map_link) ? map_link : "/"}
                 pos="relative"
-                _hover={{ textDecoration: "none", color: "brand.200" }}
               >
                 <Text fontSize="lg">{address}</Text>
               </Link>

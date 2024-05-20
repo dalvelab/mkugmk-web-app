@@ -4,7 +4,6 @@ export type EventWithPagination = {
   id: number;
   attributes: {
     title: string;
-    type: "news" | "event";
     description: string;
     createdAt: string;
     publish_date: string;
@@ -20,7 +19,6 @@ export type EventWithPagination = {
 export type Event = {
   id: number;
   title: string;
-  type: "news" | "event";
   description: string;
   createdAt: string;
   publish_date: string;

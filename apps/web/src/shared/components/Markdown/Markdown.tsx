@@ -13,11 +13,7 @@ interface LinkRendererProps extends Omit<HTMLLinkElement, "children"> {
 }
 
 function LinkRenderer(props: LinkRendererProps) {
-  return (
-    <a href={props.href} target="_blank" rel="noreferrer">
-      {props.children}
-    </a>
-  );
+  return <a href={props.href}>{props.children}</a>;
 }
 
 export const Markdown: React.FC<MarkdownProps> = ({ children }) => {
