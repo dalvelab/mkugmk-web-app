@@ -45,6 +45,7 @@ export const Navbar = () => {
 
   const [visible, setVisible] = useState(true);
   const [isOpened, setOpened] = useState(false);
+  const [isAlert, setIsAlert] = useState(true);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -163,6 +164,31 @@ export const Navbar = () => {
           </Flex>
         </Flex>
       </chakra.nav>
+      {isAlert && (
+        <Flex
+          w="100%"
+          py={2}
+          px={2}
+          bgColor="yellow.300"
+          h="auto"
+          alignItems="center"
+          justifyContent="center"
+          zIndex={5}
+          gap={[2, 4, 4, 4, 4]}
+        >
+          <chakra.div fontSize={["sm", "lg", "lg", "xl", "xl"]}>
+            8-9 июня музейный комплекс работает с 10:00 до 23:00
+          </chakra.div>
+          <Button
+            size={["sm", "md", "md", "md", "md"]}
+            colorScheme="yellow"
+            _hover={{ bgColor: "yellow.400" }}
+            onClick={() => setIsAlert(false)}
+          >
+            Закрыть
+          </Button>
+        </Flex>
+      )}
       <Sidebar
         onClose={() => setOpened(false)}
         isOpened={isOpened}

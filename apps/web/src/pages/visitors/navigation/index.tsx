@@ -1,29 +1,50 @@
 import { chakra, Container, Flex, Grid, Heading } from "@chakra-ui/react";
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-import { getNavigationPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, File, Link, SEO } from '@/shared';
-import type { VisitorsPages } from '@/entities';
-import type { ApiResponse } from '@/shared';
+import { getNavigationPage } from "@/entities";
+import {
+  isVoid,
+  EmptyState,
+  isEmpty,
+  CustomContainer,
+  isNotVoid,
+  isNotEmpty,
+  File,
+  Link,
+  SEO,
+} from "@/shared";
+import type { VisitorsPages } from "@/entities";
+import type { ApiResponse } from "@/shared";
 import { AddressesTable, HowToGetToMuseumTable } from "@/widgets";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export default function Navigation({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Navigation({
+  page,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
 
-  const t = useTranslations('Navigation_page');
+  const t = useTranslations("Navigation_page");
 
   if (isVoid(data) || isEmpty(data)) {
-    return <EmptyState />
+    return <EmptyState />;
   }
 
-  const { title, addresses, complex_map, how_to_get_to_museum, yandex_map_embed } = data;
+  const {
+    title,
+    addresses,
+    complex_map,
+    how_to_get_to_museum,
+    yandex_map_embed,
+  } = data;
 
   return (
     <>
       <SEO title={title}>
-        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta
+          property="og:title"
+          content={`${title} | Музейный комплекс - Верхняя Пышма`}
+        />
         <meta property="og:type" content="website" />
       </SEO>
       <chakra.section pt={6} pb={5}>
@@ -34,27 +55,32 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
           flexDir="column"
           pos="relative"
         >
-          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
+            {title}
+          </Heading>
         </CustomContainer>
       </chakra.section>
       {isNotVoid(complex_map) && (
         <chakra.section pb={10}>
           <Container maxW="container.xl">
-              <>
-                <chakra.span fontSize="lg">Нажмите на схему для открытия в {" "}
-                  <Link href={complex_map.url} target="_blank" color="green.500">отдельном окне</Link>
-                </chakra.span>
-                <chakra.div
-                  mt={2}
-                  w={["100%", "100%", "740px", "740px", "740px"]}
-                  h={["80vw", "70vw", "500px", "500px", "500px"]}
-                  pos="relative"
-                >
-                  <Link href={complex_map.url} target="_blank">
-                    <Image src={complex_map.url} fill alt="Карта комплекса" />
-                  </Link>
-                </chakra.div>
-              </>
+            <>
+              <chakra.span fontSize="lg">
+                Нажмите на схему для открытия в{" "}
+                <Link href={complex_map.url} target="_blank" color="green.500">
+                  отдельном окне
+                </Link>
+              </chakra.span>
+              <chakra.div
+                mt={2}
+                w={["100%", "100%", "740px", "740px", "740px"]}
+                h={["70vw", "70vw", "500px", "500px", "500px"]}
+                pos="relative"
+              >
+                <Link href={complex_map.url} target="_blank">
+                  <Image src={complex_map.url} fill alt="Карта комплекса" />
+                </Link>
+              </chakra.div>
+            </>
           </Container>
         </chakra.section>
       )}
@@ -67,21 +93,26 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
           >
             {t("how_to_get_to_museum")}
           </Heading>
-          {isNotVoid(how_to_get_to_museum) && isNotEmpty(how_to_get_to_museum) && (
-            <Grid 
-              templateColumns={["1fr", "1fr", "85%", "1fr 1fr", "1fr 1fr"]} 
-              gap={10}
-            >
-              <HowToGetToMuseumTable
-                title={t("public_transport")} 
-                data={how_to_get_to_museum.filter((data) => data.type === 'public_transport')} 
-              />
-              <HowToGetToMuseumTable
-                title={t("private_transport")} 
-                data={how_to_get_to_museum.filter((data) => data.type === 'other')} 
-              />
-            </Grid>
-          )}
+          {isNotVoid(how_to_get_to_museum) &&
+            isNotEmpty(how_to_get_to_museum) && (
+              <Grid
+                templateColumns={["1fr", "1fr", "85%", "1fr 1fr", "1fr 1fr"]}
+                gap={10}
+              >
+                <HowToGetToMuseumTable
+                  title={t("public_transport")}
+                  data={how_to_get_to_museum.filter(
+                    (data) => data.type === "public_transport"
+                  )}
+                />
+                <HowToGetToMuseumTable
+                  title={t("private_transport")}
+                  data={how_to_get_to_museum.filter(
+                    (data) => data.type === "other"
+                  )}
+                />
+              </Grid>
+            )}
         </Container>
       </chakra.section>
       <chakra.section pb={10}>
@@ -109,9 +140,9 @@ export default function Navigation({ page }: InferGetServerSidePropsType<typeof 
             <chakra.iframe
               mt={5}
               src={yandex_map_embed}
-              width="1280" 
-              height="500">
-            </chakra.iframe>
+              width="1280"
+              height="500"
+            ></chakra.iframe>
           </Container>
         </chakra.section>
       )}
@@ -123,13 +154,15 @@ interface PartnerProps {
   page: ApiResponse<VisitorsPages["navigation_page"], null>;
 }
 
-export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getNavigationPage({locale});
+export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({
+  locale,
+}) => {
+  const page = await getNavigationPage({ locale });
 
   return {
     props: {
       messages: (await import(`../../../i18n/${locale}.json`)).default,
       page,
-     }
-  }
+    },
+  };
 };
