@@ -177,7 +177,7 @@ export const Navbar = () => {
           gap={[2, 4, 4, 4, 4]}
         >
           <chakra.div fontSize={["sm", "lg", "lg", "xl", "xl"]}>
-            8-9 июня музейный комплекс работает с 10:00 до 23:00
+            8 июня Открытая площадка работает с 10:00 до 23:00
           </chakra.div>
           <Button
             size={["sm", "md", "md", "md", "md"]}
