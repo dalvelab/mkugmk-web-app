@@ -16,6 +16,11 @@ const nextConfig = {
         destination: "/buy-ticket",
         permanent: true,
       },
+      {
+        source: "/pushkinskaya-karta",
+        destination: "/buy-ticket",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
