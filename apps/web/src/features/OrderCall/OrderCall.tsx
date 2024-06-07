@@ -61,7 +61,6 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
     onSuccess: () => {
       toast({
         title: "Успешно!",
-        description: "С вами свяжутся в ближайшее время",
         status: "success",
         duration: 2500,
         position: "top-right",

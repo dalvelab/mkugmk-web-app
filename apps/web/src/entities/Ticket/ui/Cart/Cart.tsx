@@ -1,5 +1,16 @@
 import { useMemo } from "react";
-import { Button, chakra, Flex, Grid, Heading } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Button,
+  chakra,
+  Flex,
+  Grid,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 
 import { ExhibitionCenter } from "@/entities";
 import { isNotVoid } from "@/shared";
@@ -127,7 +138,12 @@ export const Cart: React.FC<CartProps> = ({
         >
           Перейти к оформлению
         </Button>
-      ) : null}
+      ) : (
+        <Alert status="warning" bgColor="yellow.300">
+          <AlertIcon />
+          <AlertTitle fontWeight="medium">Билет недоступен</AlertTitle>
+        </Alert>
+      )}
     </Flex>
   ) : null;
 };

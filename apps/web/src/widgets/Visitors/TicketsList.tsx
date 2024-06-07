@@ -97,7 +97,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
               <Thead>
                 <Tr>
                   <Th
-                    w="50%"
+                    w="55%"
                     fontSize="xl"
                     textTransform="none"
                     color="brand.black"

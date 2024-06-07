@@ -15,7 +15,7 @@ import { HamburgerIcon, WarningIcon } from "@chakra-ui/icons";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 
-import { LanguageSelect, Search } from "@/features";
+import { Search } from "@/features";
 import { DropdownLink, NavbarLink, getExibitionCenters } from "@/entities";
 import { isNotVoid } from "@/shared";
 
@@ -150,7 +150,7 @@ export const Navbar = () => {
             </Link>
             <Flex gap={2} display={isLargerThan1100 ? "flex" : "none"}>
               <Search type="desktop" />
-              <LanguageSelect />
+              {/* <LanguageSelect /> */}
             </Flex>
             <IconButton
               display={isLargerThan1100 ? "none" : "block"}
