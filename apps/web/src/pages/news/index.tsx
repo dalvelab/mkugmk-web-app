@@ -51,9 +51,16 @@ export default function Events({
             gap={[5, 5, 5, 5, 8]}
           >
             {isNotEmpty(data) &&
-              data.map((event, index) => (
-                <CardEvent key={event.id} event={event} index={index} />
-              ))}
+              data
+                .sort((a, b) =>
+                  new Date(b.attributes.publish_date) <
+                  new Date(a.attributes.publish_date)
+                    ? -1
+                    : 1
+                )
+                .map((event, index) => (
+                  <CardEvent key={event.id} event={event} index={index} />
+                ))}
           </Grid>
         </CustomContainer>
       </chakra.section>

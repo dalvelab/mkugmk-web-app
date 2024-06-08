@@ -1,13 +1,8 @@
 import Image from "next/image";
 import { Flex, Text, chakra } from "@chakra-ui/react";
+import removeMd from "remove-markdown";
 
-import {
-  getformatDateLocale,
-  ChakraBox,
-  Link,
-  isNotVoid,
-  Markdown,
-} from "@/shared";
+import { getformatDateLocale, ChakraBox, Link } from "@/shared";
 
 import { EventWithPagination } from "../models";
 
@@ -67,14 +62,12 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
           <Text fontSize={["lg", "xl", "xl", "lg", "xl"]} fontWeight="semibold">
             {event.attributes.title}
           </Text>
-          <chakra.div mt={2} pb={2} fontSize="md" noOfLines={3}>
-            <Markdown>{event.attributes.description}</Markdown>
+          <chakra.div mt={2} mb={2} fontSize="md" noOfLines={3}>
+            {removeMd(event.attributes.description)}
           </chakra.div>
           <Flex mt={2} marginTop="auto" alignSelf="flex-end">
             <chakra.span fontSize="xs" color="brand.gray">
-              {isNotVoid(event.attributes.publish_date)
-                ? getformatDateLocale(new Date(event.attributes.publish_date))
-                : getformatDateLocale(new Date(event.attributes.createdAt))}
+              {getformatDateLocale(new Date(event.attributes.publish_date))}
             </chakra.span>
           </Flex>
         </Flex>

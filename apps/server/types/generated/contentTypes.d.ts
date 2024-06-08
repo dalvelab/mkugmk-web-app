@@ -1052,6 +1052,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
         };
       }>;
     publish_date: Attribute.Date &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

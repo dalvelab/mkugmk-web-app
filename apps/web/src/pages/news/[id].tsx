@@ -80,9 +80,7 @@ export default function SingleNews({
                   fontSize={["sm", "sm", "sm", "md", "md"]}
                   color="brand.gray"
                 >
-                  {isNotVoid(publish_date)
-                    ? getformatDateLocale(new Date(publish_date))
-                    : getformatDateLocale(new Date(createdAt))}
+                  {getformatDateLocale(new Date(publish_date))}
                 </chakra.span>
               </Flex>
             </Flex>
