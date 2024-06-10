@@ -56,14 +56,18 @@ export const CardsModal: React.FC<CardsModalProps> = ({
           <ModalCloseButton />
         </ModalHeader>
         <ModalBody pt={4}>
-          <chakra.div pos="relative" w="full" h="260px">
+          <chakra.div
+            pos="relative"
+            w="full"
+            h={["60vw", "60vw", "300px", "300px", "320px"]}
+          >
             <Image
               fill
               src={
                 isNotVoid(modal_image) ? `${modal_image.url}` : `${image.url}`
               }
               alt={isNotVoid(modal_image) ? modal_image.name : image.name}
-              style={{ objectFit: "cover", borderRadius: "8px" }}
+              style={{ borderRadius: "8px" }}
             />
           </chakra.div>
           <Heading pt={4} as="h6" fontSize="3xl" fontWeight="medium">

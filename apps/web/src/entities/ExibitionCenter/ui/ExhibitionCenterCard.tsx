@@ -96,14 +96,14 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
         </Flex>
         <chakra.div
           w={["100%", "100%", "100%", "440px", "440px"]}
-          h={["240px", "360px", "380px", "300px", "300px"]}
+          h={["55vw", "50vw", "50vw", "300px", "300px"]}
           pos="relative"
         >
           <Image
             src={banner.url}
             fill
             alt="Изображение музея"
-            style={{ objectFit: "cover", borderRadius: "12px" }}
+            style={{ borderRadius: "12px" }}
           />
         </chakra.div>
       </Flex>
