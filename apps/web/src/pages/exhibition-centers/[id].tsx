@@ -63,7 +63,9 @@ export default function ExhibitionCenter({
 
   const formattedSchedule = createWorkingSchedule(working_time, locale);
   const workTimeToday = getWorkingHoursForToday({
-    data: working_time,
+    data: isNotVoid(complexOperatingSettings?.special_day_operating_hours)
+      ? complexOperatingSettings.special_day_operating_hours
+      : working_time,
     dayOfWeek,
     locale,
     isSpecialDayToday: complexOperatingSettings?.isOpened,

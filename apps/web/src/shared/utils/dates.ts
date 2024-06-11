@@ -137,15 +137,19 @@ export function checkComplexOperatingHours(days: StrapiSpecialDay[]) {
   ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
 
   let isAvailable = true;
+  let day: StrapiSpecialDay | undefined;
 
   for (let i = 0; i < days.length; i++) {
-    if (formattedDate === days[i].day && !days[i].opened) {
-      isAvailable = false;
+    if (formattedDate === days[i].day) {
+      if (!days[i].opened) {
+        isAvailable = false;
+      }
+      day = days[i];
       break;
     }
   }
 
-  return isAvailable;
+  return { isAvailable, day };
 }
 
 export function getformatDateLocale(

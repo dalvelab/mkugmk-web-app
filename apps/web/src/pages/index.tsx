@@ -57,7 +57,9 @@ export default function Home({
 
   const workTimeToday = isNotVoid(complexSettingsData.common_operating_hours)
     ? getWorkingHoursForToday({
-        data: complexSettingsData.common_operating_hours,
+        data: isNotVoid(complexOperatingSettings?.special_day_operating_hours)
+          ? complexOperatingSettings.special_day_operating_hours
+          : complexSettingsData.common_operating_hours,
         dayOfWeek,
         locale,
         isSpecialDayToday: complexOperatingSettings?.isOpened,

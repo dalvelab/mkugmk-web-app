@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { ApiResponse, StrapiSpecialDay, StrapiWorkingTime } from "../models";
+import {
+  ApiResponse,
+  StrapiSpecialDay,
+  StrapiWorkingTime,
+  WeekDay,
+} from "../models";
 import { checkComplexOperatingHours } from "../utils/dates";
 import { isNotVoid } from "../utils";
 
@@ -20,6 +25,7 @@ async function getComplexOperationManagement(): Promise<
 
 type ComplextOperatingHoursContextType = {
   isOpened?: boolean;
+  special_day_operating_hours?: StrapiWorkingTime[];
 };
 
 const ComplextOperatingHoursContext =
@@ -32,6 +38,7 @@ export const ComplextOperatingHoursProvider = ({
 }) => {
   const [value, setValue] = useState<ComplextOperatingHoursContextType>({
     isOpened: undefined,
+    special_day_operating_hours: undefined,
   });
 
   const {
@@ -53,12 +60,15 @@ export const ComplextOperatingHoursProvider = ({
     }
 
     if (isSuccess && isNotVoid(response.data)) {
-      const isOpened = checkComplexOperatingHours(
+      const { isAvailable, day } = checkComplexOperatingHours(
         response.data.special_days_operating_hours
       );
 
       setValue({
-        isOpened,
+        isOpened: isAvailable,
+        special_day_operating_hours: isNotVoid(day)
+          ? createFakeScheduleForSpecialDay(day)
+          : undefined,
       });
     }
   }, [isError, isSuccess, response?.data]);
@@ -80,4 +90,29 @@ export function useComplextOperatingHours() {
   }
 
   return context;
+}
+
+function createFakeScheduleForSpecialDay(special_day: StrapiSpecialDay) {
+  const weekDays: WeekDay[] = [
+    "mon",
+    "tue",
+    "wed",
+    "thurs",
+    "fri",
+    "sat",
+    "sun",
+  ];
+
+  const workingSchedule: StrapiWorkingTime[] = [];
+
+  for (let i = 0; i < weekDays.length; i++) {
+    const workingDay = {
+      ...special_day,
+      day: weekDays[i],
+    };
+
+    workingSchedule.push(workingDay);
+  }
+
+  return workingSchedule;
 }

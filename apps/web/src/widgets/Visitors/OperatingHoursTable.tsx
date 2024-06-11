@@ -17,7 +17,11 @@ import {
   createWorkingSchedule,
   getWorkingHoursForToday,
 } from "@/shared/utils/dates";
-import { StrapiWorkingTime, useComplextOperatingHours } from "@/shared";
+import {
+  isNotVoid,
+  StrapiWorkingTime,
+  useComplextOperatingHours,
+} from "@/shared";
 
 interface OperatingHoursProps {
   data: {
@@ -75,7 +79,11 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
               locale
             );
             const workTimeToday = getWorkingHoursForToday({
-              data: working_time,
+              data: isNotVoid(
+                complexOperatingSettings?.special_day_operating_hours
+              )
+                ? complexOperatingSettings.special_day_operating_hours
+                : working_time,
               dayOfWeek,
               locale,
               isSpecialDayToday: complexOperatingSettings?.isOpened,
