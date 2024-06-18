@@ -21,8 +21,8 @@ export const Main: React.FC<MainProps> = ({
       </Link>
       <Button
         variant="link"
-        fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}
-        lineHeight={["45px", "54px", "54px", "54px", "54px"]}
+        fontSize={["2xl", "4xl", "4xl", "4xl", "4xl"]}
+        lineHeight={["36px", "54px", "54px", "54px", "54px"]}
         _hover={{ textDecoration: "none" }}
         color="brand.black"
         fontWeight="regular"
@@ -32,8 +32,8 @@ export const Main: React.FC<MainProps> = ({
       </Button>
       <Button
         variant="link"
-        fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}
-        lineHeight={["45px", "54px", "54px", "54px", "54px"]}
+        fontSize={["2xl", "4xl", "4xl", "4xl", "4xl"]}
+        lineHeight={["36px", "54px", "54px", "54px", "54px"]}
         _hover={{ textDecoration: "none" }}
         color="brand.black"
         fontWeight="regular"

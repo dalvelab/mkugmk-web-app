@@ -144,6 +144,17 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
           </ModalHeader>
           <ModalBody pb={4}>
             <Flex flexDir="column" gap={5}>
+              <chakra.span>
+                Вы можете по телефону:{" "}
+                <chakra.a
+                  textDecor="underline"
+                  href="tel:+73436847511"
+                  target="_blank"
+                >
+                  +7 (34368) 4-75-11
+                </chakra.a>{" "}
+                <br /> Или заказать обратный звонок
+              </chakra.span>
               <FormControl isRequired isInvalid={isNotVoid(nameError)}>
                 <FormLabel>{t("order_call_modal_form_name")}</FormLabel>
                 <Input

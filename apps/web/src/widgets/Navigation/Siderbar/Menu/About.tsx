@@ -38,12 +38,12 @@ export const About: React.FC<AboutProps> = ({
       <Link href="/exhibition-centers" onClick={onClick}>
         {exhibitionCentersLinkName}
       </Link>
-      <Flex pl={5} flexDir="column" gap={2}>
+      <Flex pl={5} flexDir="column" gap={3}>
         {exhibition_centers.map(({ id, name }) => (
           <Link
             key={id}
             href={`/exhibition-centers/${id}`}
-            fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]}
+            fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]}
             color="brand.gray"
             onClick={onClick}
           >

@@ -1,7 +1,15 @@
-import { chakra, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Button,
+  chakra,
+  Container,
+  Flex,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 
 import type { StrapiYoutubeVideo } from "@/shared";
 import { isNotEmpty, isNotVoid, Slider, YoutubeVideoEmbed } from "@/shared";
+import Link from "next/link";
 
 interface YoutubeVideoSliderProps {
   youtube_gallery?: StrapiYoutubeVideo[];
@@ -42,6 +50,18 @@ export const YoutubeVideoSlider: React.FC<YoutubeVideoSliderProps> = ({
             </Flex>
           ))}
         </Slider>
+        <Link href="https://www.youtube.com/@mkugmk" target="_new">
+          <Button
+            mt={5}
+            alignSelf="flex-start"
+            bgColor="brand.black"
+            color="white"
+            _hover={{ bgColor: "brand.black" }}
+            _focus={{ bgColor: "brand.black" }}
+          >
+            Все видео
+          </Button>
+        </Link>
       </Container>
     </chakra.section>
   ) : null;

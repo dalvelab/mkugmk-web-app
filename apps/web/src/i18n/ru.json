@@ -21,7 +21,7 @@
       "partners": "Партнеры"
     },
     "visitors_dropdown": {
-      "tickets": "Билеты",
+      "tickets": "Билеты/Услуги",
       "working_schedule": "График работы",
       "navigation": "Навигация",
       "interactive_playground": "Интерактивная площадка",
@@ -42,10 +42,8 @@
   "ExhibitionCenterSingle": {
     "about_museum": "Описание",
     "buy_ticket_button": "Купить билет",
-    "useful_information": "Полезная информация",
     "working_schedule": "Режим работы",
     "tickets": "Билеты",
-    "order_excursion": "Заказать экскурсию",
     "view_prices_link": "Посмотреть цены"
   },
   "News": {

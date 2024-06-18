@@ -21,7 +21,7 @@
       "partners": "Partners"
     },
     "visitors_dropdown": {
-      "tickets": "Tickets",
+      "tickets": "Tickets and Services",
       "working_schedule": "Working Hours",
       "navigation": "Navigation",
       "interactive_playground": "Interactive Playground",
@@ -42,10 +42,8 @@
   "ExhibitionCenterSingle": {
     "about_museum": "About",
     "buy_ticket_button": "Buy ticket",
-    "useful_information": "Useful information",
     "working_schedule": "Work schedule",
     "tickets": "Tickets",
-    "order_excursion": "Order an excursion",
     "view_prices_link": "See the prices"
   },
   "News": {

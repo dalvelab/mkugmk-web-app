@@ -35,11 +35,11 @@ export const Visitors: React.FC<VisitorsProps> = ({ back, onClick }) => {
       <Link href="/visitors/navigation" onClick={onClick}>
         {t("visitors_dropdown.navigation")}
       </Link>
+      <Link href="/faq" onClick={onClick}>
+        {t("visitors_dropdown.faq")}
+      </Link>
       <Link href="/visitors/interactive-playground" onClick={onClick}>
         {t("visitors_dropdown.interactive_playground")}
-      </Link>
-      <Link href="/visitors/cafe-and-souvenirs" onClick={onClick}>
-        {t("visitors_dropdown.cafe")}
       </Link>
       <Link href="/visitors/rules" onClick={onClick}>
         {t("visitors_dropdown.rules")}
@@ -47,8 +47,8 @@ export const Visitors: React.FC<VisitorsProps> = ({ back, onClick }) => {
       <Link href="/visitors/benefit-tickets-page" onClick={onClick}>
         {t("visitors_dropdown.benefit_tickets")}
       </Link>
-      <Link href="/faq" onClick={onClick}>
-        {t("visitors_dropdown.faq")}
+      <Link href="/visitors/cafe-and-souvenirs" onClick={onClick}>
+        {t("visitors_dropdown.cafe")}
       </Link>
     </>
   );

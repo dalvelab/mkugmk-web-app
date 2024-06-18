@@ -29,7 +29,7 @@ import {
   useComplextOperatingHours,
   SEO,
 } from "@/shared";
-import { YoutubeVideoSlider } from "@/features";
+import { OrderCall, YoutubeVideoSlider } from "@/features";
 import type { ExhibitionCenter } from "@/entities";
 import type { ApiResponse } from "@/shared";
 
@@ -209,21 +209,56 @@ export default function ExhibitionCenter({
               "center",
             ]}
           >
-            <Heading as="h2" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
-              {t("useful_information")}
-            </Heading>
             <Grid
               w="100%"
               gridTemplateColumns={[
                 "auto",
                 "auto",
                 "auto",
-                "auto auto auto",
-                "auto auto auto",
+                "auto auto auto auto",
+                "auto auto auto auto",
               ]}
               justifyContent="space-between"
               gap={4}
             >
+              <Flex flexDir="column" gap={2}>
+                <chakra.span fontSize="xl" color="brand.gray">
+                  {t("tickets")}
+                </chakra.span>
+                <Link
+                  href="/visitors/tickets"
+                  fontSize="lg"
+                  color="brand.black"
+                  textDecoration="underline"
+                >
+                  {t("view_prices_link")}
+                </Link>
+              </Flex>
+              <Flex flexDir="column" gap={2}>
+                <chakra.span fontSize="xl" color="brand.gray">
+                  Схема проезда
+                </chakra.span>
+                <Link
+                  href="/visitors/navigation"
+                  fontSize="lg"
+                  color="brand.black"
+                  textDecoration="underline"
+                >
+                  Посмотреть схему
+                </Link>
+              </Flex>
+              <Flex flexDir="column" gap={2}>
+                <chakra.span fontSize="xl" color="brand.gray">
+                  Экскурсии
+                </chakra.span>
+                <OrderCall
+                  buttonStyles={{
+                    alignSelf: "flex-start",
+                    fontSize: "lg",
+                    textDecor: "underline",
+                  }}
+                />
+              </Flex>
               <Flex flexDir="column" gap={2}>
                 <chakra.span fontSize="xl" color="brand.gray">
                   {t("working_schedule")}
@@ -244,33 +279,6 @@ export default function ExhibitionCenter({
                   ))}
                 </Flex>
               </Flex>
-              <Flex flexDir="column" gap={2}>
-                <chakra.span fontSize="xl" color="brand.gray">
-                  {t("tickets")}
-                </chakra.span>
-                <Link
-                  href="/visitors/tickets"
-                  fontSize="lg"
-                  color="brand.black"
-                  textDecoration="underline"
-                >
-                  {t("view_prices_link")}
-                </Link>
-              </Flex>
-              {isNotEmpty(excursion_phone) && (
-                <Flex flexDir="column" gap={2}>
-                  <chakra.span fontSize="xl" color="brand.gray">
-                    {t("order_excursion")}
-                  </chakra.span>
-                  <Link
-                    href={`tel:${excursion_phone}`}
-                    target="_blank"
-                    fontSize="lg"
-                  >
-                    {excursion_phone}
-                  </Link>
-                </Flex>
-              )}
             </Grid>
           </HStack>
         </Container>
