@@ -1778,6 +1778,11 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
           localized: false;
         };
       }>;
+    exhibition_centers: Attribute.Relation<
+      'api::welcome-page.welcome-page',
+      'oneToMany',
+      'api::exhibition-center.exhibition-center'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
