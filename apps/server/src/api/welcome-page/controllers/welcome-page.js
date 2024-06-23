@@ -21,6 +21,8 @@ module.exports = createCoreController(
             "youtube_gallery",
             "video_preview",
             "exhibition_centers",
+            "exhibition_centers.banner",
+            "exhibition_centers.working_time",
           ],
           locale,
         }
