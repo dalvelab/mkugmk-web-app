@@ -1191,64 +1191,6 @@ export interface ApiExhibitionCenterExhibitionCenter
   };
 }
 
-export interface ApiExhibitionCenterPageExhibitionCenterPage
-  extends Schema.SingleType {
-  collectionName: 'exhibition_center_pages';
-  info: {
-    singularName: 'exhibition-center-page';
-    pluralName: 'exhibition-center-pages';
-    displayName: 'Exhibition Center Page';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    description: Attribute.RichText &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    exhibition_centers: Attribute.Relation<
-      'api::exhibition-center-page.exhibition-center-page',
-      'oneToMany',
-      'api::exhibition-center.exhibition-center'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::exhibition-center-page.exhibition-center-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::exhibition-center-page.exhibition-center-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::exhibition-center-page.exhibition-center-page',
-      'oneToMany',
-      'api::exhibition-center-page.exhibition-center-page'
-    >;
-    locale: Attribute.String;
-  };
-}
-
 export interface ApiFaqPageFaqPage extends Schema.SingleType {
   collectionName: 'faq_pages';
   info: {
@@ -1760,12 +1702,6 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
           localized: false;
         };
       }>;
-    gallery: Attribute.Media &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
     youtube_gallery: Attribute.Component<'shared.youtube-video', true> &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -1891,7 +1827,6 @@ declare module '@strapi/types' {
       'api::contacts-page.contacts-page': ApiContactsPageContactsPage;
       'api::event.event': ApiEventEvent;
       'api::exhibition-center.exhibition-center': ApiExhibitionCenterExhibitionCenter;
-      'api::exhibition-center-page.exhibition-center-page': ApiExhibitionCenterPageExhibitionCenterPage;
       'api::faq-page.faq-page': ApiFaqPageFaqPage;
       'api::footer.footer': ApiFooterFooter;
       'api::interactive-playground-page.interactive-playground-page': ApiInteractivePlaygroundPageInteractivePlaygroundPage;
