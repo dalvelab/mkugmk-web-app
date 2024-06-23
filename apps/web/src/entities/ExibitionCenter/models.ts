@@ -13,9 +13,3 @@ export type ExhibitionCenter = {
   youtube_gallery: StrapiYoutubeVideo[];
   working_time: StrapiWorkingTime[];
 };
-
-export type ExhibitionCentersPage = {
-  title: string;
-  description: string;
-  exhibition_centers: ExhibitionCenter[];
-};

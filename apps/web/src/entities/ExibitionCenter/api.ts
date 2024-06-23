@@ -1,6 +1,6 @@
 import type { ApiResponse, DefaultRequestParams } from "@/shared";
 
-import type { ExhibitionCenter, ExhibitionCentersPage } from "./models";
+import type { ExhibitionCenter } from "./models";
 
 interface GetExibitionCenters extends DefaultRequestParams {
   isPopulated: boolean;
@@ -32,20 +32,6 @@ export async function getSingleExibitionCenter(
 
   const res = await fetch(
     `${process.env.DB_HOST}/exhibition-centers/${id}?locale=${locale}`
-  );
-
-  return res.json();
-}
-
-interface GetExibitionCentersPage extends DefaultRequestParams {}
-
-export async function getExibitionCentersPage(
-  params: GetExibitionCentersPage
-): Promise<ApiResponse<ExhibitionCentersPage, null>> {
-  const { locale } = params;
-
-  const res = await fetch(
-    `${process.env.DB_HOST}/exhibition-center-page?locale=${locale}`
   );
 
   return res.json();
