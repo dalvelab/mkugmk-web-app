@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Flex } from "@chakra-ui/react";
+import { chakra, Flex } from "@chakra-ui/react";
 
 import { NavbarLink } from "@/entities/Navbar/ui/NavbarLink";
 
@@ -20,11 +20,7 @@ export const AboutDropdown: React.FC<AboutDropdownProps> = ({
 
   return (
     <Flex flexDir="column" gap={3} alignItems="flex-start">
-      <NavbarLink
-        href="/exhibition-centers"
-        text={exhibitionCentersLinkName}
-        level={2}
-      />
+      <chakra.span>{exhibitionCentersLinkName}</chakra.span>
       <Flex pl={5} flexDir="column" gap={2}>
         {exhibition_centers.map(({ id, name }) => (
           <NavbarLink

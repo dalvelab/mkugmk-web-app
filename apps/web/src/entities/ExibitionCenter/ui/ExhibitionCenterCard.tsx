@@ -1,4 +1,11 @@
-import { chakra, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  chakra,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { ExhibitionCenter } from "../models";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,81 +40,76 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
     isSpecialDayToday: complexOperatingSettings?.isOpened,
   });
 
+  const [isPhone] = useMediaQuery("(max-width: 480px)");
+
   return (
     <Flex
       as={motion.div}
+      h={["320px", "400px", "460px", "380px", "410px"]}
       display="flex"
-      w="100%"
-      py={[4, 6, 6, 6, 8]}
-      px={[4, 6, 6, 6, 10]}
+      boxSizing="border-box"
       border="1px solid"
       borderColor="brand.border"
       borderRadius="12px"
       initial={{ opacity: 0, transform: "translateX(-10%)" }}
       whileInView={{ opacity: 1, transform: "translateX(0)" }}
       viewport={{ once: true }}
+      pos="relative"
     >
+      <chakra.div w="100%" h="100%" pos="absolute" borderRadius="12px">
+        <Image
+          src={banner.url}
+          fill
+          alt="Изображение музея"
+          style={{ borderRadius: "12px", objectFit: "cover" }}
+        />
+        <chakra.div
+          w="100%"
+          h="100%"
+          pos="absolute"
+          left={0}
+          top={0}
+          bgColor="black"
+          opacity={0.6}
+          borderRadius="12px"
+        />
+      </chakra.div>
       <Flex
         w="100%"
-        justifyContent={[
-          "none",
-          "none",
-          "none",
-          "space-between",
-          "space-between",
-        ]}
-        gap={5}
-        alignItems={[
-          "flex-start",
-          "flex-start",
-          "flex-start",
-          "center",
-          "center",
-        ]}
-        flexDir={[
-          "column-reverse",
-          "column-reverse",
-          "column-reverse",
-          "row",
-          "row",
-        ]}
+        gap={6}
+        color="white"
+        zIndex={2}
+        px={[5, 5, 10, 5, 10]}
+        flexDirection="column"
+        justifyContent="center"
       >
-        <Flex flexDir="column" gap={[2, 2, 2, 6, 6]} color="brand.black">
-          <OpenStatus workTimeToday={workTimeToday} theme="light" />
-          <Flex
-            maxW="600px"
-            gap={[4, 4, 4, 5, 5]}
-            flexDir="column"
-            alignItems="flex-start"
-          >
-            <Heading as="h2" fontSize={["2xl", "3xl", "3xl", "4xl", "4xl"]}>
-              {name}
-            </Heading>
-            <Text fontSize="md">{card_description}</Text>
-            <Link href={`/exhibition-centers/${id}`}>
-              <Button
-                size={["md", "lg", "lg", "lg", "lg"]}
-                bgColor="brand.black"
-                color="white"
-                _hover={{ bgColor: "brand.black" }}
-              >
-                {t("more_button")}
-              </Button>
-            </Link>
-          </Flex>
-        </Flex>
-        <chakra.div
-          w={["100%", "100%", "100%", "440px", "440px"]}
-          h={["55vw", "50vw", "50vw", "300px", "300px"]}
-          pos="relative"
+        <OpenStatus
+          workTimeToday={workTimeToday}
+          theme="dark"
+          fontSize={isPhone ? "sm" : "md"}
+        />
+        <Flex
+          maxW="600px"
+          gap={[4, 4, 4, 5, 5]}
+          flexDir="column"
+          alignItems="flex-start"
         >
-          <Image
-            src={banner.url}
-            fill
-            alt="Изображение музея"
-            style={{ borderRadius: "12px" }}
-          />
-        </chakra.div>
+          <Heading as="h2" fontSize={["xl", "2xl", "2xl", "2xl", "3xl"]}>
+            {name}
+          </Heading>
+          <Text fontSize={["sm", "md", "md", "md", "md"]}>
+            {card_description}
+          </Text>
+          <Link href={`/exhibition-centers/${id}`}>
+            <Button
+              bgColor="white"
+              color="brand.black"
+              _hover={{ bgColor: "green.500", color: "white" }}
+            >
+              {t("more_button")}
+            </Button>
+          </Link>
+        </Flex>
       </Flex>
     </Flex>
   );

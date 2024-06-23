@@ -43,7 +43,7 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
         <chakra.div
           pos="relative"
           w="100%"
-          h={["60vw", "60vw", "30vw", "20vw", "272px"]}
+          h={["60vw", "60vw", "30vw", "20vw", "276px"]}
           display="flex"
           justifyContent="center"
           alignItems="center"
@@ -54,7 +54,7 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
           <Image
             fill
             src={event.attributes.image.data.attributes.url}
-            alt="Изображение новости"
+            alt={event.attributes.title}
           />
         </chakra.div>
         <Flex p={4} flexGrow={1} flexDir="column">

@@ -1,19 +1,25 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { chakra, Container, Heading, Flex, Button } from "@chakra-ui/react";
+import {
+  chakra,
+  Container,
+  Heading,
+  Flex,
+  Button,
+  Grid,
+} from "@chakra-ui/react";
 
 import {
   getWelcomePage,
   WelcomeHeroSection,
   getComplexOperationManagement,
+  ExhibitionCenterCard,
 } from "@/entities";
 import {
-  Gallery,
   isVoid,
   EmptyState,
   isEmpty,
-  isNotEmpty,
   isNotVoid,
   OpenStatus,
   useComplextOperatingHours,
@@ -47,8 +53,8 @@ export default function Home({
     description,
     banner,
     youtube_gallery,
-    gallery,
     video_preview,
+    exhibition_centers,
   } = data;
 
   const dayOfWeek = new Date(
@@ -160,23 +166,32 @@ export default function Home({
           </Flex>
         </Container>
       </chakra.section>
-      {isNotVoid(gallery) && isNotEmpty(gallery) && (
-        <chakra.section
-          bgColor="brand.black"
-          pt={[10, 20, 20, 20, 20]}
-          pb={[10, 20, 20, 20, 20]}
+      <chakra.section pb={10} pos="relative" display="flex" flexDir="column">
+        <Container
+          maxWidth="container.xl"
+          minH="50vh"
+          display="flex"
+          flexDir="column"
+          alignItems="flex-start"
           pos="relative"
+          gap={6}
         >
-          <Container
-            maxWidth="container.xl"
-            display="flex"
-            flexDir="column"
-            pos="relative"
+          <Grid
+            templateColumns={["1fr", "1fr", "1fr", "1fr 1fr", "1fr 1fr"]}
+            w="100%"
+            gap={5}
           >
-            <Gallery images={gallery} />
-          </Container>
-        </chakra.section>
-      )}
+            {exhibition_centers.map((exhibition_center) => (
+              <ExhibitionCenterCard
+                key={exhibition_center.id}
+                exhibition_center={exhibition_center}
+                dayOfWeek={dayOfWeek}
+                locale={locale}
+              />
+            ))}
+          </Grid>
+        </Container>
+      </chakra.section>
       <YoutubeVideoSlider youtube_gallery={youtube_gallery} />
     </>
   );

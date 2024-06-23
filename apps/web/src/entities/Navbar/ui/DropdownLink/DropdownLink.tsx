@@ -33,7 +33,7 @@ export const DropdownLink: React.FC<DropdownLinkProps> = ({
       </Flex>
       <Portal containerRef={dropdownRef}>
         {visible && (
-          <chakra.div pos="absolute" left={offsetLeft} top="100%" pt={2}>
+          <chakra.div pos="absolute" left={`${offsetLeft}px`} top="100%" pt={2}>
             <Flex
               p={4}
               bg="white"

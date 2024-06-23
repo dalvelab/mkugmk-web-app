@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { chakra, Button, Flex } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
 import type { ExhibitionCenter } from "@/entities";
@@ -35,9 +35,7 @@ export const About: React.FC<AboutProps> = ({
       >
         {t("sidebar_back")}
       </Button>
-      <Link href="/exhibition-centers" onClick={onClick}>
-        {exhibitionCentersLinkName}
-      </Link>
+      <chakra.span>{exhibitionCentersLinkName}</chakra.span>
       <Flex pl={5} flexDir="column" gap={3}>
         {exhibition_centers.map(({ id, name }) => (
           <Link

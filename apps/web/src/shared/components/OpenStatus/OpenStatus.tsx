@@ -1,5 +1,11 @@
 import { StrapiWorkingTime, isVoid } from "@/shared";
-import { chakra, keyframes, Box, Flex } from "@chakra-ui/react";
+import {
+  chakra,
+  keyframes,
+  Box,
+  Flex,
+  SystemCSSProperties,
+} from "@chakra-ui/react";
 
 const pulse = keyframes`  
   50% {
@@ -15,11 +21,13 @@ const pulse = keyframes`
 interface OpenStatusProps {
   workTimeToday?: StrapiWorkingTime;
   theme: "light" | "dark";
+  fontSize?: SystemCSSProperties["fontSize"];
 }
 
 export const OpenStatus: React.FC<OpenStatusProps> = ({
   workTimeToday,
   theme,
+  fontSize = "lg",
 }) => {
   if (isVoid(workTimeToday)) {
     return null;
@@ -52,7 +60,7 @@ export const OpenStatus: React.FC<OpenStatusProps> = ({
         }}
       />
       <chakra.span
-        fontSize="md"
+        fontSize={fontSize}
         color={theme === "dark" ? "white" : "brand.black"}
       >
         {workTimeToday.value}
