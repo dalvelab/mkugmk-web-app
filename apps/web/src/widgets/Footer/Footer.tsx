@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { WarningIcon } from "@chakra-ui/icons";
 import { useTranslations } from "next-intl";
 import { OrderCall } from "@/features";
+import Image from "next/image";
 
 export const Footer = () => {
   const t = useTranslations("Footer");
@@ -99,8 +100,7 @@ export const Footer = () => {
       w="full"
       h="auto"
       minH={40}
-      bgColor="white"
-      borderTop="1px solid"
+      bgColor="#e5e5e5"
       borderColor="brand.border"
       pos="relative"
     >
@@ -203,10 +203,21 @@ export const Footer = () => {
               <Text fontSize="lg" fontWeight="medium" color="brand.black">
                 {t("socials")}
               </Text>
-              <Flex gap={1} flexDir="column" alignSelf="flex-start">
+              <Flex gap={3} alignSelf="flex-start">
                 {socials.map((social) => (
-                  <Link key={social.id} href={social.link} target="_blank">
-                    <Text>{social.name}</Text>
+                  <Link
+                    key={social.id}
+                    href={social.link}
+                    target="_blank"
+                    style={{ backgroundColor: "#09090B", borderRadius: "8px" }}
+                  >
+                    <Image
+                      width={36}
+                      height={36}
+                      src={`/${social.type}-footer-logo.svg`}
+                      alt={social.name}
+                      style={{ fill: "white" }}
+                    />
                   </Link>
                 ))}
               </Flex>
