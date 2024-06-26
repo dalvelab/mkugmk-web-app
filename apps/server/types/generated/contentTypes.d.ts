@@ -933,6 +933,7 @@ export interface ApiComplexOperationManagementComplexOperationManagement
       'shared.operating-hours-in-current-day',
       true
     >;
+    website_top_warning: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
