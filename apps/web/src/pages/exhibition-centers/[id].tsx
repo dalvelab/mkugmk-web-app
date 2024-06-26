@@ -26,7 +26,7 @@ import {
   getWorkingHoursForToday,
   Markdown,
   Gallery,
-  useComplextOperatingHours,
+  useComplexOperationManagement,
   SEO,
 } from "@/shared";
 import { OrderCall, YoutubeVideoSlider } from "@/features";
@@ -40,7 +40,7 @@ export default function ExhibitionCenter({
   const { locale } = useRouter();
 
   const t = useTranslations("ExhibitionCenterSingle");
-  const complexOperatingSettings = useComplextOperatingHours();
+  const complexOperatingSettings = useComplexOperationManagement();
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />;

@@ -20,7 +20,7 @@ import {
 import {
   isNotVoid,
   StrapiWorkingTime,
-  useComplextOperatingHours,
+  useComplexOperationManagement,
 } from "@/shared";
 
 interface OperatingHoursProps {
@@ -37,7 +37,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
   const { locale } = useRouter();
 
   const t = useTranslations("Working_hours_page");
-  const complexOperatingSettings = useComplextOperatingHours();
+  const complexOperatingSettings = useComplexOperationManagement();
 
   const dayOfWeek = new Date(
     new Date().toLocaleString("en", { timeZone: "Asia/Yekaterinburg" })

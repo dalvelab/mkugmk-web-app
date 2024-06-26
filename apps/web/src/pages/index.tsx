@@ -22,7 +22,7 @@ import {
   isEmpty,
   isNotVoid,
   OpenStatus,
-  useComplextOperatingHours,
+  useComplexOperationManagement,
   Markdown,
 } from "@/shared";
 import type { ComplexOperationManagement, WelcomePage } from "@/entities";
@@ -42,7 +42,7 @@ export default function Home({
   const { locale } = useRouter();
 
   const t = useTranslations("Index");
-  const complexOperatingSettings = useComplextOperatingHours();
+  const complexOperatingSettings = useComplexOperationManagement();
 
   if (isVoid(data) || isEmpty(data) || isVoid(complexSettingsData)) {
     return <EmptyState />;

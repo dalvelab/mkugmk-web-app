@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Search } from "@/features";
 import { DropdownLink, NavbarLink, getExibitionCenters } from "@/entities";
-import { isNotVoid } from "@/shared";
+import { isNotEmpty, isNotVoid, useComplexOperationManagement } from "@/shared";
 
 import { Sidebar } from "./Siderbar";
 import { AboutDropdown, VisitorsDropdown } from "./Dropdowns";
@@ -42,6 +42,8 @@ export const Navbar = () => {
       }),
     refetchOnWindowFocus: false,
   });
+
+  const complexOperatingSettings = useComplexOperationManagement();
 
   const [visible, setVisible] = useState(true);
   const [isOpened, setOpened] = useState(false);
@@ -164,31 +166,34 @@ export const Navbar = () => {
           </Flex>
         </Flex>
       </chakra.nav>
-      {isAlert && (
-        <Flex
-          w="100%"
-          py={2}
-          px={2}
-          bgColor="yellow.300"
-          h="auto"
-          alignItems="center"
-          justifyContent="center"
-          zIndex={5}
-          gap={[2, 4, 4, 4, 4]}
-        >
-          <chakra.div fontSize={["sm", "lg", "lg", "xl", "xl"]}>
-            Открытая площадка работает с 10:00 до 22:00
-          </chakra.div>
-          <Button
-            size={["sm", "md", "md", "md", "md"]}
-            colorScheme="yellow"
-            _hover={{ bgColor: "yellow.400" }}
-            onClick={() => setIsAlert(false)}
+      {isNotVoid(complexOperatingSettings) &&
+        isNotVoid(complexOperatingSettings.website_top_warning) &&
+        isNotEmpty(complexOperatingSettings.website_top_warning) &&
+        isAlert && (
+          <Flex
+            w="100%"
+            py={2}
+            px={2}
+            bgColor="yellow.300"
+            h="auto"
+            alignItems="center"
+            justifyContent="center"
+            zIndex={5}
+            gap={[2, 4, 4, 4, 4]}
           >
-            Закрыть
-          </Button>
-        </Flex>
-      )}
+            <chakra.div fontSize={["sm", "lg", "lg", "xl", "xl"]}>
+              {complexOperatingSettings.website_top_warning}
+            </chakra.div>
+            <Button
+              size={["sm", "md", "md", "md", "md"]}
+              colorScheme="yellow"
+              _hover={{ bgColor: "yellow.400" }}
+              onClick={() => setIsAlert(false)}
+            >
+              Закрыть
+            </Button>
+          </Flex>
+        )}
       <Sidebar
         onClose={() => setOpened(false)}
         isOpened={isOpened}

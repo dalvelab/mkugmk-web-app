@@ -13,6 +13,7 @@ import { isNotVoid } from "../utils";
 export type ComplexOperationManagement = {
   common_operating_hours: StrapiWorkingTime[];
   special_days_operating_hours: StrapiSpecialDay[];
+  website_top_warning?: string;
 };
 
 async function getComplexOperationManagement(): Promise<
@@ -26,24 +27,21 @@ async function getComplexOperationManagement(): Promise<
 type ComplextOperatingHoursContextType = {
   isOpened?: boolean;
   special_day_operating_hours?: StrapiWorkingTime[];
+  website_top_warning?: string;
 };
 
-const ComplextOperatingHoursContext =
+const ComplexOperationManagementContext =
   createContext<ComplextOperatingHoursContextType | null>(null);
 
-export const ComplextOperatingHoursProvider = ({
+export const ComplexOperationManagementProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [value, setValue] = useState<ComplextOperatingHoursContextType>({
-    isOpened: undefined,
-    special_day_operating_hours: undefined,
-  });
+  const [value, setValue] = useState<ComplextOperatingHoursContextType>({});
 
   const {
     data: response,
-    isLoading,
     isError,
     isSuccess,
   } = useQuery({
@@ -69,23 +67,24 @@ export const ComplextOperatingHoursProvider = ({
         special_day_operating_hours: isNotVoid(day)
           ? createFakeScheduleForSpecialDay(day)
           : undefined,
+        website_top_warning: response.data.website_top_warning,
       });
     }
   }, [isError, isSuccess, response?.data]);
 
   return (
-    <ComplextOperatingHoursContext.Provider value={value}>
+    <ComplexOperationManagementContext.Provider value={value}>
       {children}
-    </ComplextOperatingHoursContext.Provider>
+    </ComplexOperationManagementContext.Provider>
   );
 };
 
-export function useComplextOperatingHours() {
-  const context = useContext(ComplextOperatingHoursContext);
+export function useComplexOperationManagement() {
+  const context = useContext(ComplexOperationManagementContext);
 
   if (context === undefined) {
     throw new Error(
-      `useComplextOperatingHours must be used within a ComplextOperatingHoursContext`
+      `useComplexOperationManagement must be used within a ComplexOperationManagementContext`
     );
   }
 

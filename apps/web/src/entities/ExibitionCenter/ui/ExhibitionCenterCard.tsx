@@ -10,7 +10,7 @@ import { ExhibitionCenter } from "../models";
 import Image from "next/image";
 import Link from "next/link";
 import { getWorkingHoursForToday } from "@/shared/utils/dates";
-import { OpenStatus, isNotVoid, useComplextOperatingHours } from "@/shared";
+import { OpenStatus, isNotVoid, useComplexOperationManagement } from "@/shared";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
@@ -29,7 +29,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
     exhibition_center;
   const t = useTranslations("ExhibitionCenter");
 
-  const complexOperatingSettings = useComplextOperatingHours();
+  const complexOperatingSettings = useComplexOperationManagement();
 
   const workTimeToday = getWorkingHoursForToday({
     data: isNotVoid(complexOperatingSettings?.special_day_operating_hours)

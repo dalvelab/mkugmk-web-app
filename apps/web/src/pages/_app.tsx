@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navbar, Footer } from "@/widgets";
 import {
   chakraMKUGMKConfig,
-  ComplextOperatingHoursProvider,
+  ComplexOperationManagementProvider,
   SEO,
 } from "@/shared";
 import { ScrollUpButton } from "@/features";
@@ -34,14 +34,14 @@ function App({ Component, pageProps }: AppProps) {
       </SEO>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme}>
-          <ComplextOperatingHoursProvider>
+          <ComplexOperationManagementProvider>
             <Navbar />
             <chakra.main pb={8} minH="calc(80vh - 80px)">
               <Component {...pageProps} />
             </chakra.main>
             <ScrollUpButton />
             <Footer />
-          </ComplextOperatingHoursProvider>
+          </ComplexOperationManagementProvider>
         </ChakraProvider>
       </QueryClientProvider>
     </NextIntlClientProvider>
