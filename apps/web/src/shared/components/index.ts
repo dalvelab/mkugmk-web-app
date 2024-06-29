@@ -11,3 +11,4 @@ export * from "./CollapsePanel";
 export * from "./ChakraBox";
 export * from "./Gallery";
 export * from "./YoutubeVideoEmbed";
+export * from "./YandexMetrika";

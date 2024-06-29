@@ -60,7 +60,6 @@
     "addresses": "Адреса Выставочных центров"
   },
   "Tickets_page": {
-    "type_of_center": "Вид площадки",
     "category": "Категория",
     "buy_ticket_button": "Купить билет",
     "currency": "руб.",
@@ -71,8 +70,7 @@
   },
   "Working_hours_page": {
     "operating_hours_holidays": "График работы в праздничные дни",
-    "operating_hours_centers": "График работы выставочных центров",
-    "operating_hours_public": "График работы общественных пространств",
+    "operating_hours_centers_and_public_spaces": "График работы выставочных центров и общественных пространств",
     "operating_hours": "Время работы",
     "centers": "Площадки"
   },

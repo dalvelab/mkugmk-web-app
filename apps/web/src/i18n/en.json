@@ -60,7 +60,6 @@
     "addresses": "Exhibition centers addresses"
   },
   "Tickets_page": {
-    "type_of_center": "Type of center",
     "category": "Category",
     "buy_ticket_button": "Buy tickets",
     "currency": "RUB",
@@ -71,8 +70,7 @@
   },
   "Working_hours_page": {
     "operating_hours_holidays": "Holidays operating hours",
-    "operating_hours_centers": "Exhibition Centers operating hours",
-    "operating_hours_public": "Public places operating hours",
+    "operating_hours_centers_and_public_spaces": "Exhibition Centers and public spaces operating hours",
     "operating_hours": "Operating hours",
     "centers": "Centers"
   },

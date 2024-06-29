@@ -3,28 +3,57 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
 import { getComplexOperationManagement, getExibitionCenters, getWorkingHoursPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, isNotVoid, isNotEmpty, SEO } from '@/shared';
-import type { ComplexOperationManagement, ExhibitionCenter, VisitorsPages } from '@/entities';
-import type { ApiResponse } from '@/shared';
+import {
+  isVoid,
+  EmptyState,
+  isEmpty,
+  CustomContainer,
+  isNotVoid,
+  isNotEmpty,
+  SEO,
+  getEqualScheduleForExhibitionCenters,
+} from "@/shared";
+import type {
+  ComplexOperationManagement,
+  ExhibitionCenter,
+  VisitorsPages,
+} from "@/entities";
+import type { ApiResponse } from "@/shared";
 import { OperatingHoursTable, SpecialDaysOperatinHourseTable } from "@/widgets";
+import { useRouter } from "next/router";
 
-export default function WorkingHours({ page, complexSettings, exhibitionCenters }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function WorkingHours({
+  page,
+  complexSettings,
+  exhibitionCenters,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
 
+  const { locale } = useRouter();
   const t = useTranslations("Working_hours_page");
 
   if (isVoid(data) || isEmpty(data)) {
-    return <EmptyState />
+    return <EmptyState />;
   }
 
   const { title, public_areas } = data;
   const { data: exhibitionCentersData } = exhibitionCenters;
   const { data: complexSettingsData } = complexSettings;
 
+  const mergedExhibitionCentersSchedule = getEqualScheduleForExhibitionCenters(
+    exhibitionCentersData,
+    locale || "ru"
+  );
+
+  const schedule = [...mergedExhibitionCentersSchedule, ...public_areas];
+
   return (
     <>
       <SEO title={title}>
-        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta
+          property="og:title"
+          content={`${title} | Музейный комплекс - Верхняя Пышма`}
+        />
         <meta property="og:type" content="website" />
       </SEO>
       <chakra.section pt={6}>
@@ -35,38 +64,29 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
           flexDir="column"
           pos="relative"
         >
-          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
+            {title}
+          </Heading>
         </CustomContainer>
       </chakra.section>
-      {isNotVoid(complexSettingsData) && isNotEmpty(complexSettingsData.special_days_operating_hours) && (
-        <chakra.section pt={5}>
-          <Container maxW="container.xl">
-            <Heading
-              as="h2"
-              fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
-              fontWeight="medium"
-            >
-              {t("operating_hours_holidays")}
-            </Heading>
-            <SpecialDaysOperatinHourseTable data={complexSettingsData.special_days_operating_hours} />
-          </Container>
-        </chakra.section>
-      )}
-      {isNotVoid(exhibitionCentersData) && (
-        <chakra.section pt={10}>
-          <Container maxW="container.xl">
-            <Heading
-              as="h2"
-              fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
-              fontWeight="medium"
-            >
-              {t("operating_hours_centers")}
-            </Heading>
-            <OperatingHoursTable data={exhibitionCentersData} />
-          </Container>
-        </chakra.section>
-      )}
-      {isNotEmpty(public_areas) && (
+      {isNotVoid(complexSettingsData) &&
+        isNotEmpty(complexSettingsData.special_days_operating_hours) && (
+          <chakra.section pt={5}>
+            <Container maxW="container.xl">
+              <Heading
+                as="h2"
+                fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
+                fontWeight="medium"
+              >
+                {t("operating_hours_holidays")}
+              </Heading>
+              <SpecialDaysOperatinHourseTable
+                data={complexSettingsData.special_days_operating_hours}
+              />
+            </Container>
+          </chakra.section>
+        )}
+      {isNotEmpty(mergedExhibitionCentersSchedule) && (
         <chakra.section pt={10} pb={10}>
           <Container maxW="container.xl">
             <Heading
@@ -74,9 +94,9 @@ export default function WorkingHours({ page, complexSettings, exhibitionCenters 
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"
             >
-              {t("operating_hours_public")}
+              {t("operating_hours_centers_and_public_spaces")}
             </Heading>
-            <OperatingHoursTable data={public_areas} />
+            <OperatingHoursTable data={schedule} />
           </Container>
         </chakra.section>
       )}

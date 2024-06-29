@@ -43,11 +43,6 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
 
   const activeTicket = tickets.find((ticket) => ticket.id === activeId);
 
-  const isAdditionalColumnActive =
-    isNotVoid(activeTicket) &&
-    (isNotEmpty(activeTicket.additional_text) ||
-      activeTicket.available_on_website);
-
   return (
     <chakra.section>
       <Container maxW="container.xl">
@@ -62,16 +57,13 @@ export const TicketsList: React.FC<TicketsListProps> = ({ tickets }) => {
             w={["100%", "auto", "auto", "auto", "auto"]}
             flexDir="column"
             py={3}
-            px={5}
+            px={3}
             border="1px solid"
             borderColor="brand.border"
             borderRadius={8}
             color="brand.black"
             gap={3}
           >
-            <chakra.span fontSize="xl" fontWeight="semibold">
-              {t("type_of_center")}
-            </chakra.span>
             <Flex flexDir="column" gap={1}>
               {tickets.map((button) => (
                 <chakra.button

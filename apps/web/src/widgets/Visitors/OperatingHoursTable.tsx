@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   chakra,
@@ -73,7 +74,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
           </Tr>
         </Thead>
         <Tbody>
-          {data.map(({ id, name, working_time }) => {
+          {data.map(({ name, working_time }) => {
             const formattedSchedule = createWorkingSchedule(
               working_time,
               locale
@@ -90,7 +91,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
             });
 
             return (
-              <Tr key={id}>
+              <Tr key={uuidv4()}>
                 <Td
                   w="50%"
                   px={5}

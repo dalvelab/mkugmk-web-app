@@ -6,6 +6,7 @@ import {
   genetiveRusMonths,
 } from "../constants";
 import { isEmpty, isNotEmpty, isNotVoid, isVoid } from "./misc";
+import { ExhibitionCenter } from "@/entities";
 
 export function createWorkingSchedule(
   data: StrapiWorkingTime[],
@@ -172,4 +173,36 @@ export function getformatDateLocaleTime(
 
 export function getGenetiveRusMonth(month: number) {
   return genetiveRusMonths[month - 1];
+}
+
+export function getEqualScheduleForExhibitionCenters(
+  data: ExhibitionCenter[] | null,
+  locale: string
+) {
+  if (!data) {
+    return [];
+  }
+
+  const uniqueData = [];
+  const hashes = new Set();
+
+  for (let i = 0; i < data.length; i++) {
+    const hash = data[i].working_time
+      .map((day) => day.value.trim().toLowerCase())
+      .reduce((acc, cur) => {
+        return acc + cur;
+      }, "");
+
+    if (hashes.has(hash)) {
+      const indexOfHash = Array.from(hashes).indexOf(hash);
+      uniqueData[indexOfHash].name =
+        locale === "ru" ? "Выставочные центры" : "Exhibition centers";
+      continue;
+    } else {
+      hashes.add(hash);
+      uniqueData.push(data[i]);
+    }
+  }
+
+  return uniqueData;
 }

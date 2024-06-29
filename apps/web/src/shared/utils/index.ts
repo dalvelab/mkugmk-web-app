@@ -9,6 +9,7 @@ export {
 } from "./misc";
 export {
   createWorkingSchedule,
+  getEqualScheduleForExhibitionCenters,
   getformatDateLocale,
   getWorkingHoursForToday,
   getformatDateLocaleTime,
