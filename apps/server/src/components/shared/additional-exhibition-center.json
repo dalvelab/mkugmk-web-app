@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_additional_exhibition_centers",
+  "info": {
+    "displayName": "Additional Exhibition Center"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "gallery": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    }
+  }
+}

@@ -66,6 +66,18 @@ export interface FooterSocial extends Schema.Component {
   };
 }
 
+export interface SharedAdditionalExhibitionCenter extends Schema.Component {
+  collectionName: 'components_shared_additional_exhibition_centers';
+  info: {
+    displayName: 'Additional Exhibition Center';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.RichText;
+    gallery: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface SharedInfoCard extends Schema.Component {
   collectionName: 'components_shared_info_cards';
   info: {
@@ -288,6 +300,7 @@ declare module '@strapi/types' {
       'footer.contact': FooterContact;
       'footer.page': FooterPage;
       'footer.social': FooterSocial;
+      'shared.additional-exhibition-center': SharedAdditionalExhibitionCenter;
       'shared.info-card': SharedInfoCard;
       'shared.operating-hours-in-current-day': SharedOperatingHoursInCurrentDay;
       'shared.working-time': SharedWorkingTime;

@@ -122,6 +122,17 @@
       "type": "boolean",
       "default": true,
       "required": true
+    },
+    "additional_center": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "shared.additional-exhibition-center"
+      ]
     }
   }
 }

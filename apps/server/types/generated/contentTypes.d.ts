@@ -1169,6 +1169,14 @@ export interface ApiExhibitionCenterExhibitionCenter
         };
       }> &
       Attribute.DefaultTo<true>;
+    additional_center: Attribute.DynamicZone<
+      ['shared.additional-exhibition-center']
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
