@@ -18,6 +18,11 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "exhibition_centers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::exhibition-center.exhibition-center"
     }
   }
 }

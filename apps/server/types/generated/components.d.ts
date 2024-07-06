@@ -113,6 +113,11 @@ export interface SharedOperatingHoursInCurrentDay extends Schema.Component {
     value: Attribute.String & Attribute.Required;
     day: Attribute.Date & Attribute.Required;
     opened: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    exhibition_centers: Attribute.Relation<
+      'shared.operating-hours-in-current-day',
+      'oneToMany',
+      'api::exhibition-center.exhibition-center'
+    >;
   };
 }
 
