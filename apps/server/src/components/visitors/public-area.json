@@ -1,14 +1,16 @@
 {
   "collectionName": "components_visitors_public_areas",
   "info": {
-    "displayName": "Public Area"
+    "displayName": "Public Area",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "working_time": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.working-time"
+      "component": "shared.working-time",
+      "max": 7
     },
     "name": {
       "type": "string"

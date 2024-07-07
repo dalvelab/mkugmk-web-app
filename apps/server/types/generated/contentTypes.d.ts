@@ -928,7 +928,13 @@ export interface ApiComplexOperationManagementComplexOperationManagement
     draftAndPublish: false;
   };
   attributes: {
-    common_operating_hours: Attribute.Component<'shared.working-time', true>;
+    common_operating_hours: Attribute.Component<'shared.working-time', true> &
+      Attribute.SetMinMax<
+        {
+          max: 7;
+        },
+        number
+      >;
     special_days_operating_hours: Attribute.Component<
       'shared.operating-hours-in-current-day',
       true
@@ -1121,7 +1127,13 @@ export interface ApiExhibitionCenterExhibitionCenter
         i18n: {
           localized: false;
         };
-      }>;
+      }> &
+      Attribute.SetMinMax<
+        {
+          max: 7;
+        },
+        number
+      >;
     banner: Attribute.Media &
       Attribute.Required &
       Attribute.SetPluginOptions<{

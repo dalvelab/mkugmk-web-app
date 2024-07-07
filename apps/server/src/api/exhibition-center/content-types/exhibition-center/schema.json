@@ -44,7 +44,8 @@
         }
       },
       "component": "shared.working-time",
-      "required": true
+      "required": true,
+      "max": 7
     },
     "banner": {
       "type": "media",

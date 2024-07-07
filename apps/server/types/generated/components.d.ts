@@ -219,9 +219,16 @@ export interface VisitorsPublicArea extends Schema.Component {
   collectionName: 'components_visitors_public_areas';
   info: {
     displayName: 'Public Area';
+    description: '';
   };
   attributes: {
-    working_time: Attribute.Component<'shared.working-time', true>;
+    working_time: Attribute.Component<'shared.working-time', true> &
+      Attribute.SetMinMax<
+        {
+          max: 7;
+        },
+        number
+      >;
     name: Attribute.String;
   };
 }

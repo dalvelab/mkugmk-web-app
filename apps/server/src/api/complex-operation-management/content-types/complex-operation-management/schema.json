@@ -15,7 +15,8 @@
     "common_operating_hours": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.working-time"
+      "component": "shared.working-time",
+      "max": 7
     },
     "special_days_operating_hours": {
       "displayName": "OperatingHoursInCurrentDay",
