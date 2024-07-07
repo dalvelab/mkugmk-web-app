@@ -8,7 +8,7 @@ import {
   WeekDay,
 } from "../models";
 import { checkComplexOperatingHours } from "../utils/dates";
-import { isNotVoid } from "../utils";
+import { isNotEmpty, isNotVoid } from "../utils";
 
 export type ComplexOperationManagement = {
   common_operating_hours: StrapiWorkingTime[];
@@ -25,8 +25,10 @@ async function getComplexOperationManagement(): Promise<
 }
 
 type ComplextOperatingHoursContextType = {
+  dayOfWeek: number;
   isOpened?: boolean;
   special_day_operating_hours?: StrapiWorkingTime[];
+  exhibition_centers_including_special_day?: number[];
   website_top_warning?: string;
 };
 
@@ -38,7 +40,13 @@ export const ComplexOperationManagementProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [value, setValue] = useState<ComplextOperatingHoursContextType>({});
+  const dayOfWeek = new Date(
+    new Date().toLocaleString("en", { timeZone: "Asia/Yekaterinburg" })
+  ).getDay();
+
+  const [value, setValue] = useState<ComplextOperatingHoursContextType>({
+    dayOfWeek,
+  });
 
   const {
     data: response,
@@ -54,6 +62,7 @@ export const ComplexOperationManagementProvider = ({
     if (isError) {
       setValue({
         isOpened: true,
+        dayOfWeek,
       });
     }
 
@@ -62,15 +71,24 @@ export const ComplexOperationManagementProvider = ({
         response.data.special_days_operating_hours
       );
 
+      const exhibitionCenterSelected =
+        isNotVoid(day) &&
+        isNotVoid(day.exhibition_centers) &&
+        isNotEmpty(day.exhibition_centers);
+
       setValue({
         isOpened: isAvailable,
         special_day_operating_hours: isNotVoid(day)
           ? createFakeScheduleForSpecialDay(day)
           : undefined,
+        exhibition_centers_including_special_day: exhibitionCenterSelected
+          ? day?.exhibition_centers?.map((center) => center.id)
+          : undefined,
         website_top_warning: response.data.website_top_warning,
+        dayOfWeek,
       });
     }
-  }, [isError, isSuccess, response?.data]);
+  }, [dayOfWeek, isError, isSuccess, response?.data]);
 
   return (
     <ComplexOperationManagementContext.Provider value={value}>

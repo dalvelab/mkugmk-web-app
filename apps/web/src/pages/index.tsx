@@ -57,16 +57,16 @@ export default function Home({
     exhibition_centers,
   } = data;
 
-  const dayOfWeek = new Date(
-    new Date().toLocaleString("en", { timeZone: "Asia/Yekaterinburg" })
-  ).getDay();
-
   const workTimeToday = isNotVoid(complexSettingsData.common_operating_hours)
     ? getWorkingHoursForToday({
-        data: isNotVoid(complexOperatingSettings?.special_day_operating_hours)
-          ? complexOperatingSettings.special_day_operating_hours
-          : complexSettingsData.common_operating_hours,
-        dayOfWeek,
+        data:
+          isNotVoid(complexOperatingSettings?.special_day_operating_hours) &&
+          isEmpty(
+            complexOperatingSettings?.exhibition_centers_including_special_day
+          )
+            ? complexOperatingSettings.special_day_operating_hours
+            : complexSettingsData.common_operating_hours,
+        dayOfWeek: complexOperatingSettings?.dayOfWeek!,
         locale,
         isSpecialDayToday: complexOperatingSettings?.isOpened,
       })
@@ -185,7 +185,6 @@ export default function Home({
               <ExhibitionCenterCard
                 key={exhibition_center.id}
                 exhibition_center={exhibition_center}
-                dayOfWeek={dayOfWeek}
                 locale={locale}
               />
             ))}

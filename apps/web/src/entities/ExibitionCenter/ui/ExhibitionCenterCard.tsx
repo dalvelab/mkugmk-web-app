@@ -9,20 +9,21 @@ import {
 import { ExhibitionCenter } from "../models";
 import Image from "next/image";
 import Link from "next/link";
-import { getWorkingHoursForToday } from "@/shared/utils/dates";
-import { OpenStatus, isNotVoid, useComplexOperationManagement } from "@/shared";
+import {
+  getWorkingHoursForToday,
+  selectScheduleForExhibitionCenter,
+} from "@/shared/utils/dates";
+import { OpenStatus, useComplexOperationManagement } from "@/shared";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
 interface ExhibitionCenterCardProps {
   exhibition_center: ExhibitionCenter;
-  dayOfWeek: number;
   locale?: string;
 }
 
 export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
   exhibition_center,
-  dayOfWeek,
   locale,
 }) => {
   const { id, name, card_description, banner, working_time } =
@@ -32,10 +33,13 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
   const complexOperatingSettings = useComplexOperationManagement();
 
   const workTimeToday = getWorkingHoursForToday({
-    data: isNotVoid(complexOperatingSettings?.special_day_operating_hours)
-      ? complexOperatingSettings.special_day_operating_hours
-      : working_time,
-    dayOfWeek,
+    data: selectScheduleForExhibitionCenter(
+      working_time,
+      id,
+      complexOperatingSettings?.special_day_operating_hours,
+      complexOperatingSettings?.exhibition_centers_including_special_day
+    ),
+    dayOfWeek: complexOperatingSettings?.dayOfWeek!,
     locale,
     isSpecialDayToday: complexOperatingSettings?.isOpened,
   });

@@ -12,6 +12,8 @@ import {
   isNotEmpty,
   SEO,
   getEqualScheduleForExhibitionCenters,
+  getWorkingHoursForToday,
+  useComplexOperationManagement,
 } from "@/shared";
 import type {
   ComplexOperationManagement,
@@ -31,6 +33,7 @@ export default function WorkingHours({
 
   const { locale } = useRouter();
   const t = useTranslations("Working_hours_page");
+  const complexOperatingSettings = useComplexOperationManagement();
 
   if (isVoid(data) || isEmpty(data)) {
     return <EmptyState />;

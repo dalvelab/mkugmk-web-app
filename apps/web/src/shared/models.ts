@@ -1,3 +1,5 @@
+import { ExhibitionCenter } from "@/entities";
+
 export type ApiResponse<Data, Meta> = {
   data: Data | null;
   meta: Meta | StrapiMeta | null;
@@ -66,6 +68,7 @@ export type StrapiWorkingTime = {
 
 export type StrapiSpecialDay = Omit<StrapiWorkingTime, "day"> & {
   day: string;
+  exhibition_centers?: ExhibitionCenter[];
 };
 
 export type StrapiSocialNetwork = {

@@ -206,3 +206,30 @@ export function getEqualScheduleForExhibitionCenters(
 
   return uniqueData;
 }
+
+export function selectScheduleForExhibitionCenter(
+  regularWorkingTime: StrapiWorkingTime[],
+  selectedExhibitionCenterId: number,
+  specialWorkingTime?: StrapiWorkingTime[],
+  exhibitionCenterIds?: number[]
+) {
+  if (
+    isNotVoid(specialWorkingTime) &&
+    isNotEmpty(specialWorkingTime) &&
+    isVoid(exhibitionCenterIds)
+  ) {
+    return specialWorkingTime;
+  }
+
+  if (
+    isNotVoid(specialWorkingTime) &&
+    isNotEmpty(specialWorkingTime) &&
+    isNotVoid(exhibitionCenterIds) &&
+    isNotEmpty(exhibitionCenterIds) &&
+    exhibitionCenterIds.includes(selectedExhibitionCenterId)
+  ) {
+    return specialWorkingTime;
+  }
+
+  return regularWorkingTime;
+}

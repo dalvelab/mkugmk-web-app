@@ -14,15 +14,8 @@ import {
   Tr,
 } from "@chakra-ui/react";
 
-import {
-  createWorkingSchedule,
-  getWorkingHoursForToday,
-} from "@/shared/utils/dates";
-import {
-  isNotVoid,
-  StrapiWorkingTime,
-  useComplexOperationManagement,
-} from "@/shared";
+import { createWorkingSchedule } from "@/shared/utils/dates";
+import { StrapiWorkingTime } from "@/shared";
 
 interface OperatingHoursProps {
   data: {
@@ -38,11 +31,6 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
   const { locale } = useRouter();
 
   const t = useTranslations("Working_hours_page");
-  const complexOperatingSettings = useComplexOperationManagement();
-
-  const dayOfWeek = new Date(
-    new Date().toLocaleString("en", { timeZone: "Asia/Yekaterinburg" })
-  ).getDay();
 
   return (
     <TableContainer maxW="800px">
@@ -79,16 +67,6 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
               working_time,
               locale
             );
-            const workTimeToday = getWorkingHoursForToday({
-              data: isNotVoid(
-                complexOperatingSettings?.special_day_operating_hours
-              )
-                ? complexOperatingSettings.special_day_operating_hours
-                : working_time,
-              dayOfWeek,
-              locale,
-              isSpecialDayToday: complexOperatingSettings?.isOpened,
-            });
 
             return (
               <Tr key={uuidv4()}>
@@ -99,14 +77,9 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
                   border="1px solid"
                   borderColor="brand.border"
                 >
-                  <Flex flexDir="column" alignItems="flex-start" gap={1}>
-                    <chakra.span fontSize="lg" fontWeight="medium">
-                      {name}
-                    </chakra.span>
-                    <chakra.span fontSize="sm" color="brand.gray">
-                      {workTimeToday.value}
-                    </chakra.span>
-                  </Flex>
+                  <chakra.span fontSize="lg" fontWeight="medium">
+                    {name}
+                  </chakra.span>
                 </Td>
                 <Td
                   w="50%"

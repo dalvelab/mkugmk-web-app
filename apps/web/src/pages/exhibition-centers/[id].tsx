@@ -28,6 +28,7 @@ import {
   Gallery,
   useComplexOperationManagement,
   SEO,
+  selectScheduleForExhibitionCenter,
 } from "@/shared";
 import { OrderCall, YoutubeVideoSlider } from "@/features";
 import type { ExhibitionCenter } from "@/entities";
@@ -47,26 +48,26 @@ export default function ExhibitionCenter({
   }
 
   const {
+    id,
     name,
     description,
     banner,
     youtube_gallery,
     gallery,
-    excursion_phone,
     working_time,
     ticket_sale_enabled,
+    additional_center,
   } = data;
-
-  const dayOfWeek = new Date(
-    new Date().toLocaleString("en", { timeZone: "Asia/Yekaterinburg" })
-  ).getDay();
 
   const formattedSchedule = createWorkingSchedule(working_time, locale);
   const workTimeToday = getWorkingHoursForToday({
-    data: isNotVoid(complexOperatingSettings?.special_day_operating_hours)
-      ? complexOperatingSettings.special_day_operating_hours
-      : working_time,
-    dayOfWeek,
+    data: selectScheduleForExhibitionCenter(
+      working_time,
+      id,
+      complexOperatingSettings?.special_day_operating_hours,
+      complexOperatingSettings?.exhibition_centers_including_special_day
+    ),
+    dayOfWeek: complexOperatingSettings?.dayOfWeek!,
     locale,
     isSpecialDayToday: complexOperatingSettings?.isOpened,
   });
@@ -184,6 +185,55 @@ export default function ExhibitionCenter({
             <Gallery images={gallery} />
           </Container>
         </chakra.section>
+      )}
+      {isNotVoid(additional_center) && isNotEmpty(additional_center) && (
+        <>
+          <chakra.section pt={[10, 20, 20, 20, 20]} pb={10} pos="relative">
+            <Container
+              maxWidth="container.xl"
+              display="flex"
+              flexDir="column"
+              justifyContent="center"
+              pos="relative"
+            >
+              <HStack
+                divider={<StackDivider borderColor="brand.border" />}
+                gap={[2, 4, 6, 6, 10]}
+                flexDir={["column", "column", "row", "row", "row"]}
+                alignItems="flex-start"
+              >
+                <Heading
+                  whiteSpace="nowrap"
+                  as="h2"
+                  fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}
+                >
+                  {additional_center[0].title}
+                </Heading>
+                <chakra.div textAlign="justify" fontSize="xl">
+                  <Markdown>{additional_center[0].description}</Markdown>
+                </chakra.div>
+              </HStack>
+            </Container>
+          </chakra.section>
+          {isNotVoid(additional_center[0].gallery) &&
+            isNotEmpty(additional_center[0].gallery) && (
+              <chakra.section
+                bgColor="brand.black"
+                pt={[10, 20, 20, 20, 20]}
+                pb={[10, 20, 20, 20, 20]}
+                pos="relative"
+              >
+                <Container
+                  maxWidth="container.xl"
+                  display="flex"
+                  flexDir="column"
+                  pos="relative"
+                >
+                  <Gallery images={gallery} />
+                </Container>
+              </chakra.section>
+            )}
+        </>
       )}
       <YoutubeVideoSlider youtube_gallery={youtube_gallery} />
       <chakra.section

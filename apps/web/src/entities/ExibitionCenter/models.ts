@@ -12,4 +12,9 @@ export type ExhibitionCenter = {
   banner: StrapiMedia;
   youtube_gallery: StrapiYoutubeVideo[];
   working_time: StrapiWorkingTime[];
+  additional_center: {
+    title: string;
+    description: string;
+    gallery: StrapiMedia[];
+  }[];
 };

@@ -39,8 +39,8 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
         mt={7}
         gridTemplateColumns={[
           "1fr",
+          "1fr",
           "1fr 1fr",
-          "1fr 1fr 1fr",
           "1fr 1fr 1fr",
           "1fr 1fr 1fr 1fr",
         ]}
@@ -61,7 +61,7 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
               <chakra.div
                 pos="relative"
                 w="100%"
-                h="220px"
+                h={["264px", "220px", "220px", "220px", "220px"]}
                 bgColor="brand.black"
                 display="flex"
                 justifyContent="center"
@@ -79,10 +79,9 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
                   />
                 ) : (
                   <Image
-                    fill
                     src={image.url}
                     alt={imageAltGenerator(name, type)}
-                    style={{ objectFit: "cover" }}
+                    fill
                   />
                 )}
               </chakra.div>

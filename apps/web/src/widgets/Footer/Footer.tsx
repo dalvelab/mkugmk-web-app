@@ -100,7 +100,7 @@ export const Footer = () => {
       w="full"
       h="auto"
       minH={40}
-      bgColor="#e5e5e5"
+      bgColor="#f5f5f5"
       borderColor="brand.border"
       pos="relative"
     >
