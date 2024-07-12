@@ -229,7 +229,7 @@ export default function ExhibitionCenter({
                   flexDir="column"
                   pos="relative"
                 >
-                  <Gallery images={gallery} />
+                  <Gallery images={additional_center[0].gallery} />
                 </Container>
               </chakra.section>
             )}
