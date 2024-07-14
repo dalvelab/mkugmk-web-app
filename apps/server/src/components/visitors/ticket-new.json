@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_visitors_ticket_news",
+  "info": {
+    "displayName": "Ticket New",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "categories": {
+      "type": "component",
+      "repeatable": true,
+      "component": "visitors.ticket-category"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "available_on_website": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_excursion": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

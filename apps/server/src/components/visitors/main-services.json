@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_visitors_main_services",
+  "info": {
+    "displayName": "Main Services",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "link": {
+      "type": "string"
+    },
+    "tickets": {
+      "type": "component",
+      "repeatable": true,
+      "component": "visitors.ticket-new"
+    },
+    "value": {
+      "type": "string",
+      "required": false
+    },
+    "additional_text": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

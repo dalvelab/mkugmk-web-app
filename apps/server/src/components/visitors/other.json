@@ -10,9 +10,6 @@
       "type": "string",
       "required": true
     },
-    "caption": {
-      "type": "string"
-    },
     "additional_text": {
       "type": "richtext"
     },

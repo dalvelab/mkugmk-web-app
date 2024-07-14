@@ -56,6 +56,17 @@
       "type": "string",
       "required": true,
       "default": "tickets"
+    },
+    "main_services": {
+      "displayName": "Main Services",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "visitors.main-services"
     }
   }
 }

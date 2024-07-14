@@ -1662,6 +1662,12 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
         };
       }> &
       Attribute.DefaultTo<'tickets'>;
+    main_services: Attribute.Component<'visitors.main-services', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

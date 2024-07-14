@@ -186,6 +186,21 @@ export interface VisitorsInteractivePlaygroudPage extends Schema.Component {
   };
 }
 
+export interface VisitorsMainServices extends Schema.Component {
+  collectionName: 'components_visitors_main_services';
+  info: {
+    displayName: 'Main Services';
+    description: '';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    link: Attribute.String;
+    tickets: Attribute.Component<'visitors.ticket-new', true>;
+    value: Attribute.String;
+    additional_text: Attribute.String;
+  };
+}
+
 export interface VisitorsNavigationPage extends Schema.Component {
   collectionName: 'components_visitors_navigation_pages';
   info: {
@@ -209,7 +224,6 @@ export interface VisitorsOther extends Schema.Component {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    caption: Attribute.String;
     additional_text: Attribute.RichText;
     value: Attribute.RichText & Attribute.Required;
   };
@@ -240,9 +254,23 @@ export interface VisitorsTicketCategory extends Schema.Component {
     description: '';
   };
   attributes: {
-    name: Attribute.String;
+    name: Attribute.String & Attribute.Required;
     caption: Attribute.String;
     price: Attribute.String;
+  };
+}
+
+export interface VisitorsTicketNew extends Schema.Component {
+  collectionName: 'components_visitors_ticket_news';
+  info: {
+    displayName: 'Ticket New';
+    description: '';
+  };
+  attributes: {
+    categories: Attribute.Component<'visitors.ticket-category', true>;
+    name: Attribute.String & Attribute.Required;
+    available_on_website: Attribute.Boolean & Attribute.DefaultTo<false>;
+    is_excursion: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
 
@@ -260,20 +288,6 @@ export interface VisitorsTicketTypes extends Schema.Component {
       Attribute.Required &
       Attribute.DefaultTo<false>;
     name: Attribute.String & Attribute.Required;
-    display_preferential_sign: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-  };
-}
-
-export interface VisitorsTicketsPage extends Schema.Component {
-  collectionName: 'components_visitors_tickets_pages';
-  info: {
-    displayName: 'Tickets Page';
-    description: '';
-  };
-  attributes: {
-    other_services: Attribute.Component<'visitors.other', true>;
   };
 }
 
@@ -320,12 +334,13 @@ declare module '@strapi/types' {
       'visitors.address': VisitorsAddress;
       'visitors.cafe-and-souvenirs-page': VisitorsCafeAndSouvenirsPage;
       'visitors.interactive-playgroud-page': VisitorsInteractivePlaygroudPage;
+      'visitors.main-services': VisitorsMainServices;
       'visitors.navigation-page': VisitorsNavigationPage;
       'visitors.other': VisitorsOther;
       'visitors.public-area': VisitorsPublicArea;
       'visitors.ticket-category': VisitorsTicketCategory;
+      'visitors.ticket-new': VisitorsTicketNew;
       'visitors.ticket-types': VisitorsTicketTypes;
-      'visitors.tickets-page': VisitorsTicketsPage;
       'visitors.transport': VisitorsTransport;
       'visitors.working-hours-page': VisitorsWorkingHoursPage;
     }
