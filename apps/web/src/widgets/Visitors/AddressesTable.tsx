@@ -1,3 +1,4 @@
+import { Markdown } from "@/shared";
 import { chakra, Flex, Grid } from "@chakra-ui/react";
 
 interface AddressesTableProps {
@@ -54,7 +55,7 @@ export const AddressesTable: React.FC<AddressesTableProps> = ({ data }) => {
               fontSize={["lg", "xl", "xl", "xl", "xl"]}
               fontWeight="medium"
             >
-              {name}
+              <Markdown>{name}</Markdown>
             </chakra.span>
             <chakra.span
               maxW={["100%", "100%", "300px", "300px", "300px"]}

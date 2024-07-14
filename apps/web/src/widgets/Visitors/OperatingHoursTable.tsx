@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 
 import { createWorkingSchedule } from "@/shared/utils/dates";
-import { StrapiWorkingTime } from "@/shared";
+import { Markdown, StrapiWorkingTime } from "@/shared";
 
 interface OperatingHoursProps {
   data: {
@@ -78,7 +78,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
                   borderColor="brand.border"
                 >
                   <chakra.span fontSize="lg" fontWeight="medium">
-                    {name}
+                    <Markdown>{name}</Markdown>
                   </chakra.span>
                 </Td>
                 <Td

@@ -57,6 +57,7 @@ export default function ExhibitionCenter({
     working_time,
     ticket_sale_enabled,
     additional_center,
+    is_excursion_available,
   } = data;
 
   const formattedSchedule = createWorkingSchedule(working_time, locale);
@@ -297,18 +298,20 @@ export default function ExhibitionCenter({
                   Посмотреть схему
                 </Link>
               </Flex>
-              <Flex flexDir="column" gap={2}>
-                <chakra.span fontSize="xl" color="brand.gray">
-                  Экскурсии
-                </chakra.span>
-                <OrderCall
-                  buttonStyles={{
-                    alignSelf: "flex-start",
-                    fontSize: "lg",
-                    textDecor: "underline",
-                  }}
-                />
-              </Flex>
+              {is_excursion_available && (
+                <Flex flexDir="column" gap={2}>
+                  <chakra.span fontSize="xl" color="brand.gray">
+                    Экскурсии
+                  </chakra.span>
+                  <OrderCall
+                    buttonStyles={{
+                      alignSelf: "flex-start",
+                      fontSize: "lg",
+                      textDecor: "underline",
+                    }}
+                  />
+                </Flex>
+              )}
               <Flex flexDir="column" gap={2}>
                 <chakra.span fontSize="xl" color="brand.gray">
                   {t("working_schedule")}
