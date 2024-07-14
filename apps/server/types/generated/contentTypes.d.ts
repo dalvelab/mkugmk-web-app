@@ -1189,6 +1189,14 @@ export interface ApiExhibitionCenterExhibitionCenter
           localized: true;
         };
       }>;
+    is_excursion_available: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

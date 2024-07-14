@@ -134,6 +134,16 @@
       "components": [
         "shared.additional-exhibition-center"
       ]
+    },
+    "is_excursion_available": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }
