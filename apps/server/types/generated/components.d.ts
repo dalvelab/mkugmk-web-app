@@ -271,6 +271,7 @@ export interface VisitorsTicketNew extends Schema.Component {
     name: Attribute.String & Attribute.Required;
     available_on_website: Attribute.Boolean & Attribute.DefaultTo<false>;
     is_excursion: Attribute.Boolean & Attribute.DefaultTo<false>;
+    additional_text: Attribute.Text;
   };
 }
 

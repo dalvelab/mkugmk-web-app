@@ -22,6 +22,9 @@
     "is_excursion": {
       "type": "boolean",
       "default": false
+    },
+    "additional_text": {
+      "type": "text"
     }
   }
 }
