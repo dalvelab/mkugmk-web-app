@@ -17,4 +17,5 @@ export type ExhibitionCenter = {
     description: string;
     gallery: StrapiMedia[];
   }[];
+  is_excursion_available: boolean;
 };
