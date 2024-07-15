@@ -1,5 +1,10 @@
 import { type ApiResponse, type DefaultRequestParams } from "@/shared";
-import type { BenefitTicketsPage, RulesPage, VisitorsPages } from "./models";
+import type {
+  BenefitTicketsPage,
+  RulesPage,
+  TicketsAndServicesPage,
+  VisitorsPages,
+} from "./models";
 
 interface GetCafeAndSouvenirsPage extends DefaultRequestParams {}
 
@@ -47,7 +52,7 @@ interface GetTicketsPage extends DefaultRequestParams {}
 
 export async function getTicketsPage(
   params: GetTicketsPage
-): Promise<ApiResponse<VisitorsPages["tickets_page"], null>> {
+): Promise<ApiResponse<TicketsAndServicesPage, null>> {
   const { locale } = params;
 
   const res = await fetch(

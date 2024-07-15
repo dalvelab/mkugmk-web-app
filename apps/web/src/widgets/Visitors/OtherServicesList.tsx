@@ -14,11 +14,11 @@ import {
   Tr,
 } from "@chakra-ui/react";
 
-import type { VisitorsPages } from "@/entities";
+import type { TicketsAndServicesPage } from "@/entities";
 import { isNotVoid, Markdown } from "@/shared";
 
 interface OtherServicesListProps {
-  other_services: VisitorsPages["tickets_page"]["other_services"];
+  other_services: TicketsAndServicesPage["other_services"];
 }
 
 export const OtherServicesList: React.FC<OtherServicesListProps> = ({
@@ -84,16 +84,6 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({
                     <chakra.span whiteSpace="pre-wrap" textAlign="left">
                       {button.name}
                     </chakra.span>
-                    {isNotVoid(button.caption) ? (
-                      <chakra.span
-                        fontSize="xs"
-                        noOfLines={1}
-                        textOverflow="ellipsis"
-                        color="brand.gray"
-                      >
-                        {button.caption}
-                      </chakra.span>
-                    ) : null}
                   </Flex>
                 </chakra.button>
               ))}

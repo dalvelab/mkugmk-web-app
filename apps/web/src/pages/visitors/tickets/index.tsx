@@ -14,7 +14,7 @@ import {
   File,
   SEO,
 } from "@/shared";
-import type { VisitorsPages } from "@/entities";
+import type { TicketsAndServicesPage } from "@/entities";
 import type { ApiResponse } from "@/shared";
 import { OtherServicesList, TicketsList } from "@/widgets";
 
@@ -36,6 +36,7 @@ export default function Tickets({
     secondary_title,
     secondary_description,
     other_services,
+    main_services,
     documents,
   } = data;
 
@@ -71,7 +72,7 @@ export default function Tickets({
         </CustomContainer>
       </chakra.section>
       {isNotVoid(tickets) && isNotEmpty(tickets) && (
-        <TicketsList tickets={tickets} />
+        <TicketsList main_services={main_services} />
       )}
       <chakra.section pt={10} pb={10}>
         <Container maxW="container.xl">
@@ -110,7 +111,7 @@ export default function Tickets({
 }
 
 interface PartnerProps {
-  page: ApiResponse<VisitorsPages["tickets_page"], null>;
+  page: ApiResponse<TicketsAndServicesPage, null>;
 }
 
 export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({

@@ -5,6 +5,7 @@ import {
   FaqPage,
   PartnerPage,
   ContactsPage,
+  TicketsAndServicesPage,
 } from "@/entities";
 
 export type MeilisearchRequest = {
@@ -25,7 +26,7 @@ export type MeilisearchRequest = {
 export interface KeyValueMap {
   event: Omit<Event, "image">;
   visitors: Pick<
-    VisitorsPages["tickets_page"],
+    TicketsAndServicesPage,
     "title" | "description" | "id" | "type_for_meilisearch"
   >;
   "exhibition-center": Omit<

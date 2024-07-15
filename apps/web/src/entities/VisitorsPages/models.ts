@@ -9,36 +9,6 @@ export type VisitorsPageType =
   | "working-hours";
 
 export type VisitorsPages = {
-  tickets_page: {
-    id: number;
-    type_for_meilisearch: VisitorsPageType;
-    title: string;
-    secondary_title: string;
-    description: string;
-    secondary_description: string;
-    other_services: {
-      id: number;
-      name: string;
-      value: string;
-      additional_text?: string;
-      caption?: string;
-    }[];
-    tickets: {
-      id: number;
-      type_for_meilisearch: VisitorsPageType;
-      name: string;
-      available_on_website: boolean;
-      display_preferential_sign: boolean;
-      categories: {
-        id: number;
-        name?: string;
-        caption?: string;
-        price?: number;
-      }[];
-      additional_text?: string;
-    }[];
-    documents: StrapiMedia[] | null;
-  };
   interactive_playground_page: {
     id: number;
     type_for_meilisearch: VisitorsPageType;
@@ -96,4 +66,52 @@ export type BenefitTicketsPage = {
   type_for_meilisearch: VisitorsPageType;
   title: string;
   description: string;
+};
+
+export type TicketsAndServicesPage = {
+  id: number;
+  type_for_meilisearch: VisitorsPageType;
+  title: string;
+  secondary_title: string;
+  description: string;
+  secondary_description: string;
+  main_services: {
+    id: number;
+    name: string;
+    link?: string | null;
+    value?: string | null;
+    additional_text?: string | null;
+    tickets: {
+      id: number;
+      name: string;
+      available_on_website?: boolean;
+      is_excursion?: boolean;
+      additional_text?: string;
+      categories: {
+        id: number;
+        name: string;
+        price: string;
+      }[];
+    }[];
+  }[];
+  other_services: {
+    id: number;
+    name: string;
+    value: string;
+    additional_text?: string;
+  }[];
+  tickets: {
+    id: number;
+    type_for_meilisearch: VisitorsPageType;
+    name: string;
+    available_on_website: boolean;
+    categories: {
+      id: number;
+      name?: string;
+      caption?: string;
+      price?: number;
+    }[];
+    additional_text?: string;
+  }[];
+  documents: StrapiMedia[] | null;
 };
