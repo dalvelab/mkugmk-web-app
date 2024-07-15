@@ -193,7 +193,7 @@ export interface VisitorsMainServices extends Schema.Component {
     description: '';
   };
   attributes: {
-    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    name: Attribute.String & Attribute.Required;
     link: Attribute.String;
     tickets: Attribute.Component<'visitors.ticket-new', true>;
     value: Attribute.String;
