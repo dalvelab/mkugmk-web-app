@@ -2,9 +2,11 @@ import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import {
+  Badge,
   chakra,
   Container,
   Flex,
+  Grid,
   Table,
   TableContainer,
   Tbody,
@@ -45,6 +47,13 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({
     (service) => service.id === activeId
   );
 
+  const bgColorMap: Record<string, string> = {
+    '0': 'blue',
+    '1': 'green',
+    '2': 'yellow',
+    '3': 'orange',
+  }
+
   return (
     <chakra.section pb={10}>
       <Container maxW="container.xl">
@@ -53,7 +62,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({
           alignItems="flex-start"
           flexDir={["column", "column", "column", "row", "row"]}
         >
-          <Flex
+          {/* <Flex
             minW="340px"
             maxW="390px"
             w={["100%", "auto", "auto", "auto", "auto"]}
@@ -88,9 +97,27 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({
                 </chakra.button>
               ))}
             </Flex>
-          </Flex>
+          </Flex> */}
+          <Grid templateColumns="1fr 1fr 1fr" gap={5}>
+          {other_services.map((service, index) => (
+            <Flex
+            key={service.id}
+            p={5}
+            flexDir="column"
+            border="1px solid"
+            borderColor="brand.border"
+            borderRadius={8}
+            > 
+            <Badge colorScheme={bgColorMap[index]} px={2} alignSelf="flex-start">{service.name}</Badge>
+            <chakra.span mt={5} fontSize="2xl" fontWeight="medium">{service.value}</chakra.span>
+            <chakra.span mt={5} color="brand.gray" fontSize="sm">
+              <Markdown>{service.additional_text}</Markdown>
+            </chakra.span>
+            </Flex>
+          ))}
+          </Grid>
           {/* @ts-ignore */}
-          <TableContainer ref={tableRef} w="100%">
+          {/* <TableContainer ref={tableRef} w="100%">
             <Table border="1px solid" borderColor="brand.border">
               <Thead>
                 <Tr>
@@ -152,7 +179,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({
                 )}
               </Tbody>
             </Table>
-          </TableContainer>
+          </TableContainer> */}
         </Flex>
       </Container>
     </chakra.section>
