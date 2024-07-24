@@ -1,6 +1,7 @@
 import { chakra, Container, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useTranslations } from "next-intl";
+import removeMarkdown from "remove-markdown";
 
 import { getFaqPage } from "@/entities";
 import {
@@ -33,7 +34,7 @@ export default function FAQPage({
   return (
     <>
       <SEO title={title}>
-        <meta name="description" content={description} />
+        <meta name="description" content={removeMarkdown(description)} />
       </SEO>
       <chakra.section pt={6} pb={10}>
         <CustomContainer

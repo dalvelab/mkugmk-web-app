@@ -1,17 +1,27 @@
 import { chakra, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import removeMarkdown from "remove-markdown";
 
-import { CardsWithModal } from '@/widgets';
-import { getInteractivePlaygroundPage } from '@/entities';
-import { isVoid, EmptyState, isEmpty, CustomContainer, Markdown, SEO } from '@/shared';
-import type { VisitorsPages } from '@/entities';
-import type { ApiResponse } from '@/shared';
+import { CardsWithModal } from "@/widgets";
+import { getInteractivePlaygroundPage } from "@/entities";
+import {
+  isVoid,
+  EmptyState,
+  isEmpty,
+  CustomContainer,
+  Markdown,
+  SEO,
+} from "@/shared";
+import type { VisitorsPages } from "@/entities";
+import type { ApiResponse } from "@/shared";
 
-export default function InteractivePlaygrounds({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function InteractivePlaygrounds({
+  page,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
 
   if (isVoid(data) || isEmpty(data)) {
-    return <EmptyState />
+    return <EmptyState />;
   }
 
   const { title, description, interactive_playgrounds } = data;
@@ -19,8 +29,11 @@ export default function InteractivePlaygrounds({ page }: InferGetServerSideProps
   return (
     <>
       <SEO title={title}>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={`${title} | Музейный комплекс - Верхняя Пышма`} />
+        <meta name="description" content={removeMarkdown(description)} />
+        <meta
+          property="og:title"
+          content={`${title} | Музейный комплекс - Верхняя Пышма`}
+        />
         <meta property="og:type" content="website" />
       </SEO>
       <chakra.section pt={6} pb={10}>
@@ -32,8 +45,15 @@ export default function InteractivePlaygrounds({ page }: InferGetServerSideProps
           flexDir="column"
           pos="relative"
         >
-          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>{title}</Heading>
-          <chakra.div maxW={["100%", "100%", "90%", "80%", "70%"]} mt={4} fontSize="lg" textAlign="justify">
+          <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
+            {title}
+          </Heading>
+          <chakra.div
+            maxW={["100%", "100%", "90%", "80%", "70%"]}
+            mt={4}
+            fontSize="lg"
+            textAlign="justify"
+          >
             <Markdown>{description}</Markdown>
           </chakra.div>
           <CardsWithModal data={interactive_playgrounds} />

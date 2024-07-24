@@ -1,5 +1,6 @@
 import { chakra, Container, Flex, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import removeMarkdown from "remove-markdown";
 import { useTranslations } from "next-intl";
 
 import { getTicketsPage } from "@/entities";
@@ -43,7 +44,7 @@ export default function Tickets({
   return (
     <>
       <SEO title={title}>
-        <meta name="description" content={description} />
+        <meta name="description" content={removeMarkdown(description)} />
         <meta
           property="og:title"
           content={`${title} | Музейный комплекс - Верхняя Пышма`}

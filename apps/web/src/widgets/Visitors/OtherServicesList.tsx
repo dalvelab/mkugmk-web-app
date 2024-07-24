@@ -10,13 +10,6 @@ interface OtherServicesListProps {
 export const OtherServicesList: React.FC<OtherServicesListProps> = ({
   other_services,
 }) => {
-  const bgColorMap: Record<string, string> = {
-    "0": "blue",
-    "1": "green",
-    "2": "yellow",
-    "3": "orange",
-  };
-
   return (
     <chakra.section pb={10}>
       <Container maxW="container.xl">
@@ -52,7 +45,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({
                 >
                   {service.name}
                 </Badge>
-                <chakra.span mt={5} fontSize="lg" fontWeight="medium">
+                <chakra.span mt={5} fontSize="md" fontWeight="bold">
                   {service.value}
                 </chakra.span>
                 {isNotVoid(service.additional_text) && (

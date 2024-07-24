@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { chakra, Flex, Heading } from "@chakra-ui/react";
+import removeMarkdown from "remove-markdown";
 
 import { getSingleEvent } from "@/entities";
 import {
@@ -10,7 +11,6 @@ import {
   isEmpty,
   Markdown,
   CustomContainer,
-  isNotVoid,
   SEO,
 } from "@/shared";
 import type { Event } from "@/entities";
@@ -25,12 +25,12 @@ export default function SingleNews({
     return <EmptyState />;
   }
 
-  const { title, description, createdAt, publish_date, image } = data;
+  const { title, description, publish_date, image } = data;
 
   return (
     <>
       <SEO title={title}>
-        <meta name="description" content={description} />
+        <meta name="description" content={removeMarkdown(description)} />
         <meta
           property="og:title"
           content={`${title} | Музейный комплекс - Верхняя Пышма`}
