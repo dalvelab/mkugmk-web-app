@@ -185,6 +185,8 @@ export const Navbar = () => {
               {complexOperatingSettings.website_top_warning}
             </chakra.div>
             <Button
+              maxW={["80px", "104px", "104px", "104px", "104px"]}
+              w="100%"
               size={["sm", "md", "md", "md", "md"]}
               colorScheme="yellow"
               _hover={{ bgColor: "yellow.400" }}

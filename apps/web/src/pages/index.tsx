@@ -181,11 +181,12 @@ export default function Home({
             w="100%"
             gap={5}
           >
-            {exhibition_centers.map((exhibition_center) => (
+            {exhibition_centers.map((exhibition_center, index) => (
               <ExhibitionCenterCard
                 key={exhibition_center.id}
                 exhibition_center={exhibition_center}
                 locale={locale}
+                isLast={exhibition_centers.length - 1 === index}
               />
             ))}
           </Grid>

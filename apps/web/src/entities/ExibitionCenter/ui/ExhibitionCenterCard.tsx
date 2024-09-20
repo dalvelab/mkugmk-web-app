@@ -19,12 +19,14 @@ import { motion } from "framer-motion";
 
 interface ExhibitionCenterCardProps {
   exhibition_center: ExhibitionCenter;
+  isLast?: boolean;
   locale?: string;
 }
 
 export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
   exhibition_center,
   locale,
+  isLast,
 }) => {
   const { id, name, card_description, banner, working_time } =
     exhibition_center;
@@ -46,10 +48,14 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
 
   const [isPhone] = useMediaQuery("(max-width: 480px)");
 
+  const height = isLast
+    ? ["320px", "400px", "460px", "460px", "500px"]
+    : ["320px", "400px", "460px", "380px", "410px"];
+
   return (
     <Flex
       as={motion.div}
-      h={["320px", "400px", "460px", "380px", "410px"]}
+      h={height}
       display="flex"
       boxSizing="border-box"
       border="1px solid"
@@ -59,6 +65,11 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
       whileInView={{ opacity: 1, transform: "translateX(0)" }}
       viewport={{ once: true }}
       pos="relative"
+      _last={
+        isLast
+          ? { gridColumn: ["auto", "auto", "auto", "span 2", "span 2"] }
+          : {}
+      }
     >
       <chakra.div w="100%" h="100%" pos="absolute" borderRadius="12px">
         <Image
