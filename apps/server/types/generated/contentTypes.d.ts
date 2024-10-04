@@ -1045,7 +1045,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    image: Attribute.Media &
+    image: Attribute.Media<'images'> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -1134,14 +1134,14 @@ export interface ApiExhibitionCenterExhibitionCenter
         },
         number
       >;
-    banner: Attribute.Media &
+    banner: Attribute.Media<'images' | 'videos'> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
         };
       }>;
-    gallery: Attribute.Media &
+    gallery: Attribute.Media<'images', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -1431,7 +1431,7 @@ export interface ApiNavigationPageNavigationPage extends Schema.SingleType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    complex_map: Attribute.Media;
+    complex_map: Attribute.Media<'images'>;
     yandex_map_embed: Attribute.String;
     addresses: Attribute.Component<'visitors.address', true>;
     how_to_get_to_museum: Attribute.Component<'visitors.transport', true>;
@@ -1657,7 +1657,7 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.RichText;
-    documents: Attribute.Media;
+    documents: Attribute.Media<'files', true>;
     secondary_title: Attribute.String;
     other_services: Attribute.Component<'visitors.other', true>;
     tickets: Attribute.Component<'visitors.ticket-types', true>;
@@ -1730,7 +1730,7 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
           localized: true;
         };
       }>;
-    banner: Attribute.Media &
+    banner: Attribute.Media<'images' | 'videos'> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -1743,7 +1743,7 @@ export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
           localized: true;
         };
       }>;
-    video_preview: Attribute.Media &
+    video_preview: Attribute.Media<'images'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
