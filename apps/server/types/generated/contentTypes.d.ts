@@ -1430,11 +1430,27 @@ export interface ApiNavigationPageNavigationPage extends Schema.SingleType {
     };
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     complex_map: Attribute.Media<'images'>;
     yandex_map_embed: Attribute.String;
-    addresses: Attribute.Component<'visitors.address', true>;
-    how_to_get_to_museum: Attribute.Component<'visitors.transport', true>;
+    addresses: Attribute.Component<'visitors.address', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    how_to_get_to_museum: Attribute.Component<'visitors.transport', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     type_for_meilisearch: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{

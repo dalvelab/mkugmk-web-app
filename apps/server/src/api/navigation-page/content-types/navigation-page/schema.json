@@ -18,7 +18,12 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "complex_map": {
       "type": "media",
@@ -34,12 +39,22 @@
     "addresses": {
       "type": "component",
       "repeatable": true,
-      "component": "visitors.address"
+      "component": "visitors.address",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "how_to_get_to_museum": {
       "type": "component",
       "repeatable": true,
-      "component": "visitors.transport"
+      "component": "visitors.transport",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "type_for_meilisearch": {
       "pluginOptions": {
