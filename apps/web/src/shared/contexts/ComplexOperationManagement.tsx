@@ -16,10 +16,10 @@ export type ComplexOperationManagement = {
   website_top_warning?: string;
 };
 
-async function getComplexOperationManagement(): Promise<
+async function getComplexOperationManagement(locale?: string): Promise<
   ApiResponse<ComplexOperationManagement, null>
 > {
-  const res = await fetch(`/api/complex-operation-management`);
+  const res = await fetch(`/api/complex-operation-management?locale=${locale}`);
 
   return res.json();
 }
@@ -37,7 +37,9 @@ const ComplexOperationManagementContext =
 
 export const ComplexOperationManagementProvider = ({
   children,
+  locale
 }: {
+  locale?: string,
   children: React.ReactNode;
 }) => {
   const dayOfWeek = new Date(
@@ -54,7 +56,7 @@ export const ComplexOperationManagementProvider = ({
     isSuccess,
   } = useQuery({
     queryKey: [`complex-operation-hours`],
-    queryFn: () => getComplexOperationManagement(),
+    queryFn: () => getComplexOperationManagement(locale),
     refetchOnWindowFocus: false,
   });
 

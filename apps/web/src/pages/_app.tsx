@@ -22,7 +22,7 @@ const theme = extendTheme({ ...chakraMKUGMKConfig });
 const queryClient = new QueryClient();
 
 function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
+  const {locale} = useRouter();
 
   return (
     <>
@@ -41,7 +41,7 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <YandexMetrika />
       <NextIntlClientProvider
-        locale={router.locale}
+        locale={locale}
         messages={pageProps.messages}
         timeZone="Asia/Yekaterinburg"
       >
@@ -53,7 +53,7 @@ function App({ Component, pageProps }: AppProps) {
         </SEO>
         <QueryClientProvider client={queryClient}>
           <ChakraProvider theme={theme}>
-            <ComplexOperationManagementProvider>
+            <ComplexOperationManagementProvider locale={locale}>
               <Navbar />
               <chakra.main pb={8} minH="calc(80vh - 80px)">
                 <Component {...pageProps} />
