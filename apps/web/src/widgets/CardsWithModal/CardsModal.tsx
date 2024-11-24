@@ -1,3 +1,7 @@
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+
 import {
   chakra,
   Button,
@@ -11,8 +15,6 @@ import {
   Heading,
   Flex,
 } from "@chakra-ui/react";
-import Image from "next/image";
-import Link from "next/link";
 
 import { Markdown, StrapiInfoCard, isNotVoid } from "@/shared";
 
@@ -42,6 +44,8 @@ export const CardsModal: React.FC<CardsModalProps> = ({
     tickets,
     working_hours,
   } = data;
+
+  const t = useTranslations("Common");
 
   return (
     <Modal
@@ -90,7 +94,7 @@ export const CardsModal: React.FC<CardsModalProps> = ({
         </ModalBody>
         <ModalFooter gap={4}>
           <Button onClick={onClose} variant="ghost">
-            Закрыть
+            {t("close")}
           </Button>
           {type === "partners" && isNotVoid(reference_to_other_source) && (
             <Link
@@ -103,7 +107,7 @@ export const CardsModal: React.FC<CardsModalProps> = ({
                 color="white"
                 _hover={{ bgColor: "brand.black" }}
               >
-                Перейти
+                {t("explore")}
               </Button>
             </Link>
           )}

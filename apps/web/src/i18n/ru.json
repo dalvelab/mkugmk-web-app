@@ -1,6 +1,12 @@
 {
-  "Settings": {
-    "title_prefix": "Музейный комплекс - Верхняя Пышма"
+  "Common": {
+    "close": "Закрыть",
+    "open_search": "Открыть поиск",
+    "explore": "Перейти"
+  },
+  "SEO": {
+    "title_prefix": "Музейный комплекс - Верхняя Пышма",
+    "description": "Крупнейший выставочный комплекс военной и автомобильной техники в России. Расположен в г. Верхняя Пышма, ул. Александра Козицына, 2"
   },
   "Navigation": {
     "title": "Музейный комплекс",
@@ -50,7 +56,14 @@
     "title": "Новости"
   },
   "Buy_Tickets": {
-    "title": "Купить билеты"
+    "title": "Купить билеты",
+    "seo_description": "Билеты в музейный комплекс можно приобрести онлайн или в кассе",
+    "select_one_or_several_exhibition_centers": "Выберите один или несколько выставочных центров",
+    "notification": "При приобретении входного билета в один из выставочных центров вход на Открытую площадку бесплатный. В данном случае билет приобретать не нужно.",
+    "tickets_amount_can_be_selected_on_next_step": "количество билетов можно будет выбрать далее",
+    "ticket_is_unavailable": "Билет недоступен",
+    "go_to_ticket_issue": "Перейти к оформлению",
+    "automatically_included": "автоматически включено"
   },
   "Navigation_page": {
     "museum_complex_map": "Карта музейного комплекса",
@@ -84,6 +97,11 @@
     "leave_feedback": "Оставить отзыв",
     "order_call_modal_form_name": "Имя",
     "order_call_modal_form_phone": "Телефон",
-    "order_call_modal_form_message": "Сообщение"
+    "order_call_modal_form_message": "Сообщение",
+    "faq": "Вопрос — Ответ",
+    "legal_notes": "Частное учреждение культуры «Музейный комплекс»"
+  },
+  "Search_Modal": {
+    "enter_your_search_request": "Введите поисковый запрос"
   }
 }

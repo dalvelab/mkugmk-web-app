@@ -1,6 +1,7 @@
 import { isNotVoid } from "@/shared";
 import { chakra, Flex, Tag } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface HitProps {
   type:
@@ -16,14 +17,8 @@ interface HitProps {
   caption?: string;
 }
 
-export const Hit: React.FC<HitProps> = ({
-  closeModal,
-  title,
-  type,
-  link,
-  caption,
-}) => {
-  const tagMap: Record<HitProps["type"], string> = {
+function getTagByLocale(locale?: string) {
+  const ruTagMap: Record<HitProps["type"], string> = {
     exhibition_center: "о музее",
     news: "новости",
     visitors: "посетителям",
@@ -31,6 +26,33 @@ export const Hit: React.FC<HitProps> = ({
     "partners-page": "партнеры",
     "contacts-page": "контакты",
   };
+
+  if (locale === 'en') {
+    const enTagMap: Record<HitProps["type"], string> = {
+      exhibition_center: "about us",
+      news: "news",
+      visitors: "for visitors",
+      "faq-page": "faq",
+      "partners-page": "partners",
+      "contacts-page": "contacts",
+    };
+
+    return enTagMap;
+  }
+
+  return ruTagMap;
+}
+
+export const Hit: React.FC<HitProps> = ({
+  closeModal,
+  title,
+  type,
+  link,
+  caption,
+}) => {
+  const {locale} = useRouter()
+
+  const tagMap = getTagByLocale(locale);
 
   const tagColorScheme: Record<HitProps["type"], string> = {
     exhibition_center: "green",

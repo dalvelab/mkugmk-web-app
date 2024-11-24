@@ -2,6 +2,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useState } from "react";
 import { chakra, Heading, Grid, Flex, Button, Text } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 
 import { Cart, TicketCard, getExibitionCenters, getTickets } from "@/entities";
 import {
@@ -23,6 +24,7 @@ export default function BuyTicket({
   const { data: ticketsData } = tickets;
   const { data } = exhibition_centers;
 
+  const {locale} = useRouter()
   const t = useTranslations("Buy_Tickets");
 
   const [mode, setMode] = useState<"default" | "pushkin_card">("default");
@@ -117,14 +119,11 @@ export default function BuyTicket({
     setMode(selectedMode);
   }
 
+  const isRuLanguage = locale === 'ru';
+
   return (
     <>
-      <SEO title={t("title")}>
-        <meta
-          name="description"
-          content="Билеты в музейный комплекс можно приобрести онлайн или в кассе"
-        />
-      </SEO>
+      <SEO title={t("title")} description={t("seo_description")} />
       <chakra.section pt={6} pb={10} minH="100vh">
         <CustomContainer
           withBackButton
@@ -137,38 +136,40 @@ export default function BuyTicket({
           <Heading as="h1" fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}>
             {t("title")}
           </Heading>
-          <Flex mt={4} p={1.5} bgColor="#F4F4F5" borderRadius="8px">
-            <Button
-              px={[3, 7, 7, 7, 7]}
-              py={[3, 5, 5, 5, 5]}
-              fontSize={["xs", "md", "md", "md", "md"]}
-              bgColor={mode === "default" ? "brand.black" : "transparent"}
-              color={mode === "default" ? "white" : "brand.black"}
-              _hover={{
-                bgColor: mode === "default" ? "brand.black" : "transparent",
-              }}
-              onClick={() => changeMode("default")}
-            >
-              Стандартные билеты
-            </Button>
-            <Button
-              px={[3, 7, 7, 7, 7]}
-              py={[3, 5, 5, 5, 5]}
-              fontSize={["xs", "md", "md", "md", "md"]}
-              bgColor={mode === "pushkin_card" ? "brand.black" : "transparent"}
-              color={mode === "pushkin_card" ? "white" : "brand.black"}
-              _hover={{
-                bgColor:
-                  mode === "pushkin_card" ? "brand.black" : "transparent",
-              }}
-              onClick={() => changeMode("pushkin_card")}
-            >
-              Пушкинская карта
-            </Button>
-          </Flex>
+          {isRuLanguage && (
+            <Flex mt={4} p={1.5} bgColor="#F4F4F5" borderRadius="8px">
+              <Button
+                px={[3, 7, 7, 7, 7]}
+                py={[3, 5, 5, 5, 5]}
+                fontSize={["xs", "md", "md", "md", "md"]}
+                bgColor={mode === "default" ? "brand.black" : "transparent"}
+                color={mode === "default" ? "white" : "brand.black"}
+                _hover={{
+                  bgColor: mode === "default" ? "brand.black" : "transparent",
+                }}
+                onClick={() => changeMode("default")}
+              >
+                Стандартные билеты
+              </Button>
+              <Button
+                px={[3, 7, 7, 7, 7]}
+                py={[3, 5, 5, 5, 5]}
+                fontSize={["xs", "md", "md", "md", "md"]}
+                bgColor={mode === "pushkin_card" ? "brand.black" : "transparent"}
+                color={mode === "pushkin_card" ? "white" : "brand.black"}
+                _hover={{
+                  bgColor:
+                    mode === "pushkin_card" ? "brand.black" : "transparent",
+                }}
+                onClick={() => changeMode("pushkin_card")}
+              >
+                Пушкинская карта
+              </Button>
+            </Flex>
+          )}
           <Text mt={5} fontSize="lg" color="brand.gray">
             {mode === "default"
-              ? "Выберите один или несколько выставочных центров"
+              ? t("select_one_or_several_exhibition_centers")
               : "Выберите один выставочный центр"}
           </Text>
           <Grid
@@ -207,9 +208,7 @@ export default function BuyTicket({
                   fontSize="sm"
                   fontWeight="medium"
                 >
-                  При приобретении входного билета в один из выставочных центров
-                  вход на Открытую площадку бесплатный. В данном случае билет
-                  приобретать не нужно.
+                  {t("notification")}
                 </chakra.span>
               </Flex>
               <Grid

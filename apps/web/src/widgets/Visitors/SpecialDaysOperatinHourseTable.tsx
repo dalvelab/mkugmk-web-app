@@ -1,5 +1,4 @@
-import { ComplexOperationManagement } from "@/entities";
-import { isEmpty, isNotEmpty, isNotVoid, isVoid } from "@/shared";
+import { isEmpty, isNotEmpty, isNotVoid, isVoid, StrapiSpecialDay } from "@/shared";
 import { getGenetiveRusMonth } from "@/shared/utils/dates";
 import {
   chakra,
@@ -12,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 interface SpecialDaysOperatinHourseTableProps {
-  data: ComplexOperationManagement["special_days_operating_hours"];
+  data: StrapiSpecialDay[];
 }
 
 export const SpecialDaysOperatinHourseTable: React.FC<
@@ -44,8 +43,8 @@ export const SpecialDaysOperatinHourseTable: React.FC<
                               justifyContent="space-between"
                               gap={2}
                             >
-                              <chakra.span fontSize="sm" fontWeight="medium">
-                                {center.name}:
+                              <chakra.span whiteSpace="break-spaces" fontSize="sm" fontWeight="medium">
+                                {center.name}
                               </chakra.span>
                               <chakra.span
                                 fontSize="lg"

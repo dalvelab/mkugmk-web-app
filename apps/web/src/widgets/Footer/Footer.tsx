@@ -228,7 +228,7 @@ export const Footer = () => {
               </Text>
               <Flex gap={1} flexDir="column" alignSelf="flex-start">
                 <OrderCall buttonStyles={{ color: "brand.black" }} />
-                <Link href="/faq">Вопрос — Ответ</Link>
+                <Link href="/faq">{t("faq")}</Link>
                 {pages.map((page) => (
                   <Link key={page.id} href={page.link} target="_blank">
                     <Text>{page.name}</Text>
@@ -240,7 +240,7 @@ export const Footer = () => {
         </Flex>
         <chakra.div mt={8}>
           <Text fontSize="xs" color="brand.gray">
-            Частное учреждение культуры «Музейный комплекс»
+            {t("legal_notes")}
           </Text>
         </chakra.div>
       </Container>

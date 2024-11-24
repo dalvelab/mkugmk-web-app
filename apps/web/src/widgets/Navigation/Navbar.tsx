@@ -23,7 +23,7 @@ import { Sidebar } from "./Siderbar";
 import { AboutDropdown, VisitorsDropdown } from "./Dropdowns";
 
 export const Navbar = () => {
-  const t = useTranslations("Navigation");
+  const t = useTranslations("");
   const { locale } = useRouter();
 
   const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
@@ -98,10 +98,10 @@ export const Navbar = () => {
         >
           <Link href="/">
             <Text fontSize="xl" textTransform="uppercase" fontWeight="bold">
-              {t("title")}
+              {t("Navigation.title")}
             </Text>
             <Text lineHeight="14px" fontWeight="medium" fontSize="sm">
-              {t("city")}
+              {t("Navigation.city")}
             </Text>
           </Link>
           <Flex
@@ -112,7 +112,7 @@ export const Navbar = () => {
             fontWeight="medium"
             color="brand.black"
           >
-            <DropdownLink text={t("menu.about")}>
+            <DropdownLink text={t("Navigation.menu.about")}>
               {isLoading && <Spinner />}
               {isNotVoid(response?.error) ||
                 (isError && (
@@ -127,16 +127,16 @@ export const Navbar = () => {
                 <AboutDropdown exhibition_centers={response.data} />
               )}
             </DropdownLink>
-            <DropdownLink text={t("menu.visitors")}>
+            <DropdownLink text={t("Navigation.menu.visitors")}>
               <VisitorsDropdown />
             </DropdownLink>
-            <NavbarLink href="/news" text={t("menu.news")} level={1} />
+            <NavbarLink href="/news" text={t("Navigation.menu.news")} level={1} />
             <NavbarLink
               href="/visitors/cafe-and-souvenirs"
-              text={t("menu.cafe")}
+              text={t("Navigation.menu.cafe")}
               level={1}
             />
-            <NavbarLink href="/contacts" text={t("menu.contacts")} level={1} />
+            <NavbarLink href="/contacts" text={t("Navigation.menu.contacts")} level={1} />
           </Flex>
           <Flex gap={[0, 4, 4, 0, 4]} display="flex" alignItems="center">
             <Link href="/buy-ticket">
@@ -146,7 +146,7 @@ export const Navbar = () => {
                   size={["sm", "sm", "md", "md", "md"]}
                   colorScheme="green"
                 >
-                  {t("buy_ticket")}
+                  {t("Navigation.buy_ticket")}
                 </Button>
               </chakra.div>
             </Link>
@@ -192,7 +192,7 @@ export const Navbar = () => {
               _hover={{ bgColor: "yellow.400" }}
               onClick={() => setIsAlert(false)}
             >
-              Закрыть
+              {t("Common.close")}
             </Button>
           </Flex>
         )}

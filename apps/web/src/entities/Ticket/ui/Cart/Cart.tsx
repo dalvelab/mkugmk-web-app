@@ -1,7 +1,8 @@
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
+
 import {
   Alert,
-  AlertDescription,
   AlertIcon,
   AlertTitle,
   Button,
@@ -9,7 +10,6 @@ import {
   Flex,
   Grid,
   Heading,
-  Text,
 } from "@chakra-ui/react";
 
 import { ExhibitionCenter } from "@/entities";
@@ -61,6 +61,8 @@ export const Cart: React.FC<CartProps> = ({
   includedOpenSpace,
   tickets,
 }) => {
+  const t = useTranslations("Buy_Tickets");
+
   const selectedCenters = getSelectedByIds(selected, exhibition_centers);
   const isExhibitionCenterSelected = selectedCenters.some(
     (center) => center.type === "exhibition_center"
@@ -87,7 +89,7 @@ export const Cart: React.FC<CartProps> = ({
         Выбрано
       </Heading>
       <chakra.span mt={1} fontSize="xs" color="brand.gray">
-        количество билетов можно будет выбрать далее
+        {t("tickets_amount_can_be_selected_on_next_step")}
       </chakra.span>
       <Grid
         pt={4}
@@ -121,7 +123,7 @@ export const Cart: React.FC<CartProps> = ({
         >
           <Flex flexDir="column" gap={2}>
             <chakra.span fontSize="xs" color="brand.gray">
-              автоматически включено
+              {t("automatically_included")}
             </chakra.span>
             <CartTicketCard exhibition_center={includedOpenSpace} />
           </Flex>
@@ -136,12 +138,12 @@ export const Cart: React.FC<CartProps> = ({
           colorScheme="green"
           cursor="pointer"
         >
-          Перейти к оформлению
+          {t("go_to_ticket_issue")}
         </Button>
       ) : (
         <Alert status="warning" bgColor="yellow.300">
           <AlertIcon />
-          <AlertTitle fontWeight="medium">Билет недоступен</AlertTitle>
+          <AlertTitle fontWeight="medium">{t("ticket_is_unavailable")}</AlertTitle>
         </Alert>
       )}
     </Flex>

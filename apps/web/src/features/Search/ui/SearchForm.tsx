@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useTranslations } from "next-intl";
 
 import { SearchIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
@@ -14,6 +15,8 @@ interface SearchForm {
 }
 
 export const SearchForm: React.FC<SearchForm> = ({ setData, inputRef }) => {
+  const t = useTranslations("Search_Modal");
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getTest = useCallback(
     debounce(async (args: string[]) => {
@@ -49,7 +52,7 @@ export const SearchForm: React.FC<SearchForm> = ({ setData, inputRef }) => {
       <Input
         ref={inputRef}
         size="lg"
-        placeholder="Введите поисковый запрос"
+        placeholder={t("enter_your_search_request")}
         onChange={(e) => onChange(e.target.value)}
       />
     </InputGroup>

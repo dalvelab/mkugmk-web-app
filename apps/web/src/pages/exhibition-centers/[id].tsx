@@ -40,7 +40,7 @@ export default function ExhibitionCenter({
   const { data } = exhibitionCenter;
   const { locale } = useRouter();
 
-  const t = useTranslations("ExhibitionCenterSingle");
+  const t = useTranslations();
   const complexOperatingSettings = useComplexOperationManagement();
 
   if (isVoid(data) || isEmpty(data)) {
@@ -65,7 +65,7 @@ export default function ExhibitionCenter({
     data: selectScheduleForExhibitionCenter(
       working_time,
       id,
-      complexOperatingSettings?.special_day_operating_hours,
+      complexOperatingSettings?.current_special_day_operating_hours,
       complexOperatingSettings?.exhibition_centers_including_special_day
     ),
     dayOfWeek: complexOperatingSettings?.dayOfWeek!,
@@ -78,7 +78,7 @@ export default function ExhibitionCenter({
       <SEO title={name}>
         <meta
           property="og:title"
-          content={`${name} | Музейный комплекс - Верхняя Пышма`}
+          content={`${name} | ${t("SEO.title_prefix")}`}
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={banner.url} />
@@ -142,7 +142,7 @@ export default function ExhibitionCenter({
             {ticket_sale_enabled && (
               <Link href="/buy-ticket">
                 <Button mt={2} size="lg" colorScheme="green">
-                  {t("buy_ticket_button")}
+                  {t("ExhibitionCenterSingle.buy_ticket_button")}
                 </Button>
               </Link>
             )}
@@ -162,7 +162,7 @@ export default function ExhibitionCenter({
               as="h2"
               fontSize={["3xl", "4xl", "4xl", "4xl", "4xl"]}
             >
-              {t("about_museum")}
+              {t("ExhibitionCenterSingle.about_museum")}
             </Heading>
             <chakra.div textAlign="justify" fontSize="xl">
               <Markdown>{description}</Markdown>
@@ -274,7 +274,7 @@ export default function ExhibitionCenter({
             >
               <Flex flexDir="column" gap={2}>
                 <chakra.span fontSize="xl" color="brand.gray">
-                  {t("tickets")}
+                  {t("ExhibitionCenterSingle.tickets")}
                 </chakra.span>
                 <Link
                   href="/visitors/tickets"
@@ -282,7 +282,7 @@ export default function ExhibitionCenter({
                   color="brand.black"
                   textDecoration="underline"
                 >
-                  {t("view_prices_link")}
+                  {t("ExhibitionCenterSingle.view_prices_link")}
                 </Link>
               </Flex>
               <Flex flexDir="column" gap={2}>
@@ -314,7 +314,7 @@ export default function ExhibitionCenter({
               )}
               <Flex flexDir="column" gap={2}>
                 <chakra.span fontSize="xl" color="brand.gray">
-                  {t("working_schedule")}
+                  {t("ExhibitionCenterSingle.working_schedule")}
                 </chakra.span>
                 <Flex
                   flexDir="column"

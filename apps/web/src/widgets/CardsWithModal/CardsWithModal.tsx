@@ -50,7 +50,8 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
           data.map(({ id, image, name, short_description, type }, index) => (
             <Flex
               key={id}
-              w={["100%", "300px", "300px", "300px", "300px"]}
+              minW="300px"
+              w="100%"
               flexDir="column"
               cursor="pointer"
               pos="relative"
@@ -81,6 +82,7 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
                   <Image
                     src={image.url}
                     alt={imageAltGenerator(name, type)}
+                    style={{objectFit: 'cover'}}
                     fill
                   />
                 )}

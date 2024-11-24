@@ -2,7 +2,7 @@ import { chakra, Container, Heading } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useTranslations } from "next-intl";
 
-import { getComplexOperationManagement, getExibitionCenters, getWorkingHoursPage } from '@/entities';
+import { getExibitionCenters, getWorkingHoursPage } from '@/entities';
 import {
   isVoid,
   EmptyState,
@@ -12,11 +12,9 @@ import {
   isNotEmpty,
   SEO,
   getEqualScheduleForExhibitionCenters,
-  getWorkingHoursForToday,
   useComplexOperationManagement,
 } from "@/shared";
 import type {
-  ComplexOperationManagement,
   ExhibitionCenter,
   VisitorsPages,
 } from "@/entities";
@@ -26,7 +24,6 @@ import { useRouter } from "next/router";
 
 export default function WorkingHours({
   page,
-  complexSettings,
   exhibitionCenters,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
@@ -41,7 +38,6 @@ export default function WorkingHours({
 
   const { title, public_areas } = data;
   const { data: exhibitionCentersData } = exhibitionCenters;
-  const { data: complexSettingsData } = complexSettings;
 
   const mergedExhibitionCentersSchedule = getEqualScheduleForExhibitionCenters(
     exhibitionCentersData,
@@ -72,8 +68,8 @@ export default function WorkingHours({
           </Heading>
         </CustomContainer>
       </chakra.section>
-      {isNotVoid(complexSettingsData) &&
-        isNotEmpty(complexSettingsData.special_days_operating_hours) && (
+      {isNotVoid(complexOperatingSettings) &&
+        isNotEmpty(complexOperatingSettings.special_days_operating_hours) && (
           <chakra.section pt={5}>
             <Container maxW="container.xl">
               <Heading
@@ -84,7 +80,7 @@ export default function WorkingHours({
                 {t("operating_hours_holidays")}
               </Heading>
               <SpecialDaysOperatinHourseTable
-                data={complexSettingsData.special_days_operating_hours}
+                data={complexOperatingSettings.special_days_operating_hours}
               />
             </Container>
           </chakra.section>
@@ -109,20 +105,17 @@ export default function WorkingHours({
 
 interface PartnerProps {
   page: ApiResponse<VisitorsPages["working_hours_page"], null>;
-  complexSettings: ApiResponse<ComplexOperationManagement, null>;
   exhibitionCenters: ApiResponse<ExhibitionCenter[], null>;
 }
 
 export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
   const page = await getWorkingHoursPage({locale});
-  const complexSettings = await getComplexOperationManagement();
   const exhibitionCenters = await getExibitionCenters({locale, isPopulated: true});
 
   return {
     props: {
       messages: (await import(`../../../i18n/${locale}.json`)).default,
       page,
-      complexSettings,
       exhibitionCenters
      }
   }

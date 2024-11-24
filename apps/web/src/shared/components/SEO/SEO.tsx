@@ -8,13 +8,14 @@ import { isNotEmpty, isNotVoid } from "@/shared/utils";
 
 interface SEOProps {
   title?: string;
+  description?: string;
   children?: ReactNode;
 }
 
-export const SEO: React.FC<SEOProps> = ({ children, title }) => {
+export const SEO: React.FC<SEOProps> = ({ children, description, title }) => {
   const { asPath } = useRouter();
 
-  const t = useTranslations("Settings");
+  const t = useTranslations("SEO");
 
   const metaTitle =
     isNotVoid(title) && isNotEmpty(title)
@@ -25,6 +26,10 @@ export const SEO: React.FC<SEOProps> = ({ children, title }) => {
     <Head>
       {children}
       <title>{metaTitle}</title>
+      <meta
+        name="description"
+        content={description || t("description")}
+      />
       <meta property="og:url" content={CANONICAL_DOMAIN + asPath} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#FFFFFF" />

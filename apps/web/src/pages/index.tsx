@@ -13,7 +13,6 @@ import {
 import {
   getWelcomePage,
   WelcomeHeroSection,
-  getComplexOperationManagement,
   ExhibitionCenterCard,
 } from "@/entities";
 import {
@@ -25,7 +24,7 @@ import {
   useComplexOperationManagement,
   Markdown,
 } from "@/shared";
-import type { ComplexOperationManagement, WelcomePage } from "@/entities";
+import type { WelcomePage } from "@/entities";
 import type { ApiResponse } from "@/shared";
 import { YoutubeVideoSlider } from "@/features";
 import { useRouter } from "next/router";
@@ -34,17 +33,15 @@ import { motion } from "framer-motion";
 
 export default function Home({
   pageContent,
-  complexSettings,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = pageContent;
-  const { data: complexSettingsData } = complexSettings;
 
   const { locale } = useRouter();
 
   const t = useTranslations("Index");
   const complexOperatingSettings = useComplexOperationManagement();
 
-  if (isVoid(data) || isEmpty(data) || isVoid(complexSettingsData)) {
+  if (isVoid(data) || isEmpty(data) || isVoid(complexOperatingSettings)) {
     return <EmptyState />;
   }
 
@@ -57,15 +54,15 @@ export default function Home({
     exhibition_centers,
   } = data;
 
-  const workTimeToday = isNotVoid(complexSettingsData.common_operating_hours)
+  const workTimeToday = isNotVoid(complexOperatingSettings.common_operating_hours)
     ? getWorkingHoursForToday({
         data:
-          isNotVoid(complexOperatingSettings?.special_day_operating_hours) &&
+          isNotVoid(complexOperatingSettings?.current_special_day_operating_hours) &&
           isEmpty(
             complexOperatingSettings?.exhibition_centers_including_special_day
           )
-            ? complexOperatingSettings.special_day_operating_hours
-            : complexSettingsData.common_operating_hours,
+            ? complexOperatingSettings.current_special_day_operating_hours
+            : complexOperatingSettings.common_operating_hours,
         dayOfWeek: complexOperatingSettings?.dayOfWeek!,
         locale,
         isSpecialDayToday: complexOperatingSettings?.isOpened,
@@ -199,20 +196,17 @@ export default function Home({
 
 interface HomeProps {
   pageContent: ApiResponse<WelcomePage, null>;
-  complexSettings: ApiResponse<ComplexOperationManagement, null>;
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async ({
   locale,
 }) => {
   const pageContent = await getWelcomePage({ locale });
-  const complexSettings = await getComplexOperationManagement();
 
   return {
     props: {
       messages: (await import(`../i18n/${locale}.json`)).default,
       pageContent,
-      complexSettings,
     },
   };
 };

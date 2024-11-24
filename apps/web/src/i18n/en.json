@@ -1,6 +1,12 @@
 {
-  "Settings": {
-    "title_prefix": "Museum Complex - Verkhnyaya Pyshma"
+  "Common": {
+    "close": "Close",
+    "open_search": "Open search",
+    "explore": "Explore"
+  },
+  "SEO": {
+    "title_prefix": "Museum Complex - Verkhnyaya Pyshma",
+    "description": "Biggest exhibition center of civil and military vehicles in Russia. Place in Verkhnyaya Pyshma, 2 Alexandra Kozitsyna st."
   },
   "Navigation": {
     "title": "Museum Complex",
@@ -50,7 +56,14 @@
     "title": "News"
   },
   "Buy_Tickets": {
-    "title": "Buy tickets"
+    "title": "Buy tickets",
+    "seo_description": "Tickets to the museum commplex can be purchased online or at the ticket office",
+    "select_one_or_several_exhibition_centers": "Select one or several exhibition centers",
+    "notification": "If you purchase ticket for one exhibition center entry to the Open-air exhibition is free",
+    "tickets_amount_can_be_selected_on_next_step": "tickets amount can be selected on next step",
+    "ticket_is_unavailable": "Ticket is unavailable",
+    "go_to_ticket_issue": "Next step",
+    "automatically_included": "automatically included"
   },
   "Navigation_page": {
     "museum_complex_map": "Map of Museum complex",
@@ -81,6 +94,14 @@
     "visitors": "Visitors",
     "buy_ticket_button": "Buy ticket",
     "order_call": "Order excursion",
-    "leave_feedback": "Leave feedback"
+    "leave_feedback": "Leave feedback",
+    "order_call_modal_form_name": "Name",
+    "order_call_modal_form_phone": "Phone",
+    "order_call_modal_form_message": "Message",
+    "faq": "FAQ",
+    "legal_notes": "Private cultural institution «Museum complex»"
+  },
+  "Search_Modal": {
+    "enter_your_search_request": "Enter your search request"
   }
 }

@@ -77,7 +77,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
                   border="1px solid"
                   borderColor="brand.border"
                 >
-                  <chakra.span fontSize="lg" fontWeight="medium">
+                  <chakra.span whiteSpace="break-spaces" fontSize="lg" fontWeight="medium">
                     <Markdown>{name}</Markdown>
                   </chakra.span>
                 </Td>
@@ -90,7 +90,7 @@ export const OperatingHoursTable: React.FC<OperatingHoursProps> = ({
                 >
                   <Flex flexDir="column" gap={2}>
                     {formattedSchedule.map(
-                      ({ id, day, opened, value }, index) => (
+                      ({ id, day, opened, value }) => (
                         <Flex
                           key={id}
                           justifyContent="space-between"

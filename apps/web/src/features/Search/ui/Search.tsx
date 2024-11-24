@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import {
   Button,
@@ -28,6 +29,8 @@ interface Search {
 
 export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const t = useTranslations("Common");
 
   const [data, setData] = useState<MeilisearchResponse<any>["results"]>([]);
 
@@ -77,7 +80,7 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
       <IconButton
         boxSize={type === "desktop" ? 10 : 12}
         icon={<SearchIcon boxSize={type === "desktop" ? 4 : 5} />}
-        aria-label="Открыть поиск"
+        aria-label={t("open_search")}
         bgColor={type === "desktop" ? "transparent" : "gray.100"}
         _hover={{ bg: "brand.border" }}
         onClick={onOpen}
@@ -213,7 +216,7 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose} variant="ghost">
-              Закрыть
+              {t('close')}
             </Button>
           </ModalFooter>
         </ModalContent>

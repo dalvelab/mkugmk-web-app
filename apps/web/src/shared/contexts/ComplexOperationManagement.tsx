@@ -27,9 +27,11 @@ async function getComplexOperationManagement(locale?: string): Promise<
 type ComplextOperatingHoursContextType = {
   dayOfWeek: number;
   isOpened?: boolean;
-  special_day_operating_hours?: StrapiWorkingTime[];
+  current_special_day_operating_hours?: StrapiWorkingTime[];
+  special_days_operating_hours: StrapiSpecialDay[];
   exhibition_centers_including_special_day?: number[];
   website_top_warning?: string;
+  common_operating_hours?: StrapiWorkingTime[];
 };
 
 const ComplexOperationManagementContext =
@@ -48,6 +50,7 @@ export const ComplexOperationManagementProvider = ({
 
   const [value, setValue] = useState<ComplextOperatingHoursContextType>({
     dayOfWeek,
+    special_days_operating_hours: []
   });
 
   const {
@@ -65,6 +68,7 @@ export const ComplexOperationManagementProvider = ({
       setValue({
         isOpened: true,
         dayOfWeek,
+        special_days_operating_hours: []
       });
     }
 
@@ -80,7 +84,7 @@ export const ComplexOperationManagementProvider = ({
 
       setValue({
         isOpened: isAvailable,
-        special_day_operating_hours: isNotVoid(day)
+        current_special_day_operating_hours: isNotVoid(day)
           ? createFakeScheduleForSpecialDay(day)
           : undefined,
         exhibition_centers_including_special_day: exhibitionCenterSelected
@@ -88,6 +92,8 @@ export const ComplexOperationManagementProvider = ({
           : undefined,
         website_top_warning: response.data.website_top_warning,
         dayOfWeek,
+        common_operating_hours: response.data.common_operating_hours,
+        special_days_operating_hours: response.data.special_days_operating_hours
       });
     }
   }, [dayOfWeek, isError, isSuccess, response?.data]);

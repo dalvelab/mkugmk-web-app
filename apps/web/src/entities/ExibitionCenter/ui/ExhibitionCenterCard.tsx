@@ -38,7 +38,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
     data: selectScheduleForExhibitionCenter(
       working_time,
       id,
-      complexOperatingSettings?.special_day_operating_hours,
+      complexOperatingSettings?.current_special_day_operating_hours,
       complexOperatingSettings?.exhibition_centers_including_special_day
     ),
     dayOfWeek: complexOperatingSettings?.dayOfWeek!,

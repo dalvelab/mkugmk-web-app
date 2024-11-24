@@ -66,8 +66,7 @@ export type StrapiWorkingTime = {
   opened: boolean;
 };
 
-export type StrapiSpecialDay = Omit<StrapiWorkingTime, "day"> & {
-  day: string;
+export type StrapiSpecialDay = StrapiWorkingTime & {
   exhibition_centers?: ExhibitionCenter[];
 };
 
