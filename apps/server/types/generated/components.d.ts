@@ -292,6 +292,18 @@ export interface FooterContact extends Schema.Component {
   };
 }
 
+export interface FaqFaq extends Schema.Component {
+  collectionName: 'components_faq_faqs';
+  info: {
+    displayName: 'FAQ';
+  };
+  attributes: {
+    topic: Attribute.String & Attribute.Required;
+    question: Attribute.String & Attribute.Required;
+    answer: Attribute.RichText;
+  };
+}
+
 export interface ContactsDepartmentContact extends Schema.Component {
   collectionName: 'components_contacts_department_contacts';
   info: {
@@ -304,18 +316,6 @@ export interface ContactsDepartmentContact extends Schema.Component {
     email: Attribute.Email;
     phone: Attribute.String;
     enable_order_call_modal: Attribute.Boolean;
-  };
-}
-
-export interface FaqFaq extends Schema.Component {
-  collectionName: 'components_faq_faqs';
-  info: {
-    displayName: 'FAQ';
-  };
-  attributes: {
-    topic: Attribute.String & Attribute.Required;
-    question: Attribute.String & Attribute.Required;
-    answer: Attribute.RichText;
   };
 }
 
@@ -342,8 +342,8 @@ declare module '@strapi/types' {
       'footer.social': FooterSocial;
       'footer.page': FooterPage;
       'footer.contact': FooterContact;
-      'contacts.department-contact': ContactsDepartmentContact;
       'faq.faq': FaqFaq;
+      'contacts.department-contact': ContactsDepartmentContact;
     }
   }
 }

@@ -34,7 +34,7 @@
       "component": "shared.operating-hours-in-current-day",
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       }
     },

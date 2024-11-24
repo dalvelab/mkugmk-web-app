@@ -951,7 +951,7 @@ export interface ApiComplexOperationManagementComplexOperationManagement
     > &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: false;
+          localized: true;
         };
       }>;
     website_top_warning: Attribute.Text &
