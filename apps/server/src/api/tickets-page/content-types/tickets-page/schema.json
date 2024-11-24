@@ -18,10 +18,20 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "description": {
-      "type": "richtext"
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "documents": {
       "type": "media",
@@ -29,23 +39,48 @@
       "required": false,
       "allowedTypes": [
         "files"
-      ]
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "secondary_title": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "other_services": {
       "type": "component",
       "repeatable": true,
-      "component": "visitors.other"
+      "component": "visitors.other",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "tickets": {
       "type": "component",
       "repeatable": true,
-      "component": "visitors.ticket-types"
+      "component": "visitors.ticket-types",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "secondary_description": {
-      "type": "richtext"
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "type_for_meilisearch": {
       "pluginOptions": {
@@ -63,7 +98,7 @@
       "repeatable": true,
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "component": "visitors.main-services"

@@ -18,15 +18,30 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "description": {
-      "type": "richtext"
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "interactive_playgrounds": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.info-card"
+      "component": "shared.info-card",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "type_for_meilisearch": {
       "pluginOptions": {

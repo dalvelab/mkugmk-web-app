@@ -927,8 +927,18 @@ export interface ApiComplexOperationManagementComplexOperationManagement
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
     common_operating_hours: Attribute.Component<'shared.working-time', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
       Attribute.SetMinMax<
         {
           max: 7;
@@ -938,8 +948,18 @@ export interface ApiComplexOperationManagementComplexOperationManagement
     special_days_operating_hours: Attribute.Component<
       'shared.operating-hours-in-current-day',
       true
-    >;
-    website_top_warning: Attribute.Text;
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    website_top_warning: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -954,6 +974,12 @@ export interface ApiComplexOperationManagementComplexOperationManagement
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::complex-operation-management.complex-operation-management',
+      'oneToMany',
+      'api::complex-operation-management.complex-operation-management'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -1379,9 +1405,25 @@ export interface ApiInteractivePlaygroundPageInteractivePlaygroundPage
     };
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText;
-    interactive_playgrounds: Attribute.Component<'shared.info-card', true>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    interactive_playgrounds: Attribute.Component<'shared.info-card', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     type_for_meilisearch: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -1553,8 +1595,19 @@ export interface ApiRulesPageRulesPage extends Schema.SingleType {
     };
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     type_for_meilisearch: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -1671,13 +1724,49 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
     };
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText;
-    documents: Attribute.Media<'files', true>;
-    secondary_title: Attribute.String;
-    other_services: Attribute.Component<'visitors.other', true>;
-    tickets: Attribute.Component<'visitors.ticket-types', true>;
-    secondary_description: Attribute.RichText;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    documents: Attribute.Media<'files', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    secondary_title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    other_services: Attribute.Component<'visitors.other', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    tickets: Attribute.Component<'visitors.ticket-types', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    secondary_description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     type_for_meilisearch: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -1689,7 +1778,7 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
     main_services: Attribute.Component<'visitors.main-services', true> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: false;
+          localized: true;
         };
       }>;
     createdAt: Attribute.DateTime;

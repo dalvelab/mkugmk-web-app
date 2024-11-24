@@ -10,22 +10,41 @@
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "common_operating_hours": {
       "type": "component",
       "repeatable": true,
       "component": "shared.working-time",
-      "max": 7
+      "max": 7,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "special_days_operating_hours": {
       "displayName": "OperatingHoursInCurrentDay",
       "type": "component",
       "repeatable": true,
-      "component": "shared.operating-hours-in-current-day"
+      "component": "shared.operating-hours-in-current-day",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "website_top_warning": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
