@@ -44,7 +44,7 @@ export const Slider: React.FC<SliderProps> = (props) => {
   };
 
   return (
-    <chakra.div mt={7}>
+    <chakra.div mt={5}>
       <chakra.div pos="relative">
         {length > 2 && (
           <>

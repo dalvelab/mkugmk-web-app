@@ -2,7 +2,9 @@
   "Common": {
     "close": "Close",
     "open_search": "Open search",
-    "explore": "Explore"
+    "explore": "Explore",
+    "all_videos": "All Videos",
+    "video_gallery": "Videos"
   },
   "SEO": {
     "title_prefix": "Museum Complex - Verkhnyaya Pyshma",

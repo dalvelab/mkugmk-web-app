@@ -5,3 +5,18 @@ select,
 a {
   -webkit-tap-highlight-color: transparent;
 }
+
+.gallery {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.gallery img {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}

@@ -2,7 +2,9 @@
   "Common": {
     "close": "Закрыть",
     "open_search": "Открыть поиск",
-    "explore": "Перейти"
+    "explore": "Перейти",
+    "all_videos": "Все видео",
+    "video_gallery": "Видеогалерея"
   },
   "SEO": {
     "title_prefix": "Музейный комплекс - Верхняя Пышма",

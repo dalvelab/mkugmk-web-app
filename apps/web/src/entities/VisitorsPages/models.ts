@@ -100,18 +100,5 @@ export type TicketsAndServicesPage = {
     value: string;
     additional_text?: string;
   }[];
-  tickets: {
-    id: number;
-    type_for_meilisearch: VisitorsPageType;
-    name: string;
-    available_on_website: boolean;
-    categories: {
-      id: number;
-      name?: string;
-      caption?: string;
-      price?: number;
-    }[];
-    additional_text?: string;
-  }[];
   documents: StrapiMedia[] | null;
 };

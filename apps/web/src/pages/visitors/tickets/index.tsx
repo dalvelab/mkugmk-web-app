@@ -33,7 +33,6 @@ export default function Tickets({
   const {
     title,
     description,
-    tickets,
     secondary_title,
     secondary_description,
     other_services,
@@ -72,7 +71,7 @@ export default function Tickets({
           </chakra.div>
         </CustomContainer>
       </chakra.section>
-      {isNotVoid(tickets) && isNotEmpty(tickets) && (
+      {isNotVoid(main_services) && isNotEmpty(main_services) && (
         <TicketsList main_services={main_services} />
       )}
       <chakra.section pt={10} pb={10}>

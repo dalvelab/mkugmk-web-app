@@ -1,13 +1,16 @@
 import { chakra } from "@chakra-ui/react";
 
-import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
-
 interface YoutubeVideoEmbedProps {
   id: string;
 }
 
 export const YoutubeVideoEmbed: React.FC<YoutubeVideoEmbedProps> = ({ id }) => {
+  const splittedId = id.split("_");
+
+  if (splittedId.length !== 2) {
+    return null;
+  }
+
   return (
     <chakra.div
       w={["428px", "500px", "500px", "500px", "500px"]}
@@ -15,7 +18,12 @@ export const YoutubeVideoEmbed: React.FC<YoutubeVideoEmbedProps> = ({ id }) => {
       borderRadius="12px"
       overflow="hidden"
     >
-      <LiteYouTubeEmbed id={id} title="YouTube Embed" noCookie />
+      <iframe
+        src={`https://vk.com/video_ext.php?oid=${splittedId[0]}&id=${splittedId[1]}&hd=2`}
+        width="100%"
+        height="100%"
+        allow="encrypted-media; fullscreen; picture-in-picture;"
+      ></iframe>
     </chakra.div>
   );
 };
