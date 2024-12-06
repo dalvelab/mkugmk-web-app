@@ -9,7 +9,7 @@ export async function getPaginatedEvents(
   const { locale } = params;
 
   const res = await fetch(
-    `${process.env.DB_HOST}/events?locale=${locale}&populate=image`
+    `${process.env.DB_HOST}/events?locale=${locale}&populate=image&pagination[pageSize]=100`
   );
 
   return res.json();
