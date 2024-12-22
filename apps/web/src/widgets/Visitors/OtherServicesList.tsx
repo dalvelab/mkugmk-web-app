@@ -42,6 +42,7 @@ export const OtherServicesList: React.FC<OtherServicesListProps> = ({
                   colorScheme="green"
                   px={2}
                   alignSelf="flex-start"
+                  whiteSpace="pre-wrap"
                 >
                   {service.name}
                 </Badge>
