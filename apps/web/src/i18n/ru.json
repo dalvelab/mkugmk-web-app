@@ -72,7 +72,11 @@
     "how_to_get_to_museum": "Как добраться?",
     "public_transport": "На общественном транспорте из Екатеринбурга",
     "private_transport": "На автомобиле или экскурсионном автобусе",
-    "addresses": "Адреса Выставочных центров"
+    "addresses": "Адреса Выставочных центров",
+    "museum_on_maps": " Музейный комплекс на картах",
+    "click_on_image_to_open_it": "Нажмите на схему для открытия",
+    "in_separate_window": "в отдельном окне",
+    "get_directions": "Проложить маршрут"
   },
   "Tickets_page": {
     "category": "Категория",

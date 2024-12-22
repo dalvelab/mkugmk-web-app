@@ -76,11 +76,6 @@ export default function ExhibitionCenter({
   return (
     <>
       <SEO title={name}>
-        <meta
-          property="og:title"
-          content={`${name} | ${t("SEO.title_prefix")}`}
-        />
-        <meta property="og:type" content="website" />
         <meta property="og:image" content={banner.url} />
       </SEO>
       <chakra.section

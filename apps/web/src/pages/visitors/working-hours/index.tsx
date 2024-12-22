@@ -1,8 +1,8 @@
 import { chakra, Container, Heading } from "@chakra-ui/react";
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useTranslations } from "next-intl";
 
-import { getExibitionCenters, getWorkingHoursPage } from '@/entities';
+import { getExibitionCenters, getWorkingHoursPage } from "@/entities";
 import {
   isVoid,
   EmptyState,
@@ -14,10 +14,7 @@ import {
   getEqualScheduleForExhibitionCenters,
   useComplexOperationManagement,
 } from "@/shared";
-import type {
-  ExhibitionCenter,
-  VisitorsPages,
-} from "@/entities";
+import type { ExhibitionCenter, VisitorsPages } from "@/entities";
 import type { ApiResponse } from "@/shared";
 import { OperatingHoursTable, SpecialDaysOperatinHourseTable } from "@/widgets";
 import { useRouter } from "next/router";
@@ -48,13 +45,7 @@ export default function WorkingHours({
 
   return (
     <>
-      <SEO title={title}>
-        <meta
-          property="og:title"
-          content={`${title} | Музейный комплекс - Верхняя Пышма`}
-        />
-        <meta property="og:type" content="website" />
-      </SEO>
+      <SEO title={title} />
       <chakra.section pt={6}>
         <CustomContainer
           withBackButton
@@ -108,15 +99,20 @@ interface PartnerProps {
   exhibitionCenters: ApiResponse<ExhibitionCenter[], null>;
 }
 
-export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getWorkingHoursPage({locale});
-  const exhibitionCenters = await getExibitionCenters({locale, isPopulated: true});
+export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({
+  locale,
+}) => {
+  const page = await getWorkingHoursPage({ locale });
+  const exhibitionCenters = await getExibitionCenters({
+    locale,
+    isPopulated: true,
+  });
 
   return {
     props: {
       messages: (await import(`../../../i18n/${locale}.json`)).default,
       page,
-      exhibitionCenters
-     }
-  }
+      exhibitionCenters,
+    },
+  };
 };

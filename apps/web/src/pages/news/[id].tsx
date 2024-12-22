@@ -29,13 +29,10 @@ export default function SingleNews({
 
   return (
     <>
-      <SEO title={title}>
-        <meta name="description" content={removeMarkdown(description)} />
-        <meta
-          property="og:title"
-          content={`${title} | Музейный комплекс - Верхняя Пышма`}
-        />
-        <meta property="og:type" content="website" />
+      <SEO
+        title={title}
+        description={removeMarkdown(description).split("\n")[0]}
+      >
         <meta property="og:image" content={image.url} />
       </SEO>
       <chakra.section pt={6} pb={10}>

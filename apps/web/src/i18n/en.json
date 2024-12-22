@@ -72,7 +72,11 @@
     "how_to_get_to_museum": "How to get to Museum complex",
     "public_transport": "On public transport from Yekaterinburg",
     "private_transport": "By car or on excursion bus",
-    "addresses": "Exhibition centers addresses"
+    "addresses": "Exhibition centers addresses",
+    "museum_on_maps": "Museum complex on maps",
+    "click_on_image_to_open_it": "Click on image to open it",
+    "in_separate_window": "in separate window",
+    "get_directions": "Get directions"
   },
   "Tickets_page": {
     "category": "Category",

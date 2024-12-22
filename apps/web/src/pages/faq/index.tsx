@@ -33,9 +33,7 @@ export default function FAQPage({
 
   return (
     <>
-      <SEO title={title}>
-        <meta name="description" content={removeMarkdown(description)} />
-      </SEO>
+      <SEO title={title} description={removeMarkdown(description)} />
       <chakra.section pt={6} pb={10}>
         <CustomContainer
           withBackButton

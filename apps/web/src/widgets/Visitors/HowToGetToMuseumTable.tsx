@@ -17,11 +17,13 @@ import { isNotVoid, Markdown } from "@/shared";
 interface HowToGetToMuseumTableProps {
   title: string;
   data: VisitorsPages["navigation_page"]["how_to_get_to_museum"];
+  getDirections?: string;
 }
 
 export const HowToGetToMuseumTable: React.FC<HowToGetToMuseumTableProps> = ({
   data,
   title,
+  getDirections,
 }) => {
   return (
     <TableContainer>
@@ -81,7 +83,7 @@ export const HowToGetToMuseumTable: React.FC<HowToGetToMuseumTableProps> = ({
                           color="white"
                           _hover={{ bgColor: "brand.black" }}
                         >
-                          Проложить маршрут
+                          {getDirections}
                         </Button>
                       </chakra.a>
                     )}

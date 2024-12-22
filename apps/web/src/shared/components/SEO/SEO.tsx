@@ -24,15 +24,13 @@ export const SEO: React.FC<SEOProps> = ({ children, description, title }) => {
 
   return (
     <Head>
-      {children}
       <title>{metaTitle}</title>
-      <meta
-        name="description"
-        content={description || t("description")}
-      />
-      <meta property="og:url" content={CANONICAL_DOMAIN + asPath} />
+      <meta name="description" content={description || t("description")} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="theme-color" content="#FFFFFF" />
+      <meta name="theme-color" content="#FFFFFF" />{" "}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={CANONICAL_DOMAIN + asPath} />
+      <meta property="og:title" content={metaTitle} />
       <link rel="canonical" href={CANONICAL_DOMAIN + asPath} />
       <link rel="icon" href="/favicon.ico" />
     </Head>

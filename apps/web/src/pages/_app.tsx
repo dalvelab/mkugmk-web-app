@@ -10,7 +10,6 @@ import { Navbar, Footer } from "@/widgets";
 import {
   chakraMKUGMKConfig,
   ComplexOperationManagementProvider,
-  SEO,
   YandexMetrika,
 } from "@/shared";
 import { ScrollUpButton } from "@/features";
@@ -22,7 +21,7 @@ const theme = extendTheme({ ...chakraMKUGMKConfig });
 const queryClient = new QueryClient();
 
 function App({ Component, pageProps }: AppProps) {
-  const {locale} = useRouter();
+  const { locale } = useRouter();
 
   return (
     <>
@@ -45,7 +44,6 @@ function App({ Component, pageProps }: AppProps) {
         messages={pageProps.messages}
         timeZone="Asia/Yekaterinburg"
       >
-        <SEO />
         <QueryClientProvider client={queryClient}>
           <ChakraProvider theme={theme}>
             <ComplexOperationManagementProvider locale={locale}>

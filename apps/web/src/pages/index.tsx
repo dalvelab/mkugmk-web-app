@@ -23,6 +23,7 @@ import {
   OpenStatus,
   useComplexOperationManagement,
   Markdown,
+  SEO,
 } from "@/shared";
 import type { WelcomePage } from "@/entities";
 import type { ApiResponse } from "@/shared";
@@ -54,10 +55,14 @@ export default function Home({
     exhibition_centers,
   } = data;
 
-  const workTimeToday = isNotVoid(complexOperatingSettings.common_operating_hours)
+  const workTimeToday = isNotVoid(
+    complexOperatingSettings.common_operating_hours
+  )
     ? getWorkingHoursForToday({
         data:
-          isNotVoid(complexOperatingSettings?.current_special_day_operating_hours) &&
+          isNotVoid(
+            complexOperatingSettings?.current_special_day_operating_hours
+          ) &&
           isEmpty(
             complexOperatingSettings?.exhibition_centers_including_special_day
           )
@@ -71,6 +76,7 @@ export default function Home({
 
   return (
     <>
+      <SEO />
       <chakra.section
         pos="relative"
         h={[

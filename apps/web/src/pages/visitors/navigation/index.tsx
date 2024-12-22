@@ -40,13 +40,7 @@ export default function Navigation({
 
   return (
     <>
-      <SEO title={title}>
-        <meta
-          property="og:title"
-          content={`${title} | Музейный комплекс - Верхняя Пышма`}
-        />
-        <meta property="og:type" content="website" />
-      </SEO>
+      <SEO title={title} />
       <chakra.section pt={6} pb={5}>
         <CustomContainer
           withBackButton
@@ -65,9 +59,9 @@ export default function Navigation({
           <Container maxW="container.xl">
             <>
               <chakra.span fontSize="lg">
-                Нажмите на схему для открытия в{" "}
+                {t("click_on_image_to_open_it")}{" "}
                 <Link href={complex_map.url} target="_blank" color="green.500">
-                  отдельном окне
+                  {t("in_separate_window")}
                 </Link>
               </chakra.span>
               <chakra.div
@@ -77,7 +71,7 @@ export default function Navigation({
                 pos="relative"
               >
                 <Link href={complex_map.url} target="_blank">
-                  <Image src={complex_map.url} fill alt="Карта комплекса" />
+                  <Image src={complex_map.url} fill alt={title} />
                 </Link>
               </chakra.div>
             </>
@@ -110,6 +104,7 @@ export default function Navigation({
                   data={how_to_get_to_museum.filter(
                     (data) => data.type === "other"
                   )}
+                  getDirections={t("get_directions")}
                 />
               </Grid>
             )}
@@ -135,7 +130,7 @@ export default function Navigation({
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="bold"
             >
-              Музейный комплекс на картах
+              {t("museum_on_maps")}
             </Heading>
             <chakra.iframe
               mt={5}

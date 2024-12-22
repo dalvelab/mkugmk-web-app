@@ -42,14 +42,7 @@ export default function Tickets({
 
   return (
     <>
-      <SEO title={title}>
-        <meta name="description" content={removeMarkdown(description)} />
-        <meta
-          property="og:title"
-          content={`${title} | Музейный комплекс - Верхняя Пышма`}
-        />
-        <meta property="og:type" content="website" />
-      </SEO>
+      <SEO title={title} description={removeMarkdown(description)} />
       <chakra.section pt={6} pb={10}>
         <CustomContainer
           withBackButton

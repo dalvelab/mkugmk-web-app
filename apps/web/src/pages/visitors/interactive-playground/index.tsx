@@ -1,5 +1,5 @@
 import { chakra, Heading } from "@chakra-ui/react";
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import removeMarkdown from "remove-markdown";
 
 import { CardsWithModal } from "@/widgets";
@@ -28,14 +28,7 @@ export default function InteractivePlaygrounds({
 
   return (
     <>
-      <SEO title={title}>
-        <meta name="description" content={removeMarkdown(description)} />
-        <meta
-          property="og:title"
-          content={`${title} | Музейный комплекс - Верхняя Пышма`}
-        />
-        <meta property="og:type" content="website" />
-      </SEO>
+      <SEO title={title} description={removeMarkdown(description)} />
       <chakra.section pt={6} pb={10}>
         <CustomContainer
           withBackButton
@@ -64,16 +57,18 @@ export default function InteractivePlaygrounds({
 }
 
 interface PartnerProps {
-  page: ApiResponse<VisitorsPages["interactive_playground_page"], null>
+  page: ApiResponse<VisitorsPages["interactive_playground_page"], null>;
 }
 
-export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({locale}) => {
-  const page = await getInteractivePlaygroundPage({locale});
+export const getServerSideProps: GetServerSideProps<PartnerProps> = async ({
+  locale,
+}) => {
+  const page = await getInteractivePlaygroundPage({ locale });
 
   return {
     props: {
       messages: (await import(`../../../i18n/${locale}.json`)).default,
-      page
-     }
-  }
+      page,
+    },
+  };
 };
