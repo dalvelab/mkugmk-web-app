@@ -1755,12 +1755,6 @@ export interface ApiTicketsPageTicketsPage extends Schema.SingleType {
           localized: true;
         };
       }>;
-    tickets: Attribute.Component<'visitors.ticket-types', true> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     secondary_description: Attribute.RichText &
       Attribute.SetPluginOptions<{
         i18n: {

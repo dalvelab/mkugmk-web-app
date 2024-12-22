@@ -64,16 +64,6 @@
         }
       }
     },
-    "tickets": {
-      "type": "component",
-      "repeatable": true,
-      "component": "visitors.ticket-types",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "secondary_description": {
       "type": "richtext",
       "pluginOptions": {
