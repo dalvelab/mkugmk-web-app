@@ -13,13 +13,13 @@ export const rusFullDayNamesMap: Record<WeekDay, string> = {
 };
 
 export const engFullDayNamesMap: Record<WeekDay, string> = {
-  mon: "monday",
-  tue: "tuesday",
-  wed: "wednesday",
-  thurs: "thursday",
-  fri: "friday",
-  sat: "saturday",
-  sun: "sunday",
+  mon: "Monday",
+  tue: "Tuesday",
+  wed: "Wednesday",
+  thurs: "Thursday",
+  fri: "Friday",
+  sat: "Saturday",
+  sun: "Sunday",
 };
 
 export const genetiveRusMonths = [

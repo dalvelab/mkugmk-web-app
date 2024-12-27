@@ -52,7 +52,10 @@
     "buy_ticket_button": "Купить билет",
     "working_schedule": "Режим работы",
     "tickets": "Билеты",
-    "view_prices_link": "Посмотреть цены"
+    "view_prices_link": "Посмотреть цены",
+    "directions": "Схема проезда",
+    "view_directions": "Посмотреть схему",
+    "excursions": "Экскурсии"
   },
   "News": {
     "title": "Новости"
@@ -75,7 +78,7 @@
     "addresses": "Адреса Выставочных центров",
     "museum_on_maps": " Музейный комплекс на картах",
     "click_on_image_to_open_it": "Нажмите на схему для открытия",
-    "in_separate_window": "в отдельном окне",
+    "in_new_tab": "в отдельном окне",
     "get_directions": "Проложить маршрут"
   },
   "Tickets_page": {

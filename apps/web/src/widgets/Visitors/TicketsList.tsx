@@ -144,7 +144,9 @@ export const TicketsList: React.FC<TicketsListProps> = ({ main_services }) => {
                         <chakra.span>
                           <Markdown>{category.name}</Markdown>
                         </chakra.span>
-                        <Text>{category.price} руб.</Text>
+                        <Text>
+                          {category.price} {t("currency")}
+                        </Text>
                       </Flex>
                     ))}
                     {ticket.available_on_website && (

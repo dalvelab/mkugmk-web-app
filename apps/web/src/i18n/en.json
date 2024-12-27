@@ -52,7 +52,10 @@
     "buy_ticket_button": "Buy ticket",
     "working_schedule": "Work schedule",
     "tickets": "Tickets",
-    "view_prices_link": "See the prices"
+    "view_prices_link": "View prices",
+    "directions": "Directions",
+    "view_directions": "View directions",
+    "excursions": "Excursions"
   },
   "News": {
     "title": "News"
@@ -75,7 +78,7 @@
     "addresses": "Exhibition centers addresses",
     "museum_on_maps": "Museum complex on maps",
     "click_on_image_to_open_it": "Click on image to open it",
-    "in_separate_window": "in separate window",
+    "in_new_tab": "in new tab",
     "get_directions": "Get directions"
   },
   "Tickets_page": {

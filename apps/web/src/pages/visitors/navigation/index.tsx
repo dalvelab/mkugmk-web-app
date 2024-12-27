@@ -61,7 +61,7 @@ export default function Navigation({
               <chakra.span fontSize="lg">
                 {t("click_on_image_to_open_it")}{" "}
                 <Link href={complex_map.url} target="_blank" color="green.500">
-                  {t("in_separate_window")}
+                  {t("in_new_tab")}
                 </Link>
               </chakra.span>
               <chakra.div
