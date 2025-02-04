@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { Search } from "@/features";
+import { LanguageSelect, Search } from "@/features";
 
 import { About, Visitors, Main } from "./Menu";
 import { ExhibitionCenter } from "@/entities";
@@ -47,7 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <ModalHeader zIndex={2}>
           <Flex w="full" justifyContent="space-between">
             <Flex gap={4}>
-              {/* <LanguageSelect size="lg" /> */}
+              <LanguageSelect size="lg" />
               <Search type="mobile" onSidebarClose={onClose} />
             </Flex>
             <IconButton

@@ -15,7 +15,7 @@ import { HamburgerIcon, WarningIcon } from "@chakra-ui/icons";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 
-import { Search } from "@/features";
+import { LanguageSelect, Search } from "@/features";
 import { DropdownLink, NavbarLink, getExibitionCenters } from "@/entities";
 import { isNotEmpty, isNotVoid, useComplexOperationManagement } from "@/shared";
 
@@ -130,13 +130,23 @@ export const Navbar = () => {
             <DropdownLink text={t("Navigation.menu.visitors")}>
               <VisitorsDropdown />
             </DropdownLink>
-            <NavbarLink href="/news" text={t("Navigation.menu.news")} level={1} />
+            {locale === "ru" && (
+              <NavbarLink
+                href="/news"
+                text={t("Navigation.menu.news")}
+                level={1}
+              />
+            )}
             <NavbarLink
               href="/visitors/cafe-and-souvenirs"
               text={t("Navigation.menu.cafe")}
               level={1}
             />
-            <NavbarLink href="/contacts" text={t("Navigation.menu.contacts")} level={1} />
+            <NavbarLink
+              href="/contacts"
+              text={t("Navigation.menu.contacts")}
+              level={1}
+            />
           </Flex>
           <Flex gap={[0, 4, 4, 0, 4]} display="flex" alignItems="center">
             <Link href="/buy-ticket">
@@ -152,7 +162,7 @@ export const Navbar = () => {
             </Link>
             <Flex gap={2} display={isLargerThan1100 ? "flex" : "none"}>
               <Search type="desktop" />
-              {/* <LanguageSelect /> */}
+              <LanguageSelect />
             </Flex>
             <IconButton
               display={isLargerThan1100 ? "none" : "block"}

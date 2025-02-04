@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 import { Link } from "@/shared";
 import { useTranslations } from "next-intl";
@@ -12,6 +13,7 @@ export const Main: React.FC<MainProps> = ({
   onClick,
   setSelectedMenuBlock,
 }) => {
+  const { locale } = useRouter();
   const t = useTranslations("Navigation");
 
   return (
@@ -41,9 +43,11 @@ export const Main: React.FC<MainProps> = ({
       >
         {t("menu.visitors")}
       </Button>
-      <Link href="/news" onClick={onClick}>
-        {t("menu.news")}
-      </Link>
+      {locale === "ru" && (
+        <Link href="/news" onClick={onClick}>
+          {t("menu.news")}
+        </Link>
+      )}
       <Link href="/visitors/cafe-and-souvenirs" onClick={onClick}>
         {t("menu.cafe")}
       </Link>

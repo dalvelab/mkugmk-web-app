@@ -128,7 +128,7 @@ export default function Home({
               textTransform="uppercase"
               color="white"
             >
-              {t("name")}
+              {title}
             </Heading>
             <OpenStatus workTimeToday={workTimeToday} theme="dark" />
             <Link href="/buy-ticket">
