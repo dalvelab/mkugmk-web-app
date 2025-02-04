@@ -16,9 +16,9 @@ export type ComplexOperationManagement = {
   website_top_warning?: string;
 };
 
-async function getComplexOperationManagement(locale?: string): Promise<
-  ApiResponse<ComplexOperationManagement, null>
-> {
+async function getComplexOperationManagement(
+  locale?: string
+): Promise<ApiResponse<ComplexOperationManagement, null>> {
   const res = await fetch(`/api/complex-operation-management?locale=${locale}`);
 
   return res.json();
@@ -39,9 +39,9 @@ const ComplexOperationManagementContext =
 
 export const ComplexOperationManagementProvider = ({
   children,
-  locale
+  locale,
 }: {
-  locale?: string,
+  locale?: string;
   children: React.ReactNode;
 }) => {
   const dayOfWeek = new Date(
@@ -50,7 +50,7 @@ export const ComplexOperationManagementProvider = ({
 
   const [value, setValue] = useState<ComplextOperatingHoursContextType>({
     dayOfWeek,
-    special_days_operating_hours: []
+    special_days_operating_hours: [],
   });
 
   const {
@@ -58,7 +58,7 @@ export const ComplexOperationManagementProvider = ({
     isError,
     isSuccess,
   } = useQuery({
-    queryKey: [`complex-operation-hours`],
+    queryKey: [`complex-operation-hours-${locale}`],
     queryFn: () => getComplexOperationManagement(locale),
     refetchOnWindowFocus: false,
   });
@@ -68,7 +68,7 @@ export const ComplexOperationManagementProvider = ({
       setValue({
         isOpened: true,
         dayOfWeek,
-        special_days_operating_hours: []
+        special_days_operating_hours: [],
       });
     }
 
@@ -93,7 +93,8 @@ export const ComplexOperationManagementProvider = ({
         website_top_warning: response.data.website_top_warning,
         dayOfWeek,
         common_operating_hours: response.data.common_operating_hours,
-        special_days_operating_hours: response.data.special_days_operating_hours
+        special_days_operating_hours:
+          response.data.special_days_operating_hours,
       });
     }
   }, [dayOfWeek, isError, isSuccess, response?.data]);
