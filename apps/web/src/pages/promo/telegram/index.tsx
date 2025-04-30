@@ -1,27 +1,7 @@
-import { chakra, Spinner } from "@chakra-ui/react";
+import { Button, chakra } from "@chakra-ui/react";
 import type { GetServerSideProps } from "next";
 
-import { useEffect, useState } from "react";
-
-const TIMER = 2000;
-
 export default function Promo() {
-  const [countdown, setCountdown] = useState(TIMER / 1000);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCountdown((prev) => prev - 1);
-      if (countdown === 1) {
-        clearTimeout(timer);
-        window.location.href = "https://t.me/mk_pyshma";
-      }
-    }, TIMER);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [countdown]);
-
   return (
     <chakra.section
       pt={6}
@@ -33,10 +13,16 @@ export default function Promo() {
       flexDir="column"
       gap={5}
     >
-      <Spinner size="xl" />
-      <chakra.span fontSize="xl" textAlign="center">
-        Переход произойдет через: <br /> {countdown}
-      </chakra.span>
+      <chakra.a href="https://t.me/mk_pyshma">
+        <Button
+          size="lg"
+          bgColor="#1c93e3"
+          _hover={{ bgColor: "#1c93e3" }}
+          color="white"
+        >
+          Перейти в Telegram
+        </Button>
+      </chakra.a>
     </chakra.section>
   );
 }
