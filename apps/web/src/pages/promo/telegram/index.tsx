@@ -10,12 +10,13 @@ export default function Promo() {
   const [countdown, setCountdown] = useState(TIMER / 1000);
 
   useEffect(() => {
+    if (countdown === 0) {
+      window.location.href = TG_LINK;
+      return;
+    }
+
     const timer = setTimeout(() => {
       setCountdown((prev) => prev - 1);
-      if (countdown === 1) {
-        clearTimeout(timer);
-        window.location.href = TG_LINK;
-      }
     }, 1000);
 
     return () => {
