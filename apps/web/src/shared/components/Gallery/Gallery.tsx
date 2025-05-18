@@ -36,7 +36,11 @@ export const Gallery = ({ images }: { images: StrapiMedia[] }) => {
             src={image.url}
             fill
             alt="Изображение галереи"
-            style={{ objectFit: "cover", borderRadius: "4px" }}
+            style={{
+              objectFit: "cover",
+              borderRadius: "4px",
+              overflowClipMargin: "unset",
+            }}
           />
         </ChakraBox>
       ))}

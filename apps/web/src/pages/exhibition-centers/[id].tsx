@@ -103,7 +103,7 @@ export default function ExhibitionCenter({
         />
         <chakra.div w="full" h="100%" pos="absolute" zIndex={-1}>
           <Image
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", overflowClipMargin: "unset" }}
             src={banner.url}
             fill
             alt="заглавное изображение"
@@ -341,14 +341,17 @@ interface ExhibitionCenterProps {
 
 export const getServerSideProps: GetServerSideProps<
   ExhibitionCenterProps
-> = async ({ locale, params }) => {
-  const id = Number(params?.id);
+> = async (context) => {
+  const id = Number(context.params?.id);
 
-  const exhibitionCenter = await getSingleExibitionCenter({ id, locale });
+  const exhibitionCenter = await getSingleExibitionCenter({
+    id,
+    locale: context.locale,
+  });
 
   return {
     props: {
-      messages: (await import(`../../i18n/${locale}.json`)).default,
+      messages: (await import(`../../i18n/${context.locale}.json`)).default,
       exhibitionCenter,
     },
   };

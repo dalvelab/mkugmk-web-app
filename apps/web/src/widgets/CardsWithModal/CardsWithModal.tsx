@@ -82,7 +82,7 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
                   <Image
                     src={image.url}
                     alt={imageAltGenerator(name, type)}
-                    style={{objectFit: 'cover'}}
+                    style={{ objectFit: "cover", overflowClipMargin: "unset" }}
                     fill
                   />
                 )}

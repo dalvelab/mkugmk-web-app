@@ -62,7 +62,11 @@ export default function SingleNews({
                   fill
                   src={image.url}
                   alt="Изображение новости"
-                  style={{ borderRadius: "8px", objectFit: "cover" }}
+                  style={{
+                    borderRadius: "8px",
+                    objectFit: "cover",
+                    overflowClipMargin: "unset",
+                  }}
                 />
               </chakra.div>
               <Flex

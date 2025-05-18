@@ -23,16 +23,15 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
     return (
       <>
         <chakra.div
-          w={["32px", "40px", "32px", "32px", "32px"]}
+          minW={["32px", "40px", "32px", "32px", "32px"]}
           h={["32px", "40px", "32px", "32px", "32px"]}
           pos="relative"
-          borderRadius="50%"
-          overflow="hidden"
         >
           <Image
             fill
             src={thumbnail}
             alt={`Изображение ${exhibition_center.name}`}
+            style={{ borderRadius: "50%" }}
           />
         </chakra.div>
         <chakra.span fontSize={["sm", "md", "md", "md", "sm"]}>

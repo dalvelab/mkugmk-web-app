@@ -71,7 +71,11 @@ export const CardsModal: React.FC<CardsModalProps> = ({
                 isNotVoid(modal_image) ? `${modal_image.url}` : `${image.url}`
               }
               alt={isNotVoid(modal_image) ? modal_image.name : image.name}
-              style={{ borderRadius: "8px", objectFit: "cover" }}
+              style={{
+                borderRadius: "8px",
+                objectFit: "cover",
+                overflowClipMargin: "unset",
+              }}
             />
           </chakra.div>
           <Heading pt={4} as="h6" fontSize="3xl" fontWeight="medium">

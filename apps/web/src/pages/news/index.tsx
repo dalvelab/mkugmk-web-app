@@ -11,13 +11,13 @@ import {
   CustomContainer,
   SEO,
 } from "@/shared";
-import type { EventWithPagination } from "@/entities";
+import type { Event } from "@/entities";
 import type { ApiResponse, StrapiMeta } from "@/shared";
 
 export default function Events({
   events,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { data } = events;
+  const { data, meta } = events;
 
   const t = useTranslations("News");
 
@@ -53,10 +53,7 @@ export default function Events({
             {isNotEmpty(data) &&
               data
                 .sort((a, b) =>
-                  new Date(b.attributes.publish_date) <
-                  new Date(a.attributes.publish_date)
-                    ? -1
-                    : 1
+                  new Date(b.publish_date) < new Date(a.publish_date) ? -1 : 1
                 )
                 .map((event, index) => (
                   <CardEvent key={event.id} event={event} index={index} />
@@ -69,7 +66,7 @@ export default function Events({
 }
 
 interface NewsProps {
-  events: ApiResponse<EventWithPagination[], StrapiMeta>;
+  events: ApiResponse<Event[], StrapiMeta>;
 }
 
 export const getServerSideProps: GetServerSideProps<NewsProps> = async ({

@@ -18,7 +18,7 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({
     return (
       <chakra.div w="full" h="100%" pos="absolute" zIndex={-1}>
         <Image
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", overflowClipMargin: "unset" }}
           src={media.url}
           fill
           alt="заглавное изображение"
@@ -37,7 +37,12 @@ export const WelcomeHeroSection: React.FC<WelcomeHeroSectionProps> = ({
         loop
         tabIndex={-1}
         preload="auto"
-        style={{ minHeight: "100vh", minWidth: "100%", objectFit: "cover" }}
+        style={{
+          minHeight: "100vh",
+          minWidth: "100%",
+          objectFit: "cover",
+          overflowClipMargin: "unset",
+        }}
         poster={isNotVoid(preview) ? `${preview.url}` : undefined}
       >
         <source src={media.url} type={media.mime} />

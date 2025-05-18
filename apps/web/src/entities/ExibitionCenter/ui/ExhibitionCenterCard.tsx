@@ -76,7 +76,11 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
           src={banner.url}
           fill
           alt="Изображение музея"
-          style={{ borderRadius: "12px", objectFit: "cover" }}
+          style={{
+            borderRadius: "12px",
+            objectFit: "cover",
+            overflowClipMargin: "unset",
+          }}
         />
         <chakra.div
           w="100%"

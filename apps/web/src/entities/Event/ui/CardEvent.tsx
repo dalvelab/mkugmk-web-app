@@ -4,16 +4,18 @@ import removeMd from "remove-markdown";
 
 import { getformatDateLocale, ChakraBox, Link } from "@/shared";
 
-import { EventWithPagination } from "../models";
+import { Event } from "../models";
 
 interface CardEventProps {
-  event: EventWithPagination;
+  event: Event;
   index: number;
 }
 
 export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
+  const { id, image, title, description, publish_date } = event;
+
   return (
-    <Link href={`/news/${event.id}`}>
+    <Link href={`/news/${id}`}>
       <ChakraBox
         display="flex"
         bg="white"
@@ -51,22 +53,18 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
           borderTopRightRadius="12px"
           overflow="hidden"
         >
-          <Image
-            fill
-            src={event.attributes.image.data.attributes.url}
-            alt={event.attributes.title}
-          />
+          <Image fill src={image.url} alt={title} />
         </chakra.div>
         <Flex p={4} flexGrow={1} flexDir="column">
           <Text fontSize={["lg", "xl", "xl", "lg", "xl"]} fontWeight="semibold">
-            {event.attributes.title}
+            {title}
           </Text>
           <chakra.div mt={2} mb={2} fontSize="md" noOfLines={3}>
-            {removeMd(event.attributes.description)}
+            {removeMd(description)}
           </chakra.div>
           <Flex mt={2} marginTop="auto" alignSelf="flex-end">
             <chakra.span fontSize="xs" color="brand.gray">
-              {getformatDateLocale(new Date(event.attributes.publish_date))}
+              {getformatDateLocale(new Date(publish_date))}
             </chakra.span>
           </Flex>
         </Flex>

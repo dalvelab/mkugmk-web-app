@@ -1,11 +1,11 @@
 import { ApiResponse, DefaultRequestParams, StrapiMeta } from "@/shared";
-import { Event, EventWithPagination } from "./models";
+import { Event } from "./models";
 
 interface GetPaginatedEvents extends DefaultRequestParams {}
 
 export async function getPaginatedEvents(
   params: GetPaginatedEvents
-): Promise<ApiResponse<EventWithPagination[], StrapiMeta>> {
+): Promise<ApiResponse<Event[], StrapiMeta>> {
   const { locale } = params;
 
   const res = await fetch(
