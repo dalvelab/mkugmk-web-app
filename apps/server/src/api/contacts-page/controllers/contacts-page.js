@@ -10,11 +10,11 @@ module.exports = createCoreController('api::contacts-page.contacts-page', ({stra
   async find(ctx) {
     const locale = ctx.query.locale || 'all';
 
-    const response = await strapi.entityService.findMany('api::contacts-page.contacts-page', {
+    const response = await strapi.documents('api::contacts-page.contacts-page').findMany({
       populate: ['contacts'],
       locale
     });
 
-    return { data: response };
+    return { data: response[0] };
   }
 }));

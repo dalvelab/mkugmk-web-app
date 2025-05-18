@@ -10,18 +10,15 @@ module.exports = createCoreController('api::complex-operation-management.complex
   async find(ctx) {
     const locale = ctx.query.locale || 'all';
 
-    const response = await strapi.entityService.findMany(
-      "api::complex-operation-management.complex-operation-management",
-      {
-        populate: [
-          "common_operating_hours",
-          "special_days_operating_hours",
-          "special_days_operating_hours.exhibition_centers",
-        ],
-        locale,
-      }
-    );
+    const response = await strapi.documents("api::complex-operation-management.complex-operation-management").findMany({
+      populate: [
+        "common_operating_hours",
+        "special_days_operating_hours",
+        "special_days_operating_hours.exhibition_centers",
+      ],
+      locale,
+    });
 
-    return { data: response };
+    return { data: response[0] };
   }
 }));

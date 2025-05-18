@@ -10,11 +10,11 @@ module.exports = createCoreController('api::cafe-and-souvenirs-page.cafe-and-sou
   async find(ctx) {
     const locale = ctx.query.locale || 'all';
 
-    const response = await strapi.entityService.findMany('api::cafe-and-souvenirs-page.cafe-and-souvenirs-page', {
+    const response = await strapi.documents('api::cafe-and-souvenirs-page.cafe-and-souvenirs-page').findMany({
       populate: ['cafes_and_souvenirs', 'cafes_and_souvenirs.image', 'cafes_and_souvenirs.modal_image'],
       locale
     });
 
-    return { data: response };
+    return { data: response[0] };
   }
 }));

@@ -10,11 +10,11 @@ module.exports = createCoreController('api::navigation-page.navigation-page', ({
   async find(ctx) {
     const locale = ctx.query.locale || 'all';
 
-    const response = await strapi.entityService.findMany('api::navigation-page.navigation-page', {
+    const response = await strapi.documents('api::navigation-page.navigation-page').findMany({
       populate: ['addresses', 'how_to_get_to_museum', 'complex_map'],
       locale
     });
 
-    return { data: response };
+    return { data: response[0] };
   }
 }));

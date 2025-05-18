@@ -12,23 +12,19 @@ module.exports = createCoreController(
     async find(ctx) {
       const locale = ctx.query.locale || "all";
 
-      const response = await strapi.entityService.findMany(
-        "api::welcome-page.welcome-page",
-        {
-          populate: [
-            "gallery",
-            "banner",
-            "youtube_gallery",
-            "video_preview",
-            "exhibition_centers",
-            "exhibition_centers.banner",
-            "exhibition_centers.working_time",
-          ],
-          locale,
-        }
-      );
+      const response = await strapi.documents("api::welcome-page.welcome-page").findMany({
+        populate: [
+          "banner",
+          "youtube_gallery",
+          "video_preview",
+          "exhibition_centers",
+          "exhibition_centers.banner",
+          "exhibition_centers.working_time",
+        ],
+        locale,
+      });
 
-      return { data: response };
+      return { data: response[0] };
     },
   })
 );

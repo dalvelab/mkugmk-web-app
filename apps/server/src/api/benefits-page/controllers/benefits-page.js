@@ -10,8 +10,8 @@ module.exports = createCoreController('api::benefits-page.benefits-page', ({stra
   async find(ctx) {
     const locale = ctx.query.locale || 'all';
 
-    const response = await strapi.entityService.findMany('api::benefits-page.benefits-page', {locale});
+    const response = await strapi.documents('api::benefits-page.benefits-page').findMany({locale});
 
-    return { data: response };
+    return { data: response[0] };
   }
 }));

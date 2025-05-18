@@ -10,11 +10,11 @@ module.exports = createCoreController('api::partners-page.partners-page', ({stra
   async find(ctx) {
     const locale = ctx.query.locale || 'all';
 
-    const response = await strapi.entityService.findMany('api::partners-page.partners-page', {
+    const response = await strapi.documents('api::partners-page.partners-page').findMany({
       populate: ['partners', 'partners.image', 'partners.modal_image'],
       locale
     });
 
-    return { data: response };
+    return { data: response[0] };
   }
 }));

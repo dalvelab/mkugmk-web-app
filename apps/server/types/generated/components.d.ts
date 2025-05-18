@@ -1,349 +1,362 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface VisitorsWorkingHoursPage extends Schema.Component {
-  collectionName: 'components_visitors_working_hours_pages';
+export interface ContactsDepartmentContact extends Struct.ComponentSchema {
+  collectionName: 'components_contacts_department_contacts';
   info: {
-    displayName: 'Working Hours Page';
     description: '';
+    displayName: 'DepartmentContact';
   };
   attributes: {
-    title: Attribute.String;
-    public_areas: Attribute.Component<'visitors.public-area', true>;
+    caption: Schema.Attribute.String;
+    department: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.Email;
+    enable_order_call_modal: Schema.Attribute.Boolean;
+    phone: Schema.Attribute.String;
   };
 }
 
-export interface VisitorsTransport extends Schema.Component {
-  collectionName: 'components_visitors_transports';
-  info: {
-    displayName: 'Transport';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    caption: Attribute.String;
-    value: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['public_transport', 'other']> &
-      Attribute.Required;
-  };
-}
-
-export interface VisitorsTicketTypes extends Schema.Component {
-  collectionName: 'components_visitors_ticket_types';
-  info: {
-    displayName: 'Ticket';
-    description: '';
-  };
-  attributes: {
-    additional_text: Attribute.String;
-    categories: Attribute.Component<'visitors.ticket-category', true> &
-      Attribute.Required;
-    available_on_website: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    name: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface VisitorsTicketNew extends Schema.Component {
-  collectionName: 'components_visitors_ticket_news';
-  info: {
-    displayName: 'Ticket New';
-    description: '';
-  };
-  attributes: {
-    categories: Attribute.Component<'visitors.ticket-category', true>;
-    name: Attribute.String & Attribute.Required;
-    available_on_website: Attribute.Boolean & Attribute.DefaultTo<false>;
-    is_excursion: Attribute.Boolean & Attribute.DefaultTo<false>;
-    additional_text: Attribute.Text;
-  };
-}
-
-export interface VisitorsTicketCategory extends Schema.Component {
-  collectionName: 'components_services_ticket_categories';
-  info: {
-    displayName: 'Ticket Category';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    caption: Attribute.String;
-    price: Attribute.String;
-  };
-}
-
-export interface VisitorsPublicArea extends Schema.Component {
-  collectionName: 'components_visitors_public_areas';
-  info: {
-    displayName: 'Public Area';
-    description: '';
-  };
-  attributes: {
-    working_time: Attribute.Component<'shared.working-time', true> &
-      Attribute.SetMinMax<
-        {
-          max: 7;
-        },
-        number
-      >;
-    name: Attribute.String;
-  };
-}
-
-export interface VisitorsOther extends Schema.Component {
-  collectionName: 'components_services_others';
-  info: {
-    displayName: 'Other Services';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    additional_text: Attribute.RichText;
-    value: Attribute.RichText & Attribute.Required;
-  };
-}
-
-export interface VisitorsNavigationPage extends Schema.Component {
-  collectionName: 'components_visitors_navigation_pages';
-  info: {
-    displayName: 'Navigation Page';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    complex_map: Attribute.Media<'images'> & Attribute.Required;
-    yandex_map_embed: Attribute.String;
-    addresses: Attribute.Component<'visitors.address', true>;
-    how_to_get_to_museum: Attribute.Component<'visitors.transport', true>;
-  };
-}
-
-export interface VisitorsMainServices extends Schema.Component {
-  collectionName: 'components_visitors_main_services';
-  info: {
-    displayName: 'Main Services';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    link: Attribute.String;
-    tickets: Attribute.Component<'visitors.ticket-new', true>;
-    value: Attribute.String;
-    additional_text: Attribute.String;
-  };
-}
-
-export interface VisitorsInteractivePlaygroudPage extends Schema.Component {
-  collectionName: 'components_visitors_interactive_playgroud_pages';
-  info: {
-    displayName: 'Interactive Playgroud Page';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText;
-    interactive_playgrounds: Attribute.Component<'shared.info-card', true>;
-  };
-}
-
-export interface VisitorsCafeAndSouvenirsPage extends Schema.Component {
-  collectionName: 'components_visitors_cafe_and_souvenirs_pages';
-  info: {
-    displayName: 'Cafe And Souvenirs Page';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText;
-    cafes_and_souvenirs: Attribute.Component<'shared.info-card', true>;
-  };
-}
-
-export interface VisitorsAddress extends Schema.Component {
-  collectionName: 'components_visitors_addresses';
-  info: {
-    displayName: 'Address';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    address: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface SharedYoutubeVideo extends Schema.Component {
-  collectionName: 'components_shared_youtube_videos';
-  info: {
-    displayName: 'YoutubeVideo';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    video_id: Attribute.String;
-  };
-}
-
-export interface SharedWorkingTime extends Schema.Component {
-  collectionName: 'components_shared_working_times';
-  info: {
-    displayName: 'WorkingTime';
-    icon: 'clock';
-    description: '';
-  };
-  attributes: {
-    value: Attribute.String & Attribute.Required;
-    opened: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>;
-    day: Attribute.Enumeration<
-      ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun']
-    >;
-  };
-}
-
-export interface SharedOperatingHoursInCurrentDay extends Schema.Component {
-  collectionName: 'components_shared_operating_hours_in_current_days';
-  info: {
-    displayName: 'OperatingHoursInCurrentDay';
-    description: '';
-  };
-  attributes: {
-    value: Attribute.String & Attribute.Required;
-    day: Attribute.Date & Attribute.Required;
-    opened: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    exhibition_centers: Attribute.Relation<
-      'shared.operating-hours-in-current-day',
-      'oneToMany',
-      'api::exhibition-center.exhibition-center'
-    >;
-  };
-}
-
-export interface SharedInfoCard extends Schema.Component {
-  collectionName: 'components_shared_info_cards';
-  info: {
-    displayName: 'Info Card';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    short_description: Attribute.String;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    modal_image: Attribute.Media<'images'>;
-    description: Attribute.RichText;
-    type: Attribute.Enumeration<
-      ['partners', 'cafes_and_souvenirs', 'interactive_playground']
-    > &
-      Attribute.Required;
-    address: Attribute.String & Attribute.Required;
-    phone: Attribute.String;
-    working_hours: Attribute.String;
-    tickets: Attribute.String;
-    email: Attribute.Email;
-    reference_to_other_source: Attribute.String;
-  };
-}
-
-export interface SharedAdditionalExhibitionCenter extends Schema.Component {
-  collectionName: 'components_shared_additional_exhibition_centers';
-  info: {
-    displayName: 'Additional Exhibition Center';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.RichText;
-    gallery: Attribute.Media<'images', true> & Attribute.Required;
-  };
-}
-
-export interface FaqFaq extends Schema.Component {
+export interface FaqFaq extends Struct.ComponentSchema {
   collectionName: 'components_faq_faqs';
   info: {
     displayName: 'FAQ';
   };
   attributes: {
-    topic: Attribute.String & Attribute.Required;
-    question: Attribute.String & Attribute.Required;
-    answer: Attribute.RichText;
+    answer: Schema.Attribute.RichText;
+    question: Schema.Attribute.String & Schema.Attribute.Required;
+    topic: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface FooterSocial extends Schema.Component {
-  collectionName: 'components_shared_socials';
-  info: {
-    displayName: 'Social';
-    description: '';
-  };
-  attributes: {
-    type: Attribute.Enumeration<['vk', 'telegram', 'youtube']>;
-    link: Attribute.String & Attribute.Required;
-    name: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface FooterPage extends Schema.Component {
-  collectionName: 'components_shared_pages';
-  info: {
-    displayName: 'Page';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    link: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface FooterContact extends Schema.Component {
+export interface FooterContact extends Struct.ComponentSchema {
   collectionName: 'components_footer_contacts';
   info: {
+    description: '';
     displayName: 'ContactFooter';
-    description: '';
   };
   attributes: {
-    type: Attribute.Enumeration<['email', 'phone', 'address']> &
-      Attribute.Required;
-    text: Attribute.String & Attribute.Required;
-    caption: Attribute.String;
+    caption: Schema.Attribute.String;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['email', 'phone', 'address']> &
+      Schema.Attribute.Required;
   };
 }
 
-export interface ContactsDepartmentContact extends Schema.Component {
-  collectionName: 'components_contacts_department_contacts';
+export interface FooterPage extends Struct.ComponentSchema {
+  collectionName: 'components_shared_pages';
   info: {
-    displayName: 'DepartmentContact';
     description: '';
+    displayName: 'Page';
   };
   attributes: {
-    department: Attribute.String & Attribute.Required;
-    caption: Attribute.String;
-    email: Attribute.Email;
-    phone: Attribute.String;
-    enable_order_call_modal: Attribute.Boolean;
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
-      'visitors.working-hours-page': VisitorsWorkingHoursPage;
-      'visitors.transport': VisitorsTransport;
-      'visitors.ticket-types': VisitorsTicketTypes;
-      'visitors.ticket-new': VisitorsTicketNew;
-      'visitors.ticket-category': VisitorsTicketCategory;
-      'visitors.public-area': VisitorsPublicArea;
-      'visitors.other': VisitorsOther;
-      'visitors.navigation-page': VisitorsNavigationPage;
-      'visitors.main-services': VisitorsMainServices;
-      'visitors.interactive-playgroud-page': VisitorsInteractivePlaygroudPage;
-      'visitors.cafe-and-souvenirs-page': VisitorsCafeAndSouvenirsPage;
-      'visitors.address': VisitorsAddress;
-      'shared.youtube-video': SharedYoutubeVideo;
-      'shared.working-time': SharedWorkingTime;
-      'shared.operating-hours-in-current-day': SharedOperatingHoursInCurrentDay;
-      'shared.info-card': SharedInfoCard;
-      'shared.additional-exhibition-center': SharedAdditionalExhibitionCenter;
-      'faq.faq': FaqFaq;
-      'footer.social': FooterSocial;
-      'footer.page': FooterPage;
-      'footer.contact': FooterContact;
+export interface FooterSocial extends Struct.ComponentSchema {
+  collectionName: 'components_shared_socials';
+  info: {
+    description: '';
+    displayName: 'Social';
+  };
+  attributes: {
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['vk', 'telegram', 'youtube']>;
+  };
+}
+
+export interface SharedAdditionalExhibitionCenter
+  extends Struct.ComponentSchema {
+  collectionName: 'components_shared_additional_exhibition_centers';
+  info: {
+    displayName: 'Additional Exhibition Center';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    gallery: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface SharedInfoCard extends Struct.ComponentSchema {
+  collectionName: 'components_shared_info_cards';
+  info: {
+    description: '';
+    displayName: 'Info Card';
+  };
+  attributes: {
+    address: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText;
+    email: Schema.Attribute.Email;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    modal_image: Schema.Attribute.Media<'images'>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    phone: Schema.Attribute.String;
+    reference_to_other_source: Schema.Attribute.String;
+    short_description: Schema.Attribute.String;
+    tickets: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ['partners', 'cafes_and_souvenirs', 'interactive_playground']
+    > &
+      Schema.Attribute.Required;
+    working_hours: Schema.Attribute.String;
+  };
+}
+
+export interface SharedOperatingHoursInCurrentDay
+  extends Struct.ComponentSchema {
+  collectionName: 'components_shared_operating_hours_in_current_days';
+  info: {
+    description: '';
+    displayName: 'OperatingHoursInCurrentDay';
+  };
+  attributes: {
+    day: Schema.Attribute.Date & Schema.Attribute.Required;
+    exhibition_centers: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::exhibition-center.exhibition-center'
+    >;
+    opened: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedWorkingTime extends Struct.ComponentSchema {
+  collectionName: 'components_shared_working_times';
+  info: {
+    description: '';
+    displayName: 'WorkingTime';
+    icon: 'clock';
+  };
+  attributes: {
+    day: Schema.Attribute.Enumeration<
+      ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun']
+    >;
+    opened: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedYoutubeVideo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_youtube_videos';
+  info: {
+    description: '';
+    displayName: 'YoutubeVideo';
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    video_id: Schema.Attribute.String;
+  };
+}
+
+export interface VisitorsAddress extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_addresses';
+  info: {
+    description: '';
+    displayName: 'Address';
+  };
+  attributes: {
+    address: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface VisitorsCafeAndSouvenirsPage extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_cafe_and_souvenirs_pages';
+  info: {
+    displayName: 'Cafe And Souvenirs Page';
+  };
+  attributes: {
+    cafes_and_souvenirs: Schema.Attribute.Component<'shared.info-card', true>;
+    description: Schema.Attribute.RichText;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface VisitorsInteractivePlaygroudPage
+  extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_interactive_playgroud_pages';
+  info: {
+    description: '';
+    displayName: 'Interactive Playgroud Page';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    interactive_playgrounds: Schema.Attribute.Component<
+      'shared.info-card',
+      true
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface VisitorsMainServices extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_main_services';
+  info: {
+    description: '';
+    displayName: 'Main Services';
+  };
+  attributes: {
+    additional_text: Schema.Attribute.String;
+    link: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    tickets: Schema.Attribute.Component<'visitors.ticket-new', true>;
+    value: Schema.Attribute.String;
+  };
+}
+
+export interface VisitorsNavigationPage extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_navigation_pages';
+  info: {
+    description: '';
+    displayName: 'Navigation Page';
+  };
+  attributes: {
+    addresses: Schema.Attribute.Component<'visitors.address', true>;
+    complex_map: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    how_to_get_to_museum: Schema.Attribute.Component<
+      'visitors.transport',
+      true
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    yandex_map_embed: Schema.Attribute.String;
+  };
+}
+
+export interface VisitorsOther extends Struct.ComponentSchema {
+  collectionName: 'components_services_others';
+  info: {
+    description: '';
+    displayName: 'Other Services';
+  };
+  attributes: {
+    additional_text: Schema.Attribute.RichText;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.RichText & Schema.Attribute.Required;
+  };
+}
+
+export interface VisitorsPublicArea extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_public_areas';
+  info: {
+    description: '';
+    displayName: 'Public Area';
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    working_time: Schema.Attribute.Component<'shared.working-time', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 7;
+        },
+        number
+      >;
+  };
+}
+
+export interface VisitorsTicketCategory extends Struct.ComponentSchema {
+  collectionName: 'components_services_ticket_categories';
+  info: {
+    description: '';
+    displayName: 'Ticket Category';
+  };
+  attributes: {
+    caption: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.String;
+  };
+}
+
+export interface VisitorsTicketNew extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_ticket_news';
+  info: {
+    description: '';
+    displayName: 'Ticket New';
+  };
+  attributes: {
+    additional_text: Schema.Attribute.Text;
+    available_on_website: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    categories: Schema.Attribute.Component<'visitors.ticket-category', true>;
+    is_excursion: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface VisitorsTicketTypes extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_ticket_types';
+  info: {
+    description: '';
+    displayName: 'Ticket';
+  };
+  attributes: {
+    additional_text: Schema.Attribute.String;
+    available_on_website: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    categories: Schema.Attribute.Component<'visitors.ticket-category', true> &
+      Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface VisitorsTransport extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_transports';
+  info: {
+    description: '';
+    displayName: 'Transport';
+  };
+  attributes: {
+    caption: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['public_transport', 'other']> &
+      Schema.Attribute.Required;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface VisitorsWorkingHoursPage extends Struct.ComponentSchema {
+  collectionName: 'components_visitors_working_hours_pages';
+  info: {
+    description: '';
+    displayName: 'Working Hours Page';
+  };
+  attributes: {
+    public_areas: Schema.Attribute.Component<'visitors.public-area', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'contacts.department-contact': ContactsDepartmentContact;
+      'faq.faq': FaqFaq;
+      'footer.contact': FooterContact;
+      'footer.page': FooterPage;
+      'footer.social': FooterSocial;
+      'shared.additional-exhibition-center': SharedAdditionalExhibitionCenter;
+      'shared.info-card': SharedInfoCard;
+      'shared.operating-hours-in-current-day': SharedOperatingHoursInCurrentDay;
+      'shared.working-time': SharedWorkingTime;
+      'shared.youtube-video': SharedYoutubeVideo;
+      'visitors.address': VisitorsAddress;
+      'visitors.cafe-and-souvenirs-page': VisitorsCafeAndSouvenirsPage;
+      'visitors.interactive-playgroud-page': VisitorsInteractivePlaygroudPage;
+      'visitors.main-services': VisitorsMainServices;
+      'visitors.navigation-page': VisitorsNavigationPage;
+      'visitors.other': VisitorsOther;
+      'visitors.public-area': VisitorsPublicArea;
+      'visitors.ticket-category': VisitorsTicketCategory;
+      'visitors.ticket-new': VisitorsTicketNew;
+      'visitors.ticket-types': VisitorsTicketTypes;
+      'visitors.transport': VisitorsTransport;
+      'visitors.working-hours-page': VisitorsWorkingHoursPage;
     }
   }
 }
