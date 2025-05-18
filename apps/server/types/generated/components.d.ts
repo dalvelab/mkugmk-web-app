@@ -253,6 +253,18 @@ export interface SharedAdditionalExhibitionCenter extends Schema.Component {
   };
 }
 
+export interface FaqFaq extends Schema.Component {
+  collectionName: 'components_faq_faqs';
+  info: {
+    displayName: 'FAQ';
+  };
+  attributes: {
+    topic: Attribute.String & Attribute.Required;
+    question: Attribute.String & Attribute.Required;
+    answer: Attribute.RichText;
+  };
+}
+
 export interface FooterSocial extends Schema.Component {
   collectionName: 'components_shared_socials';
   info: {
@@ -292,18 +304,6 @@ export interface FooterContact extends Schema.Component {
   };
 }
 
-export interface FaqFaq extends Schema.Component {
-  collectionName: 'components_faq_faqs';
-  info: {
-    displayName: 'FAQ';
-  };
-  attributes: {
-    topic: Attribute.String & Attribute.Required;
-    question: Attribute.String & Attribute.Required;
-    answer: Attribute.RichText;
-  };
-}
-
 export interface ContactsDepartmentContact extends Schema.Component {
   collectionName: 'components_contacts_department_contacts';
   info: {
@@ -339,10 +339,10 @@ declare module '@strapi/types' {
       'shared.operating-hours-in-current-day': SharedOperatingHoursInCurrentDay;
       'shared.info-card': SharedInfoCard;
       'shared.additional-exhibition-center': SharedAdditionalExhibitionCenter;
+      'faq.faq': FaqFaq;
       'footer.social': FooterSocial;
       'footer.page': FooterPage;
       'footer.contact': FooterContact;
-      'faq.faq': FaqFaq;
       'contacts.department-contact': ContactsDepartmentContact;
     }
   }
