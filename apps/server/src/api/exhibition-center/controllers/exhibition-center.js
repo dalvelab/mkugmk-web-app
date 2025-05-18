@@ -24,6 +24,7 @@ module.exports = createCoreController('api::exhibition-center.exhibition-center'
     return { data: response };
   },
   async findOne(ctx) {
+    const locale = ctx.query.locale || 'all';
     const id = ctx.request.params.id;
 
     const response = await strapi.documents("api::exhibition-center.exhibition-center").findMany({
@@ -39,7 +40,8 @@ module.exports = createCoreController('api::exhibition-center.exhibition-center'
         id: {
           $eq: id
         }
-      }
+      },
+      locale
     });
 
     return {data: response[0]}
