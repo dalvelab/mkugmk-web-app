@@ -16,7 +16,7 @@ export async function getPaginatedEvents(
 }
 
 interface GetSingleEvent extends DefaultRequestParams {
-  id: number;
+  id: string;
 }
 
 export async function getSingleEvent(

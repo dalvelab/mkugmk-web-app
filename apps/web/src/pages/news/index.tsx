@@ -56,7 +56,11 @@ export default function Events({
                   new Date(b.publish_date) < new Date(a.publish_date) ? -1 : 1
                 )
                 .map((event, index) => (
-                  <CardEvent key={event.id} event={event} index={index} />
+                  <CardEvent
+                    key={event.documentId}
+                    event={event}
+                    index={index}
+                  />
                 ))}
           </Grid>
         </CustomContainer>

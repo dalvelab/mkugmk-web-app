@@ -12,10 +12,10 @@ interface CardEventProps {
 }
 
 export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
-  const { id, image, title, description, publish_date } = event;
+  const { documentId, image, title, description, publish_date } = event;
 
   return (
-    <Link href={`/news/${id}`}>
+    <Link href={`/news/${documentId}`}>
       <ChakraBox
         display="flex"
         bg="white"

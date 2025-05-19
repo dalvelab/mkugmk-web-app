@@ -103,7 +103,7 @@ export const getServerSideProps: GetServerSideProps<SingleNewsProps> = async ({
   locale,
   params,
 }) => {
-  const id = Number(params?.id);
+  const id = params?.id as string;
 
   const event = await getSingleEvent({ id, locale });
 
