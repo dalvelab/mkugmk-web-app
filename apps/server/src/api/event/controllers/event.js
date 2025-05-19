@@ -8,17 +8,15 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::event.event', ({strapi}) => ({
   async findOne(ctx) {
+    const locale = ctx.query.locale || 'all';
     const id = ctx.request.params.id;
 
-    const response = await strapi.documents('api::event.event').findMany({
+    const response = await strapi.documents('api::event.event').findOne({
+      documentId: id,
       populate: ['image'],
-      filters: {
-        id: {
-          $eq: id
-        }
-      }
+      locale
     });
 
-    return {data: response[0]}
+    return {data: response}
   }
 }));
