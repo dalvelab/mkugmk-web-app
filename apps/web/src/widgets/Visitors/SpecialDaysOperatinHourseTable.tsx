@@ -1,4 +1,10 @@
-import { isEmpty, isNotEmpty, isNotVoid, isVoid, StrapiSpecialDay } from "@/shared";
+import {
+  isEmpty,
+  isNotEmpty,
+  isNotVoid,
+  isVoid,
+  StrapiSpecialDay,
+} from "@/shared";
 import { getGenetiveRusMonth } from "@/shared/utils/dates";
 import {
   chakra,
@@ -43,7 +49,11 @@ export const SpecialDaysOperatinHourseTable: React.FC<
                               justifyContent="space-between"
                               gap={2}
                             >
-                              <chakra.span whiteSpace="break-spaces" fontSize="sm" fontWeight="medium">
+                              <chakra.span
+                                whiteSpace="break-spaces"
+                                fontSize="sm"
+                                fontWeight="medium"
+                              >
                                 {center.name}
                               </chakra.span>
                               <chakra.span

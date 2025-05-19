@@ -127,11 +127,11 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
                     .flatMap((center) => center.hits)
                     .map((center) => (
                       <Hit
-                        key={center.id}
+                        key={center.documentId}
                         type="exhibition_center"
                         title={center.name}
                         closeModal={closeModal}
-                        link={`/exhibition-centers/${center.id}`}
+                        link={`/exhibition-centers/${center.documentId}`}
                       />
                     ))}
                 {isNotEmpty(faqPage) &&
@@ -183,11 +183,11 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
                     .flatMap((event) => event.hits)
                     .map((event) => (
                       <Hit
-                        key={event.id}
+                        key={event.documentId}
                         type="news"
                         title={event.title}
                         closeModal={closeModal}
-                        link={`/news/${event.id}`}
+                        link={`/news/${event.documentId}`}
                       />
                     ))}
                 {isNotEmpty(partnersPage) &&
@@ -216,7 +216,7 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose} variant="ghost">
-              {t('close')}
+              {t("close")}
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -28,7 +28,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
   locale,
   isLast,
 }) => {
-  const { id, name, card_description, banner, working_time } =
+  const { documentId, name, card_description, banner, working_time } =
     exhibition_center;
   const t = useTranslations("ExhibitionCenter");
 
@@ -37,7 +37,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
   const workTimeToday = getWorkingHoursForToday({
     data: selectScheduleForExhibitionCenter(
       working_time,
-      id,
+      documentId,
       complexOperatingSettings?.current_special_day_operating_hours,
       complexOperatingSettings?.exhibition_centers_including_special_day
     ),
@@ -119,7 +119,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
           <Text fontSize={["sm", "md", "md", "md", "md"]}>
             {card_description}
           </Text>
-          <Link href={`/exhibition-centers/${id}`}>
+          <Link href={`/exhibition-centers/${documentId}`}>
             <Button
               bgColor="white"
               color="brand.black"

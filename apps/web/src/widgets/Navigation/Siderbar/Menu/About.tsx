@@ -37,10 +37,10 @@ export const About: React.FC<AboutProps> = ({
       </Button>
       <chakra.span>{exhibitionCentersLinkName}</chakra.span>
       <Flex pl={5} flexDir="column" gap={3}>
-        {exhibition_centers.map(({ id, name }) => (
+        {exhibition_centers.map(({ documentId, name }) => (
           <Link
-            key={id}
-            href={`/exhibition-centers/${id}`}
+            key={documentId}
+            href={`/exhibition-centers/${documentId}`}
             fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]}
             color="brand.gray"
             onClick={onClick}

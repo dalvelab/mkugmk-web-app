@@ -48,7 +48,7 @@ export default function ExhibitionCenter({
   }
 
   const {
-    id,
+    documentId,
     name,
     description,
     banner,
@@ -64,7 +64,7 @@ export default function ExhibitionCenter({
   const workTimeToday = getWorkingHoursForToday({
     data: selectScheduleForExhibitionCenter(
       working_time,
-      id,
+      documentId,
       complexOperatingSettings?.current_special_day_operating_hours,
       complexOperatingSettings?.exhibition_centers_including_special_day
     ),
@@ -342,7 +342,7 @@ interface ExhibitionCenterProps {
 export const getServerSideProps: GetServerSideProps<
   ExhibitionCenterProps
 > = async (context) => {
-  const id = Number(context.params?.id);
+  const id = context.params?.id as string;
 
   const exhibitionCenter = await getSingleExibitionCenter({
     id,

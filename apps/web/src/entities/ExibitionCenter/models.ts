@@ -3,6 +3,7 @@ import { StrapiMedia, StrapiWorkingTime, StrapiYoutubeVideo } from "@/shared";
 export type ExhibitionCenter = {
   id: number;
   name: string;
+  documentId: string;
   ticket_sale_enabled: boolean;
   description: string;
   excursion_phone?: string;

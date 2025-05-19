@@ -27,7 +27,8 @@ module.exports = createCoreController('api::exhibition-center.exhibition-center'
     const locale = ctx.query.locale || 'all';
     const id = ctx.request.params.id;
 
-    const response = await strapi.documents("api::exhibition-center.exhibition-center").findMany({
+    const response = await strapi.documents("api::exhibition-center.exhibition-center").findOne({
+      documentId: id,
       populate: [
         "gallery",
         "banner",
@@ -36,14 +37,9 @@ module.exports = createCoreController('api::exhibition-center.exhibition-center'
         "additional_center",
         "additional_center.gallery",
       ],
-      filters:{
-        id: {
-          $eq: id
-        }
-      },
       locale
     });
 
-    return {data: response[0]}
+    return {data: response}
   }
 }));

@@ -29,7 +29,7 @@ type ComplextOperatingHoursContextType = {
   isOpened?: boolean;
   current_special_day_operating_hours?: StrapiWorkingTime[];
   special_days_operating_hours: StrapiSpecialDay[];
-  exhibition_centers_including_special_day?: number[];
+  exhibition_centers_including_special_day?: string[];
   website_top_warning?: string;
   common_operating_hours?: StrapiWorkingTime[];
 };
@@ -88,7 +88,7 @@ export const ComplexOperationManagementProvider = ({
           ? createFakeScheduleForSpecialDay(day)
           : undefined,
         exhibition_centers_including_special_day: exhibitionCenterSelected
-          ? day?.exhibition_centers?.map((center) => center.id)
+          ? day?.exhibition_centers?.map((center) => center.documentId)
           : undefined,
         website_top_warning: response.data.website_top_warning,
         dayOfWeek,

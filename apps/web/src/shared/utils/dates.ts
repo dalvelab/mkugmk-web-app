@@ -209,9 +209,9 @@ export function getEqualScheduleForExhibitionCenters(
 
 export function selectScheduleForExhibitionCenter(
   regularWorkingTime: StrapiWorkingTime[],
-  selectedExhibitionCenterId: number,
+  selectedExhibitionCenterId: string,
   specialWorkingTime?: StrapiWorkingTime[],
-  exhibitionCenterIds?: number[]
+  exhibitionCenterIds?: string[]
 ) {
   if (
     isNotVoid(specialWorkingTime) &&

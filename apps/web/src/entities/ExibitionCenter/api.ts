@@ -22,7 +22,7 @@ export async function getExibitionCenters(
 }
 
 interface GetSingleExibitionCenter extends DefaultRequestParams {
-  id: number;
+  id: string;
 }
 
 export async function getSingleExibitionCenter(

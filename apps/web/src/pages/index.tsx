@@ -186,7 +186,7 @@ export default function Home({
           >
             {exhibition_centers.map((exhibition_center, index) => (
               <ExhibitionCenterCard
-                key={exhibition_center.id}
+                key={exhibition_center.documentId}
                 exhibition_center={exhibition_center}
                 locale={locale}
                 isLast={exhibition_centers.length - 1 === index}
