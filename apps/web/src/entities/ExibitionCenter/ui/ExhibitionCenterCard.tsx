@@ -15,7 +15,6 @@ import {
 } from "@/shared/utils/dates";
 import { OpenStatus, useComplexOperationManagement } from "@/shared";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
 
 interface ExhibitionCenterCardProps {
   exhibition_center: ExhibitionCenter;
@@ -46,7 +45,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
     isSpecialDayToday: complexOperatingSettings?.isOpened,
   });
 
-  const [isPhone] = useMediaQuery("(max-width: 480px)");
+  const [isPhone] = useMediaQuery(["(max-width: 480px)"]);
 
   const height = isLast
     ? ["320px", "400px", "460px", "460px", "500px"]
@@ -54,16 +53,13 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
 
   return (
     <Flex
-      as={motion.div}
       h={height}
       display="flex"
+      animation="bounce"
       boxSizing="border-box"
       border="1px solid"
       borderColor="brand.border"
       borderRadius="12px"
-      initial={{ opacity: 0, transform: "translateX(-10%)" }}
-      whileInView={{ opacity: 1, transform: "translateX(0)" }}
-      viewport={{ once: true }}
       pos="relative"
       _last={
         isLast

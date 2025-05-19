@@ -61,7 +61,6 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
             size="sm"
             bgColor="transparent"
             color="brand.gray"
-            icon={<DeleteIcon boxSize={4} />}
             aria-label="удалить выбранный центр"
             _hover={{ bgColor: "brand.border", color: "brand.black" }}
             onClick={
@@ -69,7 +68,9 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
                 ? () => deleteCenterFromSelected(exhibition_center.id)
                 : undefined
             }
-          />
+          >
+            <DeleteIcon boxSize={4} />
+          </IconButton>
         </>
       ) : (
         <Description />

@@ -30,7 +30,6 @@ import type { ApiResponse } from "@/shared";
 import { YoutubeVideoSlider } from "@/features";
 import { useRouter } from "next/router";
 import { getWorkingHoursForToday } from "@/shared/utils/dates";
-import { motion } from "framer-motion";
 
 export default function Home({
   pageContent,
@@ -110,7 +109,6 @@ export default function Home({
           pos="relative"
         >
           <Flex
-            as={motion.div}
             display="flex"
             w={["full", "full", "full", "900px", "900px"]}
             h="full"
@@ -118,9 +116,7 @@ export default function Home({
             justifyContent="center"
             alignItems="flex-start"
             gap={5}
-            initial={{ opacity: 0, transform: "translateY(-100%)" }}
-            whileInView={{ opacity: 1, transform: "translateY(0)" }}
-            viewport={{ once: true }}
+            animation="ease-out"
           >
             <Heading
               as="h1"

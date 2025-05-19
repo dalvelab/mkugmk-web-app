@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Flex, Text, chakra } from "@chakra-ui/react";
 import removeMd from "remove-markdown";
 
-import { getformatDateLocale, ChakraBox, Link } from "@/shared";
+import { getformatDateLocale, Link } from "@/shared";
 
 import { Event } from "../models";
 
