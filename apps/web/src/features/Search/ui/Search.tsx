@@ -187,7 +187,7 @@ export const Search: React.FC<Search> = ({ type, onSidebarClose }) => {
                         type="news"
                         title={event.title}
                         closeModal={closeModal}
-                        link={`/news/${event.documentId}`}
+                        link={`/news/${event.slug}-${event.documentId}`}
                       />
                     ))}
                 {isNotEmpty(partnersPage) &&
