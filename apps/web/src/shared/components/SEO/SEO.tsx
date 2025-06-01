@@ -25,6 +25,8 @@ export const SEO: React.FC<SEOProps> = ({ children, description, title }) => {
   return (
     <Head>
       <title>{metaTitle}</title>
+      <meta name="googlebot" content="notranslate" />
+      <meta name="google" content="notranslate" />
       <meta name="description" content={description || t("description")} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#FFFFFF" />{" "}
