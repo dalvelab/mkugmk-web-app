@@ -31,7 +31,7 @@ export const DropdownLink: React.FC<DropdownLinkProps> = ({
           transition="0.3s ease-in-out"
         />
       </Flex>
-      <Portal containerRef={dropdownRef}>
+      <Portal container={dropdownRef}>
         {visible && (
           <chakra.div pos="absolute" left={`${offsetLeft}px`} top="100%" pt={2}>
             <Flex

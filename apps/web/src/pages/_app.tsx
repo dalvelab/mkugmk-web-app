@@ -3,7 +3,12 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { NextIntlClientProvider } from "next-intl";
-import { chakra, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import {
+  chakra,
+  ChakraProvider,
+  createSystem,
+  defaultConfig,
+} from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { Navbar, Footer } from "@/widgets";
@@ -17,7 +22,7 @@ import { ScrollUpButton } from "@/features";
 import "../shared/styles.css";
 import Head from "next/head";
 
-const theme = extendTheme({ ...chakraMKUGMKConfig });
+const system = createSystem(defaultConfig, { ...chakraMKUGMKConfig });
 const queryClient = new QueryClient();
 
 function App({ Component, pageProps }: AppProps) {
@@ -45,7 +50,7 @@ function App({ Component, pageProps }: AppProps) {
         timeZone="Asia/Yekaterinburg"
       >
         <QueryClientProvider client={queryClient}>
-          <ChakraProvider theme={theme}>
+          <ChakraProvider value={system}>
             <ComplexOperationManagementProvider locale={locale}>
               <Navbar />
               <chakra.main pb={8} minH="calc(80vh - 80px)">

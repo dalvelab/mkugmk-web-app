@@ -12,7 +12,6 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { HamburgerIcon, WarningIcon } from "@chakra-ui/icons";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 
 import { LanguageSelect, Search } from "@/features";
@@ -26,8 +25,7 @@ export const Navbar = () => {
   const t = useTranslations("");
   const { locale } = useRouter();
 
-  const [isLargerThan1100] = useMediaQuery("(min-width: 1100px)");
-  const { scrollY } = useScroll();
+  const [isLargerThan1100] = useMediaQuery(["(min-width: 1100px)"]);
   const {
     data: response,
     isLoading,
@@ -49,20 +47,9 @@ export const Navbar = () => {
   const [isOpened, setOpened] = useState(false);
   const [isAlert, setIsAlert] = useState(true);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
-
-    if (isNotVoid(previous) && latest > previous && latest > 150) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
-  });
-
   return (
     <>
       <chakra.nav
-        as={motion.nav}
         w="full"
         h={[16, 16, 16, 20, 20]}
         pos="sticky"
@@ -75,14 +62,8 @@ export const Navbar = () => {
         paddingInlineStart={4}
         paddingInlineEnd={4}
         transition=".1s, ease-in-out"
-        animate={visible ? "visible" : "hidden"}
-        variants={{
-          visible: { y: 0 },
-          hidden: { y: "calc(-100% - 2px)" }, // - 2px for border hide
-        }}
       >
         <Flex
-          as={motion.div}
           ps={isLargerThan1100 ? 4 : 0}
           display="flex"
           w="full"
@@ -90,11 +71,6 @@ export const Navbar = () => {
           justifyContent="space-between"
           alignItems="center"
           gap={2}
-          animate={visible ? "visible" : "hidden"}
-          variants={{
-            visible: { visibility: "visible" },
-            hidden: { visibility: "hidden" },
-          }}
         >
           <Link href="/">
             <Text fontSize="xl" textTransform="uppercase" fontWeight="bold">

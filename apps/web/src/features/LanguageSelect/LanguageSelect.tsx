@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Button, Menu } from "@chakra-ui/react";
 import { isNotEmpty } from "@/shared";
 
 interface LanguageSelectProps {
@@ -25,34 +25,44 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({
   };
 
   return (
-    <Menu>
-      <MenuButton
-        bg={["gray.100", "gray.100", "gray.100", "transparent", "transparent"]}
-        fontWeight="500"
-        as={Button}
-        fontSize={size === "sm" ? "md" : "lg"}
-        rightIcon={<ChevronDownIcon boxSize={size === "sm" ? 4 : 6} />}
-        _active={{ bg: "gray.100" }}
-        py={size === "sm" ? 4 : 6}
-      >
-        {locale === "ru" ? "RU" : "EN"}
-      </MenuButton>
-      <MenuList p={2} minW="auto" fontSize={size === "sm" ? "md" : "lg"}>
-        <MenuItem
+    <Menu.Root>
+      <Menu.Trigger asChild>
+        <Button
+          bg={[
+            "gray.100",
+            "gray.100",
+            "gray.100",
+            "transparent",
+            "transparent",
+          ]}
+          fontWeight="500"
+          as={Button}
+          fontSize={size === "sm" ? "md" : "lg"}
+          rightIcon={<ChevronDownIcon boxSize={size === "sm" ? 4 : 6} />}
+          _active={{ bg: "gray.100" }}
+          py={size === "sm" ? 4 : 6}
+        >
+          {locale === "ru" ? "RU" : "EN"}
+        </Button>
+      </Menu.Trigger>
+      <Menu.Content p={2} minW="auto" fontSize={size === "sm" ? "md" : "lg"}>
+        <Menu.Item
+          value="RU"
           bg={locale === "ru" ? "brand.border" : "transparent"}
           borderRadius="4px"
           onClick={() => handleLanguageChange("ru")}
         >
           RU
-        </MenuItem>
-        <MenuItem
+        </Menu.Item>
+        <Menu.Item
+          value="EN"
           bg={locale === "en" ? "brand.border" : "transparent"}
           borderRadius="4px"
           onClick={() => handleLanguageChange("en")}
         >
           EN
-        </MenuItem>
-      </MenuList>
-    </Menu>
+        </Menu.Item>
+      </Menu.Content>
+    </Menu.Root>
   );
 };

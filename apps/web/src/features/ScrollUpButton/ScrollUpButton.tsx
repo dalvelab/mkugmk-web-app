@@ -1,16 +1,9 @@
 import { useState } from "react";
 import { ArrowUpIcon } from "@chakra-ui/icons";
 import { chakra, IconButton } from "@chakra-ui/react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
 
 export const ScrollUpButton = () => {
-  const { scrollY } = useScroll();
-
   const [currentScrollY, setCurrentScrollY] = useState(0);
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setCurrentScrollY(latest);
-  });
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -32,7 +25,7 @@ export const ScrollUpButton = () => {
         boxShadow="0 2px 10px 0 #00000026"
         aria-label="Кнопка наверх"
         onClick={scrollToTop}
-      ></IconButton>
+      />
     </chakra.div>
   ) : null;
 };

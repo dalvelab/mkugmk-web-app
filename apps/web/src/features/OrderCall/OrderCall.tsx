@@ -5,27 +5,20 @@ import { useTranslations } from "next-intl";
 import {
   chakra,
   Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
+  Dialog,
   useDisclosure,
   Heading,
   Flex,
-  FormLabel,
-  FormControl,
+  Field,
   Input,
   Textarea,
-  FormErrorMessage,
-  useToast,
   ButtonProps,
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { isNotVoid } from "@/shared";
 import { useMutation } from "@tanstack/react-query";
 import { sendEmailRequest } from "../SendEmail";
+import { Toaster, toaster } from "@/shared/components/toaster";
 
 const FormSchema = z.object({
   name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
@@ -40,16 +33,15 @@ const initalForm = {
 };
 
 interface OrderCallProps {
-  buttonStyles?: ButtonProps["__css"];
+  buttonStyles?: ButtonProps["css"];
 }
 
 export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
   const { locale } = useRouter();
-  const toast = useToast();
 
   const t = useTranslations("Footer");
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   const [form, setForm] = useState(initalForm);
   const [errors, setErrors] = useState<z.ZodError<
@@ -59,12 +51,11 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
   const mutation = useMutation({
     mutationFn: sendEmailRequest,
     onSuccess: () => {
-      toast({
+      toaster.create({
         title: "Успешно!",
-        status: "success",
+        type: "success",
         duration: 2500,
-        position: "top-right",
-        isClosable: true,
+        closable: true,
       });
       setForm(initalForm);
       onClose();
@@ -72,13 +63,12 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
     onError: () => {
       setForm(initalForm);
 
-      toast({
+      toaster.error({
         title: "Произошла ошибка.",
         description: "Попробуйте позже",
-        status: "error",
+        type: "error",
         duration: 2500,
-        position: "top-right",
-        isClosable: true,
+        closable: true,
       });
     },
   });
@@ -113,24 +103,26 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
 
   return (
     <>
-      <Button
-        onClick={onOpen}
-        variant="link"
-        fontWeight="regular"
-        __css={buttonStyles}
-        _hover={{ textDecor: "underline" }}
-      >
-        {t("order_call")}
-      </Button>
-      <Modal
+      <Dialog.Root
         size={["full", "lg", "lg", "lg", "lg"]}
-        autoFocus={false}
-        isOpen={isOpen}
-        onClose={onCloseModal}
+        open={open}
+        onOpenChange={onCloseModal}
       >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
+        <Dialog.Trigger asChild>
+          <Button
+            onClick={onOpen}
+            variant="ghost"
+            fontWeight="regular"
+            css={buttonStyles}
+            _hover={{ textDecor: "underline" }}
+          >
+            {t("order_call")}
+          </Button>
+        </Dialog.Trigger>
+        <Toaster />
+        <Dialog.Backdrop />
+        <Dialog.Content>
+          <Dialog.Header>
             <Heading
               color="brand.black"
               pt={4}
@@ -140,9 +132,8 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
             >
               {t("order_call")}
             </Heading>
-            <ModalCloseButton />
-          </ModalHeader>
-          <ModalBody pb={4}>
+          </Dialog.Header>
+          <Dialog.Body pb={4}>
             <Flex flexDir="column" gap={5}>
               <chakra.span>
                 Вы можете по телефону:{" "}
@@ -155,10 +146,9 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
                 </chakra.a>{" "}
                 <br /> Или заказать обратный звонок
               </chakra.span>
-              <FormControl isRequired isInvalid={isNotVoid(nameError)}>
-                <FormLabel>{t("order_call_modal_form_name")}</FormLabel>
+              <Field.Root required invalid={isNotVoid(nameError)}>
+                <Field.Label>{t("order_call_modal_form_name")}</Field.Label>
                 <Input
-                  isInvalid={isNotVoid(nameError)}
                   placeholder={t("order_call_modal_form_name")}
                   value={form.name}
                   onChange={(event) =>
@@ -170,13 +160,12 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
                   onFocus={() => setErrors(null)}
                 />
                 {isNotVoid(nameError) && (
-                  <FormErrorMessage>{nameError.message}</FormErrorMessage>
+                  <Field.ErrorText>{nameError.message}</Field.ErrorText>
                 )}
-              </FormControl>
-              <FormControl isRequired isInvalid={isNotVoid(phoneError)}>
-                <FormLabel>{t("order_call_modal_form_phone")}</FormLabel>
+              </Field.Root>
+              <Field.Root required invalid={isNotVoid(phoneError)}>
+                <Field.Label>{t("order_call_modal_form_phone")}</Field.Label>
                 <Input
-                  isInvalid={isNotVoid(phoneError)}
                   placeholder={t("order_call_modal_form_phone")}
                   value={form.phone}
                   maxLength={12}
@@ -189,13 +178,12 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
                   onFocus={() => setErrors(null)}
                 />
                 {isNotVoid(phoneError) && (
-                  <FormErrorMessage>{phoneError.message}</FormErrorMessage>
+                  <Field.ErrorText>{phoneError.message}</Field.ErrorText>
                 )}
-              </FormControl>
-              <FormControl isRequired isInvalid={isNotVoid(messageError)}>
-                <FormLabel>{t("order_call_modal_form_message")}</FormLabel>
+              </Field.Root>
+              <Field.Root required invalid={isNotVoid(messageError)}>
+                <Field.Label>{t("order_call_modal_form_message")}</Field.Label>
                 <Textarea
-                  isInvalid={isNotVoid(messageError)}
                   placeholder={t("order_call_modal_form_message")}
                   value={form.message}
                   onChange={(event) =>
@@ -207,9 +195,9 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
                   onFocus={() => setErrors(null)}
                 />
                 {isNotVoid(messageError) && (
-                  <FormErrorMessage>{messageError.message}</FormErrorMessage>
+                  <Field.ErrorText>{messageError.message}</Field.ErrorText>
                 )}
-              </FormControl>
+              </Field.Root>
               <Button
                 bgColor="brand.black"
                 color="white"
@@ -242,9 +230,9 @@ export const OrderCall: React.FC<OrderCallProps> = ({ buttonStyles }) => {
                 </chakra.span>
               )}
             </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+          </Dialog.Body>
+        </Dialog.Content>
+      </Dialog.Root>
     </>
   );
 };
