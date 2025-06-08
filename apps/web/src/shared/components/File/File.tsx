@@ -31,7 +31,7 @@ export const File: React.FC<FileProps> = ({ file, name }) => {
           fontSize="sm"
           lineHeight="1"
           fontWeight="medium"
-          noOfLines={2}
+          lineClamp={2}
         >
           {isNotVoid(name) ? name : file.name}
         </chakra.span>

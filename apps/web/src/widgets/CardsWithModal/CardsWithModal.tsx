@@ -21,7 +21,7 @@ function imageAltGenerator(name: string, type: StrapiInfoCard["type"]) {
 }
 
 export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   const [activeId, setActiveId] = useState<number | undefined>();
 
@@ -33,7 +33,7 @@ export const CardsWithModal: React.FC<CardsWithModalProps> = ({ data }) => {
   return (
     <>
       {isNotVoid(activeId) ? (
-        <CardsModal isOpen={isOpen} onClose={onClose} data={data[activeId]} />
+        <CardsModal isOpen={open} onClose={onClose} data={data[activeId]} />
       ) : null}
       <Grid
         mt={7}

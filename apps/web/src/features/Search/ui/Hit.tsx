@@ -27,7 +27,7 @@ function getTagByLocale(locale?: string) {
     "contacts-page": "контакты",
   };
 
-  if (locale === 'en') {
+  if (locale === "en") {
     const enTagMap: Record<HitProps["type"], string> = {
       exhibition_center: "about us",
       news: "news",
@@ -50,7 +50,7 @@ export const Hit: React.FC<HitProps> = ({
   link,
   caption,
 }) => {
-  const {locale} = useRouter()
+  const { locale } = useRouter();
 
   const tagMap = getTagByLocale(locale);
 
@@ -74,13 +74,13 @@ export const Hit: React.FC<HitProps> = ({
         alignItems="flex-start"
         gap={2}
       >
-        <Tag size="sm" colorScheme={tagColorScheme[type]}>
-          {tagMap[type]}
-        </Tag>
+        <Tag.Root size="sm" colorPalette={tagColorScheme[type]}>
+          <Tag.Label>{tagMap[type]}</Tag.Label>
+        </Tag.Root>
         <Flex flexDir="column">
           <chakra.span fontSize="lg">{title}</chakra.span>
           {isNotVoid(caption) ? (
-            <chakra.span noOfLines={1} fontSize="sm" color="brand.gray">
+            <chakra.span lineClamp={1} fontSize="sm" color="brand.gray">
               {caption}
             </chakra.span>
           ) : null}

@@ -6,12 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 8081",
-    "lint": "next lint"
+    "lint": "next lint",
+    "types": "tsc"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/next-js": "^2.1.3",
-    "@chakra-ui/react": "^3.19.1",
+    "@chakra-ui/react": "^3.20.0",
     "@emotion/react": "^11.14.0",
     "@tanstack/react-query": "^5.28.9",
     "isomorphic-dompurify": "^2.7.0",

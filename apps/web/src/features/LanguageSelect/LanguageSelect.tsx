@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { RxChevronDown } from "react-icons/rx";
 import { Button, Menu } from "@chakra-ui/react";
 import { isNotEmpty } from "@/shared";
 
@@ -38,11 +38,10 @@ export const LanguageSelect: React.FC<LanguageSelectProps> = ({
           fontWeight="500"
           as={Button}
           fontSize={size === "sm" ? "md" : "lg"}
-          rightIcon={<ChevronDownIcon boxSize={size === "sm" ? 4 : 6} />}
           _active={{ bg: "gray.100" }}
           py={size === "sm" ? 4 : 6}
         >
-          {locale === "ru" ? "RU" : "EN"}
+          {locale === "ru" ? "RU" : "EN"} <RxChevronDown />
         </Button>
       </Menu.Trigger>
       <Menu.Content p={2} minW="auto" fontSize={size === "sm" ? "md" : "lg"}>

@@ -1,4 +1,4 @@
-import { Link } from "@chakra-ui/next-js";
+import { Link } from "@chakra-ui/react";
 
 interface NavbarLinkProps {
   level: 1 | 2 | 3;

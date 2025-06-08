@@ -43,6 +43,9 @@ const nextConfig = {
     defaultLocale: "ru",
     locales: ["ru", "en"],
   },
+  experimental: {
+    optimizePackageImports: ["@chakra-ui/react"],
+  }
 };
 
 export default nextConfig;

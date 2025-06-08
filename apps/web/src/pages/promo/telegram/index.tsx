@@ -1,5 +1,5 @@
 import { SEO } from "@/shared";
-import { Button, chakra, Flex, Spinner } from "@chakra-ui/react";
+import { Button, chakra, Flex } from "@chakra-ui/react";
 import type { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 

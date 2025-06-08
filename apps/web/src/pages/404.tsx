@@ -1,7 +1,6 @@
 import type { GetStaticProps } from "next";
 
-import { Flex, Text, chakra } from "@chakra-ui/react";
-import { WarningIcon } from "@chakra-ui/icons";
+import { Text, chakra } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 export default function Custom404() {

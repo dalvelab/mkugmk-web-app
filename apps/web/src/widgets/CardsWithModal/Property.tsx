@@ -1,4 +1,5 @@
-import { CalendarIcon, EmailIcon, PhoneIcon } from "@chakra-ui/icons";
+import { RxCalendar, RxEnvelopeClosed } from "react-icons/rx";
+import { BsFillTelephoneFill } from "react-icons/bs";
 import { chakra, Flex } from "@chakra-ui/react";
 
 import { LocationIcon, RubCurrencyIcon } from "@/shared";
@@ -11,11 +12,11 @@ interface PropertyProps {
 
 export const Property: React.FC<PropertyProps> = ({ text, variant }) => {
   const iconMap: Record<typeof variant, React.ReactElement> = {
-    email: <EmailIcon />,
+    email: <RxEnvelopeClosed />,
     location: <LocationIcon />,
-    phone: <PhoneIcon />,
+    phone: <BsFillTelephoneFill />,
     tickets: <RubCurrencyIcon />,
-    schedule: <CalendarIcon />,
+    schedule: <RxCalendar />,
   };
 
   return (

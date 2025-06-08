@@ -1,12 +1,5 @@
-import { CloseIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  IconButton,
-} from "@chakra-ui/react";
+import { RxCross1 } from "react-icons/rx";
+import { Flex, Dialog, IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { LanguageSelect, Search } from "@/features";
@@ -36,15 +29,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <Modal
-      autoFocus={false}
-      onClose={handleSidebarClose}
-      size="full"
-      isOpen={isOpened}
-      motionPreset="slideInRight"
-    >
-      <ModalContent>
-        <ModalHeader zIndex={2}>
+    <Dialog.Root onOpenChange={handleSidebarClose} size="full" open={isOpened}>
+      <Dialog.Content>
+        <Dialog.Header zIndex={2}>
           <Flex w="full" justifyContent="space-between">
             <Flex gap={4}>
               <LanguageSelect size="lg" />
@@ -52,14 +39,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </Flex>
             <IconButton
               boxSize={12}
-              icon={<CloseIcon boxSize={4} />}
               _hover={{ bg: "brand.border" }}
               aria-label="Закрыть меню"
               onClick={handleSidebarClose}
-            />
+            >
+              <RxCross1 />
+            </IconButton>
           </Flex>
-        </ModalHeader>
-        <ModalBody>
+        </Dialog.Header>
+        <Dialog.Body>
           <Flex
             w="full"
             height="100vh"
@@ -95,8 +83,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
               />
             ) : null}
           </Flex>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </Dialog.Body>
+      </Dialog.Content>
+    </Dialog.Root>
   );
 };

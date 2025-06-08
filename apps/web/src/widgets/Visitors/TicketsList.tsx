@@ -151,7 +151,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({ main_services }) => {
                     ))}
                     {ticket.available_on_website && (
                       <Link href="/buy-ticket">
-                        <Button colorScheme="green">
+                        <Button colorPalette="green">
                           {t("buy_ticket_button")}
                         </Button>
                       </Link>

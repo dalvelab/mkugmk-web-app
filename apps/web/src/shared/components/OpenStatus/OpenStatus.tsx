@@ -39,7 +39,7 @@ export const OpenStatus: React.FC<OpenStatusProps> = ({
           translateX: "-50%",
           translateY: "-50%",
           zIndex: 1,
-          animation: "pulse",
+          animation: "customPulse 2s infinite",
         }}
       />
       <chakra.span

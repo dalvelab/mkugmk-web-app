@@ -121,14 +121,16 @@ export default function Home({
             <Heading
               as="h1"
               fontSize={["3xl", "4xl", "5xl", "5xl", "5xl"]}
+              lineHeight="60px"
               textTransform="uppercase"
+              fontWeight={700}
               color="white"
             >
               {title}
             </Heading>
             <OpenStatus workTimeToday={workTimeToday} theme="dark" />
             <Link href="/buy-ticket">
-              <Button mt={2} size="lg" colorScheme="green">
+              <Button mt={2} size="xl" colorPalette="green">
                 {t("buy_ticket")}
               </Button>
             </Link>

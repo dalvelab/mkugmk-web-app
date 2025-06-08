@@ -1,7 +1,7 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { RxArrowLeft } from "react-icons/rx";
 import { Link } from "@/shared";
 
 interface VisitorsProps {
@@ -15,16 +15,15 @@ export const Visitors: React.FC<VisitorsProps> = ({ back, onClick }) => {
   return (
     <>
       <Button
-        variant="link"
+        variant="ghost"
         fontWeight="400"
         color="brand.black"
         pb={3}
         fontSize="lg"
-        leftIcon={<ArrowBackIcon />}
         onClick={back}
         _hover={{ textDecoration: "none" }}
       >
-        {t("sidebar_back")}
+        <RxArrowLeft /> {t("sidebar_back")}
       </Button>
       <Link href="/visitors/tickets" onClick={onClick}>
         {t("visitors_dropdown.tickets")}

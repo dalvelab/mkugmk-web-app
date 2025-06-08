@@ -11,7 +11,7 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { HamburgerIcon, WarningIcon } from "@chakra-ui/icons";
+import { RxHamburgerMenu, RxExclamationTriangle } from "react-icons/rx";
 import { useQuery } from "@tanstack/react-query";
 
 import { LanguageSelect, Search } from "@/features";
@@ -93,7 +93,7 @@ export const Navbar = () => {
               {isNotVoid(response?.error) ||
                 (isError && (
                   <Flex gap={1.5} alignItems="center">
-                    <WarningIcon color="red" />
+                    <RxExclamationTriangle color="red" />
                     <Text fontSize="sm">
                       Произошла ошибка при загрузке данных
                     </Text>
@@ -130,7 +130,7 @@ export const Navbar = () => {
               <chakra.div display={["none", "block", "block", "none", "block"]}>
                 <Button
                   size={["sm", "sm", "md", "md", "md"]}
-                  colorScheme="green"
+                  colorPalette="green"
                 >
                   {t("Navigation.buy_ticket")}
                 </Button>
@@ -143,12 +143,13 @@ export const Navbar = () => {
             <IconButton
               display={isLargerThan1100 ? "none" : "block"}
               boxSize={10}
-              icon={<HamburgerIcon boxSize={8} />}
               bg="transparent"
               _hover={{ bg: "brand.border" }}
               aria-label="Открыть меню"
               onClick={() => setOpened(true)}
-            />
+            >
+              <RxHamburgerMenu />
+            </IconButton>
           </Flex>
         </Flex>
       </chakra.nav>
@@ -174,7 +175,10 @@ export const Navbar = () => {
               maxW={["80px", "104px", "104px", "104px", "104px"]}
               w="100%"
               size={["sm", "md", "md", "md", "md"]}
-              colorScheme="yellow"
+              bgColor="yellow.400"
+              color="black"
+              fontWeight={600}
+              fontSize="16px"
               _hover={{ bgColor: "yellow.400" }}
               onClick={() => setIsAlert(false)}
             >

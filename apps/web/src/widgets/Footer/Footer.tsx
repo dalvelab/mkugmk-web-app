@@ -1,5 +1,5 @@
-import { Link } from "@chakra-ui/next-js";
 import {
+  Link,
   Button,
   chakra,
   Container,
@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { isVoid, isNotVoid, createWorkingSchedule } from "@/shared";
 import { getFooter } from "@/entities";
 import { useRouter } from "next/router";
-import { WarningIcon } from "@chakra-ui/icons";
+import { RxExclamationTriangle } from "react-icons/rx";
 import { useTranslations } from "next-intl";
 import { OrderCall } from "@/features";
 import Image from "next/image";
@@ -78,7 +78,7 @@ export const Footer = () => {
         {isNotVoid(response?.error) ||
           (isError && (
             <Flex gap={1.5} alignItems="center">
-              <WarningIcon color="red" />
+              <RxExclamationTriangle color="red" />
               <Text fontSize="sm">
                 {locale === "ru"
                   ? "Произошла ошибка при загрузке данных"
@@ -144,7 +144,7 @@ export const Footer = () => {
                 "flex-end",
               ]}
             >
-              <Button size="lg" colorScheme="green">
+              <Button size="lg" colorPalette="green">
                 {t("buy_ticket_button")}
               </Button>
             </Link>

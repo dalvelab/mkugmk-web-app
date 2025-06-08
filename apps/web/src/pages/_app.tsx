@@ -22,7 +22,7 @@ import { ScrollUpButton } from "@/features";
 import "../shared/styles.css";
 import Head from "next/head";
 
-const system = createSystem(defaultConfig, { ...chakraMKUGMKConfig });
+const system = createSystem(defaultConfig, chakraMKUGMKConfig);
 const queryClient = new QueryClient();
 
 function App({ Component, pageProps }: AppProps) {

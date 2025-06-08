@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
+import { RxChevronLeft, RxChevronRight } from "react-icons/rx";
 import { chakra } from "@chakra-ui/react";
 
 import styles from "./styles.module.css";
@@ -64,8 +64,9 @@ export const Slider: React.FC<SliderProps> = (props) => {
               display={["none", "none", "flex", "flex", "flex"]}
               justifyContent="center"
               alignItems="center"
+              fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]}
             >
-              <ChevronLeftIcon fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]} />
+              <RxChevronLeft />
             </chakra.button>
             <chakra.button
               w="40px"
@@ -83,8 +84,9 @@ export const Slider: React.FC<SliderProps> = (props) => {
               display={["none", "none", "flex", "flex", "flex"]}
               justifyContent="center"
               alignItems="center"
+              fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]}
             >
-              <ChevronRightIcon fontSize={["xl", "3xl", "3xl", "3xl", "3xl"]} />
+              <RxChevronRight />
             </chakra.button>
           </>
         )}

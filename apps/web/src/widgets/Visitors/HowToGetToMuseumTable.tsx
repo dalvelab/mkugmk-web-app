@@ -1,15 +1,4 @@
-import {
-  Button,
-  chakra,
-  Flex,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+import { Button, chakra, Flex, Table } from "@chakra-ui/react";
 
 import type { VisitorsPages } from "@/entities";
 import { isNotVoid, Markdown } from "@/shared";
@@ -26,77 +15,75 @@ export const HowToGetToMuseumTable: React.FC<HowToGetToMuseumTableProps> = ({
   getDirections,
 }) => {
   return (
-    <TableContainer>
-      <Table mt={5} border="1px solid" borderColor="brand.border">
-        <Thead>
-          <Tr>
-            <Th
-              fontSize={["lg", "xl", "xl", "xl", "xl"]}
-              textTransform="none"
-              color="brand.black"
-              fontWeight="medium"
-              px={5}
-              py={5}
-              whiteSpace="pre-wrap"
-              lineHeight="1.3"
-            >
-              {title}
-            </Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {data.map((info) => (
-            <Tr key={info.id}>
-              <Td minW="500px" px={5} py={5}>
-                <Flex justifyContent="space-between" gap={10}>
-                  <Flex flexDir="column" gap={1} alignItems="flex-start">
+    <Table.Root mt={5} border="1px solid" borderColor="brand.border">
+      <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeader
+            fontSize={["lg", "xl", "xl", "xl", "xl"]}
+            textTransform="none"
+            color="brand.black"
+            fontWeight="medium"
+            px={5}
+            py={5}
+            whiteSpace="pre-wrap"
+            lineHeight="1.3"
+          >
+            {title}
+          </Table.ColumnHeader>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {data.map((info) => (
+          <Table.Row key={info.id}>
+            <Table.Cell minW="500px" px={5} py={5}>
+              <Flex justifyContent="space-between" gap={10}>
+                <Flex flexDir="column" gap={1} alignItems="flex-start">
+                  <chakra.span
+                    fontSize="lg"
+                    whiteSpace={[
+                      "no-wrap",
+                      "no-wrap",
+                      "pre-wrap",
+                      "pre-wrap",
+                      "pre-wrap",
+                    ]}
+                  >
+                    {info.name}
+                  </chakra.span>
+                  {isNotVoid(info.caption) ? (
                     <chakra.span
-                      fontSize="lg"
-                      whiteSpace={[
-                        "no-wrap",
-                        "no-wrap",
-                        "pre-wrap",
-                        "pre-wrap",
-                        "pre-wrap",
-                      ]}
+                      fontSize="sm"
+                      maxW="300px"
+                      color="brand.gray"
+                      whiteSpace="pre-wrap"
                     >
-                      {info.name}
+                      <Markdown>{info.caption}</Markdown>
                     </chakra.span>
-                    {isNotVoid(info.caption) ? (
-                      <chakra.span
-                        fontSize="sm"
-                        maxW="300px"
-                        color="brand.gray"
-                        whiteSpace="pre-wrap"
+                  ) : null}
+                  {info.type === "other" && (
+                    <chakra.a
+                      href="https://yandex.ru/maps/-/CDbuR-iH"
+                      target="_blank"
+                    >
+                      <Button
+                        mt={4}
+                        bg="brand.black"
+                        color="white"
+                        _hover={{ bgColor: "brand.black" }}
                       >
-                        <Markdown>{info.caption}</Markdown>
-                      </chakra.span>
-                    ) : null}
-                    {info.type === "other" && (
-                      <chakra.a
-                        href="https://yandex.ru/maps/-/CDbuR-iH"
-                        target="_blank"
-                      >
-                        <Button
-                          mt={4}
-                          bg="brand.black"
-                          color="white"
-                          _hover={{ bgColor: "brand.black" }}
-                        >
-                          {getDirections}
-                        </Button>
-                      </chakra.a>
-                    )}
-                  </Flex>
-                  <Flex flexDir="column" gap={5}>
-                    <chakra.span fontSize="lg">{info.value}</chakra.span>
-                  </Flex>
+                        {getDirections}
+                      </Button>
+                    </chakra.a>
+                  )}
                 </Flex>
-              </Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+                <Flex flexDir="column" gap={5}>
+                  <chakra.span fontSize="lg">{info.value}</chakra.span>
+                </Flex>
+              </Flex>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Root>
   );
 };

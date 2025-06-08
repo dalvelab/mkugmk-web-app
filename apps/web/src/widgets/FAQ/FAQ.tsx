@@ -1,9 +1,9 @@
 import { useMemo, useRef, useState } from "react";
 
-import { chakra, Divider, Flex } from "@chakra-ui/react";
+import { chakra, Separator, Flex } from "@chakra-ui/react";
 
 import { FaqPage } from "@/entities";
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import { RxChevronRight } from "react-icons/rx";
 import { CollapsePanel, isNotVoid } from "@/shared";
 
 interface FAQProps {
@@ -71,7 +71,7 @@ export const FAQ: React.FC<FAQProps> = ({ questions_with_answers }) => {
           <chakra.span fontSize="xl" fontWeight="semibold">
             Темы
           </chakra.span>
-          <Divider borderColor="brand.border" />
+          <Separator borderColor="brand.border" />
         </Flex>
         <Flex flexDir="column" gap={1}>
           {uniqueTopics.map((topic) => (
@@ -90,7 +90,7 @@ export const FAQ: React.FC<FAQProps> = ({ questions_with_answers }) => {
               <chakra.span whiteSpace="pre-wrap" textAlign="left">
                 {topic}
               </chakra.span>
-              <ChevronRightIcon fontSize="xl" />
+              <RxChevronRight fontSize="xl" />
             </chakra.button>
           ))}
         </Flex>
@@ -108,7 +108,7 @@ export const FAQ: React.FC<FAQProps> = ({ questions_with_answers }) => {
           <chakra.span px={4} fontSize="xl" fontWeight="semibold">
             {selectedTopic}
           </chakra.span>
-          <Divider borderColor="brand.border" />
+          <Separator borderColor="brand.border" />
         </Flex>
         <Flex flexDir="column" gap={1}>
           {filteredData.map((topic) => (

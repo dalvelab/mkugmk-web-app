@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 
-import { SearchIcon } from "@chakra-ui/icons";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { RxMagnifyingGlass } from "react-icons/rx";
+import { Input, InputGroup } from "@chakra-ui/react";
 
 import { debounce, isEmpty, isNotVoid } from "@/shared";
 
@@ -45,10 +45,7 @@ export const SearchForm: React.FC<SearchForm> = ({ setData, inputRef }) => {
   }
 
   return (
-    <InputGroup size="lg">
-      <InputLeftElement pointerEvents="none">
-        <SearchIcon color="brand.gray" />
-      </InputLeftElement>
+    <InputGroup startElement={<RxMagnifyingGlass color="brand.gray" />}>
       <Input
         ref={inputRef}
         size="lg"

@@ -55,7 +55,7 @@ export const ExhibitionCenterCard: React.FC<ExhibitionCenterCardProps> = ({
     <Flex
       h={height}
       display="flex"
-      animation="bounce"
+      animation="fade-out"
       boxSizing="border-box"
       border="1px solid"
       borderColor="brand.border"

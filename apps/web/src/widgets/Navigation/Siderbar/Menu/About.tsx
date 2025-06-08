@@ -2,7 +2,7 @@ import { chakra, Button, Flex } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 
 import type { ExhibitionCenter } from "@/entities";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { RxArrowLeft } from "react-icons/rx";
 import { Link } from "@/shared";
 
 interface AboutProps {
@@ -24,16 +24,15 @@ export const About: React.FC<AboutProps> = ({
   return (
     <>
       <Button
-        variant="link"
+        variant="ghost"
         fontWeight="400"
         color="brand.black"
         pb={3}
         fontSize="lg"
-        leftIcon={<ArrowBackIcon />}
         onClick={back}
         _hover={{ textDecoration: "none" }}
       >
-        {t("sidebar_back")}
+        <RxArrowLeft /> {t("sidebar_back")}
       </Button>
       <chakra.span>{exhibitionCentersLinkName}</chakra.span>
       <Flex pl={5} flexDir="column" gap={3}>

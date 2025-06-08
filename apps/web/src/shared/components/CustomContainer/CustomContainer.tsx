@@ -1,8 +1,8 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Button, ChakraProps, Container } from "@chakra-ui/react";
+import { RxArrowLeft } from "react-icons/rx";
+import { Button, Container, BoxProps } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
-interface SectionProps extends ChakraProps {
+interface SectionProps extends BoxProps {
   children: React.ReactNode;
   withBackButton?: boolean;
 }
@@ -21,8 +21,7 @@ export const CustomContainer: React.FC<SectionProps> = ({
       {withBackButton && (
         <Button
           mb={[4, 8, 8, 8, 8]}
-          leftIcon={<ArrowBackIcon />}
-          variant="link"
+          variant="ghost"
           color="brand.gray"
           fontSize={["md", "lg", "lg", "lg", "lg"]}
           fontWeight="regular"
@@ -31,7 +30,7 @@ export const CustomContainer: React.FC<SectionProps> = ({
           justifySelf="flex-start"
           alignSelf="flex-start"
         >
-          {text}
+          <RxArrowLeft /> {text}
         </Button>
       )}
       {children}

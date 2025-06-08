@@ -1,10 +1,9 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { RxChevronDown } from "react-icons/rx";
 import {
   chakra,
-  Box,
-  Collapse,
+  Collapsible,
   useDisclosure,
-  Divider,
+  Separator,
 } from "@chakra-ui/react";
 import { Markdown } from "../Markdown";
 
@@ -17,7 +16,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   question,
   answer,
 }) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
 
   return (
     <>
@@ -28,7 +27,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
         _hover={{ bgColor: "#F4F4F5", borderColor: "#F4F4F5" }}
         _focus={{ bgColor: "transparent" }}
         borderBottom="1px solid"
-        borderColor={isOpen ? "transparent" : "brand.border"}
+        borderColor={open ? "transparent" : "brand.border"}
         justifyContent="space-between"
         onClick={onToggle}
         gap={5}
@@ -41,19 +40,18 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
         >
           {question}
         </chakra.span>
-        <ChevronDownIcon
+        <RxChevronDown
           fontSize="2xl"
           transform="auto"
-          rotate={isOpen ? "180deg" : "0deg"}
-          transition=".2s ease-in-out"
+          rotate={open ? "180deg" : "0deg"}
         />
       </chakra.button>
-      <Collapse in={isOpen} animateOpacity>
+      <Collapsible.Root open={open}>
         <chakra.div px={4} py={4} color="brand.gray" textAlign="justify">
           <Markdown>{answer}</Markdown>
         </chakra.div>
-        <Divider borderColor="brand.border" />
-      </Collapse>
+        <Separator borderColor="brand.border" />
+      </Collapsible.Root>
     </>
   );
 };

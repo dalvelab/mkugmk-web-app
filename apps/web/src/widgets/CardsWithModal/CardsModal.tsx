@@ -2,19 +2,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  chakra,
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Heading,
-  Flex,
-} from "@chakra-ui/react";
+import { chakra, Button, Dialog, Heading, Flex } from "@chakra-ui/react";
 
 import { Markdown, StrapiInfoCard, isNotVoid } from "@/shared";
 
@@ -48,18 +36,17 @@ export const CardsModal: React.FC<CardsModalProps> = ({
   const t = useTranslations("Common");
 
   return (
-    <Modal
+    <Dialog.Root
       size={["full", "xl", "xl", "xl", "xl"]}
-      autoFocus={false}
-      isOpen={isOpen}
-      onClose={onClose}
+      open={isOpen}
+      onOpenChange={onClose}
     >
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          <ModalCloseButton />
-        </ModalHeader>
-        <ModalBody pt={4}>
+      <Dialog.Backdrop />
+      <Dialog.Content>
+        <Dialog.Header>
+          <Dialog.CloseTrigger />
+        </Dialog.Header>
+        <Dialog.Body pt={4}>
           <chakra.div
             pos="relative"
             w="full"
@@ -95,8 +82,8 @@ export const CardsModal: React.FC<CardsModalProps> = ({
           <chakra.div fontSize="md" pt={5} textAlign="justify">
             <Markdown>{description}</Markdown>
           </chakra.div>
-        </ModalBody>
-        <ModalFooter gap={4}>
+        </Dialog.Body>
+        <Dialog.Footer gap={4}>
           <Button onClick={onClose} variant="ghost">
             {t("close")}
           </Button>
@@ -115,8 +102,8 @@ export const CardsModal: React.FC<CardsModalProps> = ({
               </Button>
             </Link>
           )}
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Root>
   );
 };

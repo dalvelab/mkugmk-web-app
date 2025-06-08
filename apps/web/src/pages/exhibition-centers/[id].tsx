@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Link } from "@chakra-ui/next-js";
+import { Link } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
   chakra,
@@ -10,7 +10,7 @@ import {
   Button,
   Grid,
   HStack,
-  StackDivider,
+  Separator,
 } from "@chakra-ui/react";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
@@ -136,7 +136,7 @@ export default function ExhibitionCenter({
             <OpenStatus workTimeToday={workTimeToday} theme="dark" />
             {ticket_sale_enabled && (
               <Link href="/buy-ticket">
-                <Button mt={2} size="lg" colorScheme="green">
+                <Button mt={2} size="lg" colorPalette="green">
                   {t("buy_ticket_button")}
                 </Button>
               </Link>
@@ -147,7 +147,7 @@ export default function ExhibitionCenter({
       <chakra.section pt={[10, 20, 20, 20, 20]} pb={10} pos="relative">
         <Container maxWidth="container.xl" display="flex" pos="relative">
           <HStack
-            divider={<StackDivider borderColor="brand.border" />}
+            separator={<Separator borderColor="brand.border" />}
             gap={[2, 4, 6, 6, 10]}
             flexDir={["column", "column", "row", "row", "row"]}
             alignItems="flex-start"
@@ -193,7 +193,7 @@ export default function ExhibitionCenter({
               pos="relative"
             >
               <HStack
-                divider={<StackDivider borderColor="brand.border" />}
+                separator={<Separator borderColor="brand.border" />}
                 gap={[2, 4, 6, 6, 10]}
                 flexDir={["column", "column", "row", "row", "row"]}
                 alignItems="flex-start"
@@ -244,7 +244,7 @@ export default function ExhibitionCenter({
           pos="relative"
         >
           <HStack
-            divider={<StackDivider borderColor="brand.border" />}
+            separator={<Separator borderColor="brand.border" />}
             gap={[3, 4, 6, 6, 10]}
             flexDir={["column", "column", "row", "row", "row"]}
             alignItems={[

@@ -3,7 +3,6 @@ import { useTranslations } from "next-intl";
 
 import {
   Alert,
-  AlertIcon,
   AlertTitle,
   Button,
   chakra,
@@ -135,16 +134,20 @@ export const Cart: React.FC<CartProps> = ({
           size={["md", "lg", "lg", "md", "lg"]}
           target="_blank"
           href={generatedTickets[totalSelected]}
-          colorScheme="green"
+          colorPalette="green"
           cursor="pointer"
         >
           {t("go_to_ticket_issue")}
         </Button>
       ) : (
-        <Alert status="warning" bgColor="yellow.300">
-          <AlertIcon />
-          <AlertTitle fontWeight="medium">{t("ticket_is_unavailable")}</AlertTitle>
-        </Alert>
+        <Alert.Root status="warning" bgColor="yellow.300">
+          <Alert.Indicator />
+          <Alert.Content>
+            <Alert.Title fontWeight="medium">
+              {t("ticket_is_unavailable")}
+            </Alert.Title>
+          </Alert.Content>
+        </Alert.Root>
       )}
     </Flex>
   ) : null;

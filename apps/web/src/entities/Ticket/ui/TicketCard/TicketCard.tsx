@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { chakra, Grid } from "@chakra-ui/react";
 import { ExhibitionCenter } from "@/entities";
-import { CheckIcon, LockIcon } from "@chakra-ui/icons";
+import { RxCheck, RxLockClosed } from "react-icons/rx";
 import { isNotVoid } from "@/shared";
 
 interface TicketProps {
@@ -77,7 +77,7 @@ export const TicketCard: React.FC<TicketProps> = ({
         justifyContent="center"
         alignItems="center"
       >
-        {isSelected && !disabled && <CheckIcon />}
+        {isSelected && !disabled && <RxCheck />}
         {!isSelected && !disabled && (
           <Image
             fill
@@ -86,7 +86,7 @@ export const TicketCard: React.FC<TicketProps> = ({
             style={{ objectFit: "cover" }}
           />
         )}
-        {disabled && <LockIcon />}
+        {disabled && <RxLockClosed />}
       </chakra.div>
       <chakra.span
         textAlign="left"

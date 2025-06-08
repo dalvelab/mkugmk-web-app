@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { RxCaretDown } from "react-icons/rx";
 import { chakra, Flex, Portal, Text } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 
@@ -24,11 +24,10 @@ export const DropdownLink: React.FC<DropdownLinkProps> = ({
     >
       <Flex ref={dropdownRef} alignItems="center" gap={1}>
         <Text cursor="pointer">{text}</Text>
-        <ChevronDownIcon
+        <RxCaretDown
           cursor="pointer"
           transform="auto"
           rotate={visible ? "180deg" : "0deg"}
-          transition="0.3s ease-in-out"
         />
       </Flex>
       <Portal container={dropdownRef}>

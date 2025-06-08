@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { chakra, Flex, Grid, IconButton } from "@chakra-ui/react";
 import { ExhibitionCenter } from "@/entities";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { RxTrash } from "react-icons/rx";
 import { isNotVoid } from "@/shared";
 
 interface CartTicketCardProps {
@@ -69,7 +69,7 @@ export const CartTicketCard: React.FC<CartTicketCardProps> = ({
                 : undefined
             }
           >
-            <DeleteIcon boxSize={4} />
+            <RxTrash />
           </IconButton>
         </>
       ) : (

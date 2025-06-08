@@ -22,7 +22,7 @@ export const Main: React.FC<MainProps> = ({
         {t("menu.home")}
       </Link>
       <Button
-        variant="link"
+        variant="ghost"
         fontSize={["2xl", "4xl", "4xl", "4xl", "4xl"]}
         lineHeight={["36px", "54px", "54px", "54px", "54px"]}
         _hover={{ textDecoration: "none" }}
@@ -33,7 +33,7 @@ export const Main: React.FC<MainProps> = ({
         {t("menu.about")}
       </Button>
       <Button
-        variant="link"
+        variant="ghost"
         fontSize={["2xl", "4xl", "4xl", "4xl", "4xl"]}
         lineHeight={["36px", "54px", "54px", "54px", "54px"]}
         _hover={{ textDecoration: "none" }}

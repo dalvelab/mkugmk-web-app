@@ -11,12 +11,12 @@ interface CardEventProps {
   index: number;
 }
 
-export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
+export const CardEvent: React.FC<CardEventProps> = ({ event }) => {
   const { documentId, image, slug, title, description, publish_date } = event;
 
   return (
     <Link href={`/news/${slug}-${documentId}`}>
-      <ChakraBox
+      <chakra.div
         display="flex"
         bg="white"
         height="full"
@@ -25,22 +25,6 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
         pos="relative"
         borderRadius="12px"
         boxShadow="0 2px 4px 0 rgba(0, 0, 0, 0.09)"
-        // @ts-ignore
-        transition={{
-          duration: index < 6 ? 0.15 * index : 0.9,
-          ease: "easeInOut",
-        }}
-        initial={{
-          opacity: 0,
-          transform: "translateX(-10%)",
-        }}
-        whileInView={{
-          opacity: 1,
-          transform: "translateX(0)",
-        }}
-        viewport={{
-          once: true,
-        }}
       >
         <chakra.div
           pos="relative"
@@ -59,7 +43,7 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
           <Text fontSize={["lg", "xl", "xl", "lg", "xl"]} fontWeight="semibold">
             {title}
           </Text>
-          <chakra.div mt={2} mb={2} fontSize="md" noOfLines={3}>
+          <chakra.div mt={2} mb={2} fontSize="md" lineClamp={3}>
             {removeMd(description)}
           </chakra.div>
           <Flex mt={2} marginTop="auto" alignSelf="flex-end">
@@ -68,7 +52,7 @@ export const CardEvent: React.FC<CardEventProps> = ({ event, index }) => {
             </chakra.span>
           </Flex>
         </Flex>
-      </ChakraBox>
+      </chakra.div>
     </Link>
   );
 };

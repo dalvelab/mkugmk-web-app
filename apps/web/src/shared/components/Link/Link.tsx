@@ -1,4 +1,4 @@
-import { Link as ChakraNextLink, LinkProps } from "@chakra-ui/next-js";
+import { Link as ChakraNextLink, LinkProps } from "@chakra-ui/react";
 
 export const Link: React.FC<LinkProps> = ({ children, href, ...props }) => {
   return (
