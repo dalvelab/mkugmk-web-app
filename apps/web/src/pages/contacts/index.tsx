@@ -15,7 +15,7 @@ import {
 } from "@/shared";
 import type { ContactsPage } from "@/entities";
 import type { ApiResponse } from "@/shared";
-import { OrderCall } from "@/features";
+import { OfferToBuy, OrderCall } from "@/features";
 
 export default function Events({
   page,
@@ -29,6 +29,8 @@ export default function Events({
   }
 
   const { title, description, contacts } = data;
+
+  const isNewOfferToBuyToggled = true;
 
   return (
     <>
@@ -143,25 +145,29 @@ export default function Events({
                       Предложения по покупке техники для Музейного комплекса
                     </chakra.span>
                   </Flex>
-                  <Link
-                    href="https://airtable.com/app10ambf4PK4wk2P/shrzHsLRsgXpqdKBg"
-                    target="_blank"
-                    justifySelf={[
-                      "flex-start",
-                      "flex-start",
-                      "flex-end",
-                      "flex-end",
-                      "flex-end",
-                    ]}
-                  >
-                    <Button
-                      bgColor="brand.black"
-                      color="white"
-                      _hover={{ bgColor: "brand.black" }}
+                  {isNewOfferToBuyToggled ? (
+                    <OfferToBuy />
+                  ) : (
+                    <Link
+                      href="https://airtable.com/app10ambf4PK4wk2P/shrzHsLRsgXpqdKBg"
+                      target="_blank"
+                      justifySelf={[
+                        "flex-start",
+                        "flex-start",
+                        "flex-end",
+                        "flex-end",
+                        "flex-end",
+                      ]}
                     >
-                      Связаться
-                    </Button>
-                  </Link>
+                      <Button
+                        bgColor="brand.black"
+                        color="white"
+                        _hover={{ bgColor: "brand.black" }}
+                      >
+                        Связаться
+                      </Button>
+                    </Link>
+                  )}
                 </Grid>
               ) : null}
             </Flex>

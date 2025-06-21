@@ -4,3 +4,4 @@ export * from "./YoutubeVideoSlider";
 export * from "./OrderCall";
 export * from "./Search";
 export * from "./SendEmail";
+export * from "./OfferToBuy";
