@@ -1,10 +1,21 @@
 import nodemailer from "nodemailer";
+import { Attachment } from "nodemailer/lib/mailer";
 
-interface EmailOptions {
+import { isNotEmpty } from "@/shared";
+
+export interface SendOfferToEmailPayload {
+  name: string;
   message: string;
+  files?: Attachment[];
 }
 
-export async function sendEmail(options: EmailOptions) {
+function getFormattedTimeStamp() {
+  const date = new Date();
+
+  return date.toISOString();
+}
+
+export async function sendOfferToEmail(payload: SendOfferToEmailPayload) {
   const transporter = nodemailer.createTransport({
     // @ts-ignore
     host: process.env.SMTP_HOST,
@@ -16,11 +27,14 @@ export async function sendEmail(options: EmailOptions) {
     },
   });
 
+  const timestamp = getFormattedTimeStamp();
+
   const message = {
-    from: `MKUGMK - заявка на звонок <${process.env.SMTP_USER_LOGIN}>`,
+    from: `mkugmk <${process.env.SMTP_USER_LOGIN}>`,
     to: process.env.EMAIL_FOR_CALL_ORDERS,
-    subject: "MKUGMK - заявка на звонок",
-    text: options.message,
+    subject: `#${timestamp} ${payload.name}`,
+    text: payload.message,
+    attachments: isNotEmpty(payload.files) ? payload.files : undefined,
   };
 
   await new Promise((resolve, reject) => {

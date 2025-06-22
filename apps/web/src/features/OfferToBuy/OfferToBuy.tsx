@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
 import { v4 as uuidv4 } from "uuid";
@@ -21,19 +21,19 @@ import {
   Textarea,
   FormErrorMessage,
   useToast,
-  ButtonProps,
   Grid,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Select,
+  Box,
+  Text,
+  IconButton,
+  FormHelperText,
 } from "@chakra-ui/react";
 import { z } from "zod";
-import { FileIcon, isNotEmpty, isNotVoid } from "@/shared";
+import { FileIcon, isEmpty, isNotEmpty, isNotVoid, isVoid } from "@/shared";
 import { useMutation } from "@tanstack/react-query";
-import { sendEmailRequest } from "../SendEmail";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+
+import { DeleteIcon } from "@chakra-ui/icons";
+import { sendOfferToBuyEmailRequest } from "./api";
 
 const FormSchema = z.object({
   name: z.string().min(2, "Наименование должно содержать минимум 2 символа"),
@@ -62,6 +62,8 @@ const initalForm = {
   description: "",
 };
 
+const MAX_FILES_SIZE = 1024 * 1024 * 150; // 150 MB
+
 export const OfferToBuy: React.FC = () => {
   const { locale } = useRouter();
   const toast = useToast();
@@ -71,13 +73,16 @@ export const OfferToBuy: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [form, setForm] = useState(initalForm);
-  const [files, setFiles] = useState<File[] | null>(null);
+  const [files, setFiles] = useState<{ file: File; id: string }[] | null>(null);
+  const [filesError, setFilesError] = useState<string | null>(null);
   const [errors, setErrors] = useState<z.ZodError<
     z.infer<typeof FormSchema>
   > | null>(null);
 
+  const fileInput = useRef<HTMLInputElement | null>(null);
+
   const mutation = useMutation({
-    mutationFn: sendEmailRequest,
+    mutationFn: sendOfferToBuyEmailRequest,
     onSuccess: () => {
       toast({
         title: "Успешно!",
@@ -90,8 +95,6 @@ export const OfferToBuy: React.FC = () => {
       onClose();
     },
     onError: () => {
-      setForm(initalForm);
-
       toast({
         title: "Произошла ошибка.",
         description: "Попробуйте позже",
@@ -112,16 +115,70 @@ export const OfferToBuy: React.FC = () => {
       return;
     }
 
+    // Обработка для файлов отдельно от обычных полей
+    if (isNotVoid(filesError) && isNotEmpty(files)) {
+      return;
+    }
+
+    setFilesError(null);
+
     mutation.mutate({
+      name: form.name,
       message: `Заказ звонка с сайта. \n Имя: ${form.name}\n Телефон: ${form.phone}\n Сообщение: ${form.description}`,
     });
   }
+
+  const resetErrors = () => {
+    setErrors(null);
+    setFilesError(null);
+  };
 
   function onCloseModal() {
     onClose();
     setErrors(null);
     setForm(initalForm);
   }
+
+  const processFiles = (files: File[]) => {
+    setFiles([]);
+    fileInput.current?.blur();
+
+    if (files.length > 10) {
+      setFilesError("Можно приложить максимум 10 файлов");
+      return;
+    }
+
+    const filesSize = files
+      .map((file) => file.size)
+      .reduce((acc, prev) => acc + prev, 0);
+
+    if (filesSize > MAX_FILES_SIZE) {
+      setFilesError("Общий размер файлов не должен быть больше 150 МБ");
+      return;
+    }
+
+    const filesWithId = files.map((file) => {
+      return {
+        id: uuidv4(),
+        file,
+      };
+    });
+
+    setFiles(filesWithId);
+  };
+
+  const deleteFile = (id: string) => {
+    if (isVoid(files) && isEmpty(files)) {
+      return;
+    }
+
+    const index = files.findIndex((file) => file.id === id);
+
+    const filesCopy = [...files];
+    filesCopy.splice(index, 1);
+
+    setFiles(filesCopy);
+  };
 
   const nameError = errors?.issues.find((issue) => issue.path.includes("name"));
   const yearManufacturedError = errors?.issues.find((issue) =>
@@ -188,7 +245,7 @@ export const OfferToBuy: React.FC = () => {
                       name: event.target.value,
                     })
                   }
-                  onFocus={() => setErrors(null)}
+                  onFocus={resetErrors}
                 />
                 {isNotVoid(nameError) && (
                   <FormErrorMessage>{nameError.message}</FormErrorMessage>
@@ -210,7 +267,7 @@ export const OfferToBuy: React.FC = () => {
                       ),
                     })
                   }
-                  onFocus={() => setErrors(null)}
+                  onFocus={resetErrors}
                 />
                 {isNotVoid(yearManufacturedError) && (
                   <FormErrorMessage>
@@ -230,7 +287,7 @@ export const OfferToBuy: React.FC = () => {
                       price: event.target.value.replace(/[^\d.,]+/g, ""),
                     })
                   }
-                  onFocus={() => setErrors(null)}
+                  onFocus={resetErrors}
                 />
                 {isNotVoid(priceError) && (
                   <FormErrorMessage>{priceError.message}</FormErrorMessage>
@@ -267,7 +324,7 @@ export const OfferToBuy: React.FC = () => {
                       contact_info: event.target.value,
                     })
                   }
-                  onFocus={() => setErrors(null)}
+                  onFocus={resetErrors}
                 />
                 {isNotVoid(contactInfoError) && (
                   <FormErrorMessage>
@@ -287,7 +344,7 @@ export const OfferToBuy: React.FC = () => {
                       email: event.target.value,
                     })
                   }
-                  onFocus={() => setErrors(null)}
+                  onFocus={resetErrors}
                 />
                 {isNotVoid(emailError) && (
                   <FormErrorMessage>{emailError.message}</FormErrorMessage>
@@ -305,7 +362,7 @@ export const OfferToBuy: React.FC = () => {
                       phone: event.target.value.replace(/[^\d+()\s]+/g, ""),
                     })
                   }
-                  onFocus={() => setErrors(null)}
+                  onFocus={resetErrors}
                 />
                 {isNotVoid(phoneError) && (
                   <FormErrorMessage>{phoneError.message}</FormErrorMessage>
@@ -323,7 +380,7 @@ export const OfferToBuy: React.FC = () => {
                       description: event.target.value,
                     })
                   }
-                  onFocus={() => setErrors(null)}
+                  onFocus={resetErrors}
                 />
                 {isNotVoid(descriptionError) && (
                   <FormErrorMessage>
@@ -331,22 +388,45 @@ export const OfferToBuy: React.FC = () => {
                   </FormErrorMessage>
                 )}
               </FormControl>
-              <FormControl isInvalid={isNotVoid(phoneError)}>
+              <FormControl isInvalid={isNotVoid(filesError)}>
                 <FormLabel>Файлы</FormLabel>
-
-                <Input
-                  type="file"
-                  py={1}
-                  multiple
-                  isInvalid={isNotVoid(phoneError)}
-                  onFocus={() => setErrors(null)}
-                  onChange={(event) =>
-                    // @ts-ignore
-                    setFiles([...event.target.files] as File[])
-                  }
-                />
-                {isNotVoid(phoneError) && (
-                  <FormErrorMessage>{phoneError.message}</FormErrorMessage>
+                <Box
+                  role="button"
+                  pos="relative"
+                  border="1px solid rgb(226, 232, 240)"
+                  borderRadius="6px"
+                  h={20}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  cursor="pointer"
+                  _focusWithin={{
+                    borderColor: "#3182ce;",
+                    boxShadow: "0 0 0 1px #3182ce;",
+                  }}
+                >
+                  <Text color="gray.500">Выберите файлы</Text>
+                  <Input
+                    opacity={0}
+                    h="inherit"
+                    ref={fileInput}
+                    position="absolute"
+                    cursor="pointer"
+                    type="file"
+                    py={1}
+                    multiple
+                    onFocus={resetErrors}
+                    onChange={(event) =>
+                      // @ts-ignore
+                      processFiles([...event.target.files] as File[])
+                    }
+                  />
+                </Box>
+                <FormHelperText>
+                  максимум 10 шт, общий размер не более 150МБ
+                </FormHelperText>
+                {isNotVoid(filesError) && (
+                  <FormErrorMessage>{filesError}</FormErrorMessage>
                 )}
               </FormControl>
               {isNotVoid(files) && (
@@ -356,10 +436,10 @@ export const OfferToBuy: React.FC = () => {
                   gridTemplateColumns="1fr 1fr"
                   gap={2}
                 >
-                  {files.map((file) => (
+                  {files.map(({ id, file }) => (
                     <Flex
                       maxW="300px"
-                      key={uuidv4()}
+                      key={id}
                       alignItems="center"
                       gap={3}
                       px={4}
@@ -378,6 +458,19 @@ export const OfferToBuy: React.FC = () => {
                       >
                         {file.name}
                       </chakra.span>
+                      <IconButton
+                        ml="auto"
+                        size="sm"
+                        bgColor="transparent"
+                        color="brand.gray"
+                        icon={<DeleteIcon boxSize={4} />}
+                        aria-label="удалить выбранный центр"
+                        _hover={{
+                          bgColor: "brand.border",
+                          color: "brand.black",
+                        }}
+                        onClick={() => deleteFile(id)}
+                      />
                     </Flex>
                   ))}
                 </Grid>
