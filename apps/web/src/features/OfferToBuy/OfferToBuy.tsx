@@ -34,35 +34,15 @@ import { useMutation } from "@tanstack/react-query";
 
 import { DeleteIcon } from "@chakra-ui/icons";
 import { sendOfferToBuyEmailRequest } from "./api";
+import { initalForm, OfferToBuyFormSchema } from "./models";
+import {
+  formatFilesToSendEmail,
+  formatOfferToBuyMessage,
+  getFileExtension,
+} from "./utils";
 
-const FormSchema = z.object({
-  name: z.string().min(2, "Наименование должно содержать минимум 2 символа"),
-  year_manufactured: z
-    .string()
-    .max(4, "Год производства должен быть 4 значным"),
-  price: z.string(),
-  currency: z.string(),
-  contact_info: z.string().min(1, "Поле должно быть заполнено"),
-  email: z
-    .string()
-    .email("Невалидный Email")
-    .min(1, "Email должен быть указан"),
-  phone: z.string().min(6, "Телефон должен быть более 6 символов"),
-  description: z.string(),
-});
-
-const initalForm = {
-  name: "",
-  year_manufactured: "",
-  price: "",
-  currency: "",
-  contact_info: "",
-  email: "",
-  phone: "",
-  description: "",
-};
-
-const MAX_FILES_SIZE = 1024 * 1024 * 150; // 150 MB
+const MAX_FILES_SIZE = 1024 * 1024 * 25; // 25 MB
+const VALID_FORMATS = ["gif", "bmp", "png", "jpg", "jpeg", "pdf"];
 
 export const OfferToBuy: React.FC = () => {
   const { locale } = useRouter();
@@ -73,10 +53,11 @@ export const OfferToBuy: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [form, setForm] = useState(initalForm);
+  const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<{ file: File; id: string }[] | null>(null);
   const [filesError, setFilesError] = useState<string | null>(null);
   const [errors, setErrors] = useState<z.ZodError<
-    z.infer<typeof FormSchema>
+    z.infer<typeof OfferToBuyFormSchema>
   > | null>(null);
 
   const fileInput = useRef<HTMLInputElement | null>(null);
@@ -91,10 +72,13 @@ export const OfferToBuy: React.FC = () => {
         position: "top-right",
         isClosable: true,
       });
+      setFiles(null);
       setForm(initalForm);
+      setLoading(false);
       onClose();
     },
     onError: () => {
+      setLoading(false);
       toast({
         title: "Произошла ошибка.",
         description: "Попробуйте позже",
@@ -106,8 +90,8 @@ export const OfferToBuy: React.FC = () => {
     },
   });
 
-  function onClick() {
-    const result = FormSchema.safeParse(form);
+  async function onClick() {
+    const result = OfferToBuyFormSchema.safeParse(form);
 
     if (!result.success) {
       setErrors(result.error);
@@ -120,12 +104,15 @@ export const OfferToBuy: React.FC = () => {
       return;
     }
 
+    setLoading(true);
     setFilesError(null);
 
-    mutation.mutate({
-      name: form.name,
-      message: `Заказ звонка с сайта. \n Имя: ${form.name}\n Телефон: ${form.phone}\n Сообщение: ${form.description}`,
-    });
+    const attachedFiles = files ? files.map(({ file }) => file) : undefined;
+
+    const message = formatOfferToBuyMessage(form);
+    const attachments = await formatFilesToSendEmail(attachedFiles);
+
+    mutation.mutate({ message, files: attachments, name: form.name });
   }
 
   const resetErrors = () => {
@@ -137,6 +124,8 @@ export const OfferToBuy: React.FC = () => {
     onClose();
     setErrors(null);
     setForm(initalForm);
+    setFiles([]);
+    setFilesError(null);
   }
 
   const processFiles = (files: File[]) => {
@@ -153,7 +142,27 @@ export const OfferToBuy: React.FC = () => {
       .reduce((acc, prev) => acc + prev, 0);
 
     if (filesSize > MAX_FILES_SIZE) {
-      setFilesError("Общий размер файлов не должен быть больше 150 МБ");
+      setFilesError("Превышен лимит на размер файлов");
+      return;
+    }
+
+    let isValidExtensions = true;
+
+    files.forEach((file) => {
+      const extension = getFileExtension(file.name);
+
+      if (!VALID_FORMATS.includes(extension)) {
+        isValidExtensions = false;
+        return;
+      }
+    });
+
+    if (!isValidExtensions) {
+      setFilesError(
+        `Невалидный формат файла. Разрешены только ${VALID_FORMATS.reduce(
+          (acc, val) => acc + ", " + val
+        )}`
+      );
       return;
     }
 
@@ -212,7 +221,7 @@ export const OfferToBuy: React.FC = () => {
         Связаться
       </Button>
       <Modal
-        size="2xl"
+        size={["full", "full", "2xl", "2xl", "2xl"]}
         autoFocus={false}
         isOpen={isOpen}
         onClose={onCloseModal}
@@ -423,7 +432,7 @@ export const OfferToBuy: React.FC = () => {
                   />
                 </Box>
                 <FormHelperText>
-                  максимум 10 шт, общий размер не более 150МБ
+                  максимум 10 шт, общий размер не более 25МБ
                 </FormHelperText>
                 {isNotVoid(filesError) && (
                   <FormErrorMessage>{filesError}</FormErrorMessage>
@@ -479,6 +488,7 @@ export const OfferToBuy: React.FC = () => {
                 <Button
                   size="lg"
                   bgColor="brand.black"
+                  isLoading={loading}
                   color="white"
                   _hover={{ bgColor: "brand.black" }}
                   _focus={{ bgColor: "brand.black" }}

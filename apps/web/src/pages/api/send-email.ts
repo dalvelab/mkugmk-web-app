@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { sendEmail } from "@/features/SendEmail/send";
+import { transporter } from "./nodemailer";
 
 type ResponseData = {
   message: string;
@@ -25,4 +25,28 @@ export default async function handler(
   } catch (error) {
     throw error;
   }
+}
+
+interface EmailOptions {
+  message: string;
+}
+
+export async function sendEmail(options: EmailOptions) {
+  const message = {
+    from: `MKUGMK - заявка на звонок <${process.env.SMTP_USER_LOGIN}>`,
+    to: process.env.EMAIL_FOR_CALL_ORDERS,
+    subject: "MKUGMK - заявка на звонок",
+    text: options.message,
+  };
+
+  await new Promise((resolve, reject) => {
+    transporter.sendMail(message, (err, info) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(info);
+      }
+    });
+  });
 }

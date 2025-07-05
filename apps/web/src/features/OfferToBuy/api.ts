@@ -1,4 +1,4 @@
-import { SendOfferToEmailPayload } from "./send-offer-email";
+import { SendOfferToEmailPayload } from "./models";
 
 export async function sendOfferToBuyEmailRequest(
   payload: SendOfferToEmailPayload

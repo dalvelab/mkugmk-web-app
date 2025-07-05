@@ -15,9 +15,10 @@ import {
 } from "@/shared";
 import type { ContactsPage } from "@/entities";
 import type { ApiResponse } from "@/shared";
-import { OfferToBuy, OrderCall } from "@/features";
+import { OrderCall } from "@/features";
+import { OfferToBuyWrapper } from "@/features/OfferToBuy/OfferToBuyWrapper";
 
-export default function Events({
+export default function Contacts({
   page,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data } = page;
@@ -29,8 +30,6 @@ export default function Events({
   }
 
   const { title, description, contacts } = data;
-
-  const isNewOfferToBuyToggled = true;
 
   return (
     <>
@@ -145,29 +144,7 @@ export default function Events({
                       Предложения по покупке техники для Музейного комплекса
                     </chakra.span>
                   </Flex>
-                  {isNewOfferToBuyToggled ? (
-                    <OfferToBuy />
-                  ) : (
-                    <Link
-                      href="https://airtable.com/app10ambf4PK4wk2P/shrzHsLRsgXpqdKBg"
-                      target="_blank"
-                      justifySelf={[
-                        "flex-start",
-                        "flex-start",
-                        "flex-end",
-                        "flex-end",
-                        "flex-end",
-                      ]}
-                    >
-                      <Button
-                        bgColor="brand.black"
-                        color="white"
-                        _hover={{ bgColor: "brand.black" }}
-                      >
-                        Связаться
-                      </Button>
-                    </Link>
-                  )}
+                  <OfferToBuyWrapper />
                 </Grid>
               ) : null}
             </Flex>
