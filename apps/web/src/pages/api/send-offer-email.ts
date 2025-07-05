@@ -61,7 +61,7 @@ async function sendOfferToEmail(payload: SendOfferToEmailPayload) {
 
   const message = {
     from: `Музейный комплекс <${process.env.SMTP_USER_LOGIN}>`,
-    to: process.env.EMAIL_FOR_CALL_ORDERS,
+    to: process.env.EMAIL_FOR_OFFERS,
     subject: `#${timestamp} Предложение о закупке ${payload.name}`,
     text: payload.message,
     attachments,
