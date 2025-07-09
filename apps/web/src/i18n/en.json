@@ -64,7 +64,7 @@
     "title": "Buy tickets",
     "seo_description": "Tickets to the museum commplex can be purchased online or at the ticket office",
     "select_one_or_several_exhibition_centers": "Select one or several exhibition centers",
-    "notification": "If you purchase ticket for one exhibition center entry to the Open-air exhibition is free",
+    "notification": "If you purchase ticket for one exhibition center entry to the Open-air exhibition is free. The validity period of the electronic ticket is 60 days from the date of purchase, after which it will become invalid. Refunds for unused tickets after the expiration date are not made.",
     "tickets_amount_can_be_selected_on_next_step": "tickets amount can be selected on next step",
     "ticket_is_unavailable": "Ticket is unavailable",
     "go_to_ticket_issue": "Next step",
