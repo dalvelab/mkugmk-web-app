@@ -24,7 +24,7 @@ export default function BuyTicket({
   const { data: ticketsData } = tickets;
   const { data } = exhibition_centers;
 
-  const {locale} = useRouter()
+  const { locale } = useRouter();
   const t = useTranslations("Buy_Tickets");
 
   const [mode, setMode] = useState<"default" | "pushkin_card">("default");
@@ -119,7 +119,7 @@ export default function BuyTicket({
     setMode(selectedMode);
   }
 
-  const isRuLanguage = locale === 'ru';
+  const isRuLanguage = locale === "ru";
 
   return (
     <>
@@ -155,7 +155,9 @@ export default function BuyTicket({
                 px={[3, 7, 7, 7, 7]}
                 py={[3, 5, 5, 5, 5]}
                 fontSize={["xs", "md", "md", "md", "md"]}
-                bgColor={mode === "pushkin_card" ? "brand.black" : "transparent"}
+                bgColor={
+                  mode === "pushkin_card" ? "brand.black" : "transparent"
+                }
                 color={mode === "pushkin_card" ? "white" : "brand.black"}
                 _hover={{
                   bgColor:
@@ -203,13 +205,20 @@ export default function BuyTicket({
                 flexDir={["column", "row", "row", "row", "row"]}
               >
                 <InfoOutlineIcon fontSize="3xl" />
-                <chakra.span
-                  color="brand.black"
-                  fontSize="sm"
-                  fontWeight="medium"
-                >
-                  {t("notification")}
-                </chakra.span>
+                <Flex flexDir="column">
+                  {t("notification")
+                    .split("\n")
+                    .map((chunk, index) => (
+                      <chakra.span
+                        key={index}
+                        color="brand.black"
+                        fontSize="sm"
+                        fontWeight="medium"
+                      >
+                        {chunk}
+                      </chakra.span>
+                    ))}
+                </Flex>
               </Flex>
               <Grid
                 templateColumns={[
